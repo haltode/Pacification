@@ -35,10 +35,8 @@
     - nb habitant (milestones habitants)
     - qualité de vie (pour représenter le bonheur, nourriture)
     - liste bâtiments
-
 - classe bâtiments
     - influence directement les caractéristiques d'une ville
-
 - classe units
     - points de déplacement
     - coût d'entretien
@@ -53,4 +51,4 @@
 - ia: thibault
 - réseau: valérian/cédric/antoine
 - graphisme/animation/particule: cédric
-- esclave latek: valérian
+- esclave latex: valérian

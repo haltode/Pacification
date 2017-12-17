@@ -51,4 +51,4 @@
 - ia: thibault
 - réseau: valérian/cédric/antoine
 - graphisme/animation/particule: cédric
-- esclave latex: valérian
+- esclave latex: All of us

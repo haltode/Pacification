@@ -1,4 +1,4 @@
-# Projet S2
+# Pacification
 
 ## Resources
 

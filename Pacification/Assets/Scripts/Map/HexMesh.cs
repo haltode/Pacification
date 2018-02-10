@@ -5,9 +5,10 @@ using System.Collections.Generic;
 public class HexMesh : MonoBehaviour
 {
     Mesh hexMesh;
-    List<Vector3> vertices;
-    List<int> triangles;
-    List<Color> colors;
+    // Temporary buffers only used during triangulation
+    static List<Vector3> vertices = new List<Vector3>();
+    static List<int> triangles = new List<int>();
+    static List<Color> colors = new List<Color>();
 
     MeshCollider meshCollider;
 
@@ -16,9 +17,6 @@ public class HexMesh : MonoBehaviour
         GetComponent<MeshFilter>().mesh = hexMesh = new Mesh();
         meshCollider = gameObject.AddComponent<MeshCollider>();
         hexMesh.name = "Hex Mesh";
-        vertices = new List<Vector3>();
-        triangles = new List<int>();
-        colors = new List<Color>();
     }
 
     public void Triangulate(HexCell[] cells)
@@ -52,7 +50,7 @@ public class HexMesh : MonoBehaviour
         Vector3 v2 = center + HexMetrics.GetSecondSolidCorner(dir);
 
         AddTriangle(center, v1, v2);
-        AddTriangleColor(cell.color);
+        AddTriangleColor(cell.Color);
 
         if(dir <= HexDirection.SE)
             TriangulateConnection(cell, v1, v2, dir);
@@ -71,7 +69,7 @@ public class HexMesh : MonoBehaviour
         v3.y = v4.y = neighbor.Elevation * HexMetrics.ElevationStep;
 
         AddQuad(v1, v2, v3, v4);
-        AddQuadColor(cell.color, neighbor.color);
+        AddQuadColor(cell.Color, neighbor.Color);
 
         // Corners connections
         HexCell nextNeighbor = cell.GetNeighbor(dir.Next());
@@ -81,7 +79,7 @@ public class HexMesh : MonoBehaviour
             v5.y = nextNeighbor.Elevation * HexMetrics.ElevationStep;
             
             AddTriangle(v2, v4, v5);
-            AddTriangleColor(cell.color, neighbor.color, nextNeighbor.color);
+            AddTriangleColor(cell.Color, neighbor.Color, nextNeighbor.Color);
         }
     }
 

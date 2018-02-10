@@ -5,6 +5,9 @@ public static class HexMetrics
     public const float OuterRadius = 10f;
     public const float InnerRadius = OuterRadius * 0.866025404f;
 
+    public const int ChunkSizeX = 5;
+    public const int ChunkSizeZ = 5;
+
     public const float ElevationStep = 5f;
 
     // Blending colored regions factors

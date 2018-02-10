@@ -15,7 +15,7 @@ public class GameManager : MonoBehaviour
 
     public InputField nameInput;
 
-    public const int Port = 6321;
+    private const string localhost = "127.0.0.1";
 
     private void Start()
     {
@@ -44,7 +44,7 @@ public class GameManager : MonoBehaviour
             {
                 client.name = "Host";
             }
-            client.ConnectToServer("127.0.0.1", Port);
+            client.ConnectToServer(localhost, Server.Port);
         }
         catch (Exception e)
         {
@@ -61,22 +61,21 @@ public class GameManager : MonoBehaviour
         bool isConnected = false;
 
         if (hostAddress == "")
-            hostAddress = "127.0.0.1";
+            hostAddress = localhost;
 
         try
         {
             Client client = Instantiate(clientPrefab).GetComponent<Client>();
-            client.ConnectToServer(hostAddress, Port);
+            client.ConnectToServer(hostAddress, Server.Port);
 
             client.name = nameInput.text;
             if (client.name == "")
             {
                 System.Random rnd = new System.Random();
-                client.name = "Player" + (rnd.Next(100000));
+                client.name = "Player" + (rnd.Next(1000, 10000));
             }
 
             connectionMenu.SetActive(false);
-
             isConnected = true;
         }
         catch (Exception e)
@@ -94,18 +93,18 @@ public class GameManager : MonoBehaviour
         //    }
     }
 
-public void BackButton()
+    public void BackButton()
     {
         hostMenu.SetActive(false);
         joinMenu.SetActive(false);
         connectionMenu.SetActive(true);
 
-        Server s = FindObjectOfType<Server>();
-        if (s != null)
-            Destroy(s.gameObject);
+        Server server = FindObjectOfType<Server>();
+        if (server != null)
+            Destroy(server.gameObject);
 
-        Client c = FindObjectOfType<Client>();
-        if (c != null)
-            Destroy(c.gameObject);
+        Client client = FindObjectOfType<Client>();
+        if (client != null)
+            Destroy(client.gameObject);
     }
 }

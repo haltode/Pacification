@@ -53,12 +53,10 @@ public class Server : MonoBehaviour
             else
             {
                 NetworkStream stream = clients[i].tcp.GetStream();
-
                 if(stream.DataAvailable)
                 {
                     StreamReader reader = new StreamReader(stream, true);
                     string data = reader.ReadLine();
-
                     if(data != null)
                         Read(clients[i], data);
                 }
@@ -109,9 +107,9 @@ public class Server : MonoBehaviour
         }
     }
 
-    private void Broadcast(string data, List<ServerClient> clientList)
+    private void Broadcast(string data)
     {
-        foreach(ServerClient client in clientList)
+        foreach(ServerClient client in clients)
         {
             try
             {

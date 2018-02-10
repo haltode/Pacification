@@ -9,6 +9,9 @@ public class HexMapEditor : MonoBehaviour
 
     private Color activeColor;
     private int activeElevation;
+    private bool applyColor;
+    private bool applyElevation;
+    private int brushSize;
 
     void Awake()
     {
@@ -26,22 +29,58 @@ public class HexMapEditor : MonoBehaviour
         Ray inputRay = Camera.main.ScreenPointToRay(Input.mousePosition);
         RaycastHit hit;
         if(Physics.Raycast(inputRay, out hit))
-            EditCell(hexGrid.GetCell(hit.point));
+            EditCells(hexGrid.GetCell(hit.point));
+    }
+
+    void EditCells(HexCell center)
+    {
+        int centerX = center.coordinates.X;
+        int centerZ = center.coordinates.Z;
+
+        for(int r = 0, z = centerZ - brushSize; z <= centerZ; ++z, ++r)
+            for(int x = centerX - r; x <= centerX + brushSize; ++x)
+                EditCell(hexGrid.GetCell(new HexCoordinates(x, z)));
+
+        for(int r = 0, z = centerZ + brushSize; z > centerZ; --z, ++r)
+            for(int x = centerX - brushSize; x <= centerX + r; ++x)
+                EditCell(hexGrid.GetCell(new HexCoordinates(x, z)));
     }
 
     void EditCell(HexCell cell)
     {
-        cell.Color = activeColor;
-        cell.Elevation = activeElevation;
+        if(cell)
+        {
+            if(applyColor)
+                cell.Color = activeColor;
+            if(applyElevation)
+                cell.Elevation = activeElevation;
+        }
     }
 
     public void SetColor(int colorIndex)
     {
-        activeColor = colors[colorIndex];
+        applyColor = (colorIndex >= 0);
+        if(applyColor)
+            activeColor = colors[colorIndex];
     }
 
     public void SetElevation(float elevation)
     {
         activeElevation = (int) elevation;
+    }
+
+    public void SetApplyElevation(bool toggle)
+    {
+        applyElevation = toggle;
+    }
+
+    public void SetBrushSize(float size)
+    {
+        brushSize = (int) size;
+    }
+
+    public void ShowUI(bool visible)
+    {
+        hexGrid.ShowUI(visible);
     }
 }

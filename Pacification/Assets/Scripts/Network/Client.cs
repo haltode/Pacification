@@ -11,9 +11,14 @@ public class Client : MonoBehaviour
     private StreamWriter writer;
     private StreamReader reader;
 
+    private void Start()
+    {
+        DontDestroyOnLoad(gameObject);
+    }
+
     public bool ConnectToServer(string host, int port)
     {
-        if (isSocketReady)
+        if (isSocketReady) // If already connected : don't try once more (in case of more than one call to this function)
             return false;
 
         try

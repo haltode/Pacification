@@ -1,13 +1,11 @@
 ﻿using System;
-using System.Collections;
-using System.Collections.Generic;
 using System.IO;
 using System.Net.Sockets;
 using UnityEngine;
 
 public class Client : MonoBehaviour
 {
-    private bool socketReady;
+    private bool isSocketReady;
     private TcpClient socket;
     private NetworkStream stream;
     private StreamWriter writer;
@@ -15,7 +13,7 @@ public class Client : MonoBehaviour
 
     public bool ConnectToServer(string host, int port)
     {
-        if (socketReady)
+        if (isSocketReady)
             return false;
 
         try
@@ -25,63 +23,59 @@ public class Client : MonoBehaviour
             writer = new StreamWriter(stream);
             reader = new StreamReader(stream);
 
-            socketReady = true;
+            isSocketReady = true;
         }
         catch(Exception e)
         {
             Debug.Log("Socket error : " + e.Message);
         }
 
-        return socketReady;
+        return isSocketReady;
     }
 
     private void Update()
     {
-        if(socketReady)
+        if (isSocketReady && stream.DataAvailable)
         {
-            if(stream.DataAvailable)
-            {
-                string data = reader.ReadLine();
-                if (data != null)
-                    OnIncomingData(data);
-            }
+            string data = reader.ReadLine();
+            if (data != null)
+                Read(data);
         }
     }
 
-    //Sending messages to server
     public void Send(string data)
     {
-        if (!socketReady)
+        if (!isSocketReady)
             return;
 
         writer.WriteLine(data);
         writer.Flush();
     }
 
-    //Read messages from server
-    private void OnIncomingData(string data)
+    private void Read(string data)
     {
         Debug.Log(data);
     }
 
     private void OnApplicationQuit()
     {
-        CLoseSocket();
+        CloseSocket();
     }
+
     private void OnDisable()
     {
-        CLoseSocket();
+        CloseSocket();
     }
-    private void CLoseSocket()
+
+    private void CloseSocket()
     {
-        if (!socketReady)
+        if (!isSocketReady)
             return;
 
         writer.Close();
         reader.Close();
         socket.Close();
-        socketReady = false;
-
+        isSocketReady = false;
     }
 }
 

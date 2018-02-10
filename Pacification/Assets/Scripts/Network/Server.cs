@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Collections;
 using System.Collections.Generic;
 using System.IO;
 using System.Net;
@@ -14,7 +13,7 @@ public class Server : MonoBehaviour
     private List<ServerClient> disconnectList;
 
     private TcpListener server;
-    private bool serverStarted;
+    private bool isServerStarted;
 
     public void Init()
     {
@@ -29,29 +28,30 @@ public class Server : MonoBehaviour
             server.Start();
 
             StartListening();
-            serverStarted = true;
+            isServerStarted = true;
         }
         catch(Exception e)
         {
             Debug.Log("Socket error: " + e.Message);
         }
     }
+
     public void Update()
     {
-        if (!serverStarted)
+        if (!isServerStarted)
             return;
 
-        foreach(ServerClient c in clients)
+        foreach(ServerClient client in clients)
         {
-            if(!IsConnected(c.tcp))
+            if(!IsConnected(client.tcp))
             {
-                c.tcp.Close();
-                disconnectList.Add(c);
+                client.tcp.Close();
+                disconnectList.Add(client);
                 continue;
             }
             else
             {
-                NetworkStream s = c.tcp.GetStream();
+                NetworkStream s = client.tcp.GetStream();
                 if (s.DataAvailable)
                 {
                     StreamReader reader = new StreamReader(s, true);
@@ -59,13 +59,13 @@ public class Server : MonoBehaviour
 
                     if(data != null)
                     {
-                        OnIncomingData(c, data);
+                        Read(client, data);
                     }
                 }
             }
         }
 
-        for(int i = 0; i < disconnectList.Count - 1; i++)
+        for(int i = 0; i < disconnectList.Count - 1; ++i)
         {
             clients.Remove(disconnectList[i]);
             disconnectList.RemoveAt(i);
@@ -76,30 +76,32 @@ public class Server : MonoBehaviour
     {
         server.BeginAcceptTcpClient(AcceptTcpClient, server);
     }
+
     private void AcceptTcpClient(IAsyncResult ia)
     {
-        TcpListener listener = (TcpListener)ia.AsyncState;
+        TcpListener listener = (TcpListener) ia.AsyncState;
 
         ServerClient sc = new ServerClient(listener.EndAcceptTcpClient(ia));
         clients.Add(sc);
 
         StartListening();
 
-        Debug.Log("Somebody has connected !");
+        Debug.Log("Somebody has connected!");
     }
 
-    private bool IsConnected(TcpClient c)
+    private bool IsConnected(TcpClient client)
     {
         try
         {
-            if (c != null && c.Client != null && c.Client.Connected)
+            if (client != null && client.Client != null && client.Client.Connected)
             {
-                if (c.Client.Poll(0, SelectMode.SelectRead))
-                    return !(c.Client.Receive(new byte[1], SocketFlags.Peek) == 0);
-
-                return true;
+                if (client.Client.Poll(0, SelectMode.SelectRead))
+                    return (client.Client.Receive(new byte[1], SocketFlags.Peek) != 0);
+                else
+                    return true;
             }
-            else return false;
+            else
+                return false;
         }
         catch
         {
@@ -107,28 +109,27 @@ public class Server : MonoBehaviour
         }
     }
 
-    //Server Send
-    private void Broadcast(string data, List<ServerClient> cl)
+    // Server Send
+    private void Broadcast(string data, List<ServerClient> clientList)
     {
-        foreach(ServerClient sc in cl)
+        foreach(ServerClient servclient in clientList)
         {
             try
             {
-                StreamWriter writer = new StreamWriter(sc.tcp.GetStream());
+                StreamWriter writer = new StreamWriter(servclient.tcp.GetStream());
                 writer.WriteLine(data);
                 writer.Flush();
             }
             catch(Exception e)
             {
-                Debug.Log("In Broadcast() // Error : " + e.Message);
+                Debug.Log("Error : " + e.Message);
             }
         }
     }
 
-    //Server Read
-    private void OnIncomingData(ServerClient c, string data)
+    private void Read(ServerClient client, string data)
     {
-        Debug.Log(c.clientName + " : " + data);
+        Debug.Log(client.clientName + " : " + data);
     }
 }
 

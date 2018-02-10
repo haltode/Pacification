@@ -1,3 +1,7 @@
+## Organisation
+
+- Que du blabla logique
+
 ## Website
 
 - Que faire ?
@@ -20,3 +24,6 @@
 - Be prepared
     - more than one computer
     - cables
+- Installeur
+    - DVD 
+    - Guide d'installation détaillé // PDF // Imprimé 

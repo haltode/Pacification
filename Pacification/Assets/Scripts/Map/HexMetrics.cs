@@ -5,7 +5,7 @@ public static class HexMetrics
     public const float OuterRadius = 10f;
     public const float InnerRadius = OuterRadius * 0.866025404f;
 
-    public const int NbTriangleInHex = 6;
+    public const float ElevationStep = 5f;
 
     // Blending colored regions factors
     public const float SolidFactor = 0.75f;

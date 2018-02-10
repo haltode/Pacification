@@ -64,19 +64,23 @@ public class HexMesh : MonoBehaviour
         if(neighbor == null)
             return;
 
-        // Internal bridges
+        // Edges connections
         Vector3 bridge = HexMetrics.GetBridge(dir);
         Vector3 v3 = v1 + bridge;
         Vector3 v4 = v2 + bridge;
+        v3.y = v4.y = neighbor.Elevation * HexMetrics.ElevationStep;
 
         AddQuad(v1, v2, v3, v4);
         AddQuadColor(cell.color, neighbor.color);
 
-        // Internal triangles
+        // Corners connections
         HexCell nextNeighbor = cell.GetNeighbor(dir.Next());
         if(dir <= HexDirection.E && nextNeighbor != null)
         {
-            AddTriangle(v2, v4, v2 + HexMetrics.GetBridge(dir.Next()));
+            Vector3 v5 = v2 + HexMetrics.GetBridge(dir.Next());
+            v5.y = nextNeighbor.Elevation * HexMetrics.ElevationStep;
+            
+            AddTriangle(v2, v4, v5);
             AddTriangleColor(cell.color, neighbor.color, nextNeighbor.color);
         }
     }

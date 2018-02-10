@@ -47,6 +47,26 @@ public class HexGrid : MonoBehaviour
         cell.coordinates = HexCoordinates.FromOffsetCoordinates(x, z);
         cell.color = defaultColor;
 
+        // E-W neighbor connection
+        if(x > 0)
+            cell.SetNeighbor(HexDirection.W, cells[cellIndex - 1]);
+        if(z > 0)
+        {
+            // NW-SE and NE-SW connections (dealing with even/odd rows)
+            if(z % 2 == 0)
+            {
+                cell.SetNeighbor(HexDirection.SE, cells[cellIndex - width]);
+                if(x > 0)
+                    cell.SetNeighbor(HexDirection.SW, cells[cellIndex - width - 1]);
+            }
+            else
+            {
+                cell.SetNeighbor(HexDirection.SW, cells[cellIndex - width]);
+                if(x < width - 1)
+                    cell.SetNeighbor(HexDirection.SE, cells[cellIndex - width + 1]);
+            }
+        }
+
         Text label = Instantiate<Text>(cellLabelPrefab);
         label.rectTransform.SetParent(gridCanvas.transform, false);
         label.rectTransform.anchoredPosition = new Vector2(position.x, position.z);

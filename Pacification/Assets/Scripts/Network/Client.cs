@@ -5,7 +5,7 @@ using UnityEngine;
 
 public class Client : MonoBehaviour
 {
-    private bool isSocketReady;
+    private bool isSocketStarted;
     private TcpClient socket;
     private NetworkStream stream;
     private StreamWriter writer;
@@ -18,7 +18,7 @@ public class Client : MonoBehaviour
 
     public bool ConnectToServer(string host, int port)
     {
-        if (isSocketReady) // If already connected : don't try once more (in case of more than one call to this function)
+        if(isSocketStarted) 
             return false;
 
         try
@@ -28,29 +28,29 @@ public class Client : MonoBehaviour
             writer = new StreamWriter(stream);
             reader = new StreamReader(stream);
 
-            isSocketReady = true;
+            isSocketStarted = true;
         }
         catch(Exception e)
         {
             Debug.Log("Socket error : " + e.Message);
         }
 
-        return isSocketReady;
+        return isSocketStarted;
     }
 
     private void Update()
     {
-        if (isSocketReady && stream.DataAvailable)
+        if(isSocketStarted && stream.DataAvailable)
         {
             string data = reader.ReadLine();
-            if (data != null)
+            if(data != null)
                 Read(data);
         }
     }
 
-    public void Send(string data)
+    private void Send(string data)
     {
-        if (!isSocketReady)
+        if(!isSocketStarted)
             return;
 
         writer.WriteLine(data);
@@ -74,13 +74,13 @@ public class Client : MonoBehaviour
 
     private void CloseSocket()
     {
-        if (!isSocketReady)
+        if(!isSocketStarted)
             return;
 
         writer.Close();
         reader.Close();
         socket.Close();
-        isSocketReady = false;
+        isSocketStarted = false;
     }
 }
 

@@ -7,10 +7,10 @@ using UnityEngine;
 
 public class Server : MonoBehaviour
 {
-    public int port = 6321;
+    public const int Port = 6321;
 
     private List<ServerClient> clients;
-    private List<ServerClient> disconnectList;
+    //private List<ServerClient> disconnected;
 
     private TcpListener server;
     private bool isServerStarted;
@@ -20,11 +20,11 @@ public class Server : MonoBehaviour
         DontDestroyOnLoad(gameObject);
 
         clients = new List<ServerClient>();
-        disconnectList = new List<ServerClient>();
+        //disconnected = new List<ServerClient>();
 
         try
         {
-            server = new TcpListener(IPAddress.Any, port);
+            server = new TcpListener(IPAddress.Any, Port);
             server.Start();
 
             StartListening();
@@ -38,38 +38,38 @@ public class Server : MonoBehaviour
 
     public void Update()
     {
-        if (!isServerStarted)
+        if(!isServerStarted)
             return;
 
-        foreach(ServerClient client in clients)
+        //foreach(ServerClient client in clients)
+        for (int i = clients.Count - 1; i >= 0; --i)
         {
-            if(!IsConnected(client.tcp))
+            if(!IsConnected(clients[i].tcp))
             {
-                client.tcp.Close();
-                disconnectList.Add(client);
-                continue;
+                clients[i].tcp.Close();
+                clients.Remove(clients[i]); //
+                //disconnected.Add(clients[i]);
             }
             else
             {
-                NetworkStream s = client.tcp.GetStream();
-                if (s.DataAvailable)
+                NetworkStream stream = clients[i].tcp.GetStream();
+
+                if(stream.DataAvailable)
                 {
-                    StreamReader reader = new StreamReader(s, true);
+                    StreamReader reader = new StreamReader(stream, true);
                     string data = reader.ReadLine();
 
                     if(data != null)
-                    {
-                        Read(client, data);
-                    }
+                        Read(clients[i], data);
                 }
             }
         }
 
-        for(int i = 0; i < disconnectList.Count - 1; ++i)
-        {
-            clients.Remove(disconnectList[i]);
-            disconnectList.RemoveAt(i);
-        }
+        //for(int i = 0; i < disconnected.Count - 1; ++i)
+        //{
+        //    clients.Remove(disconnected[i]);
+        //    disconnected.RemoveAt(i);
+        //}
     }
 
     private void StartListening()
@@ -93,9 +93,9 @@ public class Server : MonoBehaviour
     {
         try
         {
-            if (client != null && client.Client != null && client.Client.Connected)
+            if(client != null && client.Client != null && client.Client.Connected)
             {
-                if (client.Client.Poll(0, SelectMode.SelectRead))
+                if(client.Client.Poll(0, SelectMode.SelectRead))
                     return (client.Client.Receive(new byte[1], SocketFlags.Peek) != 0);
                 else
                     return true;
@@ -109,20 +109,19 @@ public class Server : MonoBehaviour
         }
     }
 
-    // Server Send
     private void Broadcast(string data, List<ServerClient> clientList)
     {
-        foreach(ServerClient servclient in clientList)
+        foreach(ServerClient client in clientList)
         {
             try
             {
-                StreamWriter writer = new StreamWriter(servclient.tcp.GetStream());
+                StreamWriter writer = new StreamWriter(client.tcp.GetStream());
                 writer.WriteLine(data);
                 writer.Flush();
             }
             catch(Exception e)
             {
-                Debug.Log("Error : " + e.Message);
+                Debug.Log(e.Message);
             }
         }
     }

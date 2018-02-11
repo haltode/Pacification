@@ -64,9 +64,19 @@ public class Client : MonoBehaviour
 
     private void Read(string data)
     {
+        Debug.Log("Client " +clientName +" received: " + data);
+
         string[] receivedData = data.Split('|');
         switch(receivedData[0])
         {
+            case "SMOV":
+                //Display another player move
+                break;
+
+            case "SYGO":
+                //It's your turn
+                break;
+
             case "SWHO":
                 for(int i = 1; i < receivedData.Length -1; ++i)
                 {

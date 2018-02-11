@@ -150,6 +150,14 @@ public class Server : MonoBehaviour
         string[] receivedData = data.Split('|');
         switch(receivedData[0])
         {
+            case "CMOV":
+                // One player made a move, send it to the other players -> SMOV
+                break;
+
+            case "CEND":
+                // One player ended his turn, let another one play -> SYGO
+                break;
+
             case "CIAM":
                 string[] clientStatus = receivedData[1].Split('#');
                 client.clientName = clientStatus[0];

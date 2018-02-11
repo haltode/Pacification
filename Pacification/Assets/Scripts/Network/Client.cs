@@ -7,10 +7,11 @@ using UnityEngine;
 public class Client : MonoBehaviour
 {
     public string clientName;
-    private List<GameClient> players = new List<GameClient>(); 
 
+    public bool isHost;
     private bool isSocketStarted;
-    public bool isHost = false;
+
+    private List<GameClient> players = new List<GameClient>(); 
     private TcpClient socket;
     private NetworkStream stream;
     private StreamWriter writer;
@@ -64,17 +65,17 @@ public class Client : MonoBehaviour
 
     private void Read(string data)
     {
-        Debug.Log("Client " +clientName +" received: " + data);
+        Debug.Log("Client " + clientName + " received: " + data);
 
         string[] receivedData = data.Split('|');
         switch(receivedData[0])
         {
             case "SMOV":
-                //Display another player move
+                // Display another player move
                 break;
 
             case "SYGO":
-                //It's your turn
+                // It's your turn
                 break;
 
             case "SWHO":
@@ -88,6 +89,10 @@ public class Client : MonoBehaviour
             case "SCNN":
                 string[] clientStatus = receivedData[1].Split('#');
                 UserConnected(clientStatus[0], (clientStatus[1]) == "1");
+                break;
+
+            case "SDEC":
+                // One user has deconnected
                 break;
 
             case "SMAP":

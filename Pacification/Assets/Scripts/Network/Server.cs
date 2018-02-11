@@ -8,14 +8,14 @@ using UnityEngine;
 public class Server : MonoBehaviour
 {
     public const int Port = 6321;
-    public const string localhost = "127.0.0.1";
+    public const string Localhost = "127.0.0.1";
+    public int playerNumber;
 
-    private bool isGameStarted = false;
-    private int playerNumber = 2; ///////////////// Add : UI pour decider du nombre de joueurs
+    private bool isGameStarted;
+    private bool isServerStarted;
 
     private List<ServerClient> clients;
     private TcpListener server;
-    private bool isServerStarted;
 
 
     public void Init()

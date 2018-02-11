@@ -9,17 +9,22 @@ public class GameManager : MonoBehaviour
 
     public GameObject connectionMenu;
     public GameObject hostMenu;
+    public GameObject toHosting;
     public GameObject joinMenu;
 
     public GameObject serverPrefab;
     public GameObject clientPrefab;
 
     public InputField nameInput;
+    public InputField nameInputHost;
+
+    public Slider numberOfPlayerSlider;
 
     private void Start()
     {
         Instance = this;
         hostMenu.SetActive(false);
+        toHosting.SetActive(false);
         joinMenu.SetActive(false);
         DontDestroyOnLoad(gameObject);
     }
@@ -37,22 +42,24 @@ public class GameManager : MonoBehaviour
             Server server = Instantiate(serverPrefab).GetComponent<Server>();
             server.Init();
 
+            server.playerNumber = (int)numberOfPlayerSlider.value;
+
             Client client = Instantiate(clientPrefab).GetComponent<Client>();
-            client.clientName = nameInput.text;
+            client.clientName = nameInputHost.text;
             client.isHost = true;
 
             if (client.clientName == "")
             {
                 client.clientName = "Host";
             }
-            client.ConnectToServer(Server.localhost, Server.Port);
+            client.ConnectToServer(Server.Localhost, Server.Port);
         }
         catch (Exception e)
         {
             Debug.Log(e.Message);
         }
 
-        connectionMenu.SetActive(false);
+        toHosting.SetActive(false);
         hostMenu.SetActive(true);
     }
 
@@ -62,7 +69,7 @@ public class GameManager : MonoBehaviour
         bool isConnected = false;
 
         if (hostAddress == "")
-            hostAddress = Server.localhost;
+            hostAddress = Server.Localhost;
 
         try
         {
@@ -107,6 +114,12 @@ public class GameManager : MonoBehaviour
         Client client = FindObjectOfType<Client>();
         if (client != null)
             Destroy(client.gameObject);
+    }
+
+    public void MenutoHostingButton()
+    {
+        toHosting.SetActive(true);
+        connectionMenu.SetActive(false);
     }
 
     public void StartGame(string map)

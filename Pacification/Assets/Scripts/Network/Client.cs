@@ -78,6 +78,18 @@ public class Client : MonoBehaviour
                 // It's your turn
                 break;
 
+            case "SMSG":
+                // Received a global message 
+                break;
+
+            case "SMSP":
+                // Received a private message 
+                break;
+
+            case "SMSE":
+                // The private message you sent couldn't find a target
+                break;
+
             case "SWHO":
                 for(int i = 1; i < receivedData.Length -1; ++i)
                 {

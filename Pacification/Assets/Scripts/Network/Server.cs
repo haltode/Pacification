@@ -151,11 +151,27 @@ public class Server : MonoBehaviour
         switch(receivedData[0])
         {
             case "CMOV":
-                // One player made a move, send it to the other players -> SMOV
+                Broadcast("SMOV|" + receivedData[1], clients);
                 break;
 
             case "CEND":
-                // One player ended his turn, let another one play -> SYGO
+                ///////// One player ended his turn, let the next one play
+                /*//*/ServerClient newActivclient = clients[0];
+                /////////////////////
+
+                Broadcast("SYGO|", newActivclient);
+                break;
+
+            case "CMSG":
+                Broadcast("SMSG|" + client.clientName + " >> " + receivedData[1], clients);
+                break;
+
+            case "CMSP":
+                ServerClient clientMSGreceiver = clients.Find(clientMsp => clientMsp.clientName == receivedData[1]);
+                if (clientMSGreceiver != null)
+                    Broadcast("SMSP|" + client.clientName + " >> " + receivedData[2], clients.Find(clientMsp => clientMsp.clientName == receivedData[1]));
+                else
+                    Broadcast("SMSE|The player receivedData[2] is unreacheable", client);
                 break;
 
             case "CIAM":

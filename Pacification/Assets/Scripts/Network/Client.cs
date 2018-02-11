@@ -1,11 +1,16 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.IO;
 using System.Net.Sockets;
 using UnityEngine;
 
 public class Client : MonoBehaviour
 {
+    public string clientName;
+    private List<GameClient> players = new List<GameClient>(); 
+
     private bool isSocketStarted;
+    public bool isHost = false;
     private TcpClient socket;
     private NetworkStream stream;
     private StreamWriter writer;
@@ -59,7 +64,33 @@ public class Client : MonoBehaviour
 
     private void Read(string data)
     {
-        Debug.Log(data);
+        string[] receivedData = data.Split('|');
+        switch(receivedData[0])
+        {
+            case "SWHO":
+                for(int i = 1; i < receivedData.Length -1; ++i)
+                {
+                    UserConnected(receivedData[i], false);
+                }
+                Send("CIAM|" + clientName + "#" + ((isHost)? 1:0).ToString());
+                break;
+
+            case "SCNN":
+                string[] clientStatus = receivedData[1].Split('#');
+                UserConnected(clientStatus[0], (clientStatus[1]) == "1");
+                break;
+
+            case "SMAP":
+                GameManager.Instance.StartGame(receivedData[1]);
+                break;
+        }
+    }
+
+    private void UserConnected(string name, bool host)
+    {
+        GameClient client = new GameClient { name = name };
+
+        players.Add(client);
     }
 
     private void OnApplicationQuit()

@@ -8,19 +8,21 @@ using UnityEngine;
 public class Server : MonoBehaviour
 {
     public const int Port = 6321;
+    public const string localhost = "127.0.0.1";
+
+    private bool isGameStarted = false;
+    private int playerNumber = 2; ///////////////// Add : UI pour decider du nombre de joueurs
 
     private List<ServerClient> clients;
-    //private List<ServerClient> disconnected;
-
     private TcpListener server;
     private bool isServerStarted;
+
 
     public void Init()
     {
         DontDestroyOnLoad(gameObject);
 
         clients = new List<ServerClient>();
-        //disconnected = new List<ServerClient>();
 
         try
         {
@@ -41,14 +43,12 @@ public class Server : MonoBehaviour
         if(!isServerStarted)
             return;
 
-        //foreach(ServerClient client in clients)
         for (int i = clients.Count - 1; i >= 0; --i)
         {
             if(!IsConnected(clients[i].tcp))
             {
                 clients[i].tcp.Close();
-                clients.Remove(clients[i]); //
-                //disconnected.Add(clients[i]);
+                clients.Remove(clients[i]);
             }
             else
             {
@@ -63,11 +63,17 @@ public class Server : MonoBehaviour
             }
         }
 
-        //for(int i = 0; i < disconnected.Count - 1; ++i)
-        //{
-        //    clients.Remove(disconnected[i]);
-        //    disconnected.RemoveAt(i);
-        //}
+        if(!isGameStarted && clients.Count == playerNumber)
+        {
+            Debug.Log("Sending Map");
+            isGameStarted = true;
+
+            ////// Appel au constructeur + enregistreur en string de Map
+            string map = "empty_map_for_now";
+            /////////
+
+            Broadcast("SMAP|" + map, clients);
+        }
     }
 
     private void StartListening()
@@ -77,14 +83,23 @@ public class Server : MonoBehaviour
 
     private void AcceptTcpClient(IAsyncResult ia)
     {
+        if(clients.Count == playerNumber)
+            return;
+
         TcpListener listener = (TcpListener) ia.AsyncState;
+
+        string allUsers = "";
+        foreach(ServerClient serverClient in clients)
+        {
+            allUsers += serverClient.clientName + '|';
+        }
 
         ServerClient sc = new ServerClient(listener.EndAcceptTcpClient(ia));
         clients.Add(sc);
 
         StartListening();
 
-        Debug.Log("Somebody has connected!");
+        Broadcast("SWHO|"+ allUsers, clients[clients.Count - 1]);
     }
 
     private bool IsConnected(TcpClient client)
@@ -107,9 +122,9 @@ public class Server : MonoBehaviour
         }
     }
 
-    private void Broadcast(string data)
+    private void Broadcast(string data, List<ServerClient> clientList)
     {
-        foreach(ServerClient client in clients)
+        foreach(ServerClient client in clientList)
         {
             try
             {
@@ -123,10 +138,26 @@ public class Server : MonoBehaviour
             }
         }
     }
+    private void Broadcast(string data, ServerClient client)
+    {
+        Broadcast(data, new List<ServerClient> { client });
+    }
 
     private void Read(ServerClient client, string data)
     {
-        Debug.Log(client.clientName + " : " + data);
+        Debug.Log("Server received : " + data);
+
+        string[] receivedData = data.Split('|');
+        switch(receivedData[0])
+        {
+            case "CIAM":
+                string[] clientStatus = receivedData[1].Split('#');
+                client.clientName = clientStatus[0];
+                client.isHost = (clientStatus[1] == "1");
+
+                Broadcast("SCNN|" + receivedData[1], clients);
+                break;
+        }
     }
 }
 
@@ -134,6 +165,7 @@ public class ServerClient
 {
     public string clientName;
     public TcpClient tcp;
+    public bool isHost;
 
     public ServerClient(TcpClient tcp)
     {

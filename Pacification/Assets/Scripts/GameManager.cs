@@ -1,6 +1,7 @@
 ﻿using System;
 using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.SceneManagement;
 
 public class GameManager : MonoBehaviour
 {
@@ -14,8 +15,6 @@ public class GameManager : MonoBehaviour
     public GameObject clientPrefab;
 
     public InputField nameInput;
-
-    private const string localhost = "127.0.0.1";
 
     private void Start()
     {
@@ -39,12 +38,14 @@ public class GameManager : MonoBehaviour
             server.Init();
 
             Client client = Instantiate(clientPrefab).GetComponent<Client>();
-            client.name = nameInput.text;
-            if (client.name == "")
+            client.clientName = nameInput.text;
+            client.isHost = true;
+
+            if (client.clientName == "")
             {
-                client.name = "Host";
+                client.clientName = "Host";
             }
-            client.ConnectToServer(localhost, Server.Port);
+            client.ConnectToServer(Server.localhost, Server.Port);
         }
         catch (Exception e)
         {
@@ -61,18 +62,18 @@ public class GameManager : MonoBehaviour
         bool isConnected = false;
 
         if (hostAddress == "")
-            hostAddress = localhost;
+            hostAddress = Server.localhost;
 
         try
         {
             Client client = Instantiate(clientPrefab).GetComponent<Client>();
             client.ConnectToServer(hostAddress, Server.Port);
 
-            client.name = nameInput.text;
-            if (client.name == "")
+            client.clientName = nameInput.text;
+            if (client.clientName == "")
             {
                 System.Random rnd = new System.Random();
-                client.name = "Player" + (rnd.Next(1000, 10000));
+                client.clientName = "Player" + (rnd.Next(1000, 10000));
             }
 
             connectionMenu.SetActive(false);
@@ -106,5 +107,11 @@ public class GameManager : MonoBehaviour
         Client client = FindObjectOfType<Client>();
         if (client != null)
             Destroy(client.gameObject);
+    }
+
+    public void StartGame(string map)
+    {
+        //Add : Reconstruction de la map
+        SceneManager.LoadScene("Map");
     }
 }

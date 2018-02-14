@@ -103,21 +103,12 @@ public class HexGridChunk : MonoBehaviour
             Vector3 v6 = Vector3.Lerp(v3, v4, 0.5f);
             v6.y = neighbor.Elevation * HexMetrics.ElevationStep;
 
-            v1 = Vector3.Lerp(v1, v5, 0.5f);
-            v2 = Vector3.Lerp(v5, v2, 0.5f);
+            v1 = Vector3.Lerp(v1, v5, 0.5f + HexMetrics.RoadSizeFactor);
+            v2 = Vector3.Lerp(v5, v2, HexMetrics.RoadSizeFactor);
 
-            v3 = Vector3.Lerp(v3, v6, 0.5f);
-            v4 = Vector3.Lerp(v6, v4, 0.5f);
+            v3 = Vector3.Lerp(v3, v6, 0.5f + HexMetrics.RoadSizeFactor);
+            v4 = Vector3.Lerp(v6, v4, HexMetrics.RoadSizeFactor);
 
-            // Debug.Log("v1 " + v1);
-            // Debug.Log("v2 " + v2);
-            // Debug.Log("v3 " + v3);
-            // Debug.Log("v4 " + v4);
-            // Debug.Log("v5 " + v5);
-            // Debug.Log("v6 " + v6);
-            //TriangulateRoadSegment(v1, v3, v5, v2, v4, v6);
-            //TriangulateRoadSegment(v1, v5, v3, v2, v6, v4); // works but not the correct way
-            //TriangulateRoadSegment(v3, v5, v1, v4, v6, v2);
             TriangulateRoadSegment(v1, v5, v2, v3, v6, v4);
         }
     }

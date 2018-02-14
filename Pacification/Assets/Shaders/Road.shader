@@ -6,8 +6,12 @@
 		_Metallic ("Metallic", Range(0,1)) = 0.0
 	}
 	SubShader {
-		Tags { "RenderType"="Opaque" }
+		Tags {
+            "RenderType"="Opaque"
+            "Queue" = "Geometry+1"
+        }
 		LOD 200
+        Offset -1, -1
 
 		CGPROGRAM
 		// Physically based Standard lighting model, and enable shadows on all light types

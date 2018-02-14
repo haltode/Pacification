@@ -43,7 +43,8 @@ MonoBehaviour:
   coordinates:
     x: 0
     z: 0
-  color: {r: 0, g: 0, b: 0, a: 0}
+  chunk: {fileID: 0}
+  uiRect: {fileID: 0}
   neighbors:
   - {fileID: 0}
   - {fileID: 0}
@@ -51,6 +52,7 @@ MonoBehaviour:
   - {fileID: 0}
   - {fileID: 0}
   - {fileID: 0}
+  roads: 000000000000
 --- !u!1001 &100100000
 Prefab:
   m_ObjectHideFlags: 1

@@ -9,6 +9,7 @@ public static class HexMetrics
     public const int ChunkSizeZ = 5;
 
     public const float ElevationStep = 5f;
+    public const int MaxRoadElevation = 1;
 
     // Blending colored regions factors
     public const float SolidFactor = 0.75f;
@@ -45,7 +46,7 @@ public static class HexMetrics
     {
         return corners[(int) dir + 1] * SolidFactor;
     }
-
+    
     public static Vector3 GetBridge(HexDirection dir)
     {
         return (corners[(int) dir] + corners[(int) dir + 1]) * BlendFactor;

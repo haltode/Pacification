@@ -3,6 +3,10 @@ using UnityEngine.EventSystems;
 
 public class HexMapEditor : MonoBehaviour
 {
+    enum OptionalToggle {
+        Ignore, No, Yes
+    }
+
     public Color[] colors;
 
     public HexGrid hexGrid;
@@ -13,6 +17,12 @@ public class HexMapEditor : MonoBehaviour
     private bool applyElevation;
     private int brushSize;
 
+    bool isDrag;
+    HexDirection dragDirection;
+    HexCell previousCell;
+
+    OptionalToggle roadMode;
+
     void Awake()
     {
         SetColor(0);
@@ -22,6 +32,8 @@ public class HexMapEditor : MonoBehaviour
     {
         if(Input.GetMouseButton(0) && !EventSystem.current.IsPointerOverGameObject())
             HandleInput();
+        else
+            previousCell = null;
     }
 
     void HandleInput()
@@ -29,7 +41,32 @@ public class HexMapEditor : MonoBehaviour
         Ray inputRay = Camera.main.ScreenPointToRay(Input.mousePosition);
         RaycastHit hit;
         if(Physics.Raycast(inputRay, out hit))
-            EditCells(hexGrid.GetCell(hit.point));
+        {
+            HexCell currentCell = hexGrid.GetCell(hit.point);
+            if(previousCell && previousCell != currentCell)
+                ValidateDrag(currentCell);
+            else
+                isDrag = false;
+
+            EditCells(currentCell);
+            previousCell = currentCell;
+            isDrag = true;
+        }
+        else
+            previousCell = null;
+    }
+
+    void ValidateDrag(HexCell currentCell)
+    {
+        for(dragDirection = HexDirection.NE; dragDirection <= HexDirection.NW; ++dragDirection)
+        {
+            if(previousCell.GetNeighbor(dragDirection) == currentCell)
+            {
+                isDrag = true;
+                return;
+            }
+        }
+        isDrag = false;
     }
 
     void EditCells(HexCell center)
@@ -54,6 +91,14 @@ public class HexMapEditor : MonoBehaviour
                 cell.Color = activeColor;
             if(applyElevation)
                 cell.Elevation = activeElevation;
+            if(roadMode == OptionalToggle.No)
+                cell.RemoveRoads();
+            if(isDrag)
+            {
+                HexCell otherCell = cell.GetNeighbor(dragDirection.Opposite());
+                if(otherCell && roadMode == OptionalToggle.Yes)
+                    otherCell.AddRoad(dragDirection);
+            }
         }
     }
 
@@ -82,5 +127,10 @@ public class HexMapEditor : MonoBehaviour
     public void ShowUI(bool visible)
     {
         hexGrid.ShowUI(visible);
+    }
+
+    public void SetRoadMode(int mode)
+    {
+        roadMode = (OptionalToggle) mode;
     }
 }

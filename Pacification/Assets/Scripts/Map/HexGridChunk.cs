@@ -66,8 +66,7 @@ public class HexGridChunk : MonoBehaviour
         terrain.AddTriangle(center, v1, v2);
         terrain.AddTriangleColor(cell.Color);
 
-        if(dir <= HexDirection.SE)
-            TriangulateConnection(cell, v1, v2, dir);
+        TriangulateConnection(cell, v1, v2, dir);
     }
 
     void TriangulateConnection(HexCell cell, Vector3 v1, Vector3 v2, HexDirection dir)
@@ -76,40 +75,61 @@ public class HexGridChunk : MonoBehaviour
         if(neighbor == null)
             return;
 
-        // Edges connections
         Vector3 bridge = HexMetrics.GetBridge(dir);
         Vector3 v3 = v1 + bridge;
         Vector3 v4 = v2 + bridge;
         v3.y = v4.y = neighbor.Elevation * HexMetrics.ElevationStep;
 
-        terrain.AddQuad(v1, v2, v3, v4);
-        terrain.AddQuadColor(cell.Color, neighbor.Color);
-
-        // Corners connections
-        HexCell nextNeighbor = cell.GetNeighbor(dir.Next());
-        if(dir <= HexDirection.E && nextNeighbor != null)
+        if(dir <= HexDirection.SE)
         {
-            Vector3 v5 = v2 + HexMetrics.GetBridge(dir.Next());
-            v5.y = nextNeighbor.Elevation * HexMetrics.ElevationStep;
-            
-            terrain.AddTriangle(v2, v4, v5);
-            terrain.AddTriangleColor(cell.Color, neighbor.Color, nextNeighbor.Color);
+            // Edges connections
+            terrain.AddQuad(v1, v2, v3, v4);
+            terrain.AddQuadColor(cell.Color, neighbor.Color);
+
+            // Corners connections
+            HexCell nextNeighbor = cell.GetNeighbor(dir.Next());
+            if(dir <= HexDirection.E && nextNeighbor != null)
+            {
+                Vector3 v5 = v2 + HexMetrics.GetBridge(dir.Next());
+                v5.y = nextNeighbor.Elevation * HexMetrics.ElevationStep;
+                
+                terrain.AddTriangle(v2, v4, v5);
+                terrain.AddTriangleColor(cell.Color, neighbor.Color, nextNeighbor.Color);
+            }    
         }
 
-        // Road
-        if(cell.HasRoadThroughEdge(dir))
+        TriangulateRoadSystem(cell, dir, v1, v2, v3, v4);
+    }
+
+    void TriangulateRoadSystem( HexCell cell, HexDirection dir, 
+                                Vector3 v1, Vector3 v2, Vector3 v3, Vector3 v4)
+    {
+        if(cell.HasRoads)
         {
-            Vector3 v5 = Vector3.Lerp(v1, v2, 0.5f);
-            Vector3 v6 = Vector3.Lerp(v3, v4, 0.5f);
-            v6.y = neighbor.Elevation * HexMetrics.ElevationStep;
+            Vector3 center = cell.transform.localPosition;
+            Vector3 upLeft = center + HexMetrics.GetFirstSolidCorner(dir);
+            Vector3 upRight = center + HexMetrics.GetSecondSolidCorner(dir);
 
-            v1 = Vector3.Lerp(v1, v5, 0.5f + HexMetrics.RoadSizeFactor);
-            v2 = Vector3.Lerp(v5, v2, HexMetrics.RoadSizeFactor);
+            Vector3 middleLeft = Vector3.Lerp(upLeft, center, 0.5f);
+            Vector3 middleRight = Vector3.Lerp(center, upRight, 0.5f);
 
-            v3 = Vector3.Lerp(v3, v6, 0.5f + HexMetrics.RoadSizeFactor);
-            v4 = Vector3.Lerp(v6, v4, HexMetrics.RoadSizeFactor);
+            TriangulateRoad(center, middleLeft, middleRight, upLeft, upRight, cell.HasRoadThroughEdge(dir));
 
-            TriangulateRoadSegment(v1, v5, v2, v3, v6, v4);
+            if(cell.HasRoadThroughEdge(dir))
+            {
+                HexCell neighbor = cell.GetNeighbor(dir);
+                Vector3 v5 = Vector3.Lerp(v1, v2, 0.5f);
+                Vector3 v6 = Vector3.Lerp(v3, v4, 0.5f);
+                v6.y = neighbor.Elevation * HexMetrics.ElevationStep;
+
+                v1 = Vector3.Lerp(v1, v5, 0.5f);
+                v2 = Vector3.Lerp(v5, v2, 0.5f);
+
+                v3 = Vector3.Lerp(v3, v6, 0.5f);
+                v4 = Vector3.Lerp(v6, v4, 0.5f);
+
+                TriangulateRoadSegment(v1, v5, v2, v3, v6, v4);
+            }
         }
     }
 
@@ -120,5 +140,31 @@ public class HexGridChunk : MonoBehaviour
         roads.AddQuad(v2, v3, v5, v6);
         roads.AddQuadUV(0f, 1f, 0f, 0f);
         roads.AddQuadUV(1f, 0f, 0f, 0f);
+    }
+
+    void TriangulateRoad(   Vector3 center, Vector3 middleLeft, Vector3 middleRight,
+                            Vector3 upLeft, Vector3 upRight, bool hasRoadThroughCellEdge)
+    {
+        if(hasRoadThroughCellEdge)
+        {
+            Vector3 middleCenter = Vector3.Lerp(middleLeft, middleRight, 0.5f);
+            Vector3 cornerMiddleLeft = Vector3.Lerp(upLeft, upRight, 0.25f);
+            Vector3 cornerMiddle = Vector3.Lerp(upLeft, upRight, 0.5f);
+            Vector3 cornerMiddleRight = Vector3.Lerp(upLeft, upRight, 0.75f);
+
+            TriangulateRoadSegment( middleLeft, middleCenter, middleRight, 
+                                    cornerMiddleLeft, cornerMiddle, cornerMiddleRight);
+
+            roads.AddTriangle(center, middleLeft, middleCenter);
+            roads.AddTriangle(center, middleCenter, middleRight);
+            roads.AddTriangleUV(new Vector2(1f, 0f), new Vector2(0f, 0f), new Vector2(1f, 0f));
+            roads.AddTriangleUV(new Vector2(1f, 0f), new Vector2(1f, 0f), new Vector2(0f, 0f));    
+        }
+        // Roads edges
+        else
+        {
+            roads.AddTriangle(center, middleLeft, middleRight);
+            roads.AddTriangleUV(new Vector3(1f, 0f), new Vector2(0f, 0f), new Vector2(0f, 0f));
+        }
     }
 }

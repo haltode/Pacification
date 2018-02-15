@@ -15,8 +15,6 @@ public static class HexMetrics
     public const float SolidFactor = 0.75f;
     public const float BlendFactor = 1f - SolidFactor;
 
-    public const float RoadSizeFactor = 0.25f;
-
     static Vector3[] corners =
     {
         new Vector3(0f, 0f, OuterRadius),

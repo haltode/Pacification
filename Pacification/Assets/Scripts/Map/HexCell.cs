@@ -1,4 +1,5 @@
 ﻿using UnityEngine;
+using System.IO;
 
 public class HexCell : MonoBehaviour
 {
@@ -67,6 +68,26 @@ public class HexCell : MonoBehaviour
         RefreshSelfOnly();
     }
 
+    int biomeTypeIndex;
+
+    public Color Color
+    {
+        get { return HexMetrics.colors[biomeTypeIndex]; }
+    }
+
+    public int BiomeTypeIndex
+    {
+        get { return biomeTypeIndex; }
+        set
+        {
+            if(biomeTypeIndex != value)
+            {
+                biomeTypeIndex = value;
+                Refresh();
+            }
+        }
+    }
+
     int elevation = int.MinValue;
 
     public int Elevation
@@ -78,13 +99,7 @@ public class HexCell : MonoBehaviour
                 return;
 
             elevation = value;
-            Vector3 position = transform.localPosition;
-            position.y = value * HexMetrics.ElevationStep;
-            transform.localPosition = position;
-
-            Vector3 uiPosition = uiRect.localPosition;
-            uiPosition.z = elevation * -HexMetrics.ElevationStep;
-            uiRect.localPosition = uiPosition;
+            RefreshPosition();
 
             for(int i = 0; i < roads.Length; ++i)
                 if(roads[i] && GetElevationDifference((HexDirection) i) > HexMetrics.MaxRoadElevation)
@@ -100,21 +115,6 @@ public class HexCell : MonoBehaviour
         if(difference < 0)
             difference = -difference;
         return difference;
-    }
-
-    Color color;
-
-    public Color Color
-    {
-        get { return color; }
-        set
-        {
-            if(color == value)
-                return;
-
-            color = value;
-            Refresh();
-        }
     }
 
     int featureIndex = 0;
@@ -154,5 +154,41 @@ public class HexCell : MonoBehaviour
     void RefreshSelfOnly()
     {
         chunk.Refresh();
+    }
+
+    void RefreshPosition()
+    {
+        Vector3 position = transform.localPosition;
+        position.y = elevation * HexMetrics.ElevationStep;
+        transform.localPosition = position;
+
+        Vector3 uiPosition = uiRect.localPosition;
+        uiPosition.z = elevation * -HexMetrics.ElevationStep;
+        uiRect.localPosition = uiPosition;
+    }
+
+    public void Save(BinaryWriter writer)
+    {
+        writer.Write((byte) biomeTypeIndex);
+        writer.Write((byte) elevation);
+        writer.Write((byte) featureIndex);
+
+        int roadFlags = 0;
+        for(int i = 0; i < roads.Length; ++i)
+            if(roads[i])
+                roadFlags |= (1 << i);
+        writer.Write((byte) roadFlags);
+    }
+
+    public void Load(BinaryReader reader)
+    {
+        biomeTypeIndex = reader.ReadByte();
+        elevation = reader.ReadByte();
+        RefreshPosition();
+        featureIndex = reader.ReadByte();
+
+        int roadFlags = reader.ReadByte();
+        for(int i = 0; i < roads.Length; ++i)
+            roads[i] = (roadFlags & (1 << i)) != 0;
     }
 }

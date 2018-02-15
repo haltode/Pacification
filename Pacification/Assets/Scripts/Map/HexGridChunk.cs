@@ -6,7 +6,7 @@ public class HexGridChunk : MonoBehaviour
     HexCell[] cells;
     Canvas gridCanvas;
 
-    public HexMesh terrain;    
+    public HexMesh terrain;
     public HexMesh roads;
 
     void Awake()
@@ -107,13 +107,11 @@ public class HexGridChunk : MonoBehaviour
         if(cell.HasRoads)
         {
             Vector3 center = cell.transform.localPosition;
-            Vector3 upLeft = center + HexMetrics.GetFirstSolidCorner(dir);
-            Vector3 upRight = center + HexMetrics.GetSecondSolidCorner(dir);
 
-            Vector3 middleLeft = Vector3.Lerp(upLeft, center, 0.5f);
-            Vector3 middleRight = Vector3.Lerp(center, upRight, 0.5f);
+            Vector3 middleLeft = Vector3.Lerp(center, v1, 0.5f);
+            Vector3 middleRight = Vector3.Lerp(center, v2, 0.5f);
 
-            TriangulateRoad(center, middleLeft, middleRight, upLeft, upRight, cell.HasRoadThroughEdge(dir));
+            TriangulateRoad(center, middleLeft, middleRight, v1, v2, cell.HasRoadThroughEdge(dir));
 
             if(cell.HasRoadThroughEdge(dir))
             {

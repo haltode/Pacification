@@ -58,25 +58,6 @@ public class HexMesh : MonoBehaviour
             meshCollider.sharedMesh = hexMesh;
     }
 
-    /*public void Triangulate(HexCell[] cells)
-    {
-        hexMesh.Clear();
-        vertices.Clear();
-        triangles.Clear();
-        colors.Clear();
-        roads.Clear();
-
-        for(int i = 0; i < cells.Length; ++i)
-            Triangulate(cells[i]);
-
-        hexMesh.vertices = vertices.ToArray();
-        hexMesh.triangles = triangles.ToArray();
-        hexMesh.colors = colors.ToArray();
-        hexMesh.RecalculateNormals();
-
-        meshCollider.sharedMesh = hexMesh;
-    }*/
-
     public void AddTriangle(Vector3 v1, Vector3 v2, Vector3 v3)
     {
         int vertexIndex = vertices.Count;

@@ -6,6 +6,11 @@ public class HexCell : MonoBehaviour
     public HexGridChunk chunk;
     public RectTransform uiRect;
 
+    public Vector3 Position
+    {
+        get { return transform.localPosition; }
+    }
+
     [SerializeField]
     HexCell[] neighbors;
 
@@ -110,6 +115,26 @@ public class HexCell : MonoBehaviour
             color = value;
             Refresh();
         }
+    }
+
+    int featureIndex = 0;
+
+    public int FeatureIndex
+    {
+        get { return featureIndex; }
+        set
+        {
+            if(featureIndex != value)
+            {
+                featureIndex = value;
+                RefreshSelfOnly();
+            }
+        }
+    }
+
+    public bool HasFeature
+    {
+        get { return featureIndex > 0; }
     }
 
     void Refresh()

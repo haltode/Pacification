@@ -13,8 +13,10 @@ public class HexMapEditor : MonoBehaviour
 
     private Color activeColor;
     private int activeElevation;
+    private int activeFeature;
     private bool applyColor;
     private bool applyElevation;
+    private bool applyFeature;
     private int brushSize;
 
     bool isDrag;
@@ -91,6 +93,8 @@ public class HexMapEditor : MonoBehaviour
                 cell.Color = activeColor;
             if(applyElevation)
                 cell.Elevation = activeElevation;
+            if(applyFeature)
+                cell.FeatureIndex = activeFeature;
             if(roadMode == OptionalToggle.No)
                 cell.RemoveRoads();
             if(isDrag)
@@ -114,9 +118,19 @@ public class HexMapEditor : MonoBehaviour
         activeElevation = (int) elevation;
     }
 
+    public void SetFeatureIndex(int featureIndex)
+    {
+        activeFeature = featureIndex;
+    }
+
     public void SetApplyElevation(bool toggle)
     {
         applyElevation = toggle;
+    }
+
+    public void SetApplyFeature(bool toggle)
+    {
+        applyFeature = toggle;
     }
 
     public void SetBrushSize(float size)

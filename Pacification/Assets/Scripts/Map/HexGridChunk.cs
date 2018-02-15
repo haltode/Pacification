@@ -8,6 +8,7 @@ public class HexGridChunk : MonoBehaviour
 
     public HexMesh terrain;
     public HexMesh roads;
+    public HexFeatureManager features;
 
     void Awake()
     {
@@ -45,16 +46,20 @@ public class HexGridChunk : MonoBehaviour
     {
         terrain.Clear();
         roads.Clear();
+        features.Clear();
         for(int i = 0; i < cells.Length; ++i)
             Triangulate(cells[i]);
         terrain.Apply();
         roads.Apply();
+        features.Apply();
     }
 
     void Triangulate(HexCell cell)
     {
         for(HexDirection dir = HexDirection.NE; dir <= HexDirection.NW; ++dir)
             Triangulate(cell, dir);
+        if(cell.HasFeature)
+            features.AddFeature(cell);
     }
 
     void Triangulate(HexCell cell, HexDirection dir)

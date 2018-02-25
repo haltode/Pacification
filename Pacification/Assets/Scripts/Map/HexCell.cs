@@ -137,11 +137,7 @@ public class HexCell : MonoBehaviour
     public int Distance
     {
         get { return distance; }
-        set
-        {
-            distance = value;
-            UpdateDistanceLabel();
-        }
+        set { distance = value; }
     }
 
     public HexCell PathFrom { get; set; }
@@ -211,12 +207,6 @@ public class HexCell : MonoBehaviour
         uiRect.localPosition = uiPosition;
     }
 
-    void UpdateDistanceLabel()
-    {
-        Text label = uiRect.GetComponent<Text>();
-        label.text = (distance == int.MaxValue) ? "" : distance.ToString();
-    }
-
     public void EnableHighlight(Color color)
     {
         Image highlight = uiRect.GetChild(0).GetComponent<Image>();
@@ -228,5 +218,11 @@ public class HexCell : MonoBehaviour
     {
         Image highlight = uiRect.GetChild(0).GetComponent<Image>();
         highlight.enabled = false;        
+    }
+
+    public void SetLabel(string text)
+    {
+        Text label = uiRect.GetComponent<Text>();
+        label.text = text;
     }
 }

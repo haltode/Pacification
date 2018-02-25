@@ -12,14 +12,15 @@ public class HexMapEditor : MonoBehaviour
 
     private int activeTerrainBiomeIndex;
     private int activeElevation;
-    private int activeFeature;
+    private int activeFeature = -1;
     private bool applyElevation;
-    private bool applyFeature;
     private int brushSize;
 
+    bool editMode;
     bool isDrag;
     HexDirection dragDirection;
     HexCell previousCell;
+    HexCell searchFromCell, searchToCell;
 
     OptionalToggle roadMode;
 
@@ -43,7 +44,22 @@ public class HexMapEditor : MonoBehaviour
             else
                 isDrag = false;
 
-            EditCells(currentCell);
+            if(editMode)
+                EditCells(currentCell);
+            else if(Input.GetKey(KeyCode.LeftShift) && searchToCell != currentCell)
+            {
+                if(searchFromCell)
+                    searchFromCell.DisableHighlight();
+                searchFromCell = currentCell;
+                searchFromCell.EnableHighlight(Color.blue);
+                if(searchToCell)
+                    hexGrid.FindPath(searchFromCell, searchToCell);
+            }
+            else if(searchFromCell && searchFromCell != currentCell)
+            {
+                searchToCell = currentCell;
+                hexGrid.FindPath(searchFromCell, searchToCell);
+            }
             previousCell = currentCell;
             isDrag = true;
         }
@@ -86,7 +102,7 @@ public class HexMapEditor : MonoBehaviour
                 cell.TerrainBiomeIndex = activeTerrainBiomeIndex;
             if(applyElevation)
                 cell.Elevation = activeElevation;
-            if(applyFeature)
+            if(activeFeature >= 0)
                 cell.FeatureIndex = activeFeature;
             if(roadMode == OptionalToggle.No)
                 cell.RemoveRoads();
@@ -97,6 +113,12 @@ public class HexMapEditor : MonoBehaviour
                     otherCell.AddRoad(dragDirection);
             }
         }
+    }
+
+    public void SetEditMode(bool toggle)
+    {
+        editMode = toggle;
+        hexGrid.ShowUI(!toggle);
     }
 
     public void SetTerrainBiomeIndex(int index)
@@ -119,19 +141,9 @@ public class HexMapEditor : MonoBehaviour
         applyElevation = toggle;
     }
 
-    public void SetApplyFeature(bool toggle)
-    {
-        applyFeature = toggle;
-    }
-
     public void SetBrushSize(float size)
     {
         brushSize = (int) size;
-    }
-
-    public void ShowUI(bool visible)
-    {
-        hexGrid.ShowUI(visible);
     }
 
     public void SetRoadMode(int mode)

@@ -21,7 +21,7 @@ public class HexFeatureManager : MonoBehaviour
 
     public void AddFeature(HexCell cell)
     {
-        Transform instance = Instantiate(featuresPrefab[cell.FeatureIndex - 1]);
+        Transform instance = Instantiate(featuresPrefab[cell.FeatureIndex]);
         Vector3 position = cell.Position;
         position.y += instance.localScale.y * 0.5f;
         instance.localPosition = position;

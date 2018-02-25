@@ -20,7 +20,6 @@ public class HexGridChunk : MonoBehaviour
         gridCanvas = GetComponentInChildren<Canvas>();
 
         cells = new HexCell[HexMetrics.ChunkSizeX * HexMetrics.ChunkSizeZ];
-        ShowUI(false);
     }
 
     public void AddCell(int index, HexCell cell)

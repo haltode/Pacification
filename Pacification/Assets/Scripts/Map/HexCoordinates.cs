@@ -1,4 +1,5 @@
 ﻿using UnityEngine;
+using System;
 
 [System.Serializable]
 public struct HexCoordinates
@@ -51,6 +52,15 @@ public struct HexCoordinates
         }
 
         return new HexCoordinates(iX, iZ);
+    }
+
+    public int DistanceTo(HexCoordinates other)
+    {
+        int distance = 0;
+        distance += Math.Abs(other.x - x);
+        distance += Math.Abs(other.Y - Y);
+        distance += Math.Abs(other.z - z);
+        return distance / 2;
     }
 
     public override string ToString()

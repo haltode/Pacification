@@ -17,6 +17,8 @@ public class HexGrid : MonoBehaviour
     HexGridChunk[] chunks;
     HexCell[] cells;
 
+    HexCellPriorityQueue searchQueue;
+
     void Awake()
     {
         CreateMap(cellCountX, cellCountZ);
@@ -102,7 +104,6 @@ public class HexGrid : MonoBehaviour
 
         Text label = Instantiate<Text>(cellLabelPrefab);
         label.rectTransform.anchoredPosition = new Vector2(position.x, position.z);
-        label.text = cell.coordinates.ToStringOnSeparateLines();
         cell.uiRect = label.rectTransform;
 
         cell.Elevation = 0;
@@ -140,6 +141,71 @@ public class HexGrid : MonoBehaviour
 
         int index = x + z * cellCountX;
         return cells[index];
+    }
+
+    public void FindPath(HexCell start, HexCell end)
+    {
+        if(searchQueue == null)
+            searchQueue = new HexCellPriorityQueue();
+        else
+            searchQueue.Clear();
+
+        for(int i = 0; i < cells.Length; ++i)
+        {
+            cells[i].Distance = int.MaxValue;
+            cells[i].DisableHighlight();
+        }
+
+        start.EnableHighlight(Color.blue);
+        end.EnableHighlight(Color.red);
+
+        start.Distance = 0;
+        searchQueue.Enqueue(start);
+        while(searchQueue.Count > 0)
+        {
+            HexCell current = searchQueue.Dequeue();
+            if(current == end)
+            {
+                current = current.PathFrom;
+                while(current != start)
+                {
+                    current.EnableHighlight(Color.white);
+                    current = current.PathFrom;
+                }
+                break;
+            }
+
+            for(HexDirection dir = HexDirection.NE; dir <= HexDirection.NW; ++dir)
+            {
+                HexCell neighbor = current.GetNeighbor(dir);
+                if(neighbor == null || !current.IsReachable(dir))
+                    continue;
+
+                int newDist = current.Distance;
+                // Road and flat terrains are faster than cliffs
+                if(current.HasRoadThroughEdge(dir))
+                    newDist += 1;
+                else if(current.GetElevationDifference(dir) == 0)
+                    newDist += 5;
+                else
+                    newDist += 10;
+
+                if(neighbor.Distance == int.MaxValue)
+                {
+                    neighbor.Distance = newDist;
+                    neighbor.PathFrom = current;
+                    neighbor.SearchHeuristic = neighbor.coordinates.DistanceTo(end.coordinates);
+                    searchQueue.Enqueue(neighbor);
+                }
+                else if(newDist < neighbor.Distance)
+                {
+                    int oldPriority = neighbor.SearchPriority;
+                    neighbor.Distance = newDist;
+                    neighbor.PathFrom = current;
+                    searchQueue.Change(neighbor, oldPriority);
+                }
+            }
+        }
     }
 
     public void ShowUI(bool visible)

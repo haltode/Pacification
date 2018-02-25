@@ -68,21 +68,16 @@ public class HexCell : MonoBehaviour
         RefreshSelfOnly();
     }
 
-    int biomeTypeIndex;
+    int terrainBiomeIndex;
 
-    public Color Color
+    public int TerrainBiomeIndex
     {
-        get { return HexMetrics.colors[biomeTypeIndex]; }
-    }
-
-    public int BiomeTypeIndex
-    {
-        get { return biomeTypeIndex; }
+        get { return terrainBiomeIndex; }
         set
         {
-            if(biomeTypeIndex != value)
+            if(terrainBiomeIndex != value)
             {
-                biomeTypeIndex = value;
+                terrainBiomeIndex = value;
                 Refresh();
             }
         }
@@ -169,7 +164,7 @@ public class HexCell : MonoBehaviour
 
     public void Save(BinaryWriter writer)
     {
-        writer.Write((byte) biomeTypeIndex);
+        writer.Write((byte) terrainBiomeIndex);
         writer.Write((byte) elevation);
         writer.Write((byte) featureIndex);
 
@@ -182,7 +177,7 @@ public class HexCell : MonoBehaviour
 
     public void Load(BinaryReader reader)
     {
-        biomeTypeIndex = reader.ReadByte();
+        terrainBiomeIndex = reader.ReadByte();
         elevation = reader.ReadByte();
         RefreshPosition();
         featureIndex = reader.ReadByte();

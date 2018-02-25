@@ -51,6 +51,4 @@ public static class HexMetrics
     {
         return (corners[(int) dir] + corners[(int) dir + 1]) * BlendFactor;
     }
-
-    public static Color[] colors;
 }

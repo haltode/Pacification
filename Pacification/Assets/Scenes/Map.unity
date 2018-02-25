@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.44659364, g: 0.49642992, b: 0.57482547, a: 1}
+  m_IndirectSpecularColor: {r: 0.44657868, g: 0.49641263, b: 0.57481706, a: 1}
 --- !u!157 &3
 LightmapSettings:
   m_ObjectHideFlags: 0
@@ -1971,7 +1971,7 @@ GameObject:
   - component: {fileID: 353510162}
   - component: {fileID: 353510161}
   m_Layer: 5
-  m_Name: Color Panel
+  m_Name: Biome Panel
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -3810,7 +3810,7 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 1701239724}
-        m_MethodName: SetBiomeTypeIndex
+        m_MethodName: SetTerrainBiomeIndex
         m_Mode: 3
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -4215,7 +4215,7 @@ GameObject:
   - component: {fileID: 881148590}
   - component: {fileID: 881148591}
   m_Layer: 5
-  m_Name: Toggle Ocean
+  m_Name: Toggle Snow
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -4284,7 +4284,7 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 1701239724}
-        m_MethodName: SetBiomeTypeIndex
+        m_MethodName: SetTerrainBiomeIndex
         m_Mode: 3
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -5268,7 +5268,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: Default
+  m_Text: Ocean
 --- !u!222 &1163766217
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -6664,7 +6664,7 @@ GameObject:
   - component: {fileID: 1509231221}
   - component: {fileID: 1509231222}
   m_Layer: 5
-  m_Name: Toggle Default
+  m_Name: Toggle Ocean
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -6733,7 +6733,7 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 1701239724}
-        m_MethodName: SetBiomeTypeIndex
+        m_MethodName: SetTerrainBiomeIndex
         m_Mode: 3
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -6876,11 +6876,6 @@ MonoBehaviour:
   cellLabelPrefab: {fileID: 11470134, guid: f68794ca03b6f4510b9a5bd6ee9ba2f4, type: 2}
   chunkPrefab: {fileID: 114452804204635946, guid: 83c084f44eaff4dff9d451e21a49c10c,
     type: 2}
-  colors:
-  - {r: 0.93333334, g: 0.77254903, b: 0.09803922, a: 0}
-  - {r: 0.35686275, g: 0.7411765, b: 0.20784314, a: 0}
-  - {r: 0.039215688, g: 0.3019608, b: 0.9254902, a: 0}
-  - {r: 1, g: 1, b: 1, a: 1}
 --- !u!4 &1571186512
 Transform:
   m_ObjectHideFlags: 0
@@ -7515,7 +7510,7 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 1701239724}
-        m_MethodName: SetBiomeTypeIndex
+        m_MethodName: SetTerrainBiomeIndex
         m_Mode: 3
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -8287,7 +8282,7 @@ GameObject:
   - component: {fileID: 1872956845}
   - component: {fileID: 1872956846}
   m_Layer: 5
-  m_Name: Toggle No Color
+  m_Name: Toggle No Biome
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -8356,7 +8351,7 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 1701239724}
-        m_MethodName: SetBiomeTypeIndex
+        m_MethodName: SetTerrainBiomeIndex
         m_Mode: 3
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -8510,7 +8505,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: Ocean
+  m_Text: Snow
 --- !u!222 &1909361432
 CanvasRenderer:
   m_ObjectHideFlags: 0

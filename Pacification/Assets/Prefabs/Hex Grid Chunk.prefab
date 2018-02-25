@@ -38,8 +38,6 @@ GameObject:
   - component: {fileID: 33501222818728138}
   - component: {fileID: 23176698908040938}
   - component: {fileID: 114502788565910982}
-  - component: {fileID: 64790682715080948}
-  - component: {fileID: 64867216171918416}
   m_Layer: 0
   m_Name: Terrain
   m_TagString: Untagged
@@ -168,7 +166,7 @@ MeshRenderer:
   m_LightProbeUsage: 1
   m_ReflectionProbeUsage: 1
   m_Materials:
-  - {fileID: 2100000, guid: 6379a56a9445f498aaa97d2a9011a3c5, type: 2}
+  - {fileID: 2100000, guid: b486b7d78ae3e4e14a474e37a0447be7, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -236,34 +234,6 @@ MeshFilter:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1730840289893970}
   m_Mesh: {fileID: 0}
---- !u!64 &64790682715080948
-MeshCollider:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1711684136443126}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_Enabled: 1
-  serializedVersion: 3
-  m_Convex: 0
-  m_CookingOptions: 14
-  m_SkinWidth: 0.01
-  m_Mesh: {fileID: 0}
---- !u!64 &64867216171918416
-MeshCollider:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1711684136443126}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_Enabled: 1
-  serializedVersion: 3
-  m_Convex: 0
-  m_CookingOptions: 14
-  m_SkinWidth: 0.01
-  m_Mesh: {fileID: 0}
 --- !u!114 &114096131945215270
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -278,6 +248,7 @@ MonoBehaviour:
   useCollider: 0
   useColors: 0
   useUVCoordinates: 1
+  useTerrainBiomes: 0
 --- !u!114 &114452804204635946
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -306,6 +277,7 @@ MonoBehaviour:
   useCollider: 1
   useColors: 1
   useUVCoordinates: 0
+  useTerrainBiomes: 1
 --- !u!114 &114737684907628694
 MonoBehaviour:
   m_ObjectHideFlags: 1

@@ -14,20 +14,12 @@ public class HexGrid : MonoBehaviour
     public Text cellLabelPrefab;
     public HexGridChunk chunkPrefab;
 
-    public Color[] colors;
-
     HexGridChunk[] chunks;
     HexCell[] cells;
 
     void Awake()
     {
-        HexMetrics.colors = colors;
         CreateMap(cellCountX, cellCountZ);
-    }
-
-    void OnEnable()
-    {
-        HexMetrics.colors = colors;
     }
 
     public bool CreateMap(int sizeX, int sizeZ)

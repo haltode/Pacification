@@ -10,7 +10,7 @@ public class HexMapEditor : MonoBehaviour
 
     public HexGrid hexGrid;
 
-    private int activeBiomeTypeIndex;
+    private int activeTerrainBiomeIndex;
     private int activeElevation;
     private int activeFeature;
     private bool applyElevation;
@@ -82,8 +82,8 @@ public class HexMapEditor : MonoBehaviour
     {
         if(cell)
         {
-            if(activeBiomeTypeIndex >= 0)
-                cell.BiomeTypeIndex = activeBiomeTypeIndex;
+            if(activeTerrainBiomeIndex >= 0)
+                cell.TerrainBiomeIndex = activeTerrainBiomeIndex;
             if(applyElevation)
                 cell.Elevation = activeElevation;
             if(applyFeature)
@@ -99,9 +99,9 @@ public class HexMapEditor : MonoBehaviour
         }
     }
 
-    public void SetBiomeTypeIndex(int index)
+    public void SetTerrainBiomeIndex(int index)
     {
-        activeBiomeTypeIndex = index;
+        activeTerrainBiomeIndex = index;
     }
 
     public void SetElevation(float elevation)

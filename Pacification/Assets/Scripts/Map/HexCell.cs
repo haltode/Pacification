@@ -14,7 +14,7 @@ public class HexCell : MonoBehaviour
 
     int terrainBiomeIndex;
     int elevation = int.MinValue;
-    int featureIndex = -1;
+    int featureIndex;
 
     int distance;
 
@@ -131,7 +131,7 @@ public class HexCell : MonoBehaviour
 
     public bool HasFeature
     {
-        get { return featureIndex >= 0; }
+        get { return featureIndex > 0; }
     }
 
     public int Distance

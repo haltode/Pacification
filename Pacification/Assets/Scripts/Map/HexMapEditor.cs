@@ -12,7 +12,7 @@ public class HexMapEditor : MonoBehaviour
 
     private int activeTerrainBiomeIndex;
     private int activeElevation;
-    private int activeFeature = -1;
+    private int activeFeature;
     private bool applyElevation;
     private int brushSize;
 
@@ -102,7 +102,7 @@ public class HexMapEditor : MonoBehaviour
                 cell.TerrainBiomeIndex = activeTerrainBiomeIndex;
             if(applyElevation)
                 cell.Elevation = activeElevation;
-            if(activeFeature >= 0)
+            if(activeFeature > 0)
                 cell.FeatureIndex = activeFeature;
             if(roadMode == OptionalToggle.No)
                 cell.RemoveRoads();

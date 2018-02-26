@@ -4,9 +4,7 @@ using System.IO;
 
 public class HexMapEditor : MonoBehaviour
 {
-    enum OptionalToggle {
-        Ignore, No, Yes
-    }
+    enum OptionalToggle { Ignore, No, Yes }
 
     public HexGrid hexGrid;
 

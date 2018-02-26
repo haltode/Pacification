@@ -149,9 +149,6 @@ public class HexCell : MonoBehaviour
         get { return distance + SearchHeuristic; }
     }
 
-    public HexCell NextWithSamePriority { get; set; }
-
-
     public void Save(BinaryWriter writer)
     {
         writer.Write((byte) terrainBiomeIndex);

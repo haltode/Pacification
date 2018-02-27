@@ -2,6 +2,7 @@
 using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.SceneManagement;
+using System.IO;
 
 public class GameManager : MonoBehaviour
 {
@@ -19,6 +20,8 @@ public class GameManager : MonoBehaviour
     public InputField nameInputHost;
 
     public Slider numberOfPlayerSlider;
+
+    public HexGrid hexGrid;
 
     private void Start()
     {
@@ -124,7 +127,8 @@ public class GameManager : MonoBehaviour
 
     public void StartGame(string map)
     {
-        //Add : Reconstruction de la map
         SceneManager.LoadScene("Map");
+
+        // Load de la map -> TO DO
     }
 }

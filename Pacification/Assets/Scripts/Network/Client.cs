@@ -74,6 +74,12 @@ public class Client : MonoBehaviour
                 // Display another player move
                 break;
 
+            case "SEDI":
+                // One cell has been edited
+                // Call HexGrid.ModifieCell(receivedData[1])
+                ////////////////////////////
+                break;
+
             case "SYGO":
                 // It's your turn
                 break;
@@ -91,10 +97,13 @@ public class Client : MonoBehaviour
                 break;
 
             case "SWHO":
-                for(int i = 1; i < receivedData.Length -1; ++i)
+                for (int i = 1; i < receivedData.Length -1; ++i)
                 {
                     UserConnected(receivedData[i], false);
                 }
+
+                Debug.Log("Client " + clientName + " send: " + clientName + "#" + ((isHost) ? 1 : 0).ToString() );
+
                 Send("CIAM|" + clientName + "#" + ((isHost)? 1:0).ToString());
                 break;
 
@@ -104,7 +113,7 @@ public class Client : MonoBehaviour
                 break;
 
             case "SDEC":
-                // One user has deconnected
+                // One user has disconnected
                 break;
 
             case "SMAP":

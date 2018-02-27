@@ -14,9 +14,12 @@ public class Server : MonoBehaviour
     private bool isGameStarted;
     private bool isServerStarted;
 
+    public HexGrid hexGrid;
+
     private List<ServerClient> clients;
     private TcpListener server;
 
+    public bool MapFormatVersion { get; private set; }
 
     public void Init()
     {
@@ -63,17 +66,17 @@ public class Server : MonoBehaviour
             }
         }
 
-        if(!isGameStarted && clients.Count == playerNumber)
-        {
-            Debug.Log("Sending Map");
-            isGameStarted = true;
+        //if(!isGameStarted && clients.Count == playerNumber)
+        //{
+        //    Debug.Log("Sending Map");
 
-            ////// Appel au constructeur + enregistreur en string de Map
-            string map = "empty_map_for_now";
-            /////////
+        //    isGameStarted = true;
 
-            Broadcast("SMAP|" + map, clients);
-        }
+        //    //string map = File.ReadAllText("save/temp");
+        //    string map = "empty_map_for_now";
+
+        //    Broadcast("SMAP|" + map, clients);
+        //}
     }
 
     private void StartListening()
@@ -98,6 +101,8 @@ public class Server : MonoBehaviour
         clients.Add(sc);
 
         StartListening();
+
+        Debug.Log("Server send : SWHO|" + allUsers + " to " + clients[clients.Count - 1]);
 
         Broadcast("SWHO|"+ allUsers, clients[clients.Count - 1]);
     }
@@ -137,6 +142,18 @@ public class Server : MonoBehaviour
                 Debug.Log(e.Message);
             }
         }
+
+        if (!isGameStarted && clients.Count == playerNumber)
+        {
+            Debug.Log("Sending Map");
+
+            isGameStarted = true;
+
+            //string map = File.ReadAllText("save/temp");
+            string map = "empty_map_for_now";
+
+            Broadcast("SMAP|" + map, clients);
+        }
     }
     private void Broadcast(string data, ServerClient client)
     {
@@ -152,6 +169,10 @@ public class Server : MonoBehaviour
         {
             case "CMOV":
                 Broadcast("SMOV|" + receivedData[1], clients);
+                break;
+
+            case "CEDI": //Edition de la amp
+                Broadcast("SEDI|" + receivedData[1], clients);
                 break;
 
             case "CEND":
@@ -175,6 +196,9 @@ public class Server : MonoBehaviour
                 break;
 
             case "CIAM":
+
+                Debug.Log("Server send : SCNN|" + receivedData[1] + " to all clients");
+
                 string[] clientStatus = receivedData[1].Split('#');
                 client.clientName = clientStatus[0];
                 client.isHost = (clientStatus[1] == "1");

@@ -54,7 +54,7 @@ public class Client : MonoBehaviour
         }
     }
 
-    private void Send(string data)
+    public void Send(string data)
     {
         if(!isSocketStarted)
             return;
@@ -70,20 +70,21 @@ public class Client : MonoBehaviour
         string[] receivedData = data.Split('|');
         switch(receivedData[0])
         {
+            /////// GAMEPLAY
             case "SMOV":
                 // Display another player move
                 break;
 
             case "SEDI":
-                // One cell has been edited
-                // Call HexGrid.ModifieCell(receivedData[1])
-                ////////////////////////////
+                /////////// Appel à la fonction d'édition de HexMapEditor
+                //HexMapEditor.NetworkEditedCell(receivedData[1]);
                 break;
 
             case "SYGO":
                 // It's your turn
                 break;
 
+            /////// CHAT
             case "SMSG":
                 // Received a global message 
                 break;
@@ -96,6 +97,7 @@ public class Client : MonoBehaviour
                 // The private message you sent couldn't find a target
                 break;
 
+            /////// REGISTER ON SERVER
             case "SWHO":
                 for (int i = 1; i < receivedData.Length -1; ++i)
                 {

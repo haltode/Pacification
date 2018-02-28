@@ -21,8 +21,6 @@ public class GameManager : MonoBehaviour
 
     public Slider numberOfPlayerSlider;
 
-    public HexGrid hexGrid;
-
     private void Start()
     {
         Instance = this;

@@ -102,20 +102,103 @@ public class HexMapEditor : MonoBehaviour
     {
         if(cell)
         {
-            if(activeTerrainBiomeIndex >= 0)
+            string data = "CEDI|";
+
+            data += cell.coordinates.X + "." + cell.coordinates.Y + "." + cell.coordinates.Z + "#";
+
+            if (activeTerrainBiomeIndex >= 0)
+            {
                 cell.TerrainBiomeIndex = activeTerrainBiomeIndex;
-            if(applyElevation)
+                data += activeTerrainBiomeIndex + "#";
+            }
+            else
+                data += "-1#";
+
+            if (applyElevation)
+            {
                 cell.Elevation = activeElevation;
-            if(activeFeature > 0)
+                data += activeElevation + "#";
+            }
+            else
+                data += "-1#";
+
+            if (activeFeature > 0)
+            {
                 cell.FeatureIndex = activeFeature;
-            if(roadMode == OptionalToggle.No)
+                data += activeFeature + "#";
+            }else 
+                data += "-1#";
+
+            if (roadMode == OptionalToggle.No)
+            {
                 cell.RemoveRoads();
-            if(isDrag)
+                data += "0#";
+            }
+            else if (roadMode == OptionalToggle.Yes)
+                data += "1#";
+            else
+                data += "-1#";
+
+
+            if (isDrag)
             {
                 HexCell otherCell = cell.GetNeighbor(dragDirection.Opposite());
-                if(otherCell && roadMode == OptionalToggle.Yes)
+                if (otherCell && roadMode == OptionalToggle.Yes)
                     otherCell.AddRoad(dragDirection);
             }
+
+            //Client.Send(data); ???
+        }
+    }
+
+    public void NetworkEditedCell(string data)
+    {
+
+        string[] receivedData = data.Split('#');
+        string[] position = receivedData[0].Split('.');
+        /*
+         0: position[]
+            -> 0 : X
+            -> 1 : Y
+            -> 2 : Z
+         1: newBiomeIndex   // int
+         2: newElevation    // int
+         3: newFeature      // int 
+         4: hasRoad         // bool
+         5: ???
+        */
+
+        float x = float.Parse(position[0]);
+        float y = float.Parse(position[1]);
+        float z = float.Parse(position[2]);
+        HexCell cell = hexGrid.GetCell(new Vector3(x, y, z));
+
+        int newBiomeIndex = int.Parse(receivedData[1]);
+        int newElevation = int.Parse(receivedData[2]);
+        int newFeature = int.Parse(receivedData[2]);
+        int road = int.Parse(receivedData[3]);
+
+        if (cell)
+        {
+            if(newBiomeIndex != -1)
+                cell.TerrainBiomeIndex = newBiomeIndex;
+            if (newElevation != -1)
+                cell.Elevation = newElevation;
+            if (newFeature != -1)
+                cell.FeatureIndex = newFeature;
+            if (road == 0)
+                cell.RemoveRoads();
+            else if (road == 1)
+            {
+                //add road
+            }
+
+            //if (isDrag)
+            //{
+            //    HexCell otherCell = cell.GetNeighbor(dragDirection.Opposite());
+            //    if (otherCell && roadMode == OptionalToggle.Yes)
+            //        otherCell.AddRoad(dragDirection);
+            //}
         }
     }
 

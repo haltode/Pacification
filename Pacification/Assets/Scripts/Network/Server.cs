@@ -14,8 +14,6 @@ public class Server : MonoBehaviour
     private bool isGameStarted;
     private bool isServerStarted;
 
-    public HexGrid hexGrid;
-
     private List<ServerClient> clients;
     private TcpListener server;
 
@@ -65,18 +63,6 @@ public class Server : MonoBehaviour
                 }
             }
         }
-
-        //if(!isGameStarted && clients.Count == playerNumber)
-        //{
-        //    Debug.Log("Sending Map");
-
-        //    isGameStarted = true;
-
-        //    //string map = File.ReadAllText("save/temp");
-        //    string map = "empty_map_for_now";
-
-        //    Broadcast("SMAP|" + map, clients);
-        //}
     }
 
     private void StartListening()
@@ -167,6 +153,7 @@ public class Server : MonoBehaviour
         string[] receivedData = data.Split('|');
         switch(receivedData[0])
         {
+            /////// GAMEPLAY
             case "CMOV":
                 Broadcast("SMOV|" + receivedData[1], clients);
                 break;
@@ -183,6 +170,7 @@ public class Server : MonoBehaviour
                 Broadcast("SYGO|", newActivclient);
                 break;
 
+            /////// CHAT
             case "CMSG":
                 Broadcast("SMSG|" + client.clientName + " >> " + receivedData[1], clients);
                 break;
@@ -195,6 +183,7 @@ public class Server : MonoBehaviour
                     Broadcast("SMSE|The player receivedData[2] is unreacheable", client);
                 break;
 
+            /////// REGISTER A CLIENT
             case "CIAM":
 
                 Debug.Log("Server send : SCNN|" + receivedData[1] + " to all clients");

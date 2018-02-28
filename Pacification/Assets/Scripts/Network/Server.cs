@@ -17,8 +17,6 @@ public class Server : MonoBehaviour
     private List<ServerClient> clients;
     private TcpListener server;
 
-    public bool MapFormatVersion { get; private set; }
-
     public void Init()
     {
         DontDestroyOnLoad(gameObject);

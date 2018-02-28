@@ -1,13 +1,15 @@
 ﻿using UnityEngine;
 using UnityEngine.EventSystems;
-using System.IO;
 
 public class HexMapEditor : MonoBehaviour
 {
     enum OptionalToggle { Ignore, No, Yes }
 
     public HexGrid hexGrid;
+    public Client client;
 
+    private string data = "";
+    private string previousData = "";
     private int activeTerrainBiomeIndex;
     private int activeElevation;
     private int activeFeature;
@@ -22,13 +24,18 @@ public class HexMapEditor : MonoBehaviour
 
     OptionalToggle roadMode;
 
+    void Start()
+    {
+        client = FindObjectOfType<Client>();
+    }
+
     void Update()
     {
-        if(Input.GetMouseButton(0) && !EventSystem.current.IsPointerOverGameObject())
+        if (Input.GetMouseButton(0) && !EventSystem.current.IsPointerOverGameObject())
             HandleInput();
         else
             previousCell = null;
-    }
+    }   
 
     void HandleInput()
     {
@@ -102,9 +109,9 @@ public class HexMapEditor : MonoBehaviour
     {
         if(cell)
         {
-            string data = "CEDI|";
+            data = "CEDI|";
 
-            data += cell.coordinates.X + "." + cell.coordinates.Y + "." + cell.coordinates.Z + "#";
+            data += cell.coordinates.X + "."  + cell.coordinates.Z + "#";
 
             if (activeTerrainBiomeIndex >= 0)
             {
@@ -140,27 +147,29 @@ public class HexMapEditor : MonoBehaviour
                 data += "-1#";
 
 
-            if (isDrag)
+            if(isDrag)
             {
                 HexCell otherCell = cell.GetNeighbor(dragDirection.Opposite());
                 if (otherCell && roadMode == OptionalToggle.Yes)
                     otherCell.AddRoad(dragDirection);
             }
 
-            //Client.Send(data); ???
+            if (data != previousData)
+            {
+                previousData = data;
+                client.Send(data);
+            }
         }
     }
 
     public void NetworkEditedCell(string data)
     {
-
         string[] receivedData = data.Split('#');
         string[] position = receivedData[0].Split('.');
         /*
          0: position[]
             -> 0 : X
-            -> 1 : Y
-            -> 2 : Z
+            -> 1 : Z
          1: newBiomeIndex   // int
          2: newElevation    // int
          3: newFeature      // int 
@@ -168,32 +177,34 @@ public class HexMapEditor : MonoBehaviour
          5: ???
         */
 
-        float x = float.Parse(position[0]);
-        float y = float.Parse(position[1]);
-        float z = float.Parse(position[2]);
-        HexCell cell = hexGrid.GetCell(new Vector3(x, y, z));
+        int x = int.Parse(position[0]);
+        int z = int.Parse(position[1]);
+        HexCell cell = hexGrid.GetCell(new HexCoordinates(x, z));
 
         int newBiomeIndex = int.Parse(receivedData[1]);
         int newElevation = int.Parse(receivedData[2]);
-        int newFeature = int.Parse(receivedData[2]);
-        int road = int.Parse(receivedData[3]);
+        int newFeature = int.Parse(receivedData[3]);
+        int road = int.Parse(receivedData[4]);
 
-        if (cell)
+        if(cell)
         {
             if(newBiomeIndex != -1)
                 cell.TerrainBiomeIndex = newBiomeIndex;
-            if (newElevation != -1)
+
+            if(newElevation != -1)
                 cell.Elevation = newElevation;
-            if (newFeature != -1)
+
+            if(newFeature != -1)
                 cell.FeatureIndex = newFeature;
-            if (road == 0)
+
+            if(road == 0)
                 cell.RemoveRoads();
             else if (road == 1)
             {
                 //add road
             }
 
-            //if (isDrag)
+            //if(isDrag)
             //{
             //    HexCell otherCell = cell.GetNeighbor(dragDirection.Opposite());
             //    if (otherCell && roadMode == OptionalToggle.Yes)

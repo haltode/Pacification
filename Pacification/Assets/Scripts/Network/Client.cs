@@ -76,8 +76,8 @@ public class Client : MonoBehaviour
                 break;
 
             case "SEDI":
-                /////////// Appel à la fonction d'édition de HexMapEditor
-                //HexMapEditor.NetworkEditedCell(receivedData[1]);
+                HexMapEditor mapEditor = FindObjectOfType<HexMapEditor>();
+                mapEditor.NetworkEditedCell(receivedData[1]);
                 break;
 
             case "SYGO":

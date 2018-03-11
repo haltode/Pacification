@@ -139,24 +139,33 @@ public class HexMapEditor : MonoBehaviour
             if (roadMode == OptionalToggle.No)
             {
                 cell.RemoveRoads();
-                data += "0#";
+                data += "0.-1#";
             }
             else if (roadMode == OptionalToggle.Yes)
-                data += "1#";
+                data += "1.";
             else
-                data += "-1#";
+                data += "-1.-1#";
 
 
             if(isDrag)
             {
                 HexCell otherCell = cell.GetNeighbor(dragDirection.Opposite());
                 if (otherCell && roadMode == OptionalToggle.Yes)
+                {
                     otherCell.AddRoad(dragDirection);
+
+                    data += (int)dragDirection +"." + otherCell.coordinates.X + "." + otherCell.coordinates.Z + "#";
+                }
+            }
+            else
+            {
+                data += "-1#";
             }
 
             if (data != previousData)
             {
                 previousData = data;
+                Debug.Log(data);
                 client.Send(data);
             }
         }
@@ -166,6 +175,8 @@ public class HexMapEditor : MonoBehaviour
     {
         string[] receivedData = data.Split('#');
         string[] position = receivedData[0].Split('.');
+        string[] road = receivedData[4].Split('.');
+
         /*
          0: position[]
             -> 0 : X
@@ -173,18 +184,18 @@ public class HexMapEditor : MonoBehaviour
          1: newBiomeIndex   // int
          2: newElevation    // int
          3: newFeature      // int 
-         4: hasRoad         // bool
-         5: ???
+         4: road[]          
+            -> 0 : hasHoad  // bool
+            -> 1 : dragDirec
+            -> 2 : X        // neighborCell.X
+            -> 3 : Z        // neighborCell.Z
         */
 
-        int x = int.Parse(position[0]);
-        int z = int.Parse(position[1]);
-        HexCell cell = hexGrid.GetCell(new HexCoordinates(x, z));
+        HexCell cell = hexGrid.GetCell(new HexCoordinates(int.Parse(position[0]), int.Parse(position[1])));
 
         int newBiomeIndex = int.Parse(receivedData[1]);
         int newElevation = int.Parse(receivedData[2]);
         int newFeature = int.Parse(receivedData[3]);
-        int road = int.Parse(receivedData[4]);
 
         if(cell)
         {
@@ -197,19 +208,42 @@ public class HexMapEditor : MonoBehaviour
             if(newFeature != -1)
                 cell.FeatureIndex = newFeature;
 
-            if(road == 0)
+            if(road[0] == "0")
                 cell.RemoveRoads();
-            else if (road == 1)
+            else if (road[1] != "-1")
             {
-                //add road
-            }
+                HexCell otherCell = hexGrid.GetCell(new HexCoordinates(int.Parse(road[2]), int.Parse(road[3])));
 
-            //if(isDrag)
-            //{
-            //    HexCell otherCell = cell.GetNeighbor(dragDirection.Opposite());
-            //    if (otherCell && roadMode == OptionalToggle.Yes)
-            //        otherCell.AddRoad(dragDirection);
-            //}
+                switch(road[1])
+                {
+                    case "0":
+                        otherCell.AddRoad(HexDirection.NE);
+                        break;
+
+                    case "1":
+                        otherCell.AddRoad(HexDirection.E);
+                        break;
+
+                    case "2":
+                        otherCell.AddRoad(HexDirection.SE);
+                        break;
+
+                    case "3":
+                        otherCell.AddRoad(HexDirection.SW);
+                        break;
+
+                    case "4":
+                        otherCell.AddRoad(HexDirection.W);
+                        break;
+
+                    case "5":
+                        otherCell.AddRoad(HexDirection.NW);
+                        break;
+
+                    default:
+                        throw new System.Exception("Unknown drag direction");
+                }
+            }
         }
     }
 

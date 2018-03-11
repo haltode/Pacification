@@ -123,10 +123,13 @@ public class GameManager : MonoBehaviour
         connectionMenu.SetActive(false);
     }
 
+    public void SoloButton()
+    {
+        SceneManager.LoadScene("Map");
+    }
+
     public void StartGame(string map)
     {
         SceneManager.LoadScene("Map");
-
-        // Load de la map -> TO DO
     }
 }

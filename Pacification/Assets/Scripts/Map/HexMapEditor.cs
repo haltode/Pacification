@@ -111,7 +111,7 @@ public class HexMapEditor : MonoBehaviour
         {
             data = "CEDI|" + cell.coordinates.X + "."  + cell.coordinates.Z + "#";
 
-            if (activeTerrainBiomeIndex >= 0)
+            if(activeTerrainBiomeIndex >= 0)
             {
                 cell.TerrainBiomeIndex = activeTerrainBiomeIndex;
                 data += activeTerrainBiomeIndex + "#";
@@ -119,7 +119,7 @@ public class HexMapEditor : MonoBehaviour
             else
                 data += "-1#";
 
-            if (applyElevation)
+            if(applyElevation)
             {
                 cell.Elevation = activeElevation;
                 data += activeElevation + "#";
@@ -127,23 +127,23 @@ public class HexMapEditor : MonoBehaviour
             else
                 data += "-1#";
 
-            if (activeFeature > 0)
+            if(activeFeature > 0)
             {
                 cell.FeatureIndex = activeFeature;
                 data += activeFeature + "#";
-            }else 
+            }
+            else 
                 data += "-1#";
 
-            if (roadMode == OptionalToggle.No)
+            if(roadMode == OptionalToggle.No)
             {
                 cell.RemoveRoads();
                 data += "0.-1#";
             }
-            else if (roadMode == OptionalToggle.Yes)
+            else if(roadMode == OptionalToggle.Yes)
                 data += "1.";
             else
                 data += "-1.-1#";
-
 
             if(isDrag)
             {
@@ -151,14 +151,13 @@ public class HexMapEditor : MonoBehaviour
                 if (otherCell && roadMode == OptionalToggle.Yes)
                 {
                     otherCell.AddRoad(dragDirection);
-
                     data += (int)dragDirection +"." + otherCell.coordinates.X + "." + otherCell.coordinates.Z + "#";
                 }
             }
             else
                 data += "-1#";
 
-            if (data != previousData)
+            if(data != previousData)
             {
                 previousData = data;
                 client.Send(data);
@@ -168,24 +167,12 @@ public class HexMapEditor : MonoBehaviour
 
     public void NetworkEditedCell(string data)
     {
-        /* data :
-            0: position[]
-               -> 0 : X
-               -> 1 : Z
-            1: newBiomeIndex   // int
-            2: newElevation    // int
-            3: newFeature      // int 
-            4: road[]          
-               -> 0 : hasHoad
-               -> 1 : dragDirec
-               -> 2 : neighborCell.X
-               -> 3 : neighborCell.Z
-       */
-
         string[] receivedData = data.Split('#');
         string[] position = receivedData[0].Split('.');
 
-        HexCell cell = hexGrid.GetCell(new HexCoordinates(int.Parse(position[0]), int.Parse(position[1])));
+        int X = int.Parse(position[0]);
+        int Z = int.Parse(position[1]);
+        HexCell cell = hexGrid.GetCell(new HexCoordinates(X, Z));
 
         if(cell)
         {
@@ -194,47 +181,21 @@ public class HexMapEditor : MonoBehaviour
             int newElevation = int.Parse(receivedData[2]);
             int newFeature = int.Parse(receivedData[3]);
 
-            if (newBiomeIndex != -1)
+            if(newBiomeIndex != -1)
                 cell.TerrainBiomeIndex = newBiomeIndex;
-
             if(newElevation != -1)
                 cell.Elevation = newElevation;
-
             if(newFeature != -1)
                 cell.FeatureIndex = newFeature;
-
             if(road[0] == "0")
                 cell.RemoveRoads();
-            else if (road[1] != "-1")
+            else if(road[1] != "-1")
             {
-                HexCell otherCell = hexGrid.GetCell(new HexCoordinates(int.Parse(road[2]), int.Parse(road[3])));
+                int neighborX = int.Parse(position[0]);
+                int neighborZ = int.Parse(position[1]);
+                HexCell otherCell = hexGrid.GetCell(new HexCoordinates(neighborX, neighborZ));
 
-                switch(road[1])
-                {
-                    case "0":
-                        otherCell.AddRoad(HexDirection.NE);
-                        break;
-
-                    case "1":
-                        otherCell.AddRoad(HexDirection.E);
-                        break;
-
-                    case "2":
-                        otherCell.AddRoad(HexDirection.SE);
-                        break;
-
-                    case "3":
-                        otherCell.AddRoad(HexDirection.SW);
-                        break;
-
-                    case "4":
-                        otherCell.AddRoad(HexDirection.W);
-                        break;
-
-                    case "5":
-                        otherCell.AddRoad(HexDirection.NW);
-                        break;
-                }
+                otherCell.AddRoad(((HexDirection)int.Parse(road[1])));
             }
         }
     }

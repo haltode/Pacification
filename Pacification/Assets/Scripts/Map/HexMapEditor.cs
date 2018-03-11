@@ -160,7 +160,8 @@ public class HexMapEditor : MonoBehaviour
             if(data != previousData)
             {
                 previousData = data;
-                client.Send(data);
+                if(FindObjectOfType<Client>())
+                    client.Send(data);
             }
         }
     }
@@ -191,8 +192,8 @@ public class HexMapEditor : MonoBehaviour
                 cell.RemoveRoads();
             else if(road[1] != "-1")
             {
-                int neighborX = int.Parse(position[0]);
-                int neighborZ = int.Parse(position[1]);
+                int neighborX = int.Parse(road[2]);
+                int neighborZ = int.Parse(road[3]);
                 HexCell otherCell = hexGrid.GetCell(new HexCoordinates(neighborX, neighborZ));
 
                 otherCell.AddRoad(((HexDirection)int.Parse(road[1])));

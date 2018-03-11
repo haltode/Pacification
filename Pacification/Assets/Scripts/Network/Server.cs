@@ -46,8 +46,10 @@ public class Server : MonoBehaviour
         {
             if(!IsConnected(clients[i].tcp))
             {
+                string deconnected = clients[i].clientName;
                 clients[i].tcp.Close();
                 clients.Remove(clients[i]);
+                Broadcast("SDEC|" + deconnected, clients);
             }
             else
             {

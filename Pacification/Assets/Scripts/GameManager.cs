@@ -72,45 +72,46 @@ public class GameManager : MonoBehaviour
         if (hostAddress == "")
             hostAddress = Server.Localhost;
 
+        Client client = Instantiate(clientPrefab).GetComponent<Client>();
+
         try
         {
-            Client client = Instantiate(clientPrefab).GetComponent<Client>();
-            client.ConnectToServer(hostAddress, Server.Port);
-
-            client.clientName = nameInput.text;
-            if (client.clientName == "")
+            if(client.ConnectToServer(hostAddress, Server.Port))
             {
-                System.Random rnd = new System.Random();
-                client.clientName = "Player" + (rnd.Next(1000, 10000));
-            }
+                client.clientName = nameInput.text;
 
-            connectionMenu.SetActive(false);
-            isConnected = true;
+                if (client.clientName == "")
+                {
+                    System.Random rnd = new System.Random();
+                    client.clientName = "Player" + (rnd.Next(1000, 10000));
+                }
+
+                connectionMenu.SetActive(false);
+                isConnected = true;
+            }
         }
         catch (Exception e)
         {
-            isConnected = false;
             Debug.Log(e.Message);
         }
 
-        //      ISSUE : Appuyer plusieurs fois sur connecter sans succes cree de nouveaux client sans destroy l'ancien !!!
-        //    if(!isConnected)
-        //    {
-        //        Client c = FindObjectOfType<Client>();
-        //        if (c != null)
-        //            Destroy(c.gameObject);
-        //    }
+        if (!isConnected)
+            Destroy(client.gameObject);
     }
 
     public void BackButton()
     {
         hostMenu.SetActive(false);
+        toHosting.SetActive(false);
         joinMenu.SetActive(false);
         connectionMenu.SetActive(true);
 
         Server server = FindObjectOfType<Server>();
         if (server != null)
+        {
+            server.server.Stop();
             Destroy(server.gameObject);
+        }
 
         Client client = FindObjectOfType<Client>();
         if (client != null)

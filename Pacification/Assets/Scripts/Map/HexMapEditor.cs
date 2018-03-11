@@ -109,9 +109,7 @@ public class HexMapEditor : MonoBehaviour
     {
         if(cell)
         {
-            data = "CEDI|";
-
-            data += cell.coordinates.X + "."  + cell.coordinates.Z + "#";
+            data = "CEDI|" + cell.coordinates.X + "."  + cell.coordinates.Z + "#";
 
             if (activeTerrainBiomeIndex >= 0)
             {
@@ -158,14 +156,11 @@ public class HexMapEditor : MonoBehaviour
                 }
             }
             else
-            {
                 data += "-1#";
-            }
 
             if (data != previousData)
             {
                 previousData = data;
-                Debug.Log(data);
                 client.Send(data);
             }
         }
@@ -173,33 +168,33 @@ public class HexMapEditor : MonoBehaviour
 
     public void NetworkEditedCell(string data)
     {
+        /* data :
+            0: position[]
+               -> 0 : X
+               -> 1 : Z
+            1: newBiomeIndex   // int
+            2: newElevation    // int
+            3: newFeature      // int 
+            4: road[]          
+               -> 0 : hasHoad
+               -> 1 : dragDirec
+               -> 2 : neighborCell.X
+               -> 3 : neighborCell.Z
+       */
+
         string[] receivedData = data.Split('#');
         string[] position = receivedData[0].Split('.');
-        string[] road = receivedData[4].Split('.');
-
-        /*
-         0: position[]
-            -> 0 : X
-            -> 1 : Z
-         1: newBiomeIndex   // int
-         2: newElevation    // int
-         3: newFeature      // int 
-         4: road[]          
-            -> 0 : hasHoad  // bool
-            -> 1 : dragDirec
-            -> 2 : X        // neighborCell.X
-            -> 3 : Z        // neighborCell.Z
-        */
 
         HexCell cell = hexGrid.GetCell(new HexCoordinates(int.Parse(position[0]), int.Parse(position[1])));
 
-        int newBiomeIndex = int.Parse(receivedData[1]);
-        int newElevation = int.Parse(receivedData[2]);
-        int newFeature = int.Parse(receivedData[3]);
-
         if(cell)
         {
-            if(newBiomeIndex != -1)
+            string[] road = receivedData[4].Split('.');
+            int newBiomeIndex = int.Parse(receivedData[1]);
+            int newElevation = int.Parse(receivedData[2]);
+            int newFeature = int.Parse(receivedData[3]);
+
+            if (newBiomeIndex != -1)
                 cell.TerrainBiomeIndex = newBiomeIndex;
 
             if(newElevation != -1)
@@ -239,9 +234,6 @@ public class HexMapEditor : MonoBehaviour
                     case "5":
                         otherCell.AddRoad(HexDirection.NW);
                         break;
-
-                    default:
-                        throw new System.Exception("Unknown drag direction");
                 }
             }
         }

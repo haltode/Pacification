@@ -15,7 +15,7 @@ public class Server : MonoBehaviour
     private bool isServerStarted;
 
     private List<ServerClient> clients;
-    private TcpListener server;
+    public TcpListener server;
 
     public void Init()
     {

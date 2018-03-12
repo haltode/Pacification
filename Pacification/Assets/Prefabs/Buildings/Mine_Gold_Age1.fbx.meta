@@ -1,0 +1,216 @@
+fileFormatVersion: 2
+guid: 661c1e9f675adf04083dfce7cda31b1f
+timeCreated: 1520881075
+licenseType: Free
+ModelImporter:
+  serializedVersion: 22
+  fileIDToRecycleName:
+    100000: Caverne
+    100002: Cube
+    100004: Icosphere
+    100006: Icosphere.001
+    100008: Icosphere.002
+    100010: Icosphere.003
+    100012: Icosphere.004
+    100014: Icosphere.005
+    100016: Icosphere.006
+    100018: //RootNode
+    100020: MinerHouse
+    100022: Pioche
+    100024: Pioche.001
+    100026: Pioche.002
+    100028: Pioche.003
+    100030: RAil
+    100032: Wagon
+    100034: Wagon.001
+    400000: Caverne
+    400002: Cube
+    400004: Icosphere
+    400006: Icosphere.001
+    400008: Icosphere.002
+    400010: Icosphere.003
+    400012: Icosphere.004
+    400014: Icosphere.005
+    400016: Icosphere.006
+    400018: //RootNode
+    400020: MinerHouse
+    400022: Pioche
+    400024: Pioche.001
+    400026: Pioche.002
+    400028: Pioche.003
+    400030: RAil
+    400032: Wagon
+    400034: Wagon.001
+    2100000: Gold
+    2100002: WoodWall
+    2100004: Wood
+    2100006: Bronze
+    2100008: WoodPillar
+    2100010: StrawRoof
+    2100012: Rock
+    2300000: Caverne
+    2300002: Cube
+    2300004: Icosphere
+    2300006: Icosphere.001
+    2300008: Icosphere.002
+    2300010: Icosphere.003
+    2300012: Icosphere.004
+    2300014: Icosphere.005
+    2300016: Icosphere.006
+    2300018: MinerHouse
+    2300020: Pioche
+    2300022: Pioche.001
+    2300024: Pioche.002
+    2300026: Pioche.003
+    2300028: RAil
+    2300030: Wagon
+    2300032: Wagon.001
+    3300000: Caverne
+    3300002: Cube
+    3300004: Icosphere
+    3300006: Icosphere.001
+    3300008: Icosphere.002
+    3300010: Icosphere.003
+    3300012: Icosphere.004
+    3300014: Icosphere.005
+    3300016: Icosphere.006
+    3300018: MinerHouse
+    3300020: Pioche
+    3300022: Pioche.001
+    3300024: Pioche.002
+    3300026: Pioche.003
+    3300028: RAil
+    3300030: Wagon
+    3300032: Wagon.001
+    4300000: Icosphere.006
+    4300002: Icosphere.005
+    4300004: Icosphere.004
+    4300006: Icosphere.003
+    4300008: Cube
+    4300010: Icosphere.002
+    4300012: Icosphere.001
+    4300014: Icosphere
+    4300016: Wagon.001
+    4300018: Wagon
+    4300020: RAil
+    4300022: Pioche.003
+    4300024: Pioche.002
+    4300026: Pioche.001
+    4300028: Pioche
+    4300030: MinerHouse
+    4300032: Caverne
+  externalObjects:
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Bronze
+    second: {fileID: 2100000, guid: 7401d56bce47d5748a4072b54699cd9c, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Gold
+    second: {fileID: 2100000, guid: 3ebdf43aad1d58f41a906f74ba87584d, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Rock
+    second: {fileID: 2100000, guid: 558cbcd575cf95c49b65a95c01a8f0b3, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: StrawRoof
+    second: {fileID: 2100000, guid: c989bcf655e9b1740bfc060edb151c2e, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Wood
+    second: {fileID: 2100000, guid: 17e7a0f2f969adb439ff4bacb88dac19, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: WoodPillar
+    second: {fileID: 2100000, guid: 1684a4b733c3c414d8a13dd7fbc951c6, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: WoodWall
+    second: {fileID: 2100000, guid: 4225da3a2aa185144b19124fd337a1c5, type: 2}
+  materials:
+    importMaterials: 1
+    materialName: 0
+    materialSearch: 1
+    materialLocation: 1
+  animations:
+    legacyGenerateAnimations: 4
+    bakeSimulation: 0
+    resampleCurves: 1
+    optimizeGameObjects: 0
+    motionNodeName: 
+    rigImportErrors: 
+    rigImportWarnings: 
+    animationImportErrors: 
+    animationImportWarnings: 
+    animationRetargetingWarnings: 
+    animationDoRetargetingWarnings: 0
+    importAnimatedCustomProperties: 0
+    animationCompression: 1
+    animationRotationError: 0.5
+    animationPositionError: 0.5
+    animationScaleError: 0.5
+    animationWrapMode: 0
+    extraExposedTransformPaths: []
+    extraUserProperties: []
+    clipAnimations: []
+    isReadable: 1
+  meshes:
+    lODScreenPercentages: []
+    globalScale: 1
+    meshCompression: 0
+    addColliders: 0
+    importVisibility: 1
+    importBlendShapes: 1
+    importCameras: 1
+    importLights: 1
+    swapUVChannels: 0
+    generateSecondaryUV: 0
+    useFileUnits: 1
+    optimizeMeshForGPU: 1
+    keepQuads: 0
+    weldVertices: 1
+    preserveHierarchy: 0
+    indexFormat: 0
+    secondaryUVAngleDistortion: 8
+    secondaryUVAreaDistortion: 15.000001
+    secondaryUVHardAngle: 88
+    secondaryUVPackMargin: 4
+    useFileScale: 1
+  tangentSpace:
+    normalSmoothAngle: 60
+    normalImportMode: 0
+    tangentImportMode: 3
+    normalCalculationMode: 4
+  importAnimation: 1
+  copyAvatar: 0
+  humanDescription:
+    serializedVersion: 2
+    human: []
+    skeleton: []
+    armTwist: 0.5
+    foreArmTwist: 0.5
+    upperLegTwist: 0.5
+    legTwist: 0.5
+    armStretch: 0.05
+    legStretch: 0.05
+    feetSpacing: 0
+    rootMotionBoneName: 
+    rootMotionBoneRotation: {x: 0, y: 0, z: 0, w: 1}
+    hasTranslationDoF: 0
+    hasExtraRoot: 0
+    skeletonHasParents: 1
+  lastHumanDescriptionAvatarSource: {instanceID: 0}
+  animationType: 0
+  humanoidOversampling: 1
+  additionalBone: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

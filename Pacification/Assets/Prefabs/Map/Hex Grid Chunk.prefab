@@ -290,7 +290,13 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   featuresPrefab:
-  - {fileID: 4032263245305504, guid: de776a0b83dbe44c0bf9b85e136eb54c, type: 2}
+  - {fileID: 400000, guid: 8482cc485d40b90498462d8aac701431, type: 3}
+  - {fileID: 400040, guid: 15ee9f7b3d7369c479be23ebefb504dc, type: 3}
+  - {fileID: 400018, guid: 694bd528ca33d414180d51772197ec01, type: 3}
+  - {fileID: 400040, guid: 3617f9a098079c14492e7918af3fbedb, type: 3}
+  - {fileID: 400018, guid: a6085238b3b85a44896f74437fcebed0, type: 3}
+  - {fileID: 400040, guid: 45052c14f4c409d4e90666e50f4fe498, type: 3}
+  - {fileID: 400018, guid: 661c1e9f675adf04083dfce7cda31b1f, type: 3}
 --- !u!114 &114796483014442690
 MonoBehaviour:
   m_ObjectHideFlags: 1

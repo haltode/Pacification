@@ -108,20 +108,46 @@ public class HexMapEditor : MonoBehaviour
 
         for(int r = 0, z = centerZ - brushSize; z <= centerZ; ++z, ++r)
             for(int x = centerX - r; x <= centerX + brushSize; ++x)
-                EditCell(hexGrid.GetCell(new HexCoordinates(x, z)), true);
+                EditCellWithBrush(hexGrid.GetCell(new HexCoordinates(x, z)));
 
         for(int r = 0, z = centerZ + brushSize; z > centerZ; --z, ++r)
             for(int x = centerX - brushSize; x <= centerX + r; ++x)
-                EditCell(hexGrid.GetCell(new HexCoordinates(x, z)), true);
+                EditCellWithBrush(hexGrid.GetCell(new HexCoordinates(x, z)));
     }
 
-    void EditCell(HexCell cell, bool isBrushed = false)
-    {
-        if(cell)
-        {
-            data = "CEDI|" + cell.coordinates.X + "."  + cell.coordinates.Z + "." + brushSize + "#";
 
-            if(activeTerrainBiomeIndex >= 0)
+    void EditCellWithBrush(HexCell cell)
+    {
+        if (cell)
+        {
+            if (activeTerrainBiomeIndex >= 0)
+                cell.TerrainBiomeIndex = activeTerrainBiomeIndex;
+
+            if (applyElevation)
+                cell.Elevation = activeElevation;
+
+            if (activeFeature > 0)
+                cell.FeatureIndex = activeFeature;
+
+            if (roadMode == OptionalToggle.No)
+                cell.RemoveRoads();
+
+            if (isDrag)
+            {
+                HexCell otherCell = cell.GetNeighbor(dragDirection.Opposite());
+                if (otherCell && roadMode == OptionalToggle.Yes)
+                    otherCell.AddRoad(dragDirection);
+            }
+        }
+    }
+
+    void EditCell(HexCell cell)
+    {
+        if (cell)
+        {
+            data = "CEDI|" + cell.coordinates.X + "." + cell.coordinates.Z + "." + brushSize + "#";
+
+            if (activeTerrainBiomeIndex >= 0)
             {
                 cell.TerrainBiomeIndex = activeTerrainBiomeIndex;
                 data += activeTerrainBiomeIndex + "#";
@@ -129,7 +155,7 @@ public class HexMapEditor : MonoBehaviour
             else
                 data += "-1#";
 
-            if(applyElevation)
+            if (applyElevation)
             {
                 cell.Elevation = activeElevation;
                 data += activeElevation + "#";
@@ -137,40 +163,40 @@ public class HexMapEditor : MonoBehaviour
             else
                 data += "-1#";
 
-            if(activeFeature > 0)
+            if (activeFeature > 0)
             {
                 cell.FeatureIndex = activeFeature;
                 data += activeFeature + "#";
             }
-            else 
+            else
                 data += "-1#";
 
-            if(roadMode == OptionalToggle.No)
+            if (roadMode == OptionalToggle.No)
             {
                 cell.RemoveRoads();
                 data += "0.-1#";
             }
-            else if(roadMode == OptionalToggle.Yes)
+            else if (roadMode == OptionalToggle.Yes)
                 data += "1.";
             else
                 data += "-1.-1#";
 
-            if(isDrag)
+            if (isDrag)
             {
                 HexCell otherCell = cell.GetNeighbor(dragDirection.Opposite());
                 if (otherCell && roadMode == OptionalToggle.Yes)
                 {
                     otherCell.AddRoad(dragDirection);
-                    data += (int)dragDirection +"." + otherCell.coordinates.X + "." + otherCell.coordinates.Z + "#";
+                    data += (int)dragDirection + "." + otherCell.coordinates.X + "." + otherCell.coordinates.Z + "#";
                 }
             }
             else
                 data += "-1#";
 
-            if(data != previousData && !isBrushed)
+            if (data != previousData)
             {
                 previousData = data;
-                if(FindObjectOfType<Client>())
+                if (FindObjectOfType<Client>())
                     client.Send(data);
             }
         }
@@ -184,8 +210,6 @@ public class HexMapEditor : MonoBehaviour
 
         int centerX = int.Parse(position[0]);
         int centerZ = int.Parse(position[1]);
-
-        Debug.Log(centerX + "." + centerZ + newData);
 
         for (int r = 0, z = centerZ - brush; z <= centerZ; ++z, ++r)
             for (int x = centerX - r; x <= centerX + brush; ++x)

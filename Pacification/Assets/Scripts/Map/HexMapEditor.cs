@@ -96,20 +96,22 @@ public class HexMapEditor : MonoBehaviour
         int centerX = center.coordinates.X;
         int centerZ = center.coordinates.Z;
 
+        EditCell(center);
+
         for(int r = 0, z = centerZ - brushSize; z <= centerZ; ++z, ++r)
             for(int x = centerX - r; x <= centerX + brushSize; ++x)
-                EditCell(hexGrid.GetCell(new HexCoordinates(x, z)));
+                EditCell(hexGrid.GetCell(new HexCoordinates(x, z)), true);
 
         for(int r = 0, z = centerZ + brushSize; z > centerZ; --z, ++r)
             for(int x = centerX - brushSize; x <= centerX + r; ++x)
-                EditCell(hexGrid.GetCell(new HexCoordinates(x, z)));
+                EditCell(hexGrid.GetCell(new HexCoordinates(x, z)), true);
     }
 
-    void EditCell(HexCell cell)
+    void EditCell(HexCell cell, bool isBrushed = false)
     {
         if(cell)
         {
-            data = "CEDI|" + cell.coordinates.X + "."  + cell.coordinates.Z + "#";
+            data = "CEDI|" + cell.coordinates.X + "."  + cell.coordinates.Z + "." + brushSize + "#";
 
             if(activeTerrainBiomeIndex >= 0)
             {
@@ -157,13 +159,36 @@ public class HexMapEditor : MonoBehaviour
             else
                 data += "-1#";
 
-            if(data != previousData)
+            if(data != previousData && !isBrushed)
             {
                 previousData = data;
                 if(FindObjectOfType<Client>())
                     client.Send(data);
             }
         }
+    }
+
+    public void NetworkEditedCells(string data, int brush)
+    {
+        string[] receivedData = data.Split('#');
+        string[] position = receivedData[0].Split('.');
+        string newData = "#" + receivedData[1] + "#" + receivedData[2] + "#" + receivedData[3] + "#" + receivedData[4];
+
+        int centerX = int.Parse(position[0]);
+        int centerZ = int.Parse(position[1]);
+
+        Debug.Log(centerX + "." + centerZ + newData);
+
+        for (int r = 0, z = centerZ - brush; z <= centerZ; ++z, ++r)
+            for (int x = centerX - r; x <= centerX + brush; ++x)
+            {
+                NetworkEditedCell(x + "." + z + newData);
+            }
+        for (int r = 0, z = centerZ + brush; z > centerZ; --z, ++r)
+            for (int x = centerX - brush; x <= centerX + r; ++x)
+            {
+                NetworkEditedCell(x + "." + z + newData);
+            }
     }
 
     public void NetworkEditedCell(string data)

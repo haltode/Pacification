@@ -129,6 +129,11 @@ public class GameManager : MonoBehaviour
         SceneManager.LoadScene("Map");
     }
 
+    public void ExitButton()
+    {
+        Application.Quit();
+    }
+
     public void StartGame(string map)
     {
         SceneManager.LoadScene("Map");

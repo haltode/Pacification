@@ -77,7 +77,13 @@ public class Client : MonoBehaviour
 
             case "SEDI":
                 HexMapEditor mapEditor = FindObjectOfType<HexMapEditor>();
-                mapEditor.NetworkEditedCell(receivedData[1]);
+
+                string[] dataSplited = receivedData[1].Split('#');
+                string[] position = dataSplited[0].Split('.');
+                if (int.Parse(position[2]) == 0)
+                    mapEditor.NetworkEditedCell(receivedData[1]);
+                else
+                    mapEditor.NetworkEditedCells(receivedData[1], int.Parse(position[2]));
                 break;
 
             case "SYGO":

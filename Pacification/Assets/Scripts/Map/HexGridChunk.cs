@@ -18,7 +18,6 @@ public class HexGridChunk : MonoBehaviour
     void Awake()
     {
         gridCanvas = GetComponentInChildren<Canvas>();
-
         cells = new HexCell[HexMetrics.ChunkSizeX * HexMetrics.ChunkSizeZ];
     }
 
@@ -122,30 +121,29 @@ public class HexGridChunk : MonoBehaviour
     void TriangulateRoadSystem( HexCell cell, HexDirection dir, 
                                 Vector3 v1, Vector3 v2, Vector3 v3, Vector3 v4)
     {
-        if(cell.HasRoads)
+        if(!cell.HasRoads)
+            return;
+
+        Vector3 center = cell.transform.localPosition;
+        Vector3 middleLeft = Vector3.Lerp(center, v1, 0.5f);
+        Vector3 middleRight = Vector3.Lerp(center, v2, 0.5f);
+
+        TriangulateRoad(center, middleLeft, middleRight, v1, v2, cell.HasRoadThroughEdge(dir));
+
+        if(cell.HasRoadThroughEdge(dir))
         {
-            Vector3 center = cell.transform.localPosition;
+            HexCell neighbor = cell.GetNeighbor(dir);
+            Vector3 v5 = Vector3.Lerp(v1, v2, 0.5f);
+            Vector3 v6 = Vector3.Lerp(v3, v4, 0.5f);
+            v6.y = neighbor.Elevation * HexMetrics.ElevationStep;
 
-            Vector3 middleLeft = Vector3.Lerp(center, v1, 0.5f);
-            Vector3 middleRight = Vector3.Lerp(center, v2, 0.5f);
+            v1 = Vector3.Lerp(v1, v5, 0.5f);
+            v2 = Vector3.Lerp(v5, v2, 0.5f);
 
-            TriangulateRoad(center, middleLeft, middleRight, v1, v2, cell.HasRoadThroughEdge(dir));
+            v3 = Vector3.Lerp(v3, v6, 0.5f);
+            v4 = Vector3.Lerp(v6, v4, 0.5f);
 
-            if(cell.HasRoadThroughEdge(dir))
-            {
-                HexCell neighbor = cell.GetNeighbor(dir);
-                Vector3 v5 = Vector3.Lerp(v1, v2, 0.5f);
-                Vector3 v6 = Vector3.Lerp(v3, v4, 0.5f);
-                v6.y = neighbor.Elevation * HexMetrics.ElevationStep;
-
-                v1 = Vector3.Lerp(v1, v5, 0.5f);
-                v2 = Vector3.Lerp(v5, v2, 0.5f);
-
-                v3 = Vector3.Lerp(v3, v6, 0.5f);
-                v4 = Vector3.Lerp(v6, v4, 0.5f);
-
-                TriangulateRoadSegment(v1, v5, v2, v3, v6, v4);
-            }
+            TriangulateRoadSegment(v1, v5, v2, v3, v6, v4);
         }
     }
 

@@ -8,13 +8,13 @@ public class HexMapEditor : MonoBehaviour
     public HexGrid hexGrid;
     public Client client;
 
-    private string data = "";
-    private string previousData = "";
-    private int activeTerrainBiomeIndex;
-    private int activeElevation;
-    private int activeFeature;
-    private bool applyElevation;
-    private int brushSize;
+    string data = "";
+    string previousData = "";
+    int activeTerrainBiomeIndex;
+    int activeElevation;
+    int activeFeature;
+    bool applyElevation;
+    int brushSize;
 
     bool editMode;
     bool isDrag;
@@ -35,15 +35,22 @@ public class HexMapEditor : MonoBehaviour
             HandleInput();
         else
             previousCell = null;
-    }   
+    }
 
-    void HandleInput()
+    HexCell GetCellUnderCursor()
     {
         Ray inputRay = Camera.main.ScreenPointToRay(Input.mousePosition);
         RaycastHit hit;
         if(Physics.Raycast(inputRay, out hit))
+            return hexGrid.GetCell(hit.point);
+        return null;
+    }
+
+    void HandleInput()
+    {
+        HexCell currentCell = GetCellUnderCursor();
+        if(currentCell)
         {
-            HexCell currentCell = hexGrid.GetCell(hit.point);
             if(previousCell && previousCell != currentCell)
                 ValidateDrag(currentCell);
             else
@@ -51,6 +58,7 @@ public class HexMapEditor : MonoBehaviour
 
             if(editMode)
                 EditCells(currentCell);
+            // Pathfinding (searching + showing the path between cells)
             else if(Input.GetKey(KeyCode.LeftShift) && searchToCell != currentCell)
             {
                 if(searchFromCell != currentCell)

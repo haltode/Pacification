@@ -5,6 +5,8 @@ using System.IO;
 
 public class HexGrid : MonoBehaviour
 {
+    public int seed;
+
     public int cellCountX = 20;
     public int cellCountZ = 15;
 
@@ -20,7 +22,13 @@ public class HexGrid : MonoBehaviour
 
     void Awake()
     {
+        HexMetrics.InitializeHashGrid(seed);
         CreateMap(cellCountX, cellCountZ);
+    }
+
+    void OnEnable()
+    {
+        HexMetrics.InitializeHashGrid(seed);
     }
 
     public bool CreateMap(int sizeX, int sizeZ)

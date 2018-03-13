@@ -11,6 +11,9 @@ public static class HexMetrics
     public const float ElevationStep = 5f;
     public const int MaxRoadElevation = 1;
 
+    public const int hashGrideSize = 256;
+    static float[] hashGrid;
+
     // Blending colored regions factors
     public const float SolidFactor = 0.75f;
     public const float BlendFactor = 1f - SolidFactor;
@@ -50,5 +53,26 @@ public static class HexMetrics
     public static Vector3 GetBridge(HexDirection dir)
     {
         return (corners[(int) dir] + corners[(int) dir + 1]) * BlendFactor;
+    }
+
+    public static void InitializeHashGrid(int seed)
+    {
+        hashGrid = new float[hashGrideSize * hashGrideSize];
+        Random.State current = Random.state;
+        Random.InitState(seed);
+        for(int i = 0; i < hashGrid.Length; ++i)
+            hashGrid[i] = Random.value;
+        Random.state = current;
+    }
+
+    public static float SampleHashGrid(Vector3 position)
+    {
+        int x = (int) position.x % hashGrideSize;
+        if(x < 0)
+            x += hashGrideSize;
+        int z = (int) position.z % hashGrideSize;
+        if(z < 0)
+            z += hashGrideSize;
+        return hashGrid[x + z * hashGrideSize];
     }
 }

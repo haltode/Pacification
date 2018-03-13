@@ -131,7 +131,7 @@ public class GameManager : MonoBehaviour
 
     public void ExitButton()
     {
-        Application.Quit();
+        SceneManager.LoadScene("Exit");
     }
 
     public void StartGame(string map)

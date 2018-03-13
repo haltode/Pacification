@@ -118,21 +118,21 @@ public class HexMapEditor : MonoBehaviour
 
     void EditCellWithBrush(HexCell cell)
     {
-        if (cell)
+        if(cell)
         {
-            if (activeTerrainBiomeIndex >= 0)
+            if(activeTerrainBiomeIndex >= 0)
                 cell.TerrainBiomeIndex = activeTerrainBiomeIndex;
 
-            if (applyElevation)
+            if(applyElevation)
                 cell.Elevation = activeElevation;
 
-            if (activeFeature > 0)
+            if(activeFeature > 0)
                 cell.FeatureIndex = activeFeature;
 
-            if (roadMode == OptionalToggle.No)
+            if(roadMode == OptionalToggle.No)
                 cell.RemoveRoads();
 
-            if (isDrag)
+            if(isDrag)
             {
                 HexCell otherCell = cell.GetNeighbor(dragDirection.Opposite());
                 if (otherCell && roadMode == OptionalToggle.Yes)
@@ -143,11 +143,11 @@ public class HexMapEditor : MonoBehaviour
 
     void EditCell(HexCell cell)
     {
-        if (cell)
+        if(cell)
         {
             data = "CEDI|" + cell.coordinates.X + "." + cell.coordinates.Z + "." + brushSize + "#";
 
-            if (activeTerrainBiomeIndex >= 0)
+            if(activeTerrainBiomeIndex >= 0)
             {
                 cell.TerrainBiomeIndex = activeTerrainBiomeIndex;
                 data += activeTerrainBiomeIndex + "#";
@@ -155,7 +155,7 @@ public class HexMapEditor : MonoBehaviour
             else
                 data += "-1#";
 
-            if (applyElevation)
+            if(applyElevation)
             {
                 cell.Elevation = activeElevation;
                 data += activeElevation + "#";
@@ -163,7 +163,7 @@ public class HexMapEditor : MonoBehaviour
             else
                 data += "-1#";
 
-            if (activeFeature > 0)
+            if(activeFeature > 0)
             {
                 cell.FeatureIndex = activeFeature;
                 data += activeFeature + "#";
@@ -171,20 +171,20 @@ public class HexMapEditor : MonoBehaviour
             else
                 data += "-1#";
 
-            if (roadMode == OptionalToggle.No)
+            if(roadMode == OptionalToggle.No)
             {
                 cell.RemoveRoads();
                 data += "0.-1#";
             }
-            else if (roadMode == OptionalToggle.Yes)
+            else if(roadMode == OptionalToggle.Yes)
                 data += "1.";
             else
                 data += "-1.-1#";
 
-            if (isDrag)
+            if(isDrag)
             {
                 HexCell otherCell = cell.GetNeighbor(dragDirection.Opposite());
-                if (otherCell && roadMode == OptionalToggle.Yes)
+                if(otherCell && roadMode == OptionalToggle.Yes)
                 {
                     otherCell.AddRoad(dragDirection);
                     data += (int)dragDirection + "." + otherCell.coordinates.X + "." + otherCell.coordinates.Z + "#";
@@ -193,10 +193,10 @@ public class HexMapEditor : MonoBehaviour
             else
                 data += "-1#";
 
-            if (data != previousData)
+            if(data != previousData)
             {
                 previousData = data;
-                if (FindObjectOfType<Client>())
+                if(FindObjectOfType<Client>())
                     client.Send(data);
             }
         }

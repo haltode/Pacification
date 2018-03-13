@@ -1,49 +1,51 @@
 fileFormatVersion: 2
-guid: 8482cc485d40b90498462d8aac701431
-timeCreated: 1520804189
+guid: 98552d4ea336efc4cbd65fc69c7b6e31
+timeCreated: 1520942812
 licenseType: Free
 ModelImporter:
   serializedVersion: 22
   fileIDToRecycleName:
     100000: //RootNode
+    100002: House
+    100004: House.001
+    100006: House.002
+    100008: House.003
     400000: //RootNode
-    2100000: Material.001
-    2100002: Wall
-    2100004: Material.002
-    2300000: //RootNode
-    3300000: //RootNode
-    4300000: CityAge1
+    400002: House
+    400004: House.001
+    400006: House.002
+    400008: House.003
+    2100000: WoodPillar
+    2100002: StoneWall
+    2100004: StrawRoof
+    2300000: House
+    2300002: House.001
+    2300004: House.002
+    2300006: House.003
+    3300000: House
+    3300002: House.001
+    3300004: House.002
+    3300006: House.003
+    4300000: House.003
+    4300002: House.002
+    4300004: House.001
+    4300006: House
   externalObjects:
   - first:
       type: UnityEngine:Material
       assembly: UnityEngine.CoreModule
-      name: Material.001
-    second: {fileID: 2100000, guid: 1684a4b733c3c414d8a13dd7fbc951c6, type: 2}
+      name: StoneWall
+    second: {fileID: 2100000, guid: bd3efc9048aa38944847c018feb7fa93, type: 2}
   - first:
       type: UnityEngine:Material
       assembly: UnityEngine.CoreModule
-      name: Material.002
+      name: StrawRoof
     second: {fileID: 2100000, guid: c989bcf655e9b1740bfc060edb151c2e, type: 2}
   - first:
       type: UnityEngine:Material
       assembly: UnityEngine.CoreModule
-      name: Wall
-    second: {fileID: 2100000, guid: bd3efc9048aa38944847c018feb7fa93, type: 2}
-  - first:
-      type: UnityEngine:Texture2D
-      assembly: UnityEngine.CoreModule
-      name: StrawRoof
-    second: {fileID: 2800000, guid: f02af498e95a6454a8773e144d892c19, type: 3}
-  - first:
-      type: UnityEngine:Texture2D
-      assembly: UnityEngine.CoreModule
-      name: Wall
-    second: {fileID: 2800000, guid: d69498c1d045f724396e0937fddda3db, type: 3}
-  - first:
-      type: UnityEngine:Texture2D
-      assembly: UnityEngine.CoreModule
-      name: Wood
-    second: {fileID: 2800000, guid: 0f4f16fbb4f9bd240bb41e2df81536cd, type: 3}
+      name: WoodPillar
+    second: {fileID: 2100000, guid: 1684a4b733c3c414d8a13dd7fbc951c6, type: 2}
   materials:
     importMaterials: 1
     materialName: 0

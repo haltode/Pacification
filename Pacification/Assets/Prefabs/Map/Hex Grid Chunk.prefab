@@ -291,12 +291,12 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   featuresPrefab:
   - {fileID: 400000, guid: 8482cc485d40b90498462d8aac701431, type: 3}
-  - {fileID: 400040, guid: 15ee9f7b3d7369c479be23ebefb504dc, type: 3}
-  - {fileID: 400018, guid: 694bd528ca33d414180d51772197ec01, type: 3}
-  - {fileID: 400040, guid: 3617f9a098079c14492e7918af3fbedb, type: 3}
-  - {fileID: 400018, guid: a6085238b3b85a44896f74437fcebed0, type: 3}
-  - {fileID: 400040, guid: 45052c14f4c409d4e90666e50f4fe498, type: 3}
-  - {fileID: 400018, guid: 661c1e9f675adf04083dfce7cda31b1f, type: 3}
+  - {fileID: 400042, guid: f56c0b76b0099ba4ca712173465059b0, type: 3}
+  - {fileID: 400020, guid: 839b3bf082b1c1d418f93c25108bb68a, type: 3}
+  - {fileID: 400042, guid: 6322ce682a6c69042b38a1f1edbaaba3, type: 3}
+  - {fileID: 400020, guid: 2b4af5ff598e27148853c583e3c7d250, type: 3}
+  - {fileID: 400042, guid: 792e5cbdbfdf2ad4c840b29eafb15693, type: 3}
+  - {fileID: 400020, guid: f2cf6f91c50bfe74bb7364d2292f23f5, type: 3}
 --- !u!114 &114796483014442690
 MonoBehaviour:
   m_ObjectHideFlags: 1

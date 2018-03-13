@@ -1273,7 +1273,7 @@ RectTransform:
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 0, y: 1}
   m_AnchoredPosition: {x: 5, y: -320}
-  m_SizeDelta: {x: 135, y: 190}
+  m_SizeDelta: {x: 135, y: 195}
   m_Pivot: {x: 0, y: 1}
 --- !u!114 &210732109
 MonoBehaviour:
@@ -2622,7 +2622,7 @@ GameObject:
   - component: {fileID: 491540486}
   - component: {fileID: 491540487}
   m_Layer: 5
-  m_Name: Toggle Iron Mine Age1
+  m_Name: Toggle Iron Mine Era1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -3888,7 +3888,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: Gold Mine Age1
+  m_Text: Gold Mine Era1
 --- !u!222 &698574284
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -4357,7 +4357,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: City Age1
+  m_Text: City Era1
 --- !u!222 &767104359
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -4523,7 +4523,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: Iron Mine Age1
+  m_Text: Iron Mine Era1
 --- !u!222 &798607982
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -6585,7 +6585,7 @@ GameObject:
   - component: {fileID: 1158658100}
   - component: {fileID: 1158658101}
   m_Layer: 5
-  m_Name: Toggle Gold Mine Age1
+  m_Name: Toggle Gold Mine Era1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -6962,7 +6962,7 @@ GameObject:
   - component: {fileID: 1205312012}
   - component: {fileID: 1205312013}
   m_Layer: 5
-  m_Name: Toggle Diamond Mine Age1
+  m_Name: Toggle Diamond Mine Era1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -7671,7 +7671,7 @@ RectTransform:
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 0, y: 1}
   m_AnchoredPosition: {x: 4, y: -4}
-  m_SizeDelta: {x: 145, y: 510}
+  m_SizeDelta: {x: 145, y: 520}
   m_Pivot: {x: 0, y: 1}
 --- !u!114 &1390083065
 MonoBehaviour:
@@ -7850,7 +7850,7 @@ GameObject:
   - component: {fileID: 1431955756}
   - component: {fileID: 1431955757}
   m_Layer: 5
-  m_Name: Toggle City Age1
+  m_Name: Toggle City Era1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -8625,7 +8625,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: Dmd Mine Age1
+  m_Text: Dmd Mine Era1
 --- !u!222 &1580713624
 CanvasRenderer:
   m_ObjectHideFlags: 0

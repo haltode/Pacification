@@ -1,6 +1,6 @@
 fileFormatVersion: 2
-guid: 45052c14f4c409d4e90666e50f4fe498
-timeCreated: 1520893150
+guid: 792e5cbdbfdf2ad4c840b29eafb15693
+timeCreated: 1520939934
 licenseType: Free
 ModelImporter:
   serializedVersion: 22
@@ -25,7 +25,8 @@ ModelImporter:
     100034: Icosphere.014
     100036: Icosphere.015
     100038: Icosphere.016
-    100040: //RootNode
+    100040: Icosphere.017
+    100042: //RootNode
     400000: Caverne
     400002: Caverne.001
     400004: Caverne.002
@@ -46,9 +47,10 @@ ModelImporter:
     400034: Icosphere.014
     400036: Icosphere.015
     400038: Icosphere.016
-    400040: //RootNode
-    2100000: Gold
-    2100002: Rock
+    400040: Icosphere.017
+    400042: //RootNode
+    2100000: Rock
+    2100002: Gold
     2300000: Caverne
     2300002: Caverne.001
     2300004: Caverne.002
@@ -69,6 +71,7 @@ ModelImporter:
     2300034: Icosphere.014
     2300036: Icosphere.015
     2300038: Icosphere.016
+    2300040: Icosphere.017
     3300000: Caverne
     3300002: Caverne.001
     3300004: Caverne.002
@@ -89,26 +92,28 @@ ModelImporter:
     3300034: Icosphere.014
     3300036: Icosphere.015
     3300038: Icosphere.016
-    4300000: Icosphere.016
-    4300002: Icosphere.015
-    4300004: Icosphere.014
-    4300006: Icosphere.013
-    4300008: Icosphere.012
-    4300010: Icosphere.011
-    4300012: Icosphere.010
-    4300014: Icosphere.009
-    4300016: Icosphere.008
-    4300018: Icosphere.007
-    4300020: Icosphere.006
-    4300022: Icosphere.005
-    4300024: Icosphere.003
-    4300026: Caverne.002
-    4300028: Icosphere.004
-    4300030: Caverne.001
-    4300032: Icosphere.002
-    4300034: Icosphere.001
-    4300036: Icosphere
-    4300038: Caverne
+    3300040: Icosphere.017
+    4300000: Icosphere.017
+    4300002: Icosphere.016
+    4300004: Icosphere.013
+    4300006: Icosphere.010
+    4300008: Icosphere.015
+    4300010: Icosphere.014
+    4300012: Icosphere.012
+    4300014: Caverne.002
+    4300016: Caverne.001
+    4300018: Icosphere.011
+    4300020: Icosphere.009
+    4300022: Icosphere.008
+    4300024: Icosphere.007
+    4300026: Icosphere.006
+    4300028: Icosphere.005
+    4300030: Icosphere.004
+    4300032: Icosphere.003
+    4300034: Icosphere.002
+    4300036: Icosphere.001
+    4300038: Icosphere
+    4300040: Caverne
   externalObjects:
   - first:
       type: UnityEngine:Material

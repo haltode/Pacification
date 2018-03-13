@@ -1,6 +1,6 @@
 fileFormatVersion: 2
-guid: 694bd528ca33d414180d51772197ec01
-timeCreated: 1520879880
+guid: f2cf6f91c50bfe74bb7364d2292f23f5
+timeCreated: 1520938969
 licenseType: Free
 ModelImporter:
   serializedVersion: 22
@@ -14,15 +14,18 @@ ModelImporter:
     100012: Icosphere.004
     100014: Icosphere.005
     100016: Icosphere.006
-    100018: //RootNode
-    100020: MinerHouse
-    100022: Pioche
-    100024: Pioche.001
-    100026: Pioche.002
-    100028: Pioche.003
-    100030: RAil
-    100032: Wagon
-    100034: Wagon.001
+    100018: Icosphere.007
+    100020: //RootNode
+    100022: MinerHouse
+    100024: Pioche
+    100026: Pioche.001
+    100028: Pioche.002
+    100030: Pioche.003
+    100032: RAil
+    100034: Wagon
+    100036: Wagon.001
+    100038: Wagon.002
+    100040: Wagon.003
     400000: Caverne
     400002: Cube
     400004: Icosphere
@@ -32,19 +35,22 @@ ModelImporter:
     400012: Icosphere.004
     400014: Icosphere.005
     400016: Icosphere.006
-    400018: //RootNode
-    400020: MinerHouse
-    400022: Pioche
-    400024: Pioche.001
-    400026: Pioche.002
-    400028: Pioche.003
-    400030: RAil
-    400032: Wagon
-    400034: Wagon.001
-    2100000: Metal
-    2100002: WoodWall
-    2100004: Wood
-    2100006: Bronze
+    400018: Icosphere.007
+    400020: //RootNode
+    400022: MinerHouse
+    400024: Pioche
+    400026: Pioche.001
+    400028: Pioche.002
+    400030: Pioche.003
+    400032: RAil
+    400034: Wagon
+    400036: Wagon.001
+    400038: Wagon.002
+    400040: Wagon.003
+    2100000: Gold
+    2100002: Wood
+    2100004: Bronze
+    2100006: WoodWall
     2100008: WoodPillar
     2100010: StrawRoof
     2100012: Rock
@@ -57,14 +63,17 @@ ModelImporter:
     2300012: Icosphere.004
     2300014: Icosphere.005
     2300016: Icosphere.006
-    2300018: MinerHouse
-    2300020: Pioche
-    2300022: Pioche.001
-    2300024: Pioche.002
-    2300026: Pioche.003
-    2300028: RAil
-    2300030: Wagon
-    2300032: Wagon.001
+    2300018: Icosphere.007
+    2300020: MinerHouse
+    2300022: Pioche
+    2300024: Pioche.001
+    2300026: Pioche.002
+    2300028: Pioche.003
+    2300030: RAil
+    2300032: Wagon
+    2300034: Wagon.001
+    2300036: Wagon.002
+    2300038: Wagon.003
     3300000: Caverne
     3300002: Cube
     3300004: Icosphere
@@ -74,31 +83,37 @@ ModelImporter:
     3300012: Icosphere.004
     3300014: Icosphere.005
     3300016: Icosphere.006
-    3300018: MinerHouse
-    3300020: Pioche
-    3300022: Pioche.001
-    3300024: Pioche.002
-    3300026: Pioche.003
-    3300028: RAil
-    3300030: Wagon
-    3300032: Wagon.001
-    4300000: Icosphere.006
-    4300002: Icosphere.005
-    4300004: Icosphere.004
-    4300006: Icosphere.003
-    4300008: Cube
-    4300010: Icosphere.002
-    4300012: Icosphere.001
-    4300014: Icosphere
-    4300016: Wagon.001
-    4300018: Wagon
-    4300020: RAil
-    4300022: Pioche.003
-    4300024: Pioche.002
-    4300026: Pioche.001
-    4300028: Pioche
-    4300030: MinerHouse
-    4300032: Caverne
+    3300018: Icosphere.007
+    3300020: MinerHouse
+    3300022: Pioche
+    3300024: Pioche.001
+    3300026: Pioche.002
+    3300028: Pioche.003
+    3300030: RAil
+    3300032: Wagon
+    3300034: Wagon.001
+    3300036: Wagon.002
+    3300038: Wagon.003
+    4300000: Icosphere.007
+    4300002: Wagon.003
+    4300004: Wagon.002
+    4300006: Icosphere.006
+    4300008: Icosphere.005
+    4300010: Icosphere.004
+    4300012: Icosphere.003
+    4300014: Cube
+    4300016: Icosphere.002
+    4300018: Icosphere.001
+    4300020: Icosphere
+    4300022: Wagon.001
+    4300024: Wagon
+    4300026: RAil
+    4300028: Pioche.003
+    4300030: Pioche.002
+    4300032: Pioche.001
+    4300034: Pioche
+    4300036: MinerHouse
+    4300038: Caverne
   externalObjects:
   - first:
       type: UnityEngine:Material
@@ -108,8 +123,8 @@ ModelImporter:
   - first:
       type: UnityEngine:Material
       assembly: UnityEngine.CoreModule
-      name: Metal
-    second: {fileID: 2100000, guid: 385710ef9966bce428dc0acd6b9fd1ec, type: 2}
+      name: Gold
+    second: {fileID: 2100000, guid: 3ebdf43aad1d58f41a906f74ba87584d, type: 2}
   - first:
       type: UnityEngine:Material
       assembly: UnityEngine.CoreModule

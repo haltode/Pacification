@@ -113,7 +113,7 @@ public class HexCell : MonoBehaviour
 
     public bool IsReachable(HexDirection direction)
     {
-        return GetElevationDifference(direction) <= HexMetrics.MaxRoadElevation;
+        return GetElevationDifference(direction) <= HexMetrics.MaxElevationReach;
     }
 
     public int FeatureIndex
@@ -151,10 +151,12 @@ public class HexCell : MonoBehaviour
 
     public void Save(BinaryWriter writer)
     {
+        // Use byte to save space since we stay inside range [0; 255]
         writer.Write((byte) terrainBiomeIndex);
         writer.Write((byte) elevation);
         writer.Write((byte) featureIndex);
 
+        // Again we save space by encoding the boolean array inside a single int
         int roadFlags = 0;
         for(int i = 0; i < roads.Length; ++i)
             if(roads[i])
@@ -176,15 +178,15 @@ public class HexCell : MonoBehaviour
 
     void Refresh()
     {
-        if(chunk)
+        if(!chunk)
+            return;
+
+        chunk.Refresh();
+        for(int i = 0; i < neighbors.Length; ++i)
         {
-            chunk.Refresh();
-            for(int i = 0; i < neighbors.Length; ++i)
-            {
-                HexCell neighbor = neighbors[i];
-                if(neighbor != null && neighbor.chunk != chunk)
-                    neighbor.chunk.Refresh();
-            }
+            HexCell neighbor = neighbors[i];
+            if(neighbor != null && neighbor.chunk != chunk)
+                neighbor.chunk.Refresh();
         }
     }
 

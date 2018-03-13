@@ -23,9 +23,9 @@ public class HexFeatureManager : MonoBehaviour
     {
         Transform instance = Instantiate(featuresPrefab[cell.FeatureIndex - 1]);
         Vector3 position = cell.Position;
+        float hash = HexMetrics.SampleHashGrid(position);
         position.y += instance.localScale.y * 0.5f;
         instance.localPosition = position;
-        float hash = HexMetrics.SampleHashGrid(position);
         instance.localRotation = Quaternion.Euler(0f, 360f * hash, 0f);
         instance.SetParent(featuresContainer, false);
     }

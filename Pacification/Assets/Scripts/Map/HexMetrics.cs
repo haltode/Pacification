@@ -9,7 +9,7 @@ public static class HexMetrics
     public const int ChunkSizeZ = 5;
 
     public const float ElevationStep = 5f;
-    public const int MaxRoadElevation = 1;
+    public const int MaxElevationReach = 1;
 
     public const int hashGrideSize = 256;
     static float[] hashGrid;

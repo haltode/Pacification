@@ -10,14 +10,12 @@ public class HexGrid : MonoBehaviour
     public int cellCountX = 20;
     public int cellCountZ = 15;
 
-    private int chunkCountX;
-    private int chunkCountZ;
-
     public HexCell cellPrefab;
     public Text cellLabelPrefab;
     public HexGridChunk chunkPrefab;
 
     HexGridChunk[] chunks;
+    int chunkCountX, chunkCountZ;
     HexCell[] cells;
 
     void Awake()

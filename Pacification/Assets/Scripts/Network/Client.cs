@@ -77,13 +77,7 @@ public class Client : MonoBehaviour
 
             case "SEDI":
                 HexMapEditor mapEditor = FindObjectOfType<HexMapEditor>();
-
-                string[] dataSplited = receivedData[1].Split('#');
-                string[] position = dataSplited[0].Split('.');
-                if (int.Parse(position[2]) == 0)
-                    mapEditor.NetworkEditedCell(receivedData[1]);
-                else
-                    mapEditor.NetworkEditedCells(receivedData[1], int.Parse(position[2]));
+                mapEditor.NetworkEditedCell(receivedData[1]);
                 break;
 
             case "SYGO":
@@ -105,10 +99,8 @@ public class Client : MonoBehaviour
 
             /////// REGISTER ON SERVER
             case "SWHO":
-                for (int i = 1; i < receivedData.Length -1; ++i)
-                {
+                for(int i = 1; i < receivedData.Length - 1; ++i)
                     UserConnected(receivedData[i], false);
-                }
 
                 Debug.Log("Client " + clientName + " send: " + clientName + "#" + ((isHost) ? 1 : 0).ToString() );
 
@@ -133,7 +125,6 @@ public class Client : MonoBehaviour
     private void UserConnected(string name, bool host)
     {
         GameClient client = new GameClient { name = name };
-
         players.Add(client);
     }
 

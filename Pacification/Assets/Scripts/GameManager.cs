@@ -38,30 +38,35 @@ public class GameManager : MonoBehaviour
 
     public void MenuHostButton()
     {
+        StartingServer();
+
+        toHosting.SetActive(false);
+        hostMenu.SetActive(true);
+    }
+
+    public void StartingServer(bool isAlone = false)
+    {
         try
         {
             Server server = Instantiate(serverPrefab).GetComponent<Server>();
             server.Init();
 
-            server.playerNumber = (int)numberOfPlayerSlider.value;
+            server.playerNumber = isAlone ? 1:(int)numberOfPlayerSlider.value;
 
             Client client = Instantiate(clientPrefab).GetComponent<Client>();
             client.clientName = nameInputHost.text;
             client.isHost = true;
 
-            if (client.clientName == "")
+            if(client.clientName == "")
             {
                 client.clientName = "Host";
             }
             client.ConnectToServer(Server.Localhost, Server.Port);
         }
-        catch (Exception e)
+        catch(Exception e)
         {
             Debug.Log(e.Message);
         }
-
-        toHosting.SetActive(false);
-        hostMenu.SetActive(true);
     }
 
     public void ConnectToServerButton()
@@ -126,6 +131,7 @@ public class GameManager : MonoBehaviour
 
     public void SoloButton()
     {
+        StartingServer(true);
         SceneManager.LoadScene("Map");
     }
 

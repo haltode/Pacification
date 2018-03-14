@@ -15,7 +15,6 @@ public class HexMapEditor : MonoBehaviour
     int activeElevation;
     int activeFeature;
     bool applyElevation;
-    int brushSize;
 
     bool editMode;
     bool isDrag;
@@ -59,7 +58,7 @@ public class HexMapEditor : MonoBehaviour
                 isDrag = false;
 
             if(editMode)
-                EditCells(currentCell);
+                EditCell(currentCell);
             // Pathfinding (searching + showing the path between cells)
             else if(Input.GetKey(KeyCode.LeftShift) && searchToCell != currentCell)
             {
@@ -101,96 +100,36 @@ public class HexMapEditor : MonoBehaviour
         isDrag = false;
     }
 
-    void EditCells(HexCell center)
-    {
-        int centerX = center.coordinates.X;
-        int centerZ = center.coordinates.Z;
-
-        EditCell(center);
-
-        for(int r = 0, z = centerZ - brushSize; z <= centerZ; ++z, ++r)
-            for(int x = centerX - r; x <= centerX + brushSize; ++x)
-                EditCellWithBrush(hexGrid.GetCell(new HexCoordinates(x, z)));
-
-        for(int r = 0, z = centerZ + brushSize; z > centerZ; --z, ++r)
-            for(int x = centerX - brushSize; x <= centerX + r; ++x)
-                EditCellWithBrush(hexGrid.GetCell(new HexCoordinates(x, z)));
-    }
-
-
-    void EditCellWithBrush(HexCell cell)
-    {
-        if(cell)
-        {
-            if(activeTerrainBiomeIndex >= 0)
-                cell.TerrainBiomeIndex = activeTerrainBiomeIndex;
-            if(applyElevation)
-                cell.Elevation = activeElevation;
-            if(underWaterMode == OptionalToggle.No && cell.IsUnderWater)
-                cell.IsUnderWater = false;
-            if(underWaterMode == OptionalToggle.Yes && !cell.IsUnderWater)
-                cell.IsUnderWater = true;
-            if(activeFeature > 0)
-                cell.FeatureIndex = activeFeature;
-            if(roadMode == OptionalToggle.No)
-                cell.RemoveRoads();
-            if(isDrag)
-            {
-                HexCell otherCell = cell.GetNeighbor(dragDirection.Opposite());
-                if (otherCell && roadMode == OptionalToggle.Yes)
-                    otherCell.AddRoad(dragDirection);
-            }
-        }
-    }
-
     void EditCell(HexCell cell)
     {
         if(cell)
         {
-            data = "CEDI|" + cell.coordinates.X + "." + cell.coordinates.Z + "." + brushSize + "#";
+            data = "CEDI|" + cell.coordinates.X + "." + cell.coordinates.Z + "#";
 
             if(activeTerrainBiomeIndex >= 0)
-            {
-                cell.TerrainBiomeIndex = activeTerrainBiomeIndex;
                 data += activeTerrainBiomeIndex + "#";
-            }
             else
                 data += "-1#";
 
             if(applyElevation)
-            {
-                cell.Elevation = activeElevation;
                 data += activeElevation + ".";
-            }
             else
                 data += "-1.";
 
             if (underWaterMode == OptionalToggle.No && cell.IsUnderWater)
-            {
-                cell.IsUnderWater = false;;
                 data += "0#";
-            }
-            if (underWaterMode == OptionalToggle.Yes && !cell.IsUnderWater)
-            {
-                cell.IsUnderWater = true;
+            else if (underWaterMode == OptionalToggle.Yes && !cell.IsUnderWater)
                 data += "1#";
-            }
             else
                 data += "-1#";
 
             if (activeFeature > 0)
-            {
-                cell.FeatureIndex = activeFeature;
                 data += activeFeature + "#";
-            }
             else
                 data += "-1#";
 
             if(roadMode == OptionalToggle.No)
-            {
-                cell.RemoveRoads();
                 data += "0.-1#";
-            }
             else if(roadMode == OptionalToggle.Yes)
                 data += "1.";
             else
@@ -201,7 +140,6 @@ public class HexMapEditor : MonoBehaviour
                 HexCell otherCell = cell.GetNeighbor(dragDirection.Opposite());
                 if(otherCell && roadMode == OptionalToggle.Yes)
                 {
-                    otherCell.AddRoad(dragDirection);
                     data += (int)dragDirection + "." + otherCell.coordinates.X + "." + otherCell.coordinates.Z + "#";
                 }
             }
@@ -215,27 +153,6 @@ public class HexMapEditor : MonoBehaviour
                     client.Send(data);
             }
         }
-    }
-
-    public void NetworkEditedCells(string data, int brush)
-    {
-        string[] receivedData = data.Split('#');
-        string[] position = receivedData[0].Split('.');
-        string newData = "#" + receivedData[1] + "#" + receivedData[2] + "#" + receivedData[3] + "#" + receivedData[4];
-
-        int centerX = int.Parse(position[0]);
-        int centerZ = int.Parse(position[1]);
-
-        for (int r = 0, z = centerZ - brush; z <= centerZ; ++z, ++r)
-            for (int x = centerX - r; x <= centerX + brush; ++x)
-            {
-                NetworkEditedCell(x + "." + z + newData);
-            }
-        for (int r = 0, z = centerZ + brush; z > centerZ; --z, ++r)
-            for (int x = centerX - brush; x <= centerX + r; ++x)
-            {
-                NetworkEditedCell(x + "." + z + newData);
-            }
     }
 
     public void NetworkEditedCell(string data)
@@ -301,11 +218,6 @@ public class HexMapEditor : MonoBehaviour
     public void SetApplyElevation(bool toggle)
     {
         applyElevation = toggle;
-    }
-
-    public void SetBrushSize(float size)
-    {
-        brushSize = (int) size;
     }
 
     public void SetRoadMode(int mode)

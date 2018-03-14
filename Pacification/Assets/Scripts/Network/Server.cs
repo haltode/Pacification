@@ -79,9 +79,7 @@ public class Server : MonoBehaviour
 
         string allUsers = "";
         foreach(ServerClient serverClient in clients)
-        {
             allUsers += serverClient.clientName + '|';
-        }
 
         ServerClient sc = new ServerClient(listener.EndAcceptTcpClient(ia));
         clients.Add(sc);
@@ -158,16 +156,15 @@ public class Server : MonoBehaviour
                 Broadcast("SMOV|" + receivedData[1], clients);
                 break;
 
-            case "CEDI": //Edition de la amp
+            case "CEDI":
                 Broadcast("SEDI|" + receivedData[1], clients);
                 break;
 
             case "CEND":
                 ///////// One player ended his turn, let the next one play
-                /*//*/ServerClient newActivclient = clients[0];
+                /*//*/ServerClient newActiveClient = clients[0];
                 /////////////////////
-
-                Broadcast("SYGO|", newActivclient);
+                Broadcast("SYGO|", newActiveClient);
                 break;
 
             /////// CHAT
@@ -177,7 +174,7 @@ public class Server : MonoBehaviour
 
             case "CMSP":
                 ServerClient clientMSGreceiver = clients.Find(clientMsp => clientMsp.clientName == receivedData[1]);
-                if (clientMSGreceiver != null)
+                if(clientMSGreceiver != null)
                     Broadcast("SMSP|" + client.clientName + " >> " + receivedData[2], clients.Find(clientMsp => clientMsp.clientName == receivedData[1]));
                 else
                     Broadcast("SMSE|The player receivedData[2] is unreacheable", client);

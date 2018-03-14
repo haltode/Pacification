@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using System;
+using UnityEngine;
 using UnityEngine.EventSystems;
 
 public class HexMapEditor : MonoBehaviour
@@ -123,21 +124,16 @@ public class HexMapEditor : MonoBehaviour
         {
             if(activeTerrainBiomeIndex >= 0)
                 cell.TerrainBiomeIndex = activeTerrainBiomeIndex;
-
             if(applyElevation)
                 cell.Elevation = activeElevation;
-
             if(underWaterMode == OptionalToggle.No && cell.IsUnderWater)
                 cell.IsUnderWater = false;
             if(underWaterMode == OptionalToggle.Yes && !cell.IsUnderWater)
                 cell.IsUnderWater = true;
-
             if(activeFeature > 0)
                 cell.FeatureIndex = activeFeature;
-
             if(roadMode == OptionalToggle.No)
                 cell.RemoveRoads();
-
             if(isDrag)
             {
                 HexCell otherCell = cell.GetNeighbor(dragDirection.Opposite());
@@ -164,16 +160,23 @@ public class HexMapEditor : MonoBehaviour
             if(applyElevation)
             {
                 cell.Elevation = activeElevation;
-                data += activeElevation + "#";
+                data += activeElevation + ".";
+            }
+            else
+                data += "-1.";
+
+            if (underWaterMode == OptionalToggle.No && cell.IsUnderWater)
+            {
+                cell.IsUnderWater = false;;
+                data += "0#";
+            }
+            if (underWaterMode == OptionalToggle.Yes && !cell.IsUnderWater)
+            {
+                cell.IsUnderWater = true;
+                data += "1#";
             }
             else
                 data += "-1#";
-
-            // TODO: network
-            if (underWaterMode == OptionalToggle.No && cell.IsUnderWater)
-                cell.IsUnderWater = false;
-            if (underWaterMode == OptionalToggle.Yes && !cell.IsUnderWater)
-                cell.IsUnderWater = true;
 
             if (activeFeature > 0)
             {
@@ -247,15 +250,19 @@ public class HexMapEditor : MonoBehaviour
         if(cell)
         {
             string[] road = receivedData[4].Split('.');
+            string[] state = receivedData[2].Split('.');
             int newBiomeIndex = int.Parse(receivedData[1]);
-            int newElevation = int.Parse(receivedData[2]);
+            int newElevation = int.Parse(state[0]);
+            int newWater = int.Parse(state[1]);
             int newFeature = int.Parse(receivedData[3]);
 
             if(newBiomeIndex != -1)
                 cell.TerrainBiomeIndex = newBiomeIndex;
             if(newElevation != -1)
                 cell.Elevation = newElevation;
-            if(newFeature != -1)
+            if (newWater != -1)
+                cell.IsUnderWater = Convert.ToBoolean(newWater);
+            if (newFeature != -1)
                 cell.FeatureIndex = newFeature;
             if(road[0] == "0")
                 cell.RemoveRoads();

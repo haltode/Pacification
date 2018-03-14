@@ -23,6 +23,7 @@ public class HexMapEditor : MonoBehaviour
     HexCell searchFromCell, searchToCell;
 
     OptionalToggle roadMode;
+    OptionalToggle underWaterMode;
 
     void Start()
     {
@@ -31,7 +32,7 @@ public class HexMapEditor : MonoBehaviour
 
     void Update()
     {
-        if (Input.GetMouseButton(0) && !EventSystem.current.IsPointerOverGameObject())
+        if(Input.GetMouseButton(0) && !EventSystem.current.IsPointerOverGameObject())
             HandleInput();
         else
             previousCell = null;
@@ -126,6 +127,11 @@ public class HexMapEditor : MonoBehaviour
             if(applyElevation)
                 cell.Elevation = activeElevation;
 
+            if(underWaterMode == OptionalToggle.No && cell.IsUnderWater)
+                cell.IsUnderWater = false;
+            if(underWaterMode == OptionalToggle.Yes && !cell.IsUnderWater)
+                cell.IsUnderWater = true;
+
             if(activeFeature > 0)
                 cell.FeatureIndex = activeFeature;
 
@@ -163,7 +169,13 @@ public class HexMapEditor : MonoBehaviour
             else
                 data += "-1#";
 
-            if(activeFeature > 0)
+            // TODO: network
+            if (underWaterMode == OptionalToggle.No && cell.IsUnderWater)
+                cell.IsUnderWater = false;
+            if (underWaterMode == OptionalToggle.Yes && !cell.IsUnderWater)
+                cell.IsUnderWater = true;
+
+            if (activeFeature > 0)
             {
                 cell.FeatureIndex = activeFeature;
                 data += activeFeature + "#";
@@ -292,5 +304,10 @@ public class HexMapEditor : MonoBehaviour
     public void SetRoadMode(int mode)
     {
         roadMode = (OptionalToggle) mode;
+    }
+
+    public void SetUnderWaterMode(int mode)
+    {
+        underWaterMode = (OptionalToggle) mode;
     }
 }

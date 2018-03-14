@@ -14,6 +14,7 @@ public class HexCell : MonoBehaviour
 
     int terrainBiomeIndex;
     int elevation = int.MinValue;
+    bool isUnderWater;
     int featureIndex;
 
     int distance;
@@ -116,6 +117,19 @@ public class HexCell : MonoBehaviour
         return GetElevationDifference(direction) <= HexMetrics.MaxElevationReach;
     }
 
+    public bool IsUnderWater
+    {
+        get { return isUnderWater; }
+        set
+        {
+            if(isUnderWater == value)
+                return;
+
+            isUnderWater = value;
+            Refresh();
+        }
+    }
+
     public int FeatureIndex
     {
         get { return featureIndex; }
@@ -154,6 +168,7 @@ public class HexCell : MonoBehaviour
         // Use byte to save space since we stay inside range [0; 255]
         writer.Write((byte) terrainBiomeIndex);
         writer.Write((byte) elevation);
+        writer.Write(isUnderWater);
         writer.Write((byte) featureIndex);
 
         // Again we save space by encoding the boolean array inside a single int
@@ -168,6 +183,7 @@ public class HexCell : MonoBehaviour
     {
         terrainBiomeIndex = reader.ReadByte();
         elevation = reader.ReadByte();
+        isUnderWater = reader.ReadBoolean();
         RefreshPosition();
         featureIndex = reader.ReadByte();
 

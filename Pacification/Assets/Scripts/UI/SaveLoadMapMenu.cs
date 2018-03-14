@@ -5,7 +5,7 @@ using System.IO;
 
 public class SaveLoadMapMenu : MonoBehaviour
 {
-    public const int MapFormatVersion = 1;
+    public const int MapFormatVersion = 2;
 
     public HexGrid hexGrid;
 

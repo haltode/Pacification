@@ -7,6 +7,7 @@ public class HexGridChunk : MonoBehaviour
     Canvas gridCanvas;
 
     public HexMesh terrain;
+    public HexMesh water;
     public HexMesh roads;
     public HexFeatureManager features;
 
@@ -48,11 +49,13 @@ public class HexGridChunk : MonoBehaviour
     public void Triangulate()
     {
         terrain.Clear();
+        water.Clear();
         roads.Clear();
         features.Clear();
         for(int i = 0; i < cells.Length; ++i)
             Triangulate(cells[i]);
         terrain.Apply();
+        water.Apply();
         roads.Apply();
         features.Apply();
     }
@@ -78,6 +81,9 @@ public class HexGridChunk : MonoBehaviour
         terrain.AddTriangleTerrainBiomes(biomes);
 
         TriangulateConnection(cell, v1, v2, dir);
+
+        if(cell.IsUnderWater)
+            TriangulateWater(cell, center, dir);
     }
 
     void TriangulateConnection(HexCell cell, Vector3 v1, Vector3 v2, HexDirection dir)
@@ -179,6 +185,34 @@ public class HexGridChunk : MonoBehaviour
         {
             roads.AddTriangle(center, middleLeft, middleRight);
             roads.AddTriangleUV(new Vector3(1f, 0f), new Vector2(0f, 0f), new Vector2(0f, 0f));
+        }
+    }
+
+    void TriangulateWater(HexCell cell, Vector3 center, HexDirection dir)
+    {
+        center.y = HexMetrics.WaterElevationOffset * HexMetrics.ElevationStep;
+        Vector3 c1 = center + HexMetrics.GetFirstSolidCorner(dir);
+        Vector3 c2 = center + HexMetrics.GetSecondSolidCorner(dir);
+
+        water.AddTriangle(center, c1, c2);
+
+        if(dir <= HexDirection.SE)
+        {
+            HexCell neighbor = cell.GetNeighbor(dir);
+            if(neighbor == null || !neighbor.IsUnderWater)
+                return;
+            Vector3 bridge = HexMetrics.GetBridge(dir);
+            Vector3 e1 = c1 + bridge;
+            Vector3 e2 = c2 + bridge;
+            water.AddQuad(c1, c2, e1, e2);
+
+            if(dir <= HexDirection.E)
+            {
+                HexCell nextNeighbor = cell.GetNeighbor(dir.Next());
+                if(nextNeighbor == null || !nextNeighbor.IsUnderWater)
+                    return;
+                water.AddTriangle(c2, e2, c2 + HexMetrics.GetBridge(dir.Next()));
+            }
         }
     }
 }

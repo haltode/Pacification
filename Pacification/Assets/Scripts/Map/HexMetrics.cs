@@ -11,7 +11,9 @@ public static class HexMetrics
     public const float ElevationStep = 5f;
     public const int MaxElevationReach = 1;
 
-    public const int hashGrideSize = 256;
+    public const float WaterElevationOffset = 0.5f;
+
+    public const int HashGrideSize = 256;
     static float[] hashGrid;
 
     // Blending colored regions factors
@@ -57,7 +59,7 @@ public static class HexMetrics
 
     public static void InitializeHashGrid(int seed)
     {
-        hashGrid = new float[hashGrideSize * hashGrideSize];
+        hashGrid = new float[HashGrideSize * HashGrideSize];
         Random.State current = Random.state;
         Random.InitState(seed);
         for(int i = 0; i < hashGrid.Length; ++i)
@@ -67,12 +69,12 @@ public static class HexMetrics
 
     public static float SampleHashGrid(Vector3 position)
     {
-        int x = (int) position.x % hashGrideSize;
+        int x = (int) position.x % HashGrideSize;
         if(x < 0)
-            x += hashGrideSize;
-        int z = (int) position.z % hashGrideSize;
+            x += HashGrideSize;
+        int z = (int) position.z % HashGrideSize;
         if(z < 0)
-            z += hashGrideSize;
-        return hashGrid[x + z * hashGrideSize];
+            z += HashGrideSize;
+        return hashGrid[x + z * HashGrideSize];
     }
 }

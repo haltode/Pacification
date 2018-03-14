@@ -1,0 +1,191 @@
+fileFormatVersion: 2
+guid: 6d0934fbc08bacc4caa4d04732694873
+timeCreated: 1521047010
+licenseType: Free
+ModelImporter:
+  serializedVersion: 22
+  fileIDToRecycleName:
+    100000: Armure
+    100002: Bouclier
+    100004: Bracelet_armure
+    100006: Bretelle_Armure
+    100008: Casque
+    100010: Corps
+    100012: "Cr\xEAte"
+    100014: Jambes_armure
+    100016: Mains
+    100018: Pieds
+    100020: //RootNode
+    100022: Tunique
+    100024: Tunique.001
+    100026: Xiphos_manche
+    400000: Armure
+    400002: Bouclier
+    400004: Bracelet_armure
+    400006: Bretelle_Armure
+    400008: Casque
+    400010: Corps
+    400012: "Cr\xEAte"
+    400014: Jambes_armure
+    400016: Mains
+    400018: Pieds
+    400020: //RootNode
+    400022: Tunique
+    400024: Tunique.001
+    400026: Xiphos_manche
+    2100000: Armure
+    2100002: Lame
+    2100004: "Cr\xEAte"
+    2100006: Manche
+    2100008: Tunique2
+    2100010: Material
+    2100012: White
+    2300000: Armure
+    2300002: Bouclier
+    2300004: Bracelet_armure
+    2300006: Bretelle_Armure
+    2300008: Casque
+    2300010: Corps
+    2300012: "Cr\xEAte"
+    2300014: Jambes_armure
+    2300016: Mains
+    2300018: Pieds
+    2300020: Tunique
+    2300022: Tunique.001
+    2300024: Xiphos_manche
+    3300000: Armure
+    3300002: Bouclier
+    3300004: Bracelet_armure
+    3300006: Bretelle_Armure
+    3300008: Casque
+    3300010: Corps
+    3300012: "Cr\xEAte"
+    3300014: Jambes_armure
+    3300016: Mains
+    3300018: Pieds
+    3300020: Tunique
+    3300022: Tunique.001
+    3300024: Xiphos_manche
+    4300000: Bouclier
+    4300002: Xiphos_manche
+    4300004: Tunique.001
+    4300006: "Cr\xEAte"
+    4300008: Casque
+    4300010: Pieds
+    4300012: Jambes_armure
+    4300014: Bracelet_armure
+    4300016: Armure
+    4300018: Bretelle_Armure
+    4300020: Tunique
+    4300022: Mains
+    4300024: Corps
+  externalObjects:
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Armure
+    second: {fileID: 2100000, guid: e038fc357b0f6d74797057c937e18266, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: "Cr\xEAte"
+    second: {fileID: 2100000, guid: cb9fa179985f46443a31cf23e29c0832, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Lame
+    second: {fileID: 2100000, guid: 385710ef9966bce428dc0acd6b9fd1ec, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Manche
+    second: {fileID: 2100000, guid: 556c743e09ba8aa4f8f25fe2f4996957, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Material
+    second: {fileID: 2100000, guid: 8000f429022dafc41b4db40635eeabb0, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: White
+    second: {fileID: 2100000, guid: 12fe1445ea3968649afb494fd6bc6973, type: 2}
+  materials:
+    importMaterials: 1
+    materialName: 0
+    materialSearch: 1
+    materialLocation: 1
+  animations:
+    legacyGenerateAnimations: 4
+    bakeSimulation: 0
+    resampleCurves: 1
+    optimizeGameObjects: 0
+    motionNodeName: 
+    rigImportErrors: 
+    rigImportWarnings: 
+    animationImportErrors: 
+    animationImportWarnings: 
+    animationRetargetingWarnings: 
+    animationDoRetargetingWarnings: 0
+    importAnimatedCustomProperties: 0
+    animationCompression: 1
+    animationRotationError: 0.5
+    animationPositionError: 0.5
+    animationScaleError: 0.5
+    animationWrapMode: 0
+    extraExposedTransformPaths: []
+    extraUserProperties: []
+    clipAnimations: []
+    isReadable: 1
+  meshes:
+    lODScreenPercentages: []
+    globalScale: 1
+    meshCompression: 0
+    addColliders: 0
+    importVisibility: 1
+    importBlendShapes: 1
+    importCameras: 1
+    importLights: 1
+    swapUVChannels: 0
+    generateSecondaryUV: 0
+    useFileUnits: 1
+    optimizeMeshForGPU: 1
+    keepQuads: 0
+    weldVertices: 1
+    preserveHierarchy: 0
+    indexFormat: 0
+    secondaryUVAngleDistortion: 8
+    secondaryUVAreaDistortion: 15.000001
+    secondaryUVHardAngle: 88
+    secondaryUVPackMargin: 4
+    useFileScale: 1
+  tangentSpace:
+    normalSmoothAngle: 60
+    normalImportMode: 0
+    tangentImportMode: 3
+    normalCalculationMode: 4
+  importAnimation: 1
+  copyAvatar: 0
+  humanDescription:
+    serializedVersion: 2
+    human: []
+    skeleton: []
+    armTwist: 0.5
+    foreArmTwist: 0.5
+    upperLegTwist: 0.5
+    legTwist: 0.5
+    armStretch: 0.05
+    legStretch: 0.05
+    feetSpacing: 0
+    rootMotionBoneName: 
+    rootMotionBoneRotation: {x: 0, y: 0, z: 0, w: 1}
+    hasTranslationDoF: 0
+    hasExtraRoot: 0
+    skeletonHasParents: 1
+  lastHumanDescriptionAvatarSource: {instanceID: 0}
+  animationType: 0
+  humanoidOversampling: 1
+  additionalBone: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

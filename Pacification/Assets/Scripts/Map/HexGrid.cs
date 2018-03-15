@@ -179,7 +179,8 @@ public class HexGrid : MonoBehaviour
             for(HexDirection dir = HexDirection.NE; dir <= HexDirection.NW; ++dir)
             {
                 HexCell neighbor = current.GetNeighbor(dir);
-                if(neighbor == null || !current.IsReachable(dir) || neighbor.Distance != int.MaxValue)
+                if(neighbor == null || neighbor.Distance != int.MaxValue ||
+                    !current.IsReachable(dir) || current.IsUnderWater)
                     continue;
 
                 // Road and flat terrains are faster than cliffs

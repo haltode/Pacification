@@ -116,14 +116,14 @@ public class HexMapEditor : MonoBehaviour
             else
                 data += "-1.";
 
-            if (underWaterMode == OptionalToggle.No && cell.IsUnderWater)
+            if(underWaterMode == OptionalToggle.No && cell.IsUnderWater)
                 data += "0#";
-            else if (underWaterMode == OptionalToggle.Yes && !cell.IsUnderWater)
+            else if(underWaterMode == OptionalToggle.Yes && !cell.IsUnderWater)
                 data += "1#";
             else
                 data += "-1#";
 
-            if (activeFeature > 0)
+            if(activeFeature > 0)
                 data += activeFeature + "#";
             else
                 data += "-1#";
@@ -177,9 +177,9 @@ public class HexMapEditor : MonoBehaviour
                 cell.TerrainBiomeIndex = newBiomeIndex;
             if(newElevation != -1)
                 cell.Elevation = newElevation;
-            if (newWater != -1)
+            if(newWater != -1)
                 cell.IsUnderWater = Convert.ToBoolean(newWater);
-            if (newFeature != -1)
+            if(newFeature != -1)
                 cell.FeatureIndex = newFeature;
             if(road[0] == "0")
                 cell.RemoveRoads();

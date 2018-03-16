@@ -74,7 +74,7 @@ public class GameManager : MonoBehaviour
         string hostAddress = GameObject.Find("HostAdressInput").GetComponent<InputField>().text;
         bool isConnected = false;
 
-        if (hostAddress == "")
+        if(hostAddress == "")
             hostAddress = Server.Localhost;
 
         Client client = Instantiate(clientPrefab).GetComponent<Client>();
@@ -85,7 +85,7 @@ public class GameManager : MonoBehaviour
             {
                 client.clientName = nameInput.text;
 
-                if (client.clientName == "")
+                if(client.clientName == "")
                 {
                     System.Random rnd = new System.Random();
                     client.clientName = "Player" + (rnd.Next(1000, 10000));
@@ -100,7 +100,7 @@ public class GameManager : MonoBehaviour
             Debug.Log(e.Message);
         }
 
-        if (!isConnected)
+        if(!isConnected)
             Destroy(client.gameObject);
     }
 
@@ -112,14 +112,14 @@ public class GameManager : MonoBehaviour
         connectionMenu.SetActive(true);
 
         Server server = FindObjectOfType<Server>();
-        if (server != null)
+        if(server != null)
         {
             server.server.Stop();
             Destroy(server.gameObject);
         }
 
         Client client = FindObjectOfType<Client>();
-        if (client != null)
+        if(client != null)
             Destroy(client.gameObject);
     }
 

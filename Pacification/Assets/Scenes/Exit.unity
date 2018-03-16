@@ -124,7 +124,6 @@ GameObject:
   - component: {fileID: 203819004}
   - component: {fileID: 203819003}
   - component: {fileID: 203819002}
-  - component: {fileID: 203819001}
   m_Layer: 5
   m_Name: No
   m_TagString: Untagged
@@ -151,17 +150,6 @@ RectTransform:
   m_AnchoredPosition: {x: -95, y: 1}
   m_SizeDelta: {x: 160, y: 30}
   m_Pivot: {x: 0.5, y: 0.5}
---- !u!114 &203819001
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 203818999}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: c2734de995142674c8abe24ce241f7d0, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!114 &203819002
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -202,7 +190,7 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 1970059113}
-        m_MethodName: BackMenu
+        m_MethodName: CancelQuitting
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -549,7 +537,6 @@ GameObject:
   - component: {fileID: 1543136859}
   - component: {fileID: 1543136858}
   - component: {fileID: 1543136857}
-  - component: {fileID: 1543136856}
   m_Layer: 5
   m_Name: Yes
   m_TagString: Untagged
@@ -576,17 +563,6 @@ RectTransform:
   m_AnchoredPosition: {x: 76, y: 1}
   m_SizeDelta: {x: 160, y: 30}
   m_Pivot: {x: 0.5, y: 0.5}
---- !u!114 &1543136856
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 1543136854}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: c2734de995142674c8abe24ce241f7d0, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!114 &1543136857
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -852,7 +828,7 @@ GameObject:
   - component: {fileID: 1970059114}
   - component: {fileID: 1970059113}
   m_Layer: 5
-  m_Name: GameKiller
+  m_Name: ButtonManager
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -866,7 +842,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 1970059112}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: c2734de995142674c8abe24ce241f7d0, type: 3}
+  m_Script: {fileID: 11500000, guid: b61c9bc944131764197765454900adae, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
 --- !u!224 &1970059114

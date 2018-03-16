@@ -16,10 +16,12 @@ public class Client : MonoBehaviour
     private NetworkStream stream;
     private StreamWriter writer;
     private StreamReader reader;
+    private HexMapEditor mapEditor; 
 
     private void Start()
     {
         DontDestroyOnLoad(gameObject);
+
     }
 
     public bool ConnectToServer(string host, int port)
@@ -76,7 +78,7 @@ public class Client : MonoBehaviour
                 break;
 
             case "SEDI":
-                HexMapEditor mapEditor = FindObjectOfType<HexMapEditor>();
+                mapEditor = FindObjectOfType<HexMapEditor>(); // Move to received map
                 mapEditor.NetworkEditedCell(receivedData[1]);
                 break;
 

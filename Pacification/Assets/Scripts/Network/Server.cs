@@ -42,7 +42,7 @@ public class Server : MonoBehaviour
         if(!isServerStarted)
             return;
 
-        for (int i = clients.Count - 1; i >= 0; --i)
+        for(int i = clients.Count - 1; i >= 0; --i)
         {
             if(!IsConnected(clients[i].tcp))
             {
@@ -127,7 +127,7 @@ public class Server : MonoBehaviour
             }
         }
 
-        if (!isGameStarted && clients.Count == playerNumber)
+        if(!isGameStarted && clients.Count == playerNumber)
         {
             Debug.Log("Sending Map");
 

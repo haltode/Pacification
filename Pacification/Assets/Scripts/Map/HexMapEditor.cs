@@ -15,9 +15,9 @@ public class HexMapEditor : MonoBehaviour
     int activeElevation;
     int activeFeature;
     bool applyElevation;
-
     bool editMode;
     bool isDrag;
+
     HexDirection dragDirection;
     HexCell previousCell;
     HexCell searchFromCell, searchToCell;
@@ -27,8 +27,8 @@ public class HexMapEditor : MonoBehaviour
 
     void Start()
     {
-        client = FindObjectOfType<Client>();
         hexGrid = FindObjectOfType<HexGrid>();
+        client = FindObjectOfType<Client>();
     }
 
     void Update()

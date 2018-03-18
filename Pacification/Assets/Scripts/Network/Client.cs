@@ -122,7 +122,7 @@ public class Client : MonoBehaviour
                 break;
 
             case "SMAP":
-                MapSender mapLoader = FindObjectOfType<MapSender>();
+                MapSenderReceiver mapLoader = FindObjectOfType<MapSenderReceiver>();
                 mapLoader.StartGame(receivedData[1]);
                 break;
         }
@@ -144,7 +144,7 @@ public class Client : MonoBehaviour
         CloseSocket();
     }
 
-    private void CloseSocket()
+    public void CloseSocket()
     {
         if(!isSocketStarted)
             return;

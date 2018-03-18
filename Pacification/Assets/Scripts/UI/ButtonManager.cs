@@ -26,6 +26,8 @@ public class ButtonManager : MonoBehaviour {
 
         HexMapCamera hexCam = FindObjectOfType<HexMapCamera>();
         Destroy(hexCam.gameObject);
+
+        Destroy(GameObject.Find("GameManager"));
     }
 
     public void Quit()
@@ -36,6 +38,7 @@ public class ButtonManager : MonoBehaviour {
 
     public void CancelQuitting()
     {
+        Destroy(GameObject.Find("GameManager"));
         SceneManager.LoadScene("Menu");
     }
 }

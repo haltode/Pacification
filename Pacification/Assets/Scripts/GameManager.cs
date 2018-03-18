@@ -9,15 +9,15 @@ public class GameManager : MonoBehaviour
     public static GameManager Instance { set; get; }
 
     public GameObject connectionMenu;
-    public GameObject hostMenu;
-    public GameObject toHosting;
+    public GameObject waiting;
+    public GameObject host;
     public GameObject joinMenu;
 
     public GameObject serverPrefab;
     public GameObject clientPrefab;
 
     public InputField nameInput;
-    public InputField nameInputHost;
+    public InputField nameHostInput;
 
     public Slider numberOfPlayerSlider;
     public HexGrid hexGrid;
@@ -25,24 +25,10 @@ public class GameManager : MonoBehaviour
     private void Start()
     {
         Instance = this;
-        hostMenu.SetActive(false);
-        toHosting.SetActive(false);
+        waiting.SetActive(false);
+        host.SetActive(false);
         joinMenu.SetActive(false);
         DontDestroyOnLoad(gameObject);
-    }
-
-    public void MenuJoinButton()
-    {
-        connectionMenu.SetActive(false);
-        joinMenu.SetActive(true);
-    }
-
-    public void MenuHostButton()
-    {
-        StartingServer();
-
-        toHosting.SetActive(false);
-        hostMenu.SetActive(true);
     }
 
     public void StartingServer(bool isAlone = false)
@@ -52,10 +38,10 @@ public class GameManager : MonoBehaviour
             Server server = Instantiate(serverPrefab).GetComponent<Server>();
             server.Init();
 
-            server.playerNumber = isAlone ? 1:(int)numberOfPlayerSlider.value;
+            server.playerNumber = isAlone ? 1 : (int)numberOfPlayerSlider.value;
 
             Client client = Instantiate(clientPrefab).GetComponent<Client>();
-            client.clientName = nameInputHost.text;
+            client.clientName = nameHostInput.text;
             client.isHost = true;
 
             if(client.clientName == "")
@@ -70,7 +56,32 @@ public class GameManager : MonoBehaviour
         }
     }
 
-    public void ConnectToServerButton()
+    public void MainMenuSoloButton()
+    {
+        StartingServer(true);
+    }
+
+    public void MainMenuHostButton()
+    {
+        host.SetActive(true);
+        connectionMenu.SetActive(false);
+    }
+
+    public void MainMenuStartingServerButton()
+    {
+        StartingServer();
+
+        host.SetActive(false);
+        waiting.SetActive(true);
+    }
+
+    public void MainMenuJoinButton()
+    {
+        connectionMenu.SetActive(false);
+        joinMenu.SetActive(true);
+    }
+
+    public void MainMenuConnectToServerButton()
     {
         string hostAddress = GameObject.Find("HostAdressInput").GetComponent<InputField>().text;
         bool isConnected = false;
@@ -94,9 +105,12 @@ public class GameManager : MonoBehaviour
 
                 connectionMenu.SetActive(false);
                 isConnected = true;
+
+                joinMenu.SetActive(false);
+                waiting.SetActive(true);
             }
         }
-        catch (Exception e)
+        catch(Exception e)
         {
             Debug.Log(e.Message);
         }
@@ -105,10 +119,10 @@ public class GameManager : MonoBehaviour
             Destroy(client.gameObject);
     }
 
-    public void BackButton()
+    public void MainMenuBackButton()
     {
-        hostMenu.SetActive(false);
-        toHosting.SetActive(false);
+        waiting.SetActive(false);
+        host.SetActive(false);
         joinMenu.SetActive(false);
         connectionMenu.SetActive(true);
 
@@ -121,21 +135,10 @@ public class GameManager : MonoBehaviour
 
         Client client = FindObjectOfType<Client>();
         if(client != null)
-            Destroy(client.gameObject);
+            Destroy(client.gameObject);  
     }
 
-    public void MenutoHostingButton()
-    {
-        toHosting.SetActive(true);
-        connectionMenu.SetActive(false);
-    }
-
-    public void SoloButton()
-    {
-        StartingServer(true);
-    }
-
-    public void ExitButton()
+    public void MainMenuExitButton()
     {
         SceneManager.LoadScene("Exit");
     }

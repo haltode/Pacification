@@ -6,9 +6,6 @@ using System.IO;
 public class SaveLoadMapMenu : MonoBehaviour
 {
     public const int MapFormatVersion = 2;
-
-    public HexGrid hexGrid;
-
     private bool saveMode;
 
     public Text menuLabel, actionButtonLabel;
@@ -19,7 +16,6 @@ public class SaveLoadMapMenu : MonoBehaviour
 
     public void Open(bool saveMode)
     {
-        hexGrid = FindObjectOfType<HexGrid>();
         this.saveMode = saveMode;
         if(saveMode)
         {
@@ -58,6 +54,8 @@ public class SaveLoadMapMenu : MonoBehaviour
 
     public void Save(string path)
     {
+        HexGrid hexGrid = FindObjectOfType<HexGrid>();
+
         using(BinaryWriter writer = new BinaryWriter(File.Open(path, FileMode.Create)))
         {
             writer.Write(MapFormatVersion);
@@ -67,6 +65,8 @@ public class SaveLoadMapMenu : MonoBehaviour
 
     public void Load(string path)
     {
+        HexGrid hexGrid = FindObjectOfType<HexGrid>();
+
         if(!File.Exists(path))
         {
             Debug.LogError("File does not exist " + path);

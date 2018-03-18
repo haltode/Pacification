@@ -20,6 +20,7 @@ public class HexGrid : MonoBehaviour
 
     void Awake()
     {
+        DontDestroyOnLoad(gameObject);
         HexMetrics.InitializeHashGrid(seed);
         CreateMap(cellCountX, cellCountZ);
     }

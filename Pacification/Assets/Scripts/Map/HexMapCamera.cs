@@ -25,9 +25,11 @@ public class HexMapCamera : MonoBehaviour
 
     void Awake()
     {
+        grid = FindObjectOfType<HexGrid>();
         instance = this;
         swivel = transform.GetChild(0);
         stick = swivel.GetChild(0);
+        DontDestroyOnLoad(gameObject);
     }
 
     void Update()

@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.IO;
 using System.Net.Sockets;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class Client : MonoBehaviour
 {
@@ -16,12 +17,12 @@ public class Client : MonoBehaviour
     private NetworkStream stream;
     private StreamWriter writer;
     private StreamReader reader;
+
     private HexMapEditor mapEditor; 
 
     private void Start()
     {
         DontDestroyOnLoad(gameObject);
-
     }
 
     public bool ConnectToServer(string host, int port)
@@ -40,7 +41,7 @@ public class Client : MonoBehaviour
         }
         catch(Exception e)
         {
-            Debug.Log("Socket error : " + e.Message);
+            Debug.Log(e.Message);
         }
 
         return isSocketStarted;
@@ -104,8 +105,6 @@ public class Client : MonoBehaviour
                 for(int i = 1; i < receivedData.Length - 1; ++i)
                     UserConnected(receivedData[i], false);
 
-                Debug.Log("Client " + clientName + " send: " + clientName + "#" + ((isHost) ? 1 : 0).ToString() );
-
                 Send("CIAM|" + clientName + "#" + ((isHost)? 1:0).ToString());
                 break;
 
@@ -118,8 +117,13 @@ public class Client : MonoBehaviour
                 // One user has disconnected
                 break;
 
+            case "SLOD":
+                SceneManager.LoadScene("Loading");
+                break;
+
             case "SMAP":
-                GameManager.Instance.StartGame(receivedData[1]);
+                MapSender mapLoader = FindObjectOfType<MapSender>();
+                mapLoader.StartGame(receivedData[1]);
                 break;
         }
     }

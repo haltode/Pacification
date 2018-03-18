@@ -5,7 +5,10 @@ licenseType: Free
 MonoImporter:
   externalObjects: {}
   serializedVersion: 2
-  defaultReferences: []
+  defaultReferences:
+  - hexGrid: {instanceID: 0}
+  - hexGridPrefab: {fileID: 1502149063926496, guid: 40a2dca1fed4b094d8bb6ed0f35c5897,
+      type: 2}
   executionOrder: 0
   icon: {instanceID: 0}
   userData: 

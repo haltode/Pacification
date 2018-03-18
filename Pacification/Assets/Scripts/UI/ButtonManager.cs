@@ -20,6 +20,12 @@ public class ButtonManager : MonoBehaviour {
             Destroy(client.gameObject);
         }
         SceneManager.LoadScene("Menu");
+
+        HexGrid hexGrid= FindObjectOfType<HexGrid>();
+        Destroy(hexGrid.gameObject);
+
+        HexMapCamera hexCam = FindObjectOfType<HexMapCamera>();
+        Destroy(hexCam.gameObject);
     }
 
     public void Quit()

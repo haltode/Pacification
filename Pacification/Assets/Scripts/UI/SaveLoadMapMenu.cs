@@ -19,6 +19,7 @@ public class SaveLoadMapMenu : MonoBehaviour
 
     public void Open(bool saveMode)
     {
+        hexGrid = FindObjectOfType<HexGrid>();
         this.saveMode = saveMode;
         if(saveMode)
         {
@@ -102,6 +103,11 @@ public class SaveLoadMapMenu : MonoBehaviour
         if(mapName.Length == 0)
             return null;
         return Path.Combine(Application.persistentDataPath, mapName + ".map");
+    }
+
+    public string GetTempPath()
+    {
+        return Path.Combine(Application.persistentDataPath, "temp");
     }
 
     public void SelectItem(string name)

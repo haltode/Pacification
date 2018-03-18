@@ -1,13 +1,11 @@
 fileFormatVersion: 2
-guid: 563822def0d2305409c8b66a61bc28b1
-timeCreated: 1518262685
+guid: 4df03011a91ca084da9b82a54bcc3d8a
+timeCreated: 1521366882
 licenseType: Free
 MonoImporter:
   externalObjects: {}
   serializedVersion: 2
-  defaultReferences:
-  - hexGridPrefab: {fileID: 1502149063926496, guid: 40a2dca1fed4b094d8bb6ed0f35c5897,
-      type: 2}
+  defaultReferences: []
   executionOrder: 0
   icon: {instanceID: 0}
   userData: 

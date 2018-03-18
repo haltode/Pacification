@@ -20,6 +20,7 @@ public class GameManager : MonoBehaviour
     public InputField nameInputHost;
 
     public Slider numberOfPlayerSlider;
+    public HexGrid hexGrid;
 
     private void Start()
     {
@@ -132,16 +133,10 @@ public class GameManager : MonoBehaviour
     public void SoloButton()
     {
         StartingServer(true);
-        SceneManager.LoadScene("Map");
     }
 
     public void ExitButton()
     {
         SceneManager.LoadScene("Exit");
-    }
-
-    public void StartGame(string map)
-    {
-        SceneManager.LoadScene("Map");
     }
 }

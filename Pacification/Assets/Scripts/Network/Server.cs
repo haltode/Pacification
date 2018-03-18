@@ -14,7 +14,7 @@ public class Server : MonoBehaviour
     private bool isGameStarted;
     private bool isServerStarted;
 
-    private List<ServerClient> clients;
+    public List<ServerClient> clients;
     public TcpListener server;
 
     public void Init()
@@ -33,7 +33,7 @@ public class Server : MonoBehaviour
         }
         catch(Exception e)
         {
-            Debug.Log("Socket error: " + e.Message);
+            Debug.Log(e.Message);
         }
     }
 
@@ -86,8 +86,6 @@ public class Server : MonoBehaviour
 
         StartListening();
 
-        Debug.Log("Server send : SWHO|" + allUsers + " to " + clients[clients.Count - 1]);
-
         Broadcast("SWHO|"+ allUsers, clients[clients.Count - 1]);
     }
 
@@ -111,7 +109,7 @@ public class Server : MonoBehaviour
         }
     }
 
-    private void Broadcast(string data, List<ServerClient> clientList)
+    public void Broadcast(string data, List<ServerClient> clientList)
     {
         foreach(ServerClient client in clientList)
         {
@@ -129,14 +127,8 @@ public class Server : MonoBehaviour
 
         if(!isGameStarted && clients.Count == playerNumber)
         {
-            Debug.Log("Sending Map");
-
             isGameStarted = true;
-
-            //string map = File.ReadAllText("save/temp");
-            string map = "empty_map_for_now";
-
-            Broadcast("SMAP|" + map, clients);
+            Broadcast("SLOD", clients);
         }
     }
     private void Broadcast(string data, ServerClient client)
@@ -182,8 +174,6 @@ public class Server : MonoBehaviour
 
             /////// REGISTER A CLIENT
             case "CIAM":
-
-                Debug.Log("Server send : SCNN|" + receivedData[1] + " to all clients");
 
                 string[] clientStatus = receivedData[1].Split('#');
                 client.clientName = clientStatus[0];

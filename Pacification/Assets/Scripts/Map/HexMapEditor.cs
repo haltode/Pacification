@@ -28,6 +28,7 @@ public class HexMapEditor : MonoBehaviour
     void Start()
     {
         client = FindObjectOfType<Client>();
+        hexGrid = FindObjectOfType<HexGrid>();
     }
 
     void Update()

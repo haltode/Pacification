@@ -616,6 +616,7 @@ MonoBehaviour:
   nameInput: {fileID: 1774555081}
   nameInputHost: {fileID: 1087557008}
   numberOfPlayerSlider: {fileID: 31729889}
+  hexGrid: {fileID: 0}
 --- !u!4 &153351993
 Transform:
   m_ObjectHideFlags: 0

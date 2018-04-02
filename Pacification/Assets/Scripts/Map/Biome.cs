@@ -31,11 +31,26 @@ public class Biome
     }
 
     private Biomes type;
-    private bool canAccess;
     private int viewRange;
     private float speedMult;
-    private bool canBuildCity;
-    private List<RessourceTypes> ressources;
+    private List<RessourceTypes> ressources; //Types de ressources POSSIBLE pour le biome, d'où la présence du NONE à chaque fois
+
+    /*
+    private System.Object[] values = new System.Object[]
+    {
+        // [type, viewRange, speedMult, ressources]
+        new System.Object[] {Biomes.GRASSY_PLAIN, 3, 1f, RessourceTypes.NONE, RessourceTypes.ANIMALS, RessourceTypes.FOOD},
+        new System.Object[] {Biomes.GRASSY_HILL, 5, 1f, RessourceTypes.NONE, RessourceTypes.STONE, RessourceTypes.STEEL, RessourceTypes.GOLD},
+        new System.Object[] {Biomes.SNOWY_PLAIN, 3, 1f, RessourceTypes.NONE, RessourceTypes.ANIMALS},
+        new System.Object[] {Biomes.SNOWY_HILL, 5, 1f, RessourceTypes.NONE, RessourceTypes.STONE, RessourceTypes.STEEL, RessourceTypes.GOLD},
+        new System.Object[] {Biomes.DESERT_PLAIN, 3, 1f, RessourceTypes.NONE},
+        new System.Object[] {Biomes.DESERT_HILL, 5, 1f, RessourceTypes.NONE, RessourceTypes.STONE, RessourceTypes.STEEL, RessourceTypes.GOLD},
+        new System.Object[] {Biomes.FOREST, 1, 0.5f, RessourceTypes.NONE, RessourceTypes.ANIMALS, RessourceTypes.WOOD},
+        new System.Object[] {Biomes.ROCKY_MOUNTAIN, 4, 0.5f, RessourceTypes.NONE, RessourceTypes.STONE, RessourceTypes.GOLD, RessourceTypes.DIAMOND},
+        new System.Object[] {Biomes.SNOWY_MOUNTAIN, 0, 0f, RessourceTypes.NONE},
+        new System.Object[] {Biomes.OCEAN, 0, 0f, RessourceTypes.NONE},
+    };
+    */
 
     public Biome (Biomes type)
     {
@@ -46,8 +61,7 @@ public class Biome
         {
             viewRange = 3;
             speedMult = 1f;
-            canAccess = true;
-            canBuildCity = true;
+            ressources.Add(RessourceTypes.NONE);
             ressources.Add(RessourceTypes.ANIMALS);
             ressources.Add(RessourceTypes.FOOD);
         }
@@ -55,8 +69,7 @@ public class Biome
         {
             viewRange = 5;
             speedMult = 1f;
-            canAccess = true;
-            canBuildCity = true;
+            ressources.Add(RessourceTypes.NONE);
             ressources.Add(RessourceTypes.STONE);
             ressources.Add(RessourceTypes.STEEL);
             ressources.Add(RessourceTypes.GOLD);
@@ -65,16 +78,14 @@ public class Biome
         {
             viewRange = 3;
             speedMult = 1f;
-            canAccess = true;
-            canBuildCity = true;
+            ressources.Add(RessourceTypes.NONE);
             ressources.Add(RessourceTypes.ANIMALS);
         }
         else if(type == Biomes.SNO_HI)
         {
             viewRange = 5;
             speedMult = 1f;
-            canAccess = true;
-            canBuildCity = true;
+            ressources.Add(RessourceTypes.NONE);
             ressources.Add(RessourceTypes.STONE);
             ressources.Add(RessourceTypes.STEEL);
             ressources.Add(RessourceTypes.GOLD);
@@ -83,16 +94,13 @@ public class Biome
         {
             viewRange = 3;
             speedMult = 1f;
-            canAccess = true;
-            canBuildCity = true;
             ressources.Add(RessourceTypes.NONE);
         }
         else if(type == Biomes.DES_HI)
         {
             viewRange = 5;
             speedMult = 1f;
-            canAccess = true;
-            canBuildCity = true;
+            ressources.Add(RessourceTypes.NONE);
             ressources.Add(RessourceTypes.STONE);
             ressources.Add(RessourceTypes.STEEL);
             ressources.Add(RessourceTypes.GOLD);
@@ -101,8 +109,7 @@ public class Biome
         {
             viewRange = 1;
             speedMult = 0.5f;
-            canAccess = true;
-            canBuildCity = false;
+            ressources.Add(RessourceTypes.NONE);
             ressources.Add(RessourceTypes.ANIMALS);
             ressources.Add(RessourceTypes.WOOD);
         }
@@ -110,8 +117,7 @@ public class Biome
         {
             viewRange = 4;
             speedMult = 0.5f;
-            canAccess = true;
-            canBuildCity = false;
+            ressources.Add(RessourceTypes.NONE);
             ressources.Add(RessourceTypes.STONE);
             ressources.Add(RessourceTypes.GOLD);
             ressources.Add(RessourceTypes.DIAMOND);
@@ -120,16 +126,12 @@ public class Biome
         {
             viewRange = 0;
             speedMult = 0f;
-            canAccess = false;
-            canBuildCity = false;
             ressources.Add(RessourceTypes.NONE);
         }
         else if(type == Biomes.OCEAN)
         {
             viewRange = 0;
             speedMult = 0f;
-            canAccess = false;
-            canBuildCity = false;
             ressources.Add(RessourceTypes.NONE);
         }
     }
@@ -137,11 +139,6 @@ public class Biome
     public Biomes Type
     {
         get { return type; }
-    }
-
-    public bool CanAccess
-    {
-        get { return canAccess; }
     }
 
     public int ViewRange
@@ -154,13 +151,18 @@ public class Biome
         get { return speedMult; }
     }
 
-    public bool CanBuildCity
-    {
-        get { return canBuildCity; }
-    }
-
     public List<RessourceTypes> Ressources
     {
         get { return ressources; }
+    }
+
+    public bool CanAccess()
+    {
+        return !(type == Biomes.OCEAN || type == Biomes.SNO_MO);
+    }
+
+    public bool CanBuildCity()
+    {
+        return CanAccess() && !(type == Biomes.FOREST || type == Biomes.ROC_MO);
     }
 }

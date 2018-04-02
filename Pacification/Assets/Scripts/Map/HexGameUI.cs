@@ -26,6 +26,7 @@ public class HexGameUI : MonoBehaviour
 
     public void SetEditMode(bool toggle)
     {
+        grid = FindObjectOfType<HexGrid>();
         enabled = !toggle;
         grid.ShowUI(!toggle);
         grid.ClearPath();
@@ -52,6 +53,7 @@ public class HexGameUI : MonoBehaviour
 
     void DoPathfinding()
     {
+        grid = FindObjectOfType<HexGrid>();
         if(UpdateCurrentCell())
         {
             if(currentCell && selectedUnit.IsValidDestination(currentCell))

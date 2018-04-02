@@ -92,7 +92,7 @@ public class HexMapEditor : MonoBehaviour
     {
         if(cell)
         {
-            data = "CEDI|" + cell.coordinates.X + "." + cell.coordinates.Z + "#";
+            data = cell.coordinates.X + "." + cell.coordinates.Z + "#";
 
             if(activeTerrainBiomeIndex >= 0)
                 data += activeTerrainBiomeIndex + "#";
@@ -138,7 +138,9 @@ public class HexMapEditor : MonoBehaviour
             {
                 previousData = data;
                 if(FindObjectOfType<Client>())
-                    client.Send(data);
+                    client.Send("CEDI|" + data);
+                else
+                    NetworkEditedCell(data);
             }
         }
     }

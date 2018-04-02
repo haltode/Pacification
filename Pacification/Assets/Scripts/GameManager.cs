@@ -56,6 +56,11 @@ public class GameManager : MonoBehaviour
         }
     }
 
+    public void MainMenuEditorButton()
+    {
+        SceneManager.LoadScene("Editor");
+    }
+
     public void MainMenuSoloButton()
     {
         StartingServer(true);

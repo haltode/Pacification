@@ -18,6 +18,7 @@ public class NewMapMenu : MonoBehaviour
 
     void CreateMap(int sizeX, int sizeZ)
     {
+        hexGrid = FindObjectOfType<HexGrid>();
         hexGrid.CreateMap(sizeX, sizeZ);
         HexMapCamera.ValidatePosition();
         Close();

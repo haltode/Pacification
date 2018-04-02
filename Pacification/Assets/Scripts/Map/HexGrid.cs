@@ -2,6 +2,7 @@
 using UnityEngine.UI;
 using System;
 using System.IO;
+using System.Collections.Generic;
 
 public class HexGrid : MonoBehaviour
 {
@@ -14,20 +15,40 @@ public class HexGrid : MonoBehaviour
     public Text cellLabelPrefab;
     public HexGridChunk chunkPrefab;
 
+    public HexUnit unitPrefab;
+
     HexGridChunk[] chunks;
     int chunkCountX, chunkCountZ;
     HexCell[] cells;
+    List<HexUnit> units = new List<HexUnit>();
+
+    bool currentPathExists;
+
+    public bool HasPath
+    {
+        get { return currentPathExists; }
+    }
 
     void Awake()
     {
         DontDestroyOnLoad(gameObject);
         HexMetrics.InitializeHashGrid(seed);
+        HexUnit.unitPrefab = unitPrefab;
         CreateMap(cellCountX, cellCountZ);
     }
 
     void OnEnable()
     {
         HexMetrics.InitializeHashGrid(seed);
+        HexUnit.unitPrefab = unitPrefab;
+    }
+
+    public HexCell GetCell(Ray ray)
+    {
+        RaycastHit hit;
+        if(Physics.Raycast(ray, out hit))
+            return GetCell(hit.point);
+        return null;
     }
 
     public bool CreateMap(int sizeX, int sizeZ)
@@ -49,6 +70,7 @@ public class HexGrid : MonoBehaviour
         CreateChunks();
         CreateCells();
         ClearPath();
+        ClearUnits();
 
         return true;
     }
@@ -161,8 +183,8 @@ public class HexGrid : MonoBehaviour
     public void FindPath(HexCell start, HexCell end, int speed)
     {
         ClearPath();
-        bool found = SearchPath(start, end, speed);
-        ShowPath(start, end, speed, found);
+        currentPathExists = SearchPath(start, end, speed);
+        ShowPath(start, end, speed);
     }
 
     bool SearchPath(HexCell start, HexCell end, int speed)
@@ -181,7 +203,8 @@ public class HexGrid : MonoBehaviour
             {
                 HexCell neighbor = current.GetNeighbor(dir);
                 if(neighbor == null || neighbor.Distance != int.MaxValue ||
-                    !current.IsReachable(dir) || neighbor.IsUnderWater)
+                    !current.IsReachable(dir) || neighbor.IsUnderWater ||
+                    neighbor.Unit)
                     continue;
 
                 // Road and flat terrains are faster than cliffs
@@ -208,10 +231,10 @@ public class HexGrid : MonoBehaviour
         return false;
     }
 
-    void ShowPath(HexCell start, HexCell end, int speed, bool found)
+    void ShowPath(HexCell start, HexCell end, int speed)
     {
         start.EnableHighlight(Color.blue);
-        if(found)
+        if(currentPathExists)
         {
             HexCell current = end;
             while(current != start)
@@ -227,7 +250,7 @@ public class HexGrid : MonoBehaviour
             end.EnableHighlight(Color.red);
     }
 
-    void ClearPath()
+    public void ClearPath()
     {
         for(int i = 0; i < cells.Length; ++i)
         {
@@ -235,6 +258,27 @@ public class HexGrid : MonoBehaviour
             cells[i].SetLabel(null);
             cells[i].DisableHighlight();
         }
+    }
+
+    public void AddUnit(HexUnit unit, HexCell location, float orientation)
+    {
+        units.Add(unit);
+        unit.transform.SetParent(transform, false);
+        unit.Location = location;
+        unit.Orientation = orientation;
+    }
+
+    public void RemoveUnit(HexUnit unit)
+    {
+        units.Remove(unit);
+        unit.Die();
+    }
+
+    void ClearUnits()
+    {
+        for(int i = 0; i < units.Count; i++)
+            units[i].Die();
+        units.Clear();
     }
 
     public void ShowUI(bool visible)
@@ -249,6 +293,8 @@ public class HexGrid : MonoBehaviour
         writer.Write(cellCountZ);
         for(int i = 0; i < cells.Length; ++i)
             cells[i].Save(writer);
+        for(int i = 0; i < units.Count; ++i)
+            units[i].Save(writer);
     }
 
     public void Load(BinaryReader reader)
@@ -260,8 +306,13 @@ public class HexGrid : MonoBehaviour
                 return;
         for(int i = 0; i < cells.Length; ++i)
             cells[i].Load(reader);
+        int unitCount = reader.ReadInt32();
+        for(int i = 0; i < unitCount; ++i)
+            HexUnit.Load(reader, this);
+
         for(int i = 0; i < chunks.Length; ++i)
             chunks[i].Refresh();
         ClearPath();
+        ClearUnits();
     }
 }

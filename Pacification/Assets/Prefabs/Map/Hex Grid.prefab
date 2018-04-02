@@ -58,3 +58,5 @@ MonoBehaviour:
   cellLabelPrefab: {fileID: 11470134, guid: f68794ca03b6f4510b9a5bd6ee9ba2f4, type: 2}
   chunkPrefab: {fileID: 114452804204635946, guid: 83c084f44eaff4dff9d451e21a49c10c,
     type: 2}
+  unitPrefab: {fileID: 114899140608873982, guid: 6051e15cd963545a2a9f8bbfdfac4d09,
+    type: 2}

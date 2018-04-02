@@ -5,7 +5,7 @@ using System.IO;
 
 public class SaveLoadMapMenu : MonoBehaviour
 {
-    public const int MapFormatVersion = 2;
+    public const int MapFormatVersion = 3;
     private bool saveMode;
 
     public Text menuLabel, actionButtonLabel;

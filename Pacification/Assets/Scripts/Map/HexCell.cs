@@ -19,6 +19,8 @@ public class HexCell : MonoBehaviour
 
     int distance;
 
+    public HexUnit Unit { get; set; }
+
     public Vector3 Position
     {
         get { return transform.localPosition; }
@@ -197,6 +199,9 @@ public class HexCell : MonoBehaviour
         if(!chunk)
             return;
 
+        if(Unit)
+            Unit.ValidateLocation();
+
         chunk.Refresh();
         for(int i = 0; i < neighbors.Length; ++i)
         {
@@ -209,6 +214,8 @@ public class HexCell : MonoBehaviour
     void RefreshSelfOnly()
     {
         chunk.Refresh();
+        if(Unit)
+            Unit.ValidateLocation();
     }
 
     void RefreshPosition()

@@ -10,6 +10,7 @@ public class Server : MonoBehaviour
     public const int Port = 6321;
     public const string Localhost = "127.0.0.1";
     public int playerNumber;
+    public int playerPlaying;
 
     private bool isGameStarted;
     private bool isServerStarted;
@@ -20,6 +21,7 @@ public class Server : MonoBehaviour
     public void Init()
     {
         DontDestroyOnLoad(gameObject);
+        playerPlaying = 0;
 
         clients = new List<ServerClient>();
 
@@ -153,9 +155,10 @@ public class Server : MonoBehaviour
                 break;
 
             case "CEND":
-                ///////// One player ended his turn, let the next one play
-                /*//*/ServerClient newActiveClient = clients[0];
-                /////////////////////
+                playerPlaying++;
+                if(playerPlaying + 1 >= playerNumber)
+                    playerPlaying = 0;
+                ServerClient newActiveClient = clients[playerPlaying++];
                 Broadcast("SYGO|", newActiveClient);
                 break;
 

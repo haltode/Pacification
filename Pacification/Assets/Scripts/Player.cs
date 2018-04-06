@@ -23,6 +23,16 @@ public class Player
         //playerCities = new Dictionary<int, City>();
     }
 
+    public void TakeTurn()
+    {
+        //Set player ability to play to true
+    }
+
+    public void EndTurn()
+    {
+        //Set player ability to play to true
+    }
+
     public int AddUnit(Unit unit)
     {
         unitID++;
@@ -30,6 +40,7 @@ public class Player
 
         return unitID;
     }
+
     public void RemoveUnit(Unit unit)
     {
         playerUnits.Remove(unit.Id);

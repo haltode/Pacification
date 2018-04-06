@@ -18,11 +18,13 @@ public class Client : MonoBehaviour
     private StreamWriter writer;
     private StreamReader reader;
 
-    private HexMapEditor mapEditor; 
+    private HexMapEditor mapEditor;
+    private Player player;
 
     private void Start()
     {
         DontDestroyOnLoad(gameObject);
+        player = new Player("not_needed");
     }
 
     public bool ConnectToServer(string host, int port)
@@ -84,7 +86,7 @@ public class Client : MonoBehaviour
                 break;
 
             case "SYGO":
-                // It's your turn
+                player.TakeTurn();
                 break;
 
             /////// CHAT

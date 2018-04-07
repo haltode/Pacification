@@ -22,6 +22,7 @@ public class HexGrid : MonoBehaviour
     HexCell[] cells;
     List<HexUnit> units = new List<HexUnit>();
 
+    HexCell currentPathStart, currentPathEnd;
     bool currentPathExists;
 
     public bool HasPath
@@ -183,8 +184,10 @@ public class HexGrid : MonoBehaviour
     public void FindPath(HexCell start, HexCell end, int speed)
     {
         ClearPath();
+        currentPathStart = start;
+        currentPathEnd = end;
         currentPathExists = SearchPath(start, end, speed);
-        ShowPath(start, end, speed);
+        ShowPath(speed);
     }
 
     bool SearchPath(HexCell start, HexCell end, int speed)
@@ -198,7 +201,7 @@ public class HexGrid : MonoBehaviour
             if(current == end)
                 return true;
 
-            int currentTurn = current.Distance / speed;
+            int currentTurn = (current.Distance - 1) / speed;
             for(HexDirection dir = HexDirection.NE; dir <= HexDirection.NW; ++dir)
             {
                 HexCell neighbor = current.GetNeighbor(dir);
@@ -217,7 +220,7 @@ public class HexGrid : MonoBehaviour
                     moveCost = 10;
 
                 int newDist = current.Distance + moveCost;
-                int turn = newDist / speed;
+                int turn = (newDist - 1) / speed;
                 if(turn > currentTurn)
                     newDist = turn * speed + moveCost;
 
@@ -231,27 +234,40 @@ public class HexGrid : MonoBehaviour
         return false;
     }
 
-    void ShowPath(HexCell start, HexCell end, int speed)
+    void ShowPath(int speed)
     {
-        start.EnableHighlight(Color.blue);
+        currentPathStart.EnableHighlight(Color.blue);
         if(currentPathExists)
         {
-            HexCell current = end;
-            while(current != start)
+            HexCell current = currentPathEnd;
+            while(current != currentPathStart)
             {
-                int turn = current.Distance / speed;
+                int turn = (current.Distance - 1) / speed;
                 current.SetLabel(turn.ToString());
                 current.EnableHighlight(Color.white);
                 current = current.PathFrom;
             }
-            end.EnableHighlight(Color.green);
+            currentPathEnd.EnableHighlight(Color.green);
         }
         else
-            end.EnableHighlight(Color.red);
+            currentPathEnd.EnableHighlight(Color.red);
+    }
+
+    public List<HexCell> GetPath()
+    {
+        if(!currentPathExists)
+            return null;
+        List<HexCell> path = ListPool<HexCell>.Get();
+        for(HexCell c = currentPathEnd; c != currentPathStart; c = c.PathFrom)
+            path.Add(c);
+        path.Add(currentPathStart);
+        path.Reverse();
+        return path;
     }
 
     public void ClearPath()
     {
+        currentPathExists = false;
         for(int i = 0; i < cells.Length; ++i)
         {
             cells[i].Distance = int.MaxValue;

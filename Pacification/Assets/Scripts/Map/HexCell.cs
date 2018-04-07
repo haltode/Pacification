@@ -165,6 +165,14 @@ public class HexCell : MonoBehaviour
         get { return distance + SearchHeuristic; }
     }
 
+    public static bool CompareCells(HexCell a, HexCell b)
+    {
+        if(a == null || b == null)
+            return true;
+        else
+            return a.SearchPriority <= b.SearchPriority;
+    }
+
     public void Save(BinaryWriter writer)
     {
         // Use byte to save space since we stay inside range [0; 255]

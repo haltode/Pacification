@@ -52,6 +52,16 @@ public class HexGrid : MonoBehaviour
         return null;
     }
 
+    public HexCell GetCell(int xOffset, int zOffset)
+    {
+        return cells[xOffset + zOffset * cellCountX];
+    }
+
+    public HexCell GetCell(int cellIndex)
+    {
+        return cells[cellIndex];
+    }
+
     public bool CreateMap(int sizeX, int sizeZ)
     {
         if( sizeX <= 0 || sizeX % HexMetrics.ChunkSizeX != 0 ||
@@ -173,14 +183,6 @@ public class HexGrid : MonoBehaviour
         return cells[index];
     }
 
-    bool CompareCells(HexCell a, HexCell b)
-    {
-        if(a == null || b == null)
-            return true;
-        else
-            return a.SearchPriority <= b.SearchPriority;
-    }
-
     public void FindPath(HexCell start, HexCell end, int speed)
     {
         ClearPath();
@@ -192,7 +194,7 @@ public class HexGrid : MonoBehaviour
 
     bool SearchPath(HexCell start, HexCell end, int speed)
     {
-        PriorityQueue<HexCell> searchQueue = new PriorityQueue<HexCell>(CompareCells);
+        PriorityQueue<HexCell> searchQueue = new PriorityQueue<HexCell>(HexCell.CompareCells);
         start.Distance = 0;
         searchQueue.Enqueue(start);
         while(!searchQueue.IsEmpty())

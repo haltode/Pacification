@@ -29,7 +29,6 @@ public class HexMapCamera : MonoBehaviour
         instance = this;
         swivel = transform.GetChild(0);
         stick = swivel.GetChild(0);
-        DontDestroyOnLoad(gameObject);
     }
 
     void Update()

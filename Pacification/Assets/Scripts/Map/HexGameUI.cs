@@ -8,6 +8,11 @@ public class HexGameUI : MonoBehaviour
     HexCell currentCell;
     HexUnit selectedUnit;
 
+    private void Start()
+    {
+        grid = FindObjectOfType<HexGrid>();
+    }
+
     void Update()
     {
         if(!EventSystem.current.IsPointerOverGameObject())

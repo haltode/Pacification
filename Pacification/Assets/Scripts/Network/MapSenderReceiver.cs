@@ -12,11 +12,12 @@ public class MapSenderReceiver : MonoBehaviour {
     void Start ()
     {
         Server server = FindObjectOfType<Server>();
-        saveAndLoad = Instantiate(SaveAndLoadPrefab);
-        path = Path.Combine(Application.persistentDataPath, "temp");
 
         if(!server)
             return;
+
+        saveAndLoad = Instantiate(SaveAndLoadPrefab);
+        path = Path.Combine(Application.persistentDataPath, "temp");
 
         saveAndLoad.Save(path);
         string map = File.ReadAllText(path);
@@ -30,7 +31,5 @@ public class MapSenderReceiver : MonoBehaviour {
         File.WriteAllText(path, map);
         saveAndLoad.Load(path);
         File.Delete(path);
-
-        SceneManager.LoadScene("Map");
     }
 }

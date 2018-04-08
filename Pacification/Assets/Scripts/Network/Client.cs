@@ -120,7 +120,7 @@ public class Client : MonoBehaviour
                 break;
 
             case "SLOD":
-                SceneManager.LoadScene("Loading");
+                SceneManager.LoadScene("Map");
                 break;
 
             case "SMAP":

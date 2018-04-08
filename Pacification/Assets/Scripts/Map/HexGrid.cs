@@ -32,7 +32,6 @@ public class HexGrid : MonoBehaviour
 
     void Awake()
     {
-        DontDestroyOnLoad(gameObject);
         HexMetrics.InitializeHashGrid(seed);
         HexUnit.unitPrefab = unitPrefab;
         CreateMap(cellCountX, cellCountZ);

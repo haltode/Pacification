@@ -145,6 +145,7 @@ public class GameManager : MonoBehaviour
 
     public void MainMenuExitButton()
     {
-        SceneManager.LoadScene("Exit");
+        Debug.Log("Quitting...");
+        Application.Quit();
     }
 }

@@ -57,24 +57,6 @@ public class ButtonManager : MonoBehaviour {
         }
         SceneManager.LoadScene("Menu");
 
-        HexGrid hexGrid= FindObjectOfType<HexGrid>();
-        Destroy(hexGrid.gameObject);
-
-        HexMapCamera hexCam = FindObjectOfType<HexMapCamera>();
-        Destroy(hexCam.gameObject);
-
         Destroy(GameObject.Find("GameManager"));
-    }
-
-    public void Quit()
-    {
-        Debug.Log("Quitting...");
-        Application.Quit();
-    }
-
-    public void CancelQuitting()
-    {
-        Destroy(GameObject.Find("GameManager"));
-        SceneManager.LoadScene("Menu");
     }
 }

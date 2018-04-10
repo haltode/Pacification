@@ -131,6 +131,7 @@ public class Server : MonoBehaviour
         {
             isGameStarted = true;
             Broadcast("SLOD", clients);
+            Broadcast("SYGO", clients[0]);
         }
     }
     private void Broadcast(string data, ServerClient client)

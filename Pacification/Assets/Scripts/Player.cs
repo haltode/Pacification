@@ -12,7 +12,7 @@ public class Player
     // TODO : couleur du joueur
     // TODO : tech tree
 
-    public GameObject ActivePlayerCanvas;
+    public bool canPlay;
 
     public Player()
     {
@@ -21,30 +21,8 @@ public class Player
 
         playerUnits = new Dictionary<int, Unit>();
         //playerCities = new Dictionary<int, City>();
-    }
 
-    public void Start()
-    {
-        //NEED FIXING
-        ActivePlayerCanvas = GameObject.FindGameObjectWithTag("Player");
-
-        if(ActivePlayerCanvas)
-            Debug.Log("OK");
-        else
-            Debug.Log("Unfound");
-        ////////
-    }
-
-    public void TakeTurn()
-    {
-        //Set player ability to play to true
-        ActivePlayerCanvas.SetActive(true);
-    }
-
-    public void EndTurn()
-    {
-        //Set player ability to play to true
-        ActivePlayerCanvas.SetActive(false);
+        canPlay = false;
     }
 
     public int AddUnit(Unit unit)

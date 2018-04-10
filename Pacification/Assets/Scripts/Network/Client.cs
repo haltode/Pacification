@@ -94,7 +94,7 @@ public class Client : MonoBehaviour
                 break;
 
             case "SYGO":
-                player.TakeTurn();
+                FindObjectOfType<ButtonManager>().TakeTurn();
                 break;
 
             /////// CHAT
@@ -129,7 +129,6 @@ public class Client : MonoBehaviour
 
             case "SLOD":
                 SceneManager.LoadScene("Map");
-                player.Start();
                 break;
 
             case "SMAP":

@@ -180,7 +180,6 @@ public class Server : MonoBehaviour
 
             /////// REGISTER A CLIENT
             case "CIAM":
-
                 string[] clientStatus = receivedData[1].Split('#');
                 client.clientName = clientStatus[0];
                 client.isHost = (clientStatus[1] == "1");

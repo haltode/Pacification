@@ -90,7 +90,7 @@ public class Client : MonoBehaviour
 
             case "SEDI":
                 mapEditor = FindObjectOfType<HexMapEditor>();
-                mapEditor.NetworkEditedCell(receivedData[1]);
+                mapEditor.NetworkEditCell(receivedData[1]);
                 break;
 
             case "SYGO":

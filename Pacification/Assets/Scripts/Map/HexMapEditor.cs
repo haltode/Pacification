@@ -96,64 +96,61 @@ public class HexMapEditor : MonoBehaviour
         if(cell)
         {
             if(editor)
-            {
                 LocalEditCell(cell);
-            }
-
-            data = cell.coordinates.X + "." + cell.coordinates.Z + "#";
-
-            if(activeTerrainBiomeIndex >= 0)
-                data += activeTerrainBiomeIndex + "#";
             else
-                data += "-1#";
-
-            if(applyElevation)
-                data += activeElevation + ".";
-            else
-                data += "-1.";
-
-            if(underWaterMode == OptionalToggle.No && cell.IsUnderWater)
-                data += "0#";
-            else if(underWaterMode == OptionalToggle.Yes && !cell.IsUnderWater)
-                data += "1#";
-            else
-                data += "-1#";
-
-            if(activeFeature > 0)
-                data += activeFeature + "#";
-            else
-                data += "-1#";
-
-            if(roadMode == OptionalToggle.No)
-                data += "0.-1#";
-            else if(roadMode == OptionalToggle.Yes)
-                data += "1.";
-            else
-                data += "-1.-1#";
-
-            if(isDrag)
             {
-                HexCell otherCell = cell.GetNeighbor(dragDirection.Opposite());
-                if(otherCell && roadMode == OptionalToggle.Yes)
-                {
-                    data += (int)dragDirection + "." + otherCell.coordinates.X + "." + otherCell.coordinates.Z + "#";
-                }
-            }
-            else
-                data += "-1#";
+                data = cell.coordinates.X + "." + cell.coordinates.Z + "#";
 
-            if(data != previousData)
-            {
-                previousData = data;
-                if(client)
-                    client.Send("CEDI|" + data);
+                if(activeTerrainBiomeIndex >= 0)
+                    data += activeTerrainBiomeIndex + "#";
                 else
-                    NetworkEditedCell(data);
+                    data += "-1#";
+
+                if(applyElevation)
+                    data += activeElevation + ".";
+                else
+                    data += "-1.";
+
+                if(underWaterMode == OptionalToggle.No && cell.IsUnderWater)
+                    data += "0#";
+                else if(underWaterMode == OptionalToggle.Yes && !cell.IsUnderWater)
+                    data += "1#";
+                else
+                    data += "-1#";
+
+                if(activeFeature > 0)
+                    data += activeFeature + "#";
+                else
+                    data += "-1#";
+
+                if(roadMode == OptionalToggle.No)
+                    data += "0.-1#";
+                else if(roadMode == OptionalToggle.Yes)
+                    data += "1.";
+                else
+                    data += "-1.-1#";
+
+                if(isDrag)
+                {
+                    HexCell otherCell = cell.GetNeighbor(dragDirection.Opposite());
+                    if(otherCell && roadMode == OptionalToggle.Yes)
+                    {
+                        data += (int)dragDirection + "." + otherCell.coordinates.X + "." + otherCell.coordinates.Z + "#";
+                    }
+                }
+                else
+                    data += "-1#";
+
+                if(data != previousData)
+                {
+                    previousData = data;
+                    client.Send("CEDI|" + data);
+                }
             }
         }
     }
 
-    public void NetworkEditedCell(string data)
+    public void NetworkEditCell(string data)
     {
         string[] receivedData = data.Split('#');
         string[] position = receivedData[0].Split('.');
@@ -195,13 +192,13 @@ public class HexMapEditor : MonoBehaviour
     public void LocalEditCell(HexCell cell)
     {
         cell.TerrainBiomeIndex = activeTerrainBiomeIndex;
+        cell.FeatureIndex = activeFeature;
         if(applyElevation)
             cell.Elevation = activeElevation;
         if(underWaterMode == OptionalToggle.No && cell.IsUnderWater)
             cell.IsUnderWater = false;
         else if(underWaterMode == OptionalToggle.Yes && !cell.IsUnderWater)
             cell.IsUnderWater = true;
-        cell.FeatureIndex = activeFeature;
         if(roadMode == OptionalToggle.No)
             cell.RemoveRoads();
         if(isDrag)
@@ -241,7 +238,7 @@ public class HexMapEditor : MonoBehaviour
     void DestroyUnit()
     {
         HexCell cell = GetCellUnderCursor();
-        if(cell && !cell.Unit)
+        if(cell && cell.Unit)
         {
             if(client)
                 client.Send("CUNI|UND|" + cell.coordinates.X + "#" + cell.coordinates.Z + "#");

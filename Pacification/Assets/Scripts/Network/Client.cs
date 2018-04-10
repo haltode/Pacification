@@ -19,12 +19,12 @@ public class Client : MonoBehaviour
     private StreamReader reader;
 
     private HexMapEditor mapEditor;
-    private Player player;
+    public Player player;
 
     private void Start()
     {
         DontDestroyOnLoad(gameObject);
-        player = new Player("not_needed");
+        player = new Player();
     }
 
     public bool ConnectToServer(string host, int port)
@@ -121,6 +121,7 @@ public class Client : MonoBehaviour
 
             case "SLOD":
                 SceneManager.LoadScene("Map");
+                player.Start();
                 break;
 
             case "SMAP":

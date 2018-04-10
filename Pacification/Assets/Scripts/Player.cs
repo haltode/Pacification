@@ -7,30 +7,44 @@ public class Player
     private int unitID;
     private int cityID;
 
-    private string name;
     private Dictionary<int, Unit> playerUnits;
     //private Dictionary<int, City> playerCities;
     // TODO : couleur du joueur
     // TODO : tech tree
 
-    public Player(string name)
+    public GameObject ActivePlayerCanvas;
+
+    public Player()
     {
         unitID = 0;
         cityID = 0;
 
-        this.name = name;
         playerUnits = new Dictionary<int, Unit>();
         //playerCities = new Dictionary<int, City>();
+    }
+
+    public void Start()
+    {
+        //NEED FIXING
+        ActivePlayerCanvas = GameObject.FindGameObjectWithTag("Player");
+
+        if(ActivePlayerCanvas)
+            Debug.Log("OK");
+        else
+            Debug.Log("Unfound");
+        ////////
     }
 
     public void TakeTurn()
     {
         //Set player ability to play to true
+        ActivePlayerCanvas.SetActive(true);
     }
 
     public void EndTurn()
     {
         //Set player ability to play to true
+        ActivePlayerCanvas.SetActive(false);
     }
 
     public int AddUnit(Unit unit)

@@ -7,7 +7,6 @@ public class ButtonManager : MonoBehaviour {
 
     public GameObject leftPannel;
     public GameObject rightPannel;
-    public GameObject EndTurn;
 
     private bool cheatmode = false;
     private float time = 0F;
@@ -38,7 +37,7 @@ public class ButtonManager : MonoBehaviour {
     {
         Client client = FindObjectOfType<Client>();
         client.Send("CEND|" +  client.clientName);
-        EndTurn.SetActive(false);
+        client.player.EndTurn();
     }
 
     public void DeconnectionButton()

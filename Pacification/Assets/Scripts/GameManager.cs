@@ -27,10 +27,11 @@ public class GameManager : MonoBehaviour
     private void Start()
     {
         Instance = this;
+        DontDestroyOnLoad(this);
         waiting.SetActive(false);
         host.SetActive(false);
         joinMenu.SetActive(false);
-        DontDestroyOnLoad(gameObject);
+
     }
 
     public void StartingServer(bool isAlone = false)

@@ -287,8 +287,8 @@ public class HexGrid : MonoBehaviour
 
     public void RemoveUnit(HexUnit unit)
     {
-        unit.Die();
         units.Remove(unit);
+        unit.Die();
     }
 
     void ClearUnits()

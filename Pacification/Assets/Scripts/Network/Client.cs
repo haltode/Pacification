@@ -99,7 +99,7 @@ public class Client : MonoBehaviour
 
             /////// CHAT
             case "SMSG":
-                // Received a global message 
+                FindObjectOfType<ChatManager>().ChatMessage(receivedData[1]);
                 break;
 
             case "SMSP":

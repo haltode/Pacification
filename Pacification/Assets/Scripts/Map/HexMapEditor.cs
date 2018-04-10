@@ -23,6 +23,8 @@ public class HexMapEditor : MonoBehaviour
     OptionalToggle roadMode;
     OptionalToggle underWaterMode;
 
+    public bool editor;
+
     void Awake()
     {
         SetEditMode(false);
@@ -32,6 +34,7 @@ public class HexMapEditor : MonoBehaviour
     {
         hexGrid = FindObjectOfType<HexGrid>();
         client = FindObjectOfType<Client>();
+        editor = FindObjectOfType<GameManager>().editor;
     }
 
     void Update()
@@ -92,6 +95,11 @@ public class HexMapEditor : MonoBehaviour
     {
         if(cell)
         {
+            if(editor)
+            {
+                LocalEditCell(cell);
+            }
+
             data = cell.coordinates.X + "." + cell.coordinates.Z + "#";
 
             if(activeTerrainBiomeIndex >= 0)
@@ -137,7 +145,7 @@ public class HexMapEditor : MonoBehaviour
             if(data != previousData)
             {
                 previousData = data;
-                if(FindObjectOfType<Client>())
+                if(client)
                     client.Send("CEDI|" + data);
                 else
                     NetworkEditedCell(data);
@@ -184,22 +192,70 @@ public class HexMapEditor : MonoBehaviour
         }
     }
 
+    public void LocalEditCell(HexCell cell)
+    {
+        cell.TerrainBiomeIndex = activeTerrainBiomeIndex;
+        if(applyElevation)
+            cell.Elevation = activeElevation;
+        if(underWaterMode == OptionalToggle.No && cell.IsUnderWater)
+            cell.IsUnderWater = false;
+        else if(underWaterMode == OptionalToggle.Yes && !cell.IsUnderWater)
+            cell.IsUnderWater = true;
+        cell.FeatureIndex = activeFeature;
+        if(roadMode == OptionalToggle.No)
+            cell.RemoveRoads();
+        if(isDrag)
+        {
+            HexCell otherCell = cell.GetNeighbor(dragDirection.Opposite());
+            if(otherCell && roadMode == OptionalToggle.Yes)
+                otherCell.AddRoad(dragDirection);
+        }
+    }
+
     void CreateUnit()
     {
         HexCell cell = GetCellUnderCursor();
         if(cell && !cell.Unit)
         {
-            HexUnit unit = Instantiate(HexUnit.unitPrefab);
-            float orientation = UnityEngine.Random.Range(0f, 360f);
-            hexGrid.AddUnit(unit, cell, orientation);
+            if(client)
+                client.Send("CUNI|UNC|" + "type_of_unit#" + cell.coordinates.X + "#" + cell.coordinates.Z + "#");
+            else
+            {
+                HexUnit unit = Instantiate(HexUnit.unitPrefab);
+                float orientation = UnityEngine.Random.Range(0f, 360f);
+                hexGrid.AddUnit(unit, cell, orientation);
+            }
         }
+    }
+
+    public void NetworkCreateUnit(string data)
+    {
+        string[] receivedData = data.Split('#');
+        HexUnit unit = Instantiate(HexUnit.unitPrefab);
+        HexCell cell = hexGrid.GetCell(new HexCoordinates(int.Parse(receivedData[1]), int.Parse(receivedData[2])));
+
+        float orientation = UnityEngine.Random.Range(0f, 360f);
+        hexGrid.AddUnit(unit, cell, orientation);
     }
 
     void DestroyUnit()
     {
         HexCell cell = GetCellUnderCursor();
-        if(cell && cell.Unit)
-            hexGrid.RemoveUnit(cell.Unit);
+        if(cell && !cell.Unit)
+        {
+            if(client)
+                client.Send("CUNI|UND|" + cell.coordinates.X + "#" + cell.coordinates.Z + "#");
+            else
+                hexGrid.RemoveUnit(cell.Unit);
+        }   
+    }
+
+    public void NetworkDestroyUnit(string data)
+    {
+        string[] receivedData = data.Split('#');
+        HexCell cell = hexGrid.GetCell(new HexCoordinates(int.Parse(receivedData[0]), int.Parse(receivedData[1])));
+
+        hexGrid.RemoveUnit(cell.Unit);
     }
 
     public void SetEditMode(bool toggle)

@@ -22,6 +22,8 @@ public class GameManager : MonoBehaviour
     public Slider numberOfPlayerSlider;
     public HexGrid hexGrid;
 
+    public bool editor;
+
     private void Start()
     {
         Instance = this;
@@ -49,6 +51,8 @@ public class GameManager : MonoBehaviour
                 client.clientName = "Host";
             }
             client.ConnectToServer(Server.Localhost, Server.Port);
+
+            editor = false;
         }
         catch(Exception e)
         {
@@ -58,6 +62,7 @@ public class GameManager : MonoBehaviour
 
     public void MainMenuEditorButton()
     {
+        editor = true;
         SceneManager.LoadScene("Editor");
     }
 

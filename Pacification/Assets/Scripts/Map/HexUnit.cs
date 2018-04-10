@@ -76,7 +76,7 @@ public class HexUnit : MonoBehaviour
         Location = path[path.Count - 1];
         pathToTravel = path;
         StopAllCoroutines();
-        StartCoroutine(TravalPath());
+        StartCoroutine(TravelPath());
     }
 
     void OnDrawGizmos()
@@ -93,7 +93,7 @@ public class HexUnit : MonoBehaviour
         }
     }
 
-    IEnumerator TravalPath()
+    IEnumerator TravelPath()
     {
         for(int i = 1; i < pathToTravel.Count; ++i)
         {

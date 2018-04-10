@@ -80,8 +80,16 @@ public class Client : MonoBehaviour
                 // Display another player move
                 break;
 
+            case "SUNC":
+                mapEditor.NetworkCreateUnit(receivedData[1]);
+                break;
+
+            case "SUND":
+                mapEditor.NetworkDestroyUnit(receivedData[1]);
+                break;
+
             case "SEDI":
-                mapEditor = FindObjectOfType<HexMapEditor>(); // Move to received map
+                mapEditor = FindObjectOfType<HexMapEditor>();
                 mapEditor.NetworkEditedCell(receivedData[1]);
                 break;
 

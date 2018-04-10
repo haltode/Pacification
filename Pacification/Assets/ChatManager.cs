@@ -47,7 +47,21 @@ public class ChatManager : MonoBehaviour {
             return;
 
         Client client = FindObjectOfType<Client>();
-        client.Send("CMSG|" + i.text);
+        if(i.text[0] == '/')
+        {
+            string command = "" + i.text[1] + i.text[2] + i.text[3];
+
+            if(command == "msg")
+            {
+                string[] message = i.text.Split(' ');
+                string toSend = "";
+                for(int j = 2; j < message.Length; j++)
+                    toSend += message[j] + " ";
+                client.Send("CMSP|"  + i.text.Split(' ')[1] + "|" + toSend);
+            }
+        }
+        else
+            client.Send("CMSG|" + i.text);
 
         i.text = "";
     }

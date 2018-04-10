@@ -102,14 +102,6 @@ public class Client : MonoBehaviour
                 FindObjectOfType<ChatManager>().ChatMessage(receivedData[1]);
                 break;
 
-            case "SMSP":
-                // Received a private message 
-                break;
-
-            case "SMSE":
-                // The private message you sent couldn't find a target
-                break;
-
             /////// REGISTER ON SERVER
             case "SWHO":
                 for(int i = 1; i < receivedData.Length - 1; ++i)

@@ -174,9 +174,9 @@ public class Server : MonoBehaviour
             case "CMSP":
                 ServerClient clientMSGreceiver = clients.Find(clientMsp => clientMsp.clientName == receivedData[1]);
                 if(clientMSGreceiver != null)
-                    Broadcast("SMSP|" + client.clientName + " >> " + receivedData[2], clients.Find(clientMsp => clientMsp.clientName == receivedData[1]));
+                    Broadcast("SMSG|" + client.clientName + " whispered >> " + receivedData[2], clients.Find(clientMsp => clientMsp.clientName == receivedData[1]));
                 else
-                    Broadcast("SMSE|The player receivedData[2] is unreacheable", client);
+                    Broadcast("SMSG| ERROR : The player " + receivedData[2] + " is unreacheable", client);
                 break;
 
             /////// REGISTER A CLIENT

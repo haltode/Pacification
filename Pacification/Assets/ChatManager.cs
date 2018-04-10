@@ -8,13 +8,35 @@ public class ChatManager : MonoBehaviour {
     public Transform chatMessageContainer;
     public GameObject messagePrefab;
 
-    public void ChatMessage(string msg)
+    public AudioSource notification;
+
+    private void Start()
     {
-        GameObject go = Instantiate(messagePrefab) as GameObject;
+        if(!GameManager.Instance.editor)
+            notification = GetComponent<AudioSource>();
+        else
+        {
+            Transform chat = GameObject.Find("Chat").transform;
+            foreach(Transform t in chat)
+            {
+                t.gameObject.SetActive(false);
+            }
+        }
+    }
 
-        go.transform.SetParent(chatMessageContainer);
+    void Update()
+    {
+        if(Input.GetKey("return"))
+            SendChatMessage();
+    }
 
-        go.GetComponentInChildren<Text>().text = msg;
+    public void ChatMessage(string message)
+    {
+        GameObject msg = Instantiate(messagePrefab) as GameObject;
+        msg.transform.SetParent(chatMessageContainer);
+        msg.GetComponentInChildren<Text>().text = message;
+
+        notification.Play();
     }
 
     public void SendChatMessage()

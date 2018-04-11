@@ -99,7 +99,7 @@ public class Client : MonoBehaviour
 
             /////// CHAT
             case "SMSG":
-                FindObjectOfType<ChatManager>().ChatMessage(receivedData[1]);
+                FindObjectOfType<ChatManager>().ChatMessage(receivedData[2], int.Parse(receivedData[1]));
                 break;
 
             /////// REGISTER ON SERVER

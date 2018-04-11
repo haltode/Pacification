@@ -3141,6 +3141,10 @@ MonoBehaviour:
   chatMessageContainer: {fileID: 430921715}
   messagePrefab: {fileID: 1154314651869318, guid: c8524f10696d04b42a80419e312fccff,
     type: 2}
+  privateMessagePrefab: {fileID: 1320750714429720, guid: bcf3543138855e14bae8e3c6323093d1,
+    type: 2}
+  alertMessagePrefab: {fileID: 1306950090261154, guid: fd9935c1c31804641a0b4500e2962d83,
+    type: 2}
   notification: {fileID: 0}
 --- !u!82 &467770945
 AudioSource:
@@ -9054,6 +9058,7 @@ MonoBehaviour:
   leftPannel: {fileID: 1390083063}
   rightPannel: {fileID: 1090840138}
   activePlayer: {fileID: 2035800065}
+  cheatmode: 0
 --- !u!224 &1293624230
 RectTransform:
   m_ObjectHideFlags: 0

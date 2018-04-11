@@ -9,29 +9,32 @@ public class ButtonManager : MonoBehaviour {
     public GameObject rightPannel;
     public GameObject activePlayer;
 
-    private bool cheatmode = false;
+    public bool cheatmode = false;
     private float time = 0F;
 
     public void Update()
     {
         if(Input.GetKey(KeyCode.Tab) && Time.time >= time)
+            CheatMode();
+    }
+
+    public void CheatMode()
+    {
+        if(cheatmode)
         {
-            if(cheatmode)
-            {
-                Debug.Log("CheatMode deactivated");
-                leftPannel.SetActive(false);
-                rightPannel.SetActive(false);
-                cheatmode = false;
-            }
-            else
-            {
-                Debug.Log("CheatMode activated");
-                leftPannel.SetActive(true);
-                rightPannel.SetActive(true);
-                cheatmode = true;
-            }
-            time = Time.time + 0.5F;
+            Debug.Log("CheatMode deactivated");
+            leftPannel.SetActive(false);
+            rightPannel.SetActive(false);
+            cheatmode = false;
         }
+        else
+        {
+            Debug.Log("CheatMode activated");
+            leftPannel.SetActive(true);
+            rightPannel.SetActive(true);
+            cheatmode = true;
+        }
+        time = Time.time + 0.5F;
     }
 
     public void EndTurnButton()

@@ -168,13 +168,13 @@ public class Server : MonoBehaviour
 
             /////// CHAT
             case "CMSG":
-                Broadcast("SMSG|" + client.clientName + " >> " + receivedData[1], clients);
+                Broadcast("SMSG|" + receivedData[1] + "|"+ client.clientName + " >> " + receivedData[2], clients);
                 break;
 
             case "CMSP":
                 ServerClient clientMSGreceiver = clients.Find(clientMsp => clientMsp.clientName == receivedData[1]);
                 if(clientMSGreceiver != null)
-                    Broadcast("SMSG|" + client.clientName + " whispered >> " + receivedData[2], clients.Find(clientMsp => clientMsp.clientName == receivedData[1]));
+                    Broadcast("SMSG|1|" + client.clientName + " whispered >> " + receivedData[2], clients.Find(clientMsp => clientMsp.clientName == receivedData[1]));
                 else
                     Broadcast("SMSG| ERROR : The player " + receivedData[2] + " is unreacheable", client);
                 break;

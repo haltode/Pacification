@@ -89,7 +89,6 @@ public class Client : MonoBehaviour
                 break;
 
             case "SEDI":
-                mapEditor = FindObjectOfType<HexMapEditor>();
                 mapEditor.NetworkEditCell(receivedData[1]);
                 break;
 
@@ -134,8 +133,14 @@ public class Client : MonoBehaviour
             case "SMAP":
                 MapSenderReceiver mapLoader = FindObjectOfType<MapSenderReceiver>();
                 mapLoader.StartGame(receivedData[1]);
+                LoadMapComponent();
                 break;
         }
+    }
+
+    void LoadMapComponent()
+    {
+        mapEditor = FindObjectOfType<HexMapEditor>();
     }
 
     private void UserConnected(string name, bool host)

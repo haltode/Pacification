@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class Settler : Unit
 {
-    public Settler(ref Player owner, ref HexCell position)
+    public Settler(ref Player owner, HexCell position)
     {
         this.owner = owner;
         this.position = position;

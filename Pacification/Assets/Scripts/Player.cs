@@ -4,6 +4,8 @@ using UnityEngine;
 
 public class Player
 {
+    public string name;
+
     private int unitID;
     private int cityID;
 
@@ -16,8 +18,10 @@ public class Player
 
     public bool canPlay;
 
-    public Player()
+    public Player(string name)
     {
+        this.name = name;
+
         unitID = 0;
         cityID = 0;
 

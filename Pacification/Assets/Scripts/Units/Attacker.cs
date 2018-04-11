@@ -70,7 +70,8 @@ public class Attacker : Unit
         if (target.Hp <= 0)
         {
             target.Owner.RemoveUnit(target);
-            Destroy(target);
+            target.Position.Unit.Die();
+            target = null;
         }
     }
     /*

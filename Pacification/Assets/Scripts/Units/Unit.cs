@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Unit : MonoBehaviour
+public class Unit
 {
     public enum UnitType
     {
@@ -50,6 +50,12 @@ public class Unit : MonoBehaviour
         set { id = value; }
     }
 
+    public HexCell Position
+    {
+        get { return position; }
+        set { position = value; }
+    }
+
     public bool CanAttack(Unit unit)
     {
         return (unit.Type == UnitType.REGULAR || unit.Type == UnitType.RANGED || unit.Type == UnitType.HEAVY);
@@ -60,8 +66,8 @@ public class Unit : MonoBehaviour
         return position.coordinates;
     }
 
-    public void MoveTo (ref HexCell target)
+    public void MoveTo (HexCell target)
     {
-        // TODO, j'ai besoin de comprendre ton pathfinding et comment le gérer
+        position = target;
     }
 }

@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class Heavy : Attacker
 {
-    public Heavy(ref Player owner, ref HexCell position, int level)
+    public Heavy(ref Player owner, HexCell position, int level)
     {
         this.owner = owner;
         this.position = position;

@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class Worker : Unit
 {
-    public Worker(ref Player owner, ref HexCell position)
+    public Worker(ref Player owner, HexCell position)
     {
         this.owner = owner;
         this.position = position;

@@ -4,5 +4,57 @@ using UnityEngine;
 
 public class Heavy : Attacker
 {
-    // Soon (TM)
+    public Heavy(ref Player owner, ref HexCell position, int level)
+    {
+        this.owner = owner;
+        this.position = position;
+        type = UnitType.REGULAR;
+        this.level = level;
+
+        upgradeHP = 20;
+        hp = (isUpgraded() ? 350 : 120) - upgradeHP + (level * upgradeHP);
+        maxHP = hp;
+
+        upgradeATK = 10;
+        defaultATK = (isUpgraded() ? 210 : 100) - upgradeATK + (level * upgradeATK);
+
+        range = (isUpgraded() ? 2 : 1);
+        mvtSPD = 1;
+
+        dmgMultCity = (isUpgraded() ? 2f : 1.75f);
+        dmgMult = new Dictionary<UnitType, float>()
+        {
+            { UnitType.SETTLER, 0.5f },
+            { UnitType.WORKER, 0.5f },
+            { UnitType.REGULAR, 0.5f },
+            { UnitType.RANGED, 0.5f },
+            { UnitType.HEAVY, 1f },
+        };
+    }
+
+    public void levelUp()
+    {
+        if (isMaxed())
+        {
+            return;
+        }
+        else if (level == 10)
+        {
+            range = 2;
+            hp = 350;
+            maxHP = 350;
+
+            defaultATK = 210;
+
+            dmgMultCity = 2f;
+        }
+        else
+        {
+            maxHP += upgradeHP;
+            hp += upgradeHP;
+            defaultATK += upgradeATK;
+        }
+
+        level++;
+    }
 }

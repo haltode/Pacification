@@ -4,7 +4,6 @@ using UnityEngine;
 
 public class Attacker : Unit
 {
-    protected int defaultHP;
     protected int maxHP;
     protected int upgradeHP;
     protected int defaultATK;
@@ -12,13 +11,8 @@ public class Attacker : Unit
     protected int range;
     protected int level;
 
-    private Dictionary<Unit.UnitType, float> dmgMult = new Dictionary<UnitType, float>();
-
-    public int DefaultHP
-    {
-        get { return defaultHP; }
-        set { defaultHP = value; }
-    }
+    protected Dictionary<Unit.UnitType, float> dmgMult;
+    protected float dmgMultCity;
 
     public int MaxHP
     {
@@ -56,6 +50,16 @@ public class Attacker : Unit
         set { level = value; }
     }
 
+    public bool isUpgraded()
+    {
+        return level > 10;
+    }
+
+    public bool isMaxed()
+    {
+        return level == 20;
+    }
+
     // A voir avec l'équilibrage si on veut que l'attaquant prenne des dégats ou non
     public void Attack(ref Unit target)
     {
@@ -72,7 +76,7 @@ public class Attacker : Unit
     /*
     public void Attack(ref City target)
     {
-        target.Hp -= ((defaultATK - upgradeATK) + upgradeATK * level);
+        target.Hp -= (int)((float)((defaultATK - upgradeATK) + upgradeATK * level) * dmgMultcity);
 
         if (target.Hp <= 0)
         {

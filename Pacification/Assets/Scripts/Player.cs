@@ -7,6 +7,8 @@ public class Player
     private int unitID;
     private int cityID;
 
+    public int money;
+
     private Dictionary<int, Unit> playerUnits;
     //private Dictionary<int, City> playerCities;
     // TODO : couleur du joueur
@@ -18,6 +20,8 @@ public class Player
     {
         unitID = 0;
         cityID = 0;
+
+        money = 1000;
 
         playerUnits = new Dictionary<int, Unit>();
         //playerCities = new Dictionary<int, City>();

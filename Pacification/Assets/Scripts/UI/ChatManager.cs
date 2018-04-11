@@ -10,10 +10,13 @@ public class ChatManager : MonoBehaviour {
     public GameObject privateMessagePrefab;
     public GameObject alertMessagePrefab;
 
+    public InputField i;
     public AudioSource notification;
 
     private void Start()
     {
+        i = GameObject.Find("MessageInput").GetComponent<InputField>();
+
         if(!GameManager.Instance.editor)
             notification = GetComponent<AudioSource>();
         else
@@ -28,6 +31,8 @@ public class ChatManager : MonoBehaviour {
 
     void Update()
     {
+        if(Input.GetKeyUp(KeyCode.T))
+            i.ActivateInputField();
         if(Input.GetKey("return"))
             SendChatMessage();
     }
@@ -50,8 +55,6 @@ public class ChatManager : MonoBehaviour {
 
     public void SendChatMessage()
     {
-        InputField i = GameObject.Find("MessageInput").GetComponent<InputField>();
-
         if(i.text == "")
             return;
         Client client = FindObjectOfType<Client>();

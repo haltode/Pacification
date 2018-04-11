@@ -96,11 +96,49 @@ public class ChatManager : MonoBehaviour {
 
                 case "kick":
                     string kicked = ExtractCommand(ref index, i.text);
+                    if(kicked == "")
+                        ChatMessage("You didn't specified the player to kick", 2);
                     string kickMessage = ExtractMessage(++index, i.text);
                     client.Send("CKIK|" + kicked + "|" + kickMessage);
                     break;
 
                 case "help":
+                    string helpCommand = ExtractCommand(ref index, i.text);
+                    if(helpCommand == "")
+                        ChatMessage("The available commands are : msg, clear, unit, kick", 2);
+                    else
+                    {
+                        switch(helpCommand)
+                        {
+                            case "msg":
+                                ChatMessage("Use to talk with another player in private : /msg playerName message", 2);
+                                break;
+
+                            case "god":
+                                ChatMessage("Use to cheat", 2);
+                                break;
+
+                            case "clear":
+                                ChatMessage("Use to clear something (messages by default): /clear [msg.message.messages.unit.units]", 2);
+                                break;
+
+                            case "unit":
+                                ChatMessage("Use to spawn unit : /unit ????", 2);
+                                break;
+
+                            case "kick":
+                                ChatMessage("Use to kick a player : /kick playerName [reason]", 2);
+                                break;
+
+                            case "help":
+                                ChatMessage("You need help...", 2);
+                                break;
+
+                            default:
+                                ChatMessage("ERROR: Unknown command \"" + helpCommand + "\"", 2);
+                                break;
+                        }
+                    }
                     break;
 
                 default:

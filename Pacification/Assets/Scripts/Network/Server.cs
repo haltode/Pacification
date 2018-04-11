@@ -187,6 +187,17 @@ public class Server : MonoBehaviour
 
                 Broadcast("SCNN|" + receivedData[1], clients);
                 break;
+
+            case "CKIK":
+                ServerClient clientKicked = clients.Find(clientMsp => clientMsp.clientName == receivedData[1]);
+                if(clientKicked != null)
+                    if(!clientKicked.isHost)
+                        Broadcast("SKIK|" + receivedData[2], clients.Find(clientMsp => clientMsp.clientName == receivedData[1]));
+                    else
+                        Broadcast("SMSE|The Host is unkickable! Long live the Host!", client);
+                else
+                    Broadcast("SMSE| ERROR : The player " + receivedData[1] + " is unreacheable", client);
+                break;
         }
     }
 }

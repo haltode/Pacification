@@ -60,10 +60,10 @@ public class ChatManager : MonoBehaviour {
         {
             int index = 1;
             string command = ExtractCommand(ref index, i.text);
+            index++;
             switch (command)
             {
                 case "msg":
-                    index++;
                     string receiver = ExtractCommand(ref index, i.text);
                     string message = ExtractMessage(++index, i.text);
                     client.Send("CMSP|"  + receiver + "|" + message);
@@ -95,8 +95,9 @@ public class ChatManager : MonoBehaviour {
                     break;
 
                 case "kick":
-                    //Send message kick
-                    ChatMessage("You kicked someone !", 2);
+                    string kicked = ExtractCommand(ref index, i.text);
+                    string kickMessage = ExtractMessage(++index, i.text);
+                    client.Send("CKIK|" + kicked + "|" + kickMessage);
                     break;
 
                 case "help":

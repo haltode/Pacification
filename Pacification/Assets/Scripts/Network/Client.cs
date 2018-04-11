@@ -120,7 +120,11 @@ public class Client : MonoBehaviour
                 break;
 
             case "SDEC":
-                // One user has disconnected
+                FindObjectOfType<ChatManager>().ChatMessage(receivedData[1] + " left the game.", 2);
+                break;
+
+            case "SKIK":
+                FindObjectOfType<ButtonManager>().DeconnectionButton();
                 break;
 
             case "SLOD":

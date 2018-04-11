@@ -64,7 +64,7 @@ public class GameManager : MonoBehaviour
     public void MainMenuEditorButton()
     {
         editor = true;
-        SceneManager.LoadScene("Editor");
+        SceneManager.LoadScene("Map");
     }
 
     public void MainMenuSoloButton()

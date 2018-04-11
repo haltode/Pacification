@@ -3,22 +3,36 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class ChatManager : MonoBehaviour {
+public class ChatManager : MonoBehaviour
+{
 
     public Transform chatMessageContainer;
     public GameObject messagePrefab;
     public GameObject privateMessagePrefab;
     public GameObject alertMessagePrefab;
 
-    public InputField i;
+    public InputField input;
     public AudioSource notification;
+
+    public Client client;
+    public ButtonManager buttonManager;
 
     List<GameObject> allMessages;
 
-    private void Start()
+    public enum Type
     {
-        i = GameObject.Find("MessageInput").GetComponent<InputField>();
+        NORMAL,
+        PRIVATE,
+        ALERT
+    }
+
+    void Start()
+    {
+        input = GameObject.Find("MessageInput").GetComponent<InputField>();
         allMessages = new List<GameObject>();
+
+        client = FindObjectOfType<Client>();
+        buttonManager = FindObjectOfType<ButtonManager>();
 
         if(!GameManager.Instance.editor)
             notification = GetComponent<AudioSource>();
@@ -35,17 +49,17 @@ public class ChatManager : MonoBehaviour {
     void Update()
     {
         if(Input.GetKeyUp(KeyCode.T))
-            i.ActivateInputField();
+            input.ActivateInputField();
         if(Input.GetKey("return"))
             SendChatMessage();
     }
 
-    public void ChatMessage(string message, int type)
+    public void ChatMessage(string message, Type type)
     {
         GameObject msg;
-        if(type == 0)
+        if(type == Type.NORMAL)
             msg = Instantiate(messagePrefab) as GameObject;
-        else if(type == 1)
+        else if(type == Type.PRIVATE)
             msg = Instantiate(privateMessagePrefab) as GameObject;
         else
             msg = Instantiate(alertMessagePrefab) as GameObject;
@@ -60,29 +74,28 @@ public class ChatManager : MonoBehaviour {
 
     public void SendChatMessage()
     {
-        if(i.text == "")
+        if(input.text == "")
             return;
-        Client client = FindObjectOfType<Client>();
 
-        if(i.text[0] == '/')
+        if(input.text[0] == '/')
         {
             int index = 1;
-            string command = ExtractCommand(ref index, i.text);
+            string command = ExtractCommand(ref index, input.text);
             index++;
             switch(command)
             {
                 case "msg":
-                    string receiver = ExtractCommand(ref index, i.text);
-                    string message = ExtractMessage(++index, i.text);
+                    string receiver = ExtractCommand(ref index, input.text);
+                    string message = ExtractMessage(++index, input.text);
                     client.Send("CMSP|" + receiver + "|" + message);
                     break;
                 case "god":
-                    FindObjectOfType<ButtonManager>().CheatMode();
-                    ChatMessage("GODMOD command", 2);
+                    buttonManager.CheatMode();
+                    ChatMessage("GODMOD command", ChatManager.Type.ALERT);
                     break;
 
                 case "clear":
-                    string commandClear = ExtractCommand(ref index, i.text);
+                    string commandClear = ExtractCommand(ref index, input.text);
                     if(commandClear == "unit" || commandClear == "units")
                         FindObjectOfType<HexGrid>().ClearUnits();
                     else if(commandClear == "" || commandClear == "msg" || commandClear == "message" || commandClear == "messages")
@@ -96,80 +109,80 @@ public class ChatManager : MonoBehaviour {
                         allMessages.Clear();
                     }
                     else
-                        ChatMessage("ERROR: Unknown command \"/clear " + commandClear + "\"", 2);
+                        ChatMessage("ERROR: Unknown command \"/clear " + commandClear + "\"", Type.ALERT);
                     break;
 
                 case "unit":
-                    string commandUnit = ExtractCommand(ref index, i.text);
+                    string commandUnit = ExtractCommand(ref index, input.text);
 
 
-                    ChatMessage("ERROR: Unknown command \"unit " + commandUnit + "\"", 2);
+                    ChatMessage("ERROR: Unknown command \"unit " + commandUnit + "\"", Type.ALERT);
                     break;
 
                 case "kick":
-                    string kicked = ExtractCommand(ref index, i.text);
+                    string kicked = ExtractCommand(ref index, input.text);
                     if(kicked == "")
-                        ChatMessage("You didn't specified the player to kick", 2);
-                    string kickMessage = ExtractMessage(++index, i.text);
+                        ChatMessage("You didn't specified the player to kick", Type.ALERT);
+                    string kickMessage = ExtractMessage(++index, input.text);
                     client.Send("CKIK|" + kicked + "|" + kickMessage);
                     break;
 
                 case "help":
-                    string helpCommand = ExtractCommand(ref index, i.text);
+                    string helpCommand = ExtractCommand(ref index, input.text);
                     if(helpCommand == "")
-                        ChatMessage("The available commands are : msg, clear, unit, kick", 2);
+                        ChatMessage("The available commands are : msg, clear, unit, kick", Type.ALERT);
                     else
                     {
                         switch(helpCommand)
                         {
                             case "msg":
-                                ChatMessage("Use to talk with another player in private : /msg playerName message", 2);
+                                ChatMessage("Use to talk with another player in private : /msg playerName message", Type.ALERT);
                                 break;
 
                             case "god":
-                                ChatMessage("Use to cheat", 2);
+                                ChatMessage("Use to cheat", Type.ALERT);
                                 break;
 
                             case "clear":
-                                ChatMessage("Use to clear something (messages by default): /clear [msg.message.messages.unit.units]", 2);
+                                ChatMessage("Use to clear something (messages by default): /clear [msg.message.messages.unit.units]", Type.ALERT);
                                 break;
 
                             case "unit":
-                                ChatMessage("Use to spawn unit : /unit ????", 2);
+                                ChatMessage("Use to spawn unit : /unit ????", Type.ALERT);
                                 break;
 
                             case "kick":
-                                ChatMessage("Use to kick a player : /kick playerName [reason]", 2);
+                                ChatMessage("Use to kick a player : /kick playerName [reason]", Type.ALERT);
                                 break;
 
                             case "help":
-                                ChatMessage("You need help...", 2);
+                                ChatMessage("You need help...", Type.ALERT);
                                 break;
 
                             default:
-                                ChatMessage("ERROR: Unknown command \"" + helpCommand + "\"", 2);
+                                ChatMessage("ERROR: Unknown command \"" + helpCommand + "\"", Type.ALERT);
                                 break;
                         }
                     }
                     break;
 
                 case "code":
-                    switch(ExtractCommand(ref index, i.text))
+                    switch(ExtractCommand(ref index, input.text))
                     {
                         case "coinage":
-                            FindObjectOfType<Client>().player.Money += 1000;
+                            client.player.Money += 1000;
                             break;
                     }
                     break;
 
                 default:
-                    ChatMessage("ERROR: Unknown command \"" + command + "\"", 2);
+                    ChatMessage("ERROR: Unknown command \"" + command + "\"", Type.ALERT);
                     break;
             }
         }
         else
-            client.Send("CMSG|0|" + i.text);
-        i.text = "";
+            client.Send("CMSG|0|" + input.text);
+        input.text = "";
     }
 
     private string ExtractCommand(ref int index, string data)

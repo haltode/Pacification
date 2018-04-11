@@ -291,7 +291,7 @@ public class HexGrid : MonoBehaviour
         unit.Die();
     }
 
-    void ClearUnits()
+    public void ClearUnits()
     {
         for(int i = 0; i < units.Count; i++)
             units[i].Die();

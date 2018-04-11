@@ -59,9 +59,8 @@ public class ChatManager : MonoBehaviour {
         if(i.text[0] == '/')
         {
             int index = 1;
-            string test = ExtractCommand(ref index, i.text);
-            Debug.Log(test);
-            switch (test)
+            string command = ExtractCommand(ref index, i.text);
+            switch (command)
             {
                 case "msg":
                     index++;
@@ -71,28 +70,45 @@ public class ChatManager : MonoBehaviour {
                     break;
                 case "god":
                     FindObjectOfType<ButtonManager>().CheatMode();
+                    ChatMessage("GODMOD command", 2);
                     break;
 
                 case "clear":
+                    string commandClear = ExtractCommand(ref index, i.text);
+                    if(commandClear == "unit" || commandClear == "units")
+                        FindObjectOfType<HexGrid>().ClearUnits();
+                    else if (commandClear == "" || commandClear == "msg" || commandClear == "message" || commandClear == "messages")
+                    {
+                        GameObject[] messages = GameObject.FindGameObjectsWithTag("Message");
+                        foreach(GameObject bubble in messages)
+                            bubble.SetActive(false);
+                    }
+                    else
+                        ChatMessage("ERROR: Unknown command \"/clear " + commandClear + "\"", 2);
                     break;
 
                 case "unit":
+                    string commandUnit = ExtractCommand(ref index, i.text);
+
+
+                    ChatMessage("ERROR: Unknown command \"unit " + commandUnit + "\"", 2);
                     break;
 
                 case "kick":
+                    //Send message kick
+                    ChatMessage("You kicked someone !", 2);
                     break;
 
                 case "help":
                     break;
 
                 default:
-                    ChatMessage("ERROR: Unknown command", 2);
+                    ChatMessage("ERROR: Unknown command \""+ command + "\"", 2);
                     break;
             }
         }
         else
             client.Send("CMSG|0|" + i.text);
-
         i.text = "";
     }
 

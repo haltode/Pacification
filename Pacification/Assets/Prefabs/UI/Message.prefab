@@ -42,7 +42,7 @@ GameObject:
   - component: {fileID: 114149114539912920}
   m_Layer: 5
   m_Name: Message
-  m_TagString: Untagged
+  m_TagString: Message
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0

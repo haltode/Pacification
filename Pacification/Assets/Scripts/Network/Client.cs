@@ -102,6 +102,10 @@ public class Client : MonoBehaviour
                 FindObjectOfType<ChatManager>().ChatMessage(receivedData[2], int.Parse(receivedData[1]));
                 break;
 
+            case "SMSE":
+                FindObjectOfType<ChatManager>().ChatMessage(receivedData[1], 2);
+                break;
+
             /////// REGISTER ON SERVER
             case "SWHO":
                 for(int i = 1; i < receivedData.Length - 1; ++i)

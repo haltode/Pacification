@@ -13,9 +13,12 @@ public class ChatManager : MonoBehaviour {
     public InputField i;
     public AudioSource notification;
 
+    List<GameObject> allMessages;
+
     private void Start()
     {
         i = GameObject.Find("MessageInput").GetComponent<InputField>();
+        allMessages = new List<GameObject>();
 
         if(!GameManager.Instance.editor)
             notification = GetComponent<AudioSource>();
@@ -50,6 +53,8 @@ public class ChatManager : MonoBehaviour {
         msg.transform.SetParent(chatMessageContainer);
         msg.GetComponentInChildren<Text>().text = message;
 
+        allMessages.Add(msg);
+
         notification.Play();
     }
 
@@ -64,12 +69,12 @@ public class ChatManager : MonoBehaviour {
             int index = 1;
             string command = ExtractCommand(ref index, i.text);
             index++;
-            switch (command)
+            switch(command)
             {
                 case "msg":
                     string receiver = ExtractCommand(ref index, i.text);
                     string message = ExtractMessage(++index, i.text);
-                    client.Send("CMSP|"  + receiver + "|" + message);
+                    client.Send("CMSP|" + receiver + "|" + message);
                     break;
                 case "god":
                     FindObjectOfType<ButtonManager>().CheatMode();
@@ -80,11 +85,15 @@ public class ChatManager : MonoBehaviour {
                     string commandClear = ExtractCommand(ref index, i.text);
                     if(commandClear == "unit" || commandClear == "units")
                         FindObjectOfType<HexGrid>().ClearUnits();
-                    else if (commandClear == "" || commandClear == "msg" || commandClear == "message" || commandClear == "messages")
+                    else if(commandClear == "" || commandClear == "msg" || commandClear == "message" || commandClear == "messages")
                     {
-                        GameObject[] messages = GameObject.FindGameObjectsWithTag("Message");
-                        foreach(GameObject bubble in messages)
-                            bubble.SetActive(false);
+                        int indexMessages = allMessages.Count - 1;
+                        while(indexMessages >= 0)
+                        {
+                            Destroy(allMessages[indexMessages]);
+                            --indexMessages;
+                        }
+                        allMessages.Clear();
                     }
                     else
                         ChatMessage("ERROR: Unknown command \"/clear " + commandClear + "\"", 2);
@@ -144,8 +153,17 @@ public class ChatManager : MonoBehaviour {
                     }
                     break;
 
+                case "code":
+                    switch(ExtractCommand(ref index, i.text))
+                    {
+                        case "coinage":
+                            FindObjectOfType<Client>().player.Money += 1000;
+                            break;
+                    }
+                    break;
+
                 default:
-                    ChatMessage("ERROR: Unknown command \""+ command + "\"", 2);
+                    ChatMessage("ERROR: Unknown command \"" + command + "\"", 2);
                     break;
             }
         }

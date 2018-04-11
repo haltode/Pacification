@@ -7,7 +7,7 @@ public class Player
     private int unitID;
     private int cityID;
 
-    public int money;
+    private int money;
 
     private Dictionary<int, Unit> playerUnits;
     //private Dictionary<int, City> playerCities;
@@ -54,4 +54,10 @@ public class Player
         playerCities.Remove(city.Id);
     }
     */
+
+    public int Money
+    {
+        get { return money; }
+        set { money = value; }
+    }
 }

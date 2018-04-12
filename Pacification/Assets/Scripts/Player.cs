@@ -16,7 +16,7 @@ public class Player
 
     public bool canPlay;
 
-    public Player(string name)
+    public Player()
     {
         unitID = 0;
         cityID = 0;

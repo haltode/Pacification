@@ -19,7 +19,7 @@ public class ChatManager : MonoBehaviour
 
     List<GameObject> allMessages;
 
-    public enum Type
+    public enum MessageType
     {
         NORMAL,
         PRIVATE,
@@ -54,12 +54,12 @@ public class ChatManager : MonoBehaviour
             SendChatMessage();
     }
 
-    public void ChatMessage(string message, Type type)
+    public void ChatMessage(string message, MessageType type)
     {
         GameObject msg;
-        if(type == Type.NORMAL)
+        if(type == MessageType.NORMAL)
             msg = Instantiate(messagePrefab) as GameObject;
-        else if(type == Type.PRIVATE)
+        else if(type == MessageType.PRIVATE)
             msg = Instantiate(privateMessagePrefab) as GameObject;
         else
             msg = Instantiate(alertMessagePrefab) as GameObject;
@@ -91,7 +91,7 @@ public class ChatManager : MonoBehaviour
                     break;
                 case "god":
                     buttonManager.CheatMode();
-                    ChatMessage("GODMOD command", ChatManager.Type.ALERT);
+                    ChatMessage("GODMOD command", ChatManager.MessageType.ALERT);
                     break;
 
                 case "clear":
@@ -109,20 +109,20 @@ public class ChatManager : MonoBehaviour
                         allMessages.Clear();
                     }
                     else
-                        ChatMessage("ERROR: Unknown command \"/clear " + commandClear + "\"", Type.ALERT);
+                        ChatMessage("ERROR: Unknown command \"/clear " + commandClear + "\"", MessageType.ALERT);
                     break;
 
                 case "unit":
                     string commandUnit = ExtractCommand(ref index, input.text);
 
 
-                    ChatMessage("ERROR: Unknown command \"unit " + commandUnit + "\"", Type.ALERT);
+                    ChatMessage("ERROR: Unknown command \"unit " + commandUnit + "\"", MessageType.ALERT);
                     break;
 
                 case "kick":
                     string kicked = ExtractCommand(ref index, input.text);
                     if(kicked == "")
-                        ChatMessage("You didn't specified the player to kick", Type.ALERT);
+                        ChatMessage("You didn't specified the player to kick", MessageType.ALERT);
                     string kickMessage = ExtractMessage(++index, input.text);
                     client.Send("CKIK|" + kicked + "|" + kickMessage);
                     break;
@@ -130,37 +130,37 @@ public class ChatManager : MonoBehaviour
                 case "help":
                     string helpCommand = ExtractCommand(ref index, input.text);
                     if(helpCommand == "")
-                        ChatMessage("The available commands are : msg, clear, unit, kick", Type.ALERT);
+                        ChatMessage("The available commands are : msg, clear, unit, kick", MessageType.ALERT);
                     else
                     {
                         switch(helpCommand)
                         {
                             case "msg":
-                                ChatMessage("Use to talk with another player in private : /msg playerName message", Type.ALERT);
+                                ChatMessage("Use to talk with another player in private : /msg playerName message", MessageType.ALERT);
                                 break;
 
                             case "god":
-                                ChatMessage("Use to cheat", Type.ALERT);
+                                ChatMessage("Use to cheat", MessageType.ALERT);
                                 break;
 
                             case "clear":
-                                ChatMessage("Use to clear something (messages by default): /clear [msg.message.messages.unit.units]", Type.ALERT);
+                                ChatMessage("Use to clear something (messages by default): /clear [msg.message.messages.unit.units]", MessageType.ALERT);
                                 break;
 
                             case "unit":
-                                ChatMessage("Use to spawn unit : /unit ????", Type.ALERT);
+                                ChatMessage("Use to spawn unit : /unit ????", MessageType.ALERT);
                                 break;
 
                             case "kick":
-                                ChatMessage("Use to kick a player : /kick playerName [reason]", Type.ALERT);
+                                ChatMessage("Use to kick a player : /kick playerName [reason]", MessageType.ALERT);
                                 break;
 
                             case "help":
-                                ChatMessage("You need help...", Type.ALERT);
+                                ChatMessage("You need help...", MessageType.ALERT);
                                 break;
 
                             default:
-                                ChatMessage("ERROR: Unknown command \"" + helpCommand + "\"", Type.ALERT);
+                                ChatMessage("ERROR: Unknown command \"" + helpCommand + "\"", MessageType.ALERT);
                                 break;
                         }
                     }
@@ -176,7 +176,7 @@ public class ChatManager : MonoBehaviour
                     break;
 
                 default:
-                    ChatMessage("ERROR: Unknown command \"" + command + "\"", Type.ALERT);
+                    ChatMessage("ERROR: Unknown command \"" + command + "\"", MessageType.ALERT);
                     break;
             }
         }

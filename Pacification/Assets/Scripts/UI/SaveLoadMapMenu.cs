@@ -79,6 +79,8 @@ public class SaveLoadMapMenu : MonoBehaviour
             if(header == MapFormatVersion)
             {
                 hexGrid.Load(reader);
+                HexMapEditor mapEditor = FindObjectOfType<HexMapEditor>();
+                mapEditor.hexGrid = hexGrid;
                 HexMapCamera.ValidatePosition();
             }
             else

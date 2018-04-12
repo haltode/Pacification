@@ -81,14 +81,17 @@ public class Client : MonoBehaviour
                 break;
 
             case "SUNC":
+                mapEditor = FindObjectOfType<HexMapEditor>();
                 mapEditor.NetworkCreateUnit(receivedData[1]);
                 break;
 
             case "SUND":
+                mapEditor = FindObjectOfType<HexMapEditor>();
                 mapEditor.NetworkDestroyUnit(receivedData[1]);
                 break;
 
             case "SEDI":
+                mapEditor = FindObjectOfType<HexMapEditor>();
                 mapEditor.NetworkEditCell(receivedData[1]);
                 break;
 
@@ -98,11 +101,11 @@ public class Client : MonoBehaviour
 
             /////// CHAT
             case "SMSG":
-                FindObjectOfType<ChatManager>().ChatMessage(receivedData[2], (ChatManager.Type)int.Parse(receivedData[1]));
+                FindObjectOfType<ChatManager>().ChatMessage(receivedData[2], (ChatManager.MessageType)int.Parse(receivedData[1]));
                 break;
 
             case "SMSE":
-                FindObjectOfType<ChatManager>().ChatMessage(receivedData[1], ChatManager.Type.ALERT);
+                FindObjectOfType<ChatManager>().ChatMessage(receivedData[1], ChatManager.MessageType.ALERT);
                 break;
 
             /////// REGISTER ON SERVER
@@ -119,7 +122,7 @@ public class Client : MonoBehaviour
                 break;
 
             case "SDEC":
-                FindObjectOfType<ChatManager>().ChatMessage(receivedData[1] + " left the game.", ChatManager.Type.ALERT);
+                FindObjectOfType<ChatManager>().ChatMessage(receivedData[1] + " left the game.", ChatManager.MessageType.ALERT);
                 break;
 
             case "SKIK":
@@ -133,14 +136,8 @@ public class Client : MonoBehaviour
             case "SMAP":
                 MapSenderReceiver mapLoader = FindObjectOfType<MapSenderReceiver>();
                 mapLoader.StartGame(receivedData[1]);
-                LoadMapComponent();
                 break;
         }
-    }
-
-    void LoadMapComponent()
-    {
-        mapEditor = FindObjectOfType<HexMapEditor>();
     }
 
     private void UserConnected(string name, bool host)

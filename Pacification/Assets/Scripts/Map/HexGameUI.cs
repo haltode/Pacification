@@ -105,9 +105,12 @@ public class HexGameUI : MonoBehaviour
         int zEnd = int.Parse(receiverdData[3]);
 
         HexCell cellStart = grid.GetCell(new HexCoordinates(xStart, zStart));
-        HexCell cellEnd = grid.GetCell(new HexCoordinates(xStart, zStart));
+        HexCell cellEnd = grid.GetCell(new HexCoordinates(xEnd, zEnd));
 
         grid.SearchPath(cellStart, cellEnd, 24);
+
+        Debug.Log(cellStart.Unit == null);
+
         cellStart.Unit.Travel(grid.GetPath());
         grid.ClearPath();
     }

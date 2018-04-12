@@ -13,11 +13,10 @@ public class MapSenderReceiver : MonoBehaviour {
     {
         Server server = FindObjectOfType<Server>();
         saveAndLoad = Instantiate(SaveAndLoadPrefab);
+        path = Path.Combine(Application.persistentDataPath, "temp");
 
         if(!server)
             return;
-        
-        path = Path.Combine(Application.persistentDataPath, "temp");
 
         saveAndLoad.Save(path);
         string map = File.ReadAllText(path);

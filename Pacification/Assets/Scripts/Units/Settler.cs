@@ -19,6 +19,7 @@ public class Settler : Unit
 
     public void Settle()
     {
-        // TODO quand City.cs sera fait
+        new City(ref owner, position);
+        owner.RemoveUnit(this);
     }
 }

@@ -61,11 +61,6 @@ public class Unit
         return (unit.Type == UnitType.REGULAR || unit.Type == UnitType.RANGED || unit.Type == UnitType.HEAVY);
     }
 
-    public HexCoordinates GetCoordinates()
-    {
-        return position.coordinates;
-    }
-
     public void MoveTo (HexCell target)
     {
         position = target;

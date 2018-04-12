@@ -71,19 +71,17 @@ public class Attacker : Unit
         {
             target.Owner.RemoveUnit(target);
             target.Position.Unit.Die();
-            target = null;
         }
     }
-    /*
+    
     public void Attack(ref City target)
     {
-        target.Hp -= (int)((float)((defaultATK - upgradeATK) + upgradeATK * level) * dmgMultcity);
+        target.Hp -= (int)((float)((defaultATK - upgradeATK) + upgradeATK * level) * dmgMultCity);
 
         if (target.Hp <= 0)
         {
             target.Owner.RemoveCity(target);
-            Destroy(target);
         }
     }
-    */
+    
 }

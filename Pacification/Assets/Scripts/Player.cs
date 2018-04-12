@@ -10,7 +10,7 @@ public class Player
     private int money;
 
     private Dictionary<int, Unit> playerUnits;
-    //private Dictionary<int, City> playerCities;
+    private Dictionary<int, City> playerCities;
     // TODO : couleur du joueur
     // TODO : tech tree
 
@@ -24,7 +24,7 @@ public class Player
         money = 1000;
 
         playerUnits = new Dictionary<int, Unit>();
-        //playerCities = new Dictionary<int, City>();
+        playerCities = new Dictionary<int, City>();
 
         canPlay = false;
     }
@@ -40,20 +40,23 @@ public class Player
     public void RemoveUnit(Unit unit)
     {
         playerUnits.Remove(unit.Id);
+        unit = null;
     }
-    /*
-    public void AddCity(City city)
+    
+    public int AddCity(City city)
     {
         cityID++;
         playerCities.Add(cityID, city);
 
         return cityID;
     }
+
     public void RemoveCity(City city)
     {
         playerCities.Remove(city.Id);
+        city = null;
     }
-    */
+    
 
     public int Money
     {

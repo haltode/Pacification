@@ -67,12 +67,12 @@ public class Server : MonoBehaviour
         }
     }
 
-    private void StartListening()
+    void StartListening()
     {
         server.BeginAcceptTcpClient(AcceptTcpClient, server);
     }
 
-    private void AcceptTcpClient(IAsyncResult ia)
+    void AcceptTcpClient(IAsyncResult ia)
     {
         if(clients.Count == playerNumber)
             return;
@@ -91,7 +91,7 @@ public class Server : MonoBehaviour
         Broadcast("SWHO|"+ allUsers, clients[clients.Count - 1]);
     }
 
-    private bool IsConnected(TcpClient client)
+    bool IsConnected(TcpClient client)
     {
         try
         {
@@ -134,12 +134,12 @@ public class Server : MonoBehaviour
             Broadcast("SYGO", clients[0]);
         }
     }
-    private void Broadcast(string data, ServerClient client)
+    void Broadcast(string data, ServerClient client)
     {
         Broadcast(data, new List<ServerClient> { client });
     }
 
-    private void Read(ServerClient client, string data)
+    void Read(ServerClient client, string data)
     {
         Debug.Log("Server received : " + data);
 

@@ -21,7 +21,7 @@ public class Client : MonoBehaviour
     private HexMapEditor mapEditor;
     public Player player;
 
-    private void Start()
+    void Start()
     {
         DontDestroyOnLoad(gameObject);
         player = new Player();
@@ -49,7 +49,7 @@ public class Client : MonoBehaviour
         return isSocketStarted;
     }
 
-    private void Update()
+    void Update()
     {
         if(isSocketStarted && stream.DataAvailable)
         {
@@ -68,7 +68,7 @@ public class Client : MonoBehaviour
         writer.Flush();
     }
 
-    private void Read(string data)
+    void Read(string data)
     {
         Debug.Log("Client " + clientName + " received: " + data);
 
@@ -140,18 +140,18 @@ public class Client : MonoBehaviour
         }
     }
 
-    private void UserConnected(string name, bool host)
+    void UserConnected(string name, bool host)
     {
         GameClient client = new GameClient { name = name };
         players.Add(client);
     }
 
-    private void OnApplicationQuit()
+    void OnApplicationQuit()
     {
         CloseSocket();
     }
 
-    private void OnDisable()
+    void OnDisable()
     {
         CloseSocket();
     }

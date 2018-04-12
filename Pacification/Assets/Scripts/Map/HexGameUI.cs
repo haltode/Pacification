@@ -10,7 +10,7 @@ public class HexGameUI : MonoBehaviour
 
     Client client;
 
-    private void Start()
+    void Start()
     {
         grid = FindObjectOfType<HexGrid>();
         client = FindObjectOfType<Client>();
@@ -79,7 +79,6 @@ public class HexGameUI : MonoBehaviour
             {
                 Debug.Log("test : " + grid.GetPath().Count);
                 selectedUnit.Travel(grid.GetPath());
-                grid.ClearPath();
             }
             else
             {
@@ -107,9 +106,8 @@ public class HexGameUI : MonoBehaviour
         HexCell cellStart = grid.GetCell(new HexCoordinates(xStart, zStart));
         HexCell cellEnd = grid.GetCell(new HexCoordinates(xEnd, zEnd));
 
-        grid.SearchPath(cellStart, cellEnd, 24);
-
-        Debug.Log(cellStart.Unit == null);
+        grid.ClearPath();
+        grid.FindPath(cellStart, cellEnd, 24);
 
         cellStart.Unit.Travel(grid.GetPath());
         grid.ClearPath();

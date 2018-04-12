@@ -24,14 +24,13 @@ public class GameManager : MonoBehaviour
 
     public bool editor;
 
-    private void Start()
+    void Start()
     {
         Instance = this;
         DontDestroyOnLoad(this);
         waiting.SetActive(false);
         host.SetActive(false);
         joinMenu.SetActive(false);
-
     }
 
     public void StartingServer(bool isAlone = false)

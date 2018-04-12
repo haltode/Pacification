@@ -185,7 +185,7 @@ public class ChatManager : MonoBehaviour
         input.text = "";
     }
 
-    private string ExtractCommand(ref int index, string data)
+    string ExtractCommand(ref int index, string data)
     {
         string command = "";
         while(index < data.Length && data[index] != ' ')
@@ -196,7 +196,7 @@ public class ChatManager : MonoBehaviour
         return command;
     }
 
-    private string ExtractMessage(int index, string data)
+    string ExtractMessage(int index, string data)
     {
         string message = "";
         while (index < data.Length)

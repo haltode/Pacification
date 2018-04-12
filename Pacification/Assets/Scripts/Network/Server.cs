@@ -147,6 +147,9 @@ public class Server : MonoBehaviour
         switch(receivedData[0])
         {
             /////// GAMEPLAY
+            case "CMOV":
+                Broadcast("SMOV|" + receivedData[1], clients);
+                break;
             case "CUNI":
                 Broadcast("S" + receivedData[1] +"|"+ receivedData[2], clients);
                 break;

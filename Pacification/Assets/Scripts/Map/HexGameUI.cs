@@ -8,9 +8,12 @@ public class HexGameUI : MonoBehaviour
     HexCell currentCell;
     HexUnit selectedUnit;
 
+    Client client;
+
     private void Start()
     {
         grid = FindObjectOfType<HexGrid>();
+        client = FindObjectOfType<Client>();
     }
 
     void Update()
@@ -72,8 +75,40 @@ public class HexGameUI : MonoBehaviour
     {
         if(grid.HasPath)
         {
-            selectedUnit.Travel(grid.GetPath());
-            grid.ClearPath();
+            if(GameManager.Instance.editor)
+            {
+                Debug.Log("test : " + grid.GetPath().Count);
+                selectedUnit.Travel(grid.GetPath());
+                grid.ClearPath();
+            }
+            else
+            {
+                int xStart = selectedUnit.Location.coordinates.X;
+                int zStart = selectedUnit.Location.coordinates.Z;
+
+                int xEnd = currentCell.coordinates.X;
+                int zEnd = currentCell.coordinates.Z;
+
+                client.Send("CMOV|" + xStart + "#" + zStart + "#" + xEnd + "#" + zEnd);
+            }
         }
+    }
+
+    public void NetworkDoMove(string data)
+    {
+        string[] receiverdData = data.Split('#');
+
+        int xStart = int.Parse(receiverdData[0]);
+        int zStart = int.Parse(receiverdData[1]);
+
+        int xEnd = int.Parse(receiverdData[2]);
+        int zEnd = int.Parse(receiverdData[3]);
+
+        HexCell cellStart = grid.GetCell(new HexCoordinates(xStart, zStart));
+        HexCell cellEnd = grid.GetCell(new HexCoordinates(xStart, zStart));
+
+        grid.SearchPath(cellStart, cellEnd, 24);
+        cellStart.Unit.Travel(grid.GetPath());
+        grid.ClearPath();
     }
 }

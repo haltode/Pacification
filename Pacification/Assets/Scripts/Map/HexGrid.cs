@@ -22,8 +22,8 @@ public class HexGrid : MonoBehaviour
     HexCell[] cells;
     List<HexUnit> units = new List<HexUnit>();
 
-    HexCell currentPathStart, currentPathEnd;
-    bool currentPathExists;
+    public HexCell currentPathStart, currentPathEnd;
+    public bool currentPathExists;
 
     public bool HasPath
     {
@@ -191,7 +191,7 @@ public class HexGrid : MonoBehaviour
         ShowPath(speed);
     }
 
-    bool SearchPath(HexCell start, HexCell end, int speed)
+    public bool SearchPath(HexCell start, HexCell end, int speed)
     {
         PriorityQueue<HexCell> searchQueue = new PriorityQueue<HexCell>(HexCell.CompareCells);
         start.Distance = 0;
@@ -231,7 +231,6 @@ public class HexGrid : MonoBehaviour
                 searchQueue.Enqueue(neighbor);
             }
         }
-
         return false;
     }
 

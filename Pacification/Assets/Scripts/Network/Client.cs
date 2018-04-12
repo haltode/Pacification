@@ -77,7 +77,7 @@ public class Client : MonoBehaviour
         {
             /////// GAMEPLAY
             case "SMOV":
-                // Display another player move
+                FindObjectOfType<HexGameUI>().NetworkDoMove(receivedData[1]);
                 break;
 
             case "SUNC":

@@ -50,10 +50,6 @@ public class HexMapEditor : MonoBehaviour
                 else
                     CreateUnit();
             }
-            else if(Input.GetKeyDown(KeyCode.I))
-            {
-                DisplayInformations();
-            }
         }
         else
             previousCell = null;
@@ -63,13 +59,6 @@ public class HexMapEditor : MonoBehaviour
     {
         Ray inputRay = Camera.main.ScreenPointToRay(Input.mousePosition);
         return hexGrid.GetCell(inputRay);
-    }
-
-    void DisplayInformations()
-    {
-        HexCell currentCell = GetCellUnderCursor();
-        bool test = currentCell.Unit != null;
-        Debug.Log("Has a unit : " + test + " ");
     }
 
     void HandleInput()

@@ -179,7 +179,7 @@ public class Server : MonoBehaviour
                 if(clientMSGreceiver != null)
                     Broadcast("SMSG|1|" + client.clientName + " whispered >> " + receivedData[2], clients.Find(clientMsp => clientMsp.clientName == receivedData[1]));
                 else
-                    Broadcast("SMSE| ERROR : The player " + receivedData[2] + " is unreacheable", client);
+                    Broadcast("SMSE| ERROR : The player " + receivedData[1] + " is unreacheable", client);
                 break;
 
             /////// REGISTER A CLIENT

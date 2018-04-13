@@ -140,7 +140,11 @@ public class ChatManager : MonoBehaviour
                                 break;
 
                             case "god":
-                                ChatMessage("Use to cheat", MessageType.ALERT);
+                                ChatMessage("Use to open the editor menu", MessageType.ALERT);
+                                break;
+
+                            case "code":
+                                ChatMessage("Use this command to enter cheat code", MessageType.ALERT);
                                 break;
 
                             case "clear":

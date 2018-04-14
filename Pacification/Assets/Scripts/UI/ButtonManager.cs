@@ -8,13 +8,19 @@ public class ButtonManager : MonoBehaviour {
     public GameObject leftPannel;
     public GameObject rightPannel;
     public GameObject activePlayer;
+    public ControlsManager controls;
 
     public bool cheatmode = false;
     private float time = 0F;
 
-    public void Update()
+    void Start()
     {
-        if(Input.GetKey(KeyCode.Tab) && Time.time >= time)
+        controls = FindObjectOfType<ControlsManager>();
+    }
+
+    void Update()
+    {
+        if(Input.GetKey(controls.cheat) && Time.time >= time)
             CheatMode();
     }
 

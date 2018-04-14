@@ -16,6 +16,7 @@ public class ChatManager : MonoBehaviour
 
     public Client client;
     public ButtonManager buttonManager;
+    private ControlsManager controls;
 
     List<GameObject> allMessages;
 
@@ -28,6 +29,8 @@ public class ChatManager : MonoBehaviour
 
     void Start()
     {
+        controls = FindObjectOfType<ControlsManager>();
+
         input = GameObject.Find("MessageInput").GetComponent<InputField>();
         allMessages = new List<GameObject>();
 
@@ -48,9 +51,9 @@ public class ChatManager : MonoBehaviour
 
     void Update()
     {
-        if(Input.GetKeyUp(KeyCode.T))
+        if(Input.GetKeyUp(controls.chatFocus))
             input.ActivateInputField();
-        if(Input.GetKey("return"))
+        if(Input.GetKey(controls.chatSend))
             SendChatMessage();
     }
 

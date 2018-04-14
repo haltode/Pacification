@@ -21,6 +21,7 @@ public class GameManager : MonoBehaviour
 
     public Slider numberOfPlayerSlider;
     public HexGrid hexGrid;
+    public ControlsManager controls;
 
     public bool editor;
 

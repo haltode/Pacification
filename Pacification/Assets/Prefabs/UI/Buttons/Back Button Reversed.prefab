@@ -39,7 +39,6 @@ GameObject:
   - component: {fileID: 222459801048324132}
   - component: {fileID: 114939477944267456}
   - component: {fileID: 114552627397337652}
-  - component: {fileID: 114899131713875540}
   m_Layer: 5
   m_Name: Icon
   m_TagString: Untagged
@@ -247,18 +246,6 @@ MonoBehaviour:
         m_CallState: 2
     m_TypeName: UnityEngine.UI.Button+ButtonClickedEvent, UnityEngine.UI, Version=1.0.0.0,
       Culture=neutral, PublicKeyToken=null
---- !u!114 &114899131713875540
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1443507686585880}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f6f4ecbac5b32834bac184f22e455ea2, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  sound: {fileID: 8300000, guid: 9de752cd0c7642d4b845e9605748bde2, type: 3}
 --- !u!114 &114939477944267456
 MonoBehaviour:
   m_ObjectHideFlags: 1

@@ -1,0 +1,197 @@
+fileFormatVersion: 2
+guid: 0bc554b8c03b33d498a9649871ae7789
+timeCreated: 1524489201
+licenseType: Free
+ModelImporter:
+  serializedVersion: 22
+  fileIDToRecycleName:
+    100000: //RootNode
+    100002: Cube
+    100004: Cube.001
+    100006: Cube.002
+    100008: Cube.003
+    100010: Cylinder
+    100012: Cylinder.001
+    100014: Cylinder.002
+    100016: Cylinder.003
+    100018: Cylinder.004
+    100020: Ground
+    100022: Icosphere
+    100024: Icosphere.001
+    100026: Icosphere.002
+    100028: Icosphere.003
+    100030: Icosphere.004
+    100032: Icosphere.005
+    100034: Icosphere.006
+    100036: Icosphere.007
+    400000: //RootNode
+    400002: Cube
+    400004: Cube.001
+    400006: Cube.002
+    400008: Cube.003
+    400010: Cylinder
+    400012: Cylinder.001
+    400014: Cylinder.002
+    400016: Cylinder.003
+    400018: Cylinder.004
+    400020: Ground
+    400022: Icosphere
+    400024: Icosphere.001
+    400026: Icosphere.002
+    400028: Icosphere.003
+    400030: Icosphere.004
+    400032: Icosphere.005
+    400034: Icosphere.006
+    400036: Icosphere.007
+    2100000: Leaf
+    2100002: WoodPillar
+    2100004: Ground.001
+    2300000: Cube
+    2300002: Cube.001
+    2300004: Cube.002
+    2300006: Cube.003
+    2300008: Cylinder
+    2300010: Cylinder.001
+    2300012: Cylinder.002
+    2300014: Cylinder.003
+    2300016: Cylinder.004
+    2300018: Ground
+    2300020: Icosphere
+    2300022: Icosphere.001
+    2300024: Icosphere.002
+    2300026: Icosphere.003
+    2300028: Icosphere.004
+    2300030: Icosphere.005
+    2300032: Icosphere.006
+    2300034: Icosphere.007
+    3300000: Cube
+    3300002: Cube.001
+    3300004: Cube.002
+    3300006: Cube.003
+    3300008: Cylinder
+    3300010: Cylinder.001
+    3300012: Cylinder.002
+    3300014: Cylinder.003
+    3300016: Cylinder.004
+    3300018: Ground
+    3300020: Icosphere
+    3300022: Icosphere.001
+    3300024: Icosphere.002
+    3300026: Icosphere.003
+    3300028: Icosphere.004
+    3300030: Icosphere.005
+    3300032: Icosphere.006
+    3300034: Icosphere.007
+    4300000: Icosphere.007
+    4300002: Icosphere.006
+    4300004: Cube.003
+    4300006: Cube.002
+    4300008: Icosphere.005
+    4300010: Icosphere.004
+    4300012: Cube.001
+    4300014: Icosphere.003
+    4300016: Icosphere.002
+    4300018: Cylinder.004
+    4300020: Cylinder.003
+    4300022: Cylinder.002
+    4300024: Cylinder.001
+    4300026: Cylinder
+    4300028: Icosphere.001
+    4300030: Icosphere
+    4300032: Cube
+    4300034: Ground
+  externalObjects:
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Ground.001
+    second: {fileID: 2100000, guid: 207e54b32b43dc54ab670f5d259e5f62, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Leaf
+    second: {fileID: 2100000, guid: 321b2b4996fbf094cb27419c782a6279, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: WoodPillar
+    second: {fileID: 2100000, guid: 1684a4b733c3c414d8a13dd7fbc951c6, type: 2}
+  materials:
+    importMaterials: 1
+    materialName: 0
+    materialSearch: 1
+    materialLocation: 1
+  animations:
+    legacyGenerateAnimations: 4
+    bakeSimulation: 0
+    resampleCurves: 1
+    optimizeGameObjects: 0
+    motionNodeName: 
+    rigImportErrors: 
+    rigImportWarnings: 
+    animationImportErrors: 
+    animationImportWarnings: 
+    animationRetargetingWarnings: 
+    animationDoRetargetingWarnings: 0
+    importAnimatedCustomProperties: 0
+    animationCompression: 1
+    animationRotationError: 0.5
+    animationPositionError: 0.5
+    animationScaleError: 0.5
+    animationWrapMode: 0
+    extraExposedTransformPaths: []
+    extraUserProperties: []
+    clipAnimations: []
+    isReadable: 1
+  meshes:
+    lODScreenPercentages: []
+    globalScale: 1
+    meshCompression: 0
+    addColliders: 0
+    importVisibility: 1
+    importBlendShapes: 1
+    importCameras: 1
+    importLights: 1
+    swapUVChannels: 0
+    generateSecondaryUV: 0
+    useFileUnits: 1
+    optimizeMeshForGPU: 1
+    keepQuads: 0
+    weldVertices: 1
+    preserveHierarchy: 0
+    indexFormat: 0
+    secondaryUVAngleDistortion: 8
+    secondaryUVAreaDistortion: 15.000001
+    secondaryUVHardAngle: 88
+    secondaryUVPackMargin: 4
+    useFileScale: 1
+  tangentSpace:
+    normalSmoothAngle: 60
+    normalImportMode: 0
+    tangentImportMode: 3
+    normalCalculationMode: 4
+  importAnimation: 1
+  copyAvatar: 0
+  humanDescription:
+    serializedVersion: 2
+    human: []
+    skeleton: []
+    armTwist: 0.5
+    foreArmTwist: 0.5
+    upperLegTwist: 0.5
+    legTwist: 0.5
+    armStretch: 0.05
+    legStretch: 0.05
+    feetSpacing: 0
+    rootMotionBoneName: 
+    rootMotionBoneRotation: {x: 0, y: 0, z: 0, w: 1}
+    hasTranslationDoF: 0
+    hasExtraRoot: 0
+    skeletonHasParents: 1
+  lastHumanDescriptionAvatarSource: {instanceID: 0}
+  animationType: 0
+  humanoidOversampling: 1
+  additionalBone: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

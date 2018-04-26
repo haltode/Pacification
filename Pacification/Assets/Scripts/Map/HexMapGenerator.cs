@@ -9,15 +9,13 @@ public class HexMapGenerator : MonoBehaviour
     int cellCount;
 
     [Range(0f, 0.5f)]
-    public float jitterProbability = 0.25f;
+    public float jitterProbability = 0.2f;
     [Range(20, 200)]
-    public int chunkSizeMin = 30;
+    public int chunkSizeMin = 70;
     [Range(20, 200)]
-    public int chunkSizeMax = 100;
+    public int chunkSizeMax = 150;
     [Range(5, 95)]
-    public int landPercentage = 50;
-    [Range(0f, 1f)]
-    public float highRiseProbability = 0.25f;
+    public int landPercentage = 80;
     [Range(6, 10)]
     public int elevationMaximum = 8;
 
@@ -67,30 +65,25 @@ public class HexMapGenerator : MonoBehaviour
 
         HexCoordinates center = firstCell.coordinates;
         int size = 0;
-        int rise = Random.value < highRiseProbability ? 2 : 1;
 
-        grid.ClearPath();
-
-        while(size < chunkSize && !searchQueue.IsEmpty())
+        while(size < chunkSize && !searchQueue.IsEmpty() && budget > 0)
         {
             HexCell current = searchQueue.Dequeue();
-            int newElevation = current.Elevation + rise;
-            if(newElevation > elevationMaximum)
-                continue;
 
-            current.Elevation = newElevation;
-            if(newElevation >= 1)
-            {
-                --budget;
-                if(budget == 0)
-                    break;
-            }
+            if(current.Elevation + 1 > elevationMaximum)
+                continue;
+            ++current.Elevation;
+
+            --budget;
             ++size;
 
             for(HexDirection dir = HexDirection.NE; dir <= HexDirection.NW; ++dir)
             {
                 HexCell neighbor = current.GetNeighbor(dir);
-                if(neighbor == null || neighbor.Distance != int.MaxValue)
+                if(neighbor == null)
+                    continue;
+                // Slight chance to go back to a visited cell (to create random elevation)
+                if(neighbor.Distance != int.MaxValue && Random.value < 0.9)
                     continue;
 
                 neighbor.Distance = neighbor.coordinates.DistanceTo(center);
@@ -107,7 +100,7 @@ public class HexMapGenerator : MonoBehaviour
         for(int i = 0; i < cellCount; ++i)
         {
             HexCell cell = grid.GetCell(i);
-            cell.TerrainBiomeIndex = cell.Elevation;
+            cell.TerrainBiomeIndex = cell.Elevation / 2;
         }
     }
 

@@ -12,9 +12,9 @@ public class HexGridChunk : MonoBehaviour
     public HexFeatureManager features;
 
     // Splat map used to blend textures together
-    static Color color1 = new Color(1f, 0f, 0f);
-    static Color color2 = new Color(0f, 1f, 0f);
-    static Color color3 = new Color(0f, 0f, 1f);
+    static Color weights1 = new Color(1f, 0f, 0f);
+    static Color weights2 = new Color(0f, 1f, 0f);
+    static Color weights3 = new Color(0f, 0f, 1f);
 
     void Awake()
     {
@@ -75,10 +75,9 @@ public class HexGridChunk : MonoBehaviour
         Vector3 v2 = center + HexMetrics.GetSecondSolidCorner(dir);
 
         terrain.AddTriangle(center, v1, v2);
-        terrain.AddTriangleColor(color1);
         Vector3 biomes;
         biomes.x = biomes.y = biomes.z = cell.TerrainBiomeIndex;
-        terrain.AddTriangleTerrainBiomes(biomes);
+        terrain.AddTriangleCellData(biomes, weights1);
 
         TriangulateConnection(cell, v1, v2, dir);
 
@@ -101,11 +100,10 @@ public class HexGridChunk : MonoBehaviour
         {
             // Edges connections
             terrain.AddQuad(v1, v2, v3, v4);
-            terrain.AddQuadColor(color1, color2);
             Vector3 biomes;
             biomes.x = biomes.z = cell.TerrainBiomeIndex;
             biomes.y = neighbor.TerrainBiomeIndex;
-            terrain.AddQuadTerrainBiomes(biomes);
+            terrain.AddQuadCellData(biomes, weights1, weights2);;
 
             // Corners connections
             HexCell nextNeighbor = cell.GetNeighbor(dir.Next());
@@ -115,9 +113,8 @@ public class HexGridChunk : MonoBehaviour
                 v5.y = nextNeighbor.Elevation * HexMetrics.ElevationStep;
                 
                 terrain.AddTriangle(v2, v4, v5);
-                terrain.AddTriangleColor(color1, color2, color3);
                 biomes.z = nextNeighbor.TerrainBiomeIndex;
-                terrain.AddTriangleTerrainBiomes(biomes);
+                terrain.AddTriangleCellData(biomes, weights1, weights2, weights3);
             }    
         }
 

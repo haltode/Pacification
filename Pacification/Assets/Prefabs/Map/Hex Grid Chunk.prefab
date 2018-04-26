@@ -363,9 +363,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   useCollider: 0
-  useColors: 0
   useUVCoordinates: 1
-  useTerrainBiomes: 0
+  useCellData: 0
 --- !u!114 &114452804204635946
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -393,9 +392,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   useCollider: 0
-  useColors: 0
   useUVCoordinates: 0
-  useTerrainBiomes: 0
+  useCellData: 0
 --- !u!114 &114737684907628694
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -448,9 +446,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   useCollider: 1
-  useColors: 1
   useUVCoordinates: 0
-  useTerrainBiomes: 1
+  useCellData: 1
 --- !u!223 &223601443118581554
 Canvas:
   m_ObjectHideFlags: 1

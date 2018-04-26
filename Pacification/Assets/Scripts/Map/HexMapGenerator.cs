@@ -21,8 +21,6 @@ public class HexMapGenerator : MonoBehaviour
     [Range(6, 10)]
     public int elevationMaximum = 8;
 
-    PriorityQueue<HexCell> searchQueue;
-
     public void GenerateMap(int sizeX, int sizeZ)
     {
         Random.State originalRandomState = Random.state;
@@ -37,8 +35,6 @@ public class HexMapGenerator : MonoBehaviour
         Random.InitState(seed);
 
         cellCount = sizeX * sizeZ;
-        if(searchQueue == null)
-            searchQueue = new PriorityQueue<HexCell>(HexCell.CompareCells);
         grid.CreateMap(sizeX, sizeZ);
 
         CreateLand();
@@ -66,11 +62,14 @@ public class HexMapGenerator : MonoBehaviour
         HexCell firstCell = GetRandomCell();
         firstCell.Distance = 0;
         firstCell.SearchHeuristic = 0;
+        PriorityQueue<HexCell> searchQueue = new PriorityQueue<HexCell>(HexCell.CompareCells);
         searchQueue.Enqueue(firstCell);
 
         HexCoordinates center = firstCell.coordinates;
         int size = 0;
         int rise = Random.value < highRiseProbability ? 2 : 1;
+
+        grid.ClearPath();
 
         while(size < chunkSize && !searchQueue.IsEmpty())
         {
@@ -99,7 +98,6 @@ public class HexMapGenerator : MonoBehaviour
                 searchQueue.Enqueue(neighbor);
             }
         }
-        searchQueue.Clear();
 
         return budget;
     }

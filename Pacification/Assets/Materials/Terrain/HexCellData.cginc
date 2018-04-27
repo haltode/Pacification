@@ -4,7 +4,7 @@ float4 _HexCellData_TexelSize;
 float4 FilterCellData(float4 data)
 {
     #if defined(HEX_MAP_EDIT_MODE)
-        data.x = 1;
+        data.xy = 1;
     #endif
     return data;
 }
@@ -19,4 +19,11 @@ float4 GetCellData(appdata_full v, int index)
 	float4 data = tex2Dlod(_HexCellData, float4(uv, 0, 0));
 	data.w *= 255;
 	return FilterCellData(data);
+}
+
+float4 GetCellData (float2 cellDataCoordinates) {
+    float2 uv = cellDataCoordinates + 0.5;
+    uv.x *= _HexCellData_TexelSize.x;
+    uv.y *= _HexCellData_TexelSize.y;
+    return FilterCellData(tex2Dlod(_HexCellData, float4(uv, 0, 0)));
 }

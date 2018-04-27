@@ -364,7 +364,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   useCollider: 0
   useUVCoordinates: 1
-  useCellData: 0
+  useCellData: 1
 --- !u!114 &114452804204635946
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -393,7 +393,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   useCollider: 0
   useUVCoordinates: 0
-  useCellData: 0
+  useCellData: 1
 --- !u!114 &114737684907628694
 MonoBehaviour:
   m_ObjectHideFlags: 1

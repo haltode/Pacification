@@ -16,6 +16,12 @@ public class HexUnit : MonoBehaviour
 
     public static HexUnit unitPrefab;
 
+    public int Speed
+    {
+        // Temporary value
+        get { return 24; }
+    }
+
     public HexGrid Grid { get; set; }
 
     public HexCell Location
@@ -37,7 +43,7 @@ public class HexUnit : MonoBehaviour
 
     public bool IsValidDestination(HexCell cell)
     {
-        return !cell.IsUnderWater && !cell.Unit;
+        return cell.IsExplored && !cell.IsUnderWater && !cell.Unit;
     }
 
     public float Orientation
@@ -88,6 +94,22 @@ public class HexUnit : MonoBehaviour
         HexCoordinates coordinates = HexCoordinates.Load(reader);
         float orientation = reader.ReadSingle();
         grid.AddUnit(Instantiate(unitPrefab), grid.GetCell(coordinates), orientation);
+    }
+
+    public int GetMoveCost(HexCell current, HexCell dest, HexDirection dir)
+    {
+        if(!current.IsReachable(dir))
+            return -1;
+
+        // Road and flat terrains are faster than cliffs
+        int moveCost;
+        if(current.HasRoadThroughEdge(dir))
+            moveCost = 1;
+        else if(current.GetElevationDifference(dir) == 0)
+            moveCost = 5;
+        else
+            moveCost = 10;
+        return moveCost;
     }
 
     public void Travel(List<HexCell> path)

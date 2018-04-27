@@ -194,20 +194,21 @@ public class HexGrid : MonoBehaviour
             cells[i].Distance = int.MaxValue;    
     }
 
-    public void FindPath(HexCell start, HexCell end, int speed)
+    public void FindPath(HexCell start, HexCell end, HexUnit unit)
     {
         ClearPath();
         currentPathStart = start;
         currentPathEnd = end;
-        currentPathExists = SearchPath(start, end, speed);
-        ShowPath(speed);
+        currentPathExists = SearchPath(start, end, unit);
+        ShowPath(unit.Speed);
     }
 
-    public bool SearchPath(HexCell start, HexCell end, int speed)
+    public bool SearchPath(HexCell start, HexCell end, HexUnit unit)
     {
         PriorityQueue<HexCell> searchQueue = new PriorityQueue<HexCell>(HexCell.CompareCells);
         start.Distance = 0;
         searchQueue.Enqueue(start);
+        int speed = unit.Speed;
         while(!searchQueue.IsEmpty())
         {
             HexCell current = searchQueue.Dequeue();
@@ -218,20 +219,14 @@ public class HexGrid : MonoBehaviour
             for(HexDirection dir = HexDirection.NE; dir <= HexDirection.NW; ++dir)
             {
                 HexCell neighbor = current.GetNeighbor(dir);
-                if(neighbor == null || neighbor.Distance != int.MaxValue ||
-                    !current.IsReachable(dir) || neighbor.IsUnderWater ||
-                    neighbor.Unit)
+                if(neighbor == null || neighbor.Distance != int.MaxValue)
+                    continue;
+                if(!unit.IsValidDestination(neighbor))
                     continue;
 
-                // Road and flat terrains are faster than cliffs
-                int moveCost;
-                if(current.HasRoadThroughEdge(dir))
-                    moveCost = 1;
-                else if(current.GetElevationDifference(dir) == 0)
-                    moveCost = 5;
-                else
-                    moveCost = 10;
-
+                int moveCost = unit.GetMoveCost(current, neighbor, dir);
+                if(moveCost == -1)
+                    continue;
                 int newDist = current.Distance + moveCost;
                 int turn = (newDist - 1) / speed;
                 if(turn > currentTurn)

@@ -75,9 +75,9 @@ public class HexGridChunk : MonoBehaviour
         Vector3 v2 = center + HexMetrics.GetSecondSolidCorner(dir);
 
         terrain.AddTriangle(center, v1, v2);
-        Vector3 biomes;
-        biomes.x = biomes.y = biomes.z = cell.TerrainBiomeIndex;
-        terrain.AddTriangleCellData(biomes, weights1);
+        Vector3 indices;
+        indices.x = indices.y = indices.z = cell.Index;
+        terrain.AddTriangleCellData(indices, weights1);
 
         TriangulateConnection(cell, v1, v2, dir);
 
@@ -100,10 +100,10 @@ public class HexGridChunk : MonoBehaviour
         {
             // Edges connections
             terrain.AddQuad(v1, v2, v3, v4);
-            Vector3 biomes;
-            biomes.x = biomes.z = cell.TerrainBiomeIndex;
-            biomes.y = neighbor.TerrainBiomeIndex;
-            terrain.AddQuadCellData(biomes, weights1, weights2);;
+            Vector3 indices;
+            indices.x = indices.z = cell.Index;
+            indices.y = neighbor.Index;
+            terrain.AddQuadCellData(indices, weights1, weights2);;
 
             // Corners connections
             HexCell nextNeighbor = cell.GetNeighbor(dir.Next());
@@ -113,8 +113,8 @@ public class HexGridChunk : MonoBehaviour
                 v5.y = nextNeighbor.Elevation * HexMetrics.ElevationStep;
                 
                 terrain.AddTriangle(v2, v4, v5);
-                biomes.z = nextNeighbor.TerrainBiomeIndex;
-                terrain.AddTriangleCellData(biomes, weights1, weights2, weights3);
+                indices.z = nextNeighbor.Index;
+                terrain.AddTriangleCellData(indices, weights1, weights2, weights3);
             }    
         }
 

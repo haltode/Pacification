@@ -188,6 +188,12 @@ public class HexGrid : MonoBehaviour
         return cells[index];
     }
 
+    public void ResetDistances()
+    {
+        for(int i = 0; i < cells.Length; ++i)
+            cells[i].Distance = int.MaxValue;    
+    }
+
     public void FindPath(HexCell start, HexCell end, int speed)
     {
         ClearPath();
@@ -273,10 +279,10 @@ public class HexGrid : MonoBehaviour
 
     public void ClearPath()
     {
+        ResetDistances();
         currentPathExists = false;
         for(int i = 0; i < cells.Length; ++i)
         {
-            cells[i].Distance = int.MaxValue;
             cells[i].SetLabel(null);
             cells[i].DisableHighlight();
         }
@@ -285,8 +291,8 @@ public class HexGrid : MonoBehaviour
     List<HexCell> GetVisibleCells(HexCell start, int range)
     {
         List<HexCell> visibleCells = ListPool<HexCell>.Get();
-
         PriorityQueue<HexCell> searchQueue = new PriorityQueue<HexCell>(HexCell.CompareCells);
+        ResetDistances();
         start.Distance = 0;
         searchQueue.Enqueue(start);
         while(!searchQueue.IsEmpty())
@@ -313,7 +319,6 @@ public class HexGrid : MonoBehaviour
     public void IncreaseVisibility(HexCell start, int range)
     {
         List<HexCell> cells = GetVisibleCells(start, range);
-        Debug.Log(cells.Count);
         for(int i = 0; i < cells.Count; ++i)
             cells[i].IncreaseVisibility();
         ListPool<HexCell>.Add(cells);

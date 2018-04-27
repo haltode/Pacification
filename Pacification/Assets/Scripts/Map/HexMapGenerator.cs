@@ -3,10 +3,18 @@ using UnityEngine;
 
 public class HexMapGenerator : MonoBehaviour
 {
+    const int MaxIteration = 10000;
+
     public HexGrid grid;
     public int seed;
     public bool useFixedSeed;
     int cellCount;
+    
+    struct MapRegion {
+        public int xMin, xMax, zMin, zMax;
+    }
+
+    List<MapRegion> regions;
 
     [Range(0f, 0.5f)]
     public float jitterProbability = 0.2f;
@@ -18,6 +26,14 @@ public class HexMapGenerator : MonoBehaviour
     public int landPercentage = 80;
     [Range(6, 10)]
     public int elevationMaximum = 8;
+    [Range(0, 10)]
+    public int mapBorderX = 5;
+    [Range(0, 10)]
+    public int mapBorderZ = 5;
+    [Range(0, 10)]
+    public int regionBorder = 5;
+    [Range(1, 4)]
+    public int regionCount = 1;
 
     public void GenerateMap(int sizeX, int sizeZ)
     {
@@ -35,6 +51,7 @@ public class HexMapGenerator : MonoBehaviour
         cellCount = sizeX * sizeZ;
         grid.CreateMap(sizeX, sizeZ);
 
+        CreateRegions();
         CreateLand();
         SetTerrainType();
         AddOcean();
@@ -44,19 +61,101 @@ public class HexMapGenerator : MonoBehaviour
         Random.state = originalRandomState;
     }
 
-    void CreateLand()
+    void CreateRegions()
     {
-        int landBudget = Mathf.RoundToInt(cellCount * landPercentage * 0.01f);
-        while(landBudget > 0)
+        if(regions == null)
+            regions = new List<MapRegion>();
+        else
+            regions.Clear();
+
+        MapRegion region;
+        switch(regionCount)
         {
-            landBudget = RaiseTerrain(
-                Random.Range(chunkSizeMin, chunkSizeMax + 1), landBudget);
+            default:
+                region.xMin = mapBorderX;
+                region.xMax = grid.cellCountX - mapBorderX;
+                region.zMin = mapBorderZ;
+                region.zMax = grid.cellCountZ - mapBorderZ;
+                regions.Add(region);
+            break;
+            case 2:
+                if(Random.value < 0.5f)
+                {
+                    region.xMin = mapBorderX;
+                    region.xMax = grid.cellCountX / 2 - regionBorder;
+                    region.zMin = mapBorderZ;
+                    region.zMax = grid.cellCountZ - mapBorderZ;
+                    regions.Add(region);
+                    region.xMin = grid.cellCountX / 2 + regionBorder;
+                    region.xMax = grid.cellCountX - mapBorderX;
+                    regions.Add(region);
+                }
+                else
+                {
+                    region.xMin = mapBorderX;
+                    region.xMax = grid.cellCountX - mapBorderX;
+                    region.zMin = mapBorderZ;
+                    region.zMax = grid.cellCountZ / 2 - regionBorder;
+                    regions.Add(region);
+                    region.zMin = grid.cellCountZ / 2 + regionBorder;
+                    region.zMax = grid.cellCountZ - mapBorderZ;
+                    regions.Add(region);
+                }
+            break;
+            case 3:
+                region.xMin = mapBorderX;
+                region.xMax = grid.cellCountX / 3 - regionBorder;
+                region.zMin = mapBorderZ;
+                region.zMax = grid.cellCountZ - mapBorderZ;
+                regions.Add(region);
+                region.xMin = grid.cellCountX / 3 + regionBorder;
+                region.xMax = grid.cellCountX * 2 / 3 - regionBorder;
+                regions.Add(region);
+                region.xMin = grid.cellCountX * 2 / 3 + regionBorder;
+                region.xMax = grid.cellCountX - mapBorderX;
+                regions.Add(region);
+            break;
+            case 4:
+                region.xMin = mapBorderX;
+                region.xMax = grid.cellCountX / 2 - regionBorder;
+                region.zMin = mapBorderZ;
+                region.zMax = grid.cellCountZ / 2 - regionBorder;
+                regions.Add(region);
+                region.xMin = grid.cellCountX / 2 + regionBorder;
+                region.xMax = grid.cellCountX - mapBorderX;
+                regions.Add(region);
+                region.zMin = grid.cellCountZ / 2 + regionBorder;
+                region.zMax = grid.cellCountZ - mapBorderZ;
+                regions.Add(region);
+                region.xMin = mapBorderX;
+                region.xMax = grid.cellCountX / 2 - regionBorder;
+                regions.Add(region);
+            break;
         }
     }
 
-    int RaiseTerrain(int chunkSize, int budget)
+    void CreateLand()
     {
-        HexCell firstCell = GetRandomCell();
+        int landBudget = Mathf.RoundToInt(cellCount * landPercentage * 0.01f);
+        for(int guard = 0; guard < MaxIteration; ++guard)
+        {
+            for(int i = 0; i < regions.Count; i++)
+            {
+                MapRegion region = regions[i];
+                int chunkSize = Random.Range(chunkSizeMin, chunkSizeMax - 1);
+                landBudget = RaiseTerrain(chunkSize, landBudget, region);
+                if(landBudget <= 0)
+                    return;
+            }
+        }
+
+        if(landBudget > 0)
+            Debug.LogWarning("Failed to use up " + landBudget + " land budget.");
+    }
+
+    int RaiseTerrain(int chunkSize, int budget, MapRegion region)
+    {
+        HexCell firstCell = GetRandomCell(region);
         firstCell.Distance = 0;
         firstCell.SearchHeuristic = 0;
         PriorityQueue<HexCell> searchQueue = new PriorityQueue<HexCell>(HexCell.CompareCells);
@@ -113,8 +212,9 @@ public class HexMapGenerator : MonoBehaviour
         }
     }
 
-    HexCell GetRandomCell()
+    HexCell GetRandomCell(MapRegion region)
     {
-        return grid.GetCell(Random.Range(0, cellCount));
+        return grid.GetCell(Random.Range(region.xMin, region.xMax), 
+                            Random.Range(region.zMin, region.zMax));
     }
 }

@@ -18,6 +18,7 @@ public class HexCell : MonoBehaviour
     int featureIndex;
 
     int visibility;
+    bool explored;
 
     int distance;
 
@@ -102,6 +103,7 @@ public class HexCell : MonoBehaviour
                 return;
 
             elevation = value;
+            ShaderData.ViewElevationChanged();
             RefreshPosition();
 
             for(int i = 0; i < roads.Length; ++i)
@@ -154,12 +156,23 @@ public class HexCell : MonoBehaviour
         get { return featureIndex > 0; }
     }
 
+    public bool Explorable { get; set; }
+
     public bool IsVisible
     {
-        get { return visibility > 0; }
+        get { return visibility > 0 && Explorable; }
     }
 
-    public bool IsExplored { get; private set; }
+    public bool IsExplored
+    {
+        get { return explored && Explorable; }
+        private set { explored = value; }
+    }
+
+    public int ViewElevation
+    {
+        get { return elevation; }
+    }
 
     public int Distance
     {
@@ -290,5 +303,14 @@ public class HexCell : MonoBehaviour
         --visibility;
         if(visibility == 0)
             ShaderData.RefreshVisibility(this);
+    }
+
+    public void ResetVisibility()
+    {
+        if(visibility > 0)
+        {
+            visibility = 0;
+            ShaderData.RefreshVisibility(this);
+        }
     }
 }

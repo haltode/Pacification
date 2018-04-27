@@ -4,6 +4,9 @@ public class HexCellShaderData : MonoBehaviour
 {
     Texture2D cellTexture;
     Color32[] cellTextureData;
+    bool needsVisibilityReset;
+
+    public HexGrid Grid { get; set; }
 
     public void Initialize(int sizeX, int sizeZ)
     {
@@ -43,8 +46,19 @@ public class HexCellShaderData : MonoBehaviour
         enabled = true;
     }
 
+    public void ViewElevationChanged()
+    {
+        needsVisibilityReset = true;
+        enabled = true;
+    }
+
     void LateUpdate()
     {
+        if(needsVisibilityReset)
+        {
+            needsVisibilityReset = false;
+            Grid.ResetVisibility();
+        }
         cellTexture.SetPixels32(cellTextureData);
         cellTexture.Apply();
         enabled = false;

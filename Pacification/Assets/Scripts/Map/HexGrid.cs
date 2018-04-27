@@ -37,6 +37,7 @@ public class HexGrid : MonoBehaviour
         HexMetrics.InitializeHashGrid(seed);
         HexUnit.unitPrefab = unitPrefab;
         cellShaderData = gameObject.AddComponent<HexCellShaderData>();
+        cellShaderData.Grid = this;
         CreateMap(cellCountX, cellCountZ);
     }
 
@@ -44,6 +45,7 @@ public class HexGrid : MonoBehaviour
     {
         HexMetrics.InitializeHashGrid(seed);
         HexUnit.unitPrefab = unitPrefab;
+        ResetVisibility();
     }
 
     public HexCell GetCell(Ray ray)
@@ -126,6 +128,7 @@ public class HexGrid : MonoBehaviour
         cell.coordinates = HexCoordinates.FromOffsetCoordinates(x, z);
         cell.Index = cellIndex;
         cell.ShaderData = cellShaderData;
+        cell.Explorable = x > 0 && z > 0 && x < (cellCountX - 1) && z < (cellCountZ - 1);
 
         // E-W neighbor connection
         if(x > 0)
@@ -286,8 +289,11 @@ public class HexGrid : MonoBehaviour
     List<HexCell> GetVisibleCells(HexCell start, int range)
     {
         List<HexCell> visibleCells = ListPool<HexCell>.Get();
-        PriorityQueue<HexCell> searchQueue = new PriorityQueue<HexCell>(HexCell.CompareCells);
         ResetDistances();
+        range += start.ViewElevation;
+        HexCoordinates startCoordinates = start.coordinates;
+
+        PriorityQueue<HexCell> searchQueue = new PriorityQueue<HexCell>(HexCell.CompareCells);
         start.Distance = 0;
         searchQueue.Enqueue(start);
         while(!searchQueue.IsEmpty())
@@ -298,12 +304,13 @@ public class HexGrid : MonoBehaviour
             for(HexDirection dir = HexDirection.NE; dir <= HexDirection.NW; ++dir)
             {
                 HexCell neighbor = current.GetNeighbor(dir);
-                if(neighbor == null || neighbor.Distance != int.MaxValue)
+                if(neighbor == null || neighbor.Distance != int.MaxValue || !neighbor.Explorable)
                     continue;
-                if(current.Distance + 1 > range)
+                int dist = current.Distance + 1;
+                if(dist + neighbor.ViewElevation > range ||
+                    dist > startCoordinates.DistanceTo(neighbor.coordinates))
                     continue;
-
-                neighbor.Distance = current.Distance + 1;
+                neighbor.Distance = dist;
                 neighbor.SearchHeuristic = 0;
                 searchQueue.Enqueue(neighbor);
             }
@@ -325,6 +332,17 @@ public class HexGrid : MonoBehaviour
         for(int i = 0; i < cells.Count; ++i)
             cells[i].DecreaseVisibility();
         ListPool<HexCell>.Add(cells);
+    }
+
+    public void ResetVisibility()
+    {
+        for(int i = 0; i < cells.Length; ++i)
+            cells[i].ResetVisibility();
+        for(int i = 0; i < units.Count; ++i)
+        {
+            HexUnit unit = units[i];
+            IncreaseVisibility(unit.Location, unit.VisionRange);
+        }
     }
 
     public void AddUnit(HexUnit unit, HexCell location, float orientation)

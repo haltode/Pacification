@@ -12,7 +12,6 @@ public class HexUnit : MonoBehaviour
     List<HexCell> pathToTravel;
     const float TravelSpeed = 4f;
     const float RotationSpeed = 180f;
-    const int VisionRange = 3;
 
     public static HexUnit unitPrefab;
 
@@ -20,6 +19,12 @@ public class HexUnit : MonoBehaviour
     {
         // Temporary value
         get { return 24; }
+    }
+
+    public int VisionRange
+    {
+        // Temporary value
+        get { return 3; }
     }
 
     public HexGrid Grid { get; set; }

@@ -16,6 +16,8 @@
         // Use shader model 3.0 target, to get nicer looking lighting
         #pragma target 3.5
 
+        #pragma multi_compile _ HEX_MAP_EDIT_MODE
+
         #include "HexCellData.cginc"
 
         UNITY_DECLARE_TEX2DARRAY(_MainTex);

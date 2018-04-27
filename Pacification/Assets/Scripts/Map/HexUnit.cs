@@ -6,13 +6,23 @@ using System.IO;
 public class HexUnit : MonoBehaviour
 {
     HexCell location;
+    HexCell currentTravelLocation;
     float orientation;
 
     List<HexCell> pathToTravel;
     const float TravelSpeed = 4f;
     const float RotationSpeed = 180f;
+    const int VisionRange = 3;
 
     public static HexUnit unitPrefab;
+
+    public int Speed
+    {
+        // Temporary value
+        get { return 24; }
+    }
+
+    public HexGrid Grid { get; set; }
 
     public HexCell Location
     {
@@ -20,16 +30,20 @@ public class HexUnit : MonoBehaviour
         set
         {
             if(location)
+            {
+                Grid.DecreaseVisibility(location, VisionRange);
                 location.Unit = null;
+            }
             location = value;
             value.Unit = this;
+            Grid.IncreaseVisibility(value, VisionRange);
             transform.localPosition = value.Position;
         }
     }
 
     public bool IsValidDestination(HexCell cell)
     {
-        return !cell.IsUnderWater && !cell.Unit;
+        return cell.IsExplored && !cell.IsUnderWater && !cell.Unit;
     }
 
     public float Orientation
@@ -45,11 +59,21 @@ public class HexUnit : MonoBehaviour
     void OnEnable()
     {
         if(location)
+        {
             transform.localPosition = location.Position;
+            if(currentTravelLocation)
+            {
+                Grid.IncreaseVisibility(location, VisionRange);
+                Grid.DecreaseVisibility(currentTravelLocation, VisionRange);
+                currentTravelLocation = null;
+            }
+        }
     }
 
     public void Die()
     {
+        if(location)
+            Grid.DecreaseVisibility(location, VisionRange);
         location.Unit = null;
         Destroy(gameObject);
     }
@@ -72,9 +96,27 @@ public class HexUnit : MonoBehaviour
         grid.AddUnit(Instantiate(unitPrefab), grid.GetCell(coordinates), orientation);
     }
 
+    public int GetMoveCost(HexCell current, HexCell dest, HexDirection dir)
+    {
+        if(!current.IsReachable(dir))
+            return -1;
+
+        // Road and flat terrains are faster than cliffs
+        int moveCost;
+        if(current.HasRoadThroughEdge(dir))
+            moveCost = 1;
+        else if(current.GetElevationDifference(dir) == 0)
+            moveCost = 5;
+        else
+            moveCost = 10;
+        return moveCost;
+    }
+
     public void Travel(List<HexCell> path)
     {
-        Location = path[path.Count - 1];
+        location.Unit = null;
+        location = path[path.Count - 1];
+        location.Unit = this;
         pathToTravel = path;
         StopAllCoroutines();
         StartCoroutine(TravelPath());
@@ -83,15 +125,19 @@ public class HexUnit : MonoBehaviour
     IEnumerator TravelPath()
     {
         Vector3 a, b, c = pathToTravel[0].Position;
-        transform.localPosition = c;
         yield return LookAt(pathToTravel[1].Position);
+        Grid.DecreaseVisibility(
+            currentTravelLocation ? currentTravelLocation : pathToTravel[0],
+            VisionRange);
 
         float t = Time.deltaTime * TravelSpeed;
         for(int i = 1; i < pathToTravel.Count; ++i)
         {
+            currentTravelLocation = pathToTravel[i];
             a = c;
             b = pathToTravel[i - 1].Position;
-            c = (b + pathToTravel[i].Position) * 0.5f;
+            c = (b + currentTravelLocation.Position) * 0.5f;
+            Grid.IncreaseVisibility(pathToTravel[i], VisionRange);
             for(; t < 1f; t += Time.deltaTime * TravelSpeed)
             {
                 transform.localPosition = Bezier.GetPoint(a, b, c, t);
@@ -100,12 +146,15 @@ public class HexUnit : MonoBehaviour
                 transform.localRotation = Quaternion.LookRotation(d);
                 yield return null;
             }
+            Grid.DecreaseVisibility(pathToTravel[i], VisionRange);
             t -= 1f;
         }
+        currentTravelLocation = null;
 
         a = c;
-        b = pathToTravel[pathToTravel.Count - 1].Position;
+        b = location.Position;
         c = b;
+        Grid.IncreaseVisibility(location, VisionRange);
         for(; t < 1f; t += Time.deltaTime * TravelSpeed)
         {
             transform.localPosition = Bezier.GetPoint(a, b, c, t);

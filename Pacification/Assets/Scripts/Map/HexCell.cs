@@ -17,9 +17,13 @@ public class HexCell : MonoBehaviour
     bool isUnderWater;
     int featureIndex;
 
+    int visibility;
+
     int distance;
 
     public HexUnit Unit { get; set; }
+
+    public int Index { get; set; }
 
     public Vector3 Position
     {
@@ -84,7 +88,7 @@ public class HexCell : MonoBehaviour
             if(terrainBiomeIndex != value)
             {
                 terrainBiomeIndex = value;
-                Refresh();
+                ShaderData.RefreshTerrain(this);
             }
         }
     }
@@ -150,6 +154,13 @@ public class HexCell : MonoBehaviour
         get { return featureIndex > 0; }
     }
 
+    public bool IsVisible
+    {
+        get { return visibility > 0; }
+    }
+
+    public bool IsExplored { get; private set; }
+
     public int Distance
     {
         get { return distance; }
@@ -173,6 +184,8 @@ public class HexCell : MonoBehaviour
             return a.SearchPriority <= b.SearchPriority;
     }
 
+    public HexCellShaderData ShaderData { get; set; }
+
     public void Save(BinaryWriter writer)
     {
         // Use byte to save space since we stay inside range [0; 255]
@@ -187,11 +200,14 @@ public class HexCell : MonoBehaviour
             if(roads[i])
                 roadFlags |= (1 << i);
         writer.Write((byte) roadFlags);
+
+        writer.Write(IsExplored);
     }
 
     public void Load(BinaryReader reader)
     {
         terrainBiomeIndex = reader.ReadByte();
+        ShaderData.RefreshTerrain(this);
         elevation = reader.ReadByte();
         isUnderWater = reader.ReadBoolean();
         RefreshPosition();
@@ -200,6 +216,9 @@ public class HexCell : MonoBehaviour
         int roadFlags = reader.ReadByte();
         for(int i = 0; i < roads.Length; ++i)
             roads[i] = (roadFlags & (1 << i)) != 0;
+    
+        IsExplored = reader.ReadBoolean();
+        ShaderData.RefreshVisibility(this);
     }
 
     void Refresh()
@@ -254,5 +273,22 @@ public class HexCell : MonoBehaviour
     {
         Text label = uiRect.GetComponent<Text>();
         label.text = text;
+    }
+
+    public void IncreaseVisibility()
+    {
+        ++visibility;
+        if(visibility == 1)
+        {
+            IsExplored = true;
+            ShaderData.RefreshVisibility(this);
+        }
+    }
+
+    public void DecreaseVisibility()
+    {
+        --visibility;
+        if(visibility == 0)
+            ShaderData.RefreshVisibility(this);
     }
 }

@@ -406,7 +406,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   featuresPrefab:
-  - {fileID: 400000, guid: 98552d4ea336efc4cbd65fc69c7b6e31, type: 3}
+  - {fileID: 400000, guid: 8cd39f9aa54a60c4690c647fe282139f, type: 3}
   - {fileID: 400042, guid: f56c0b76b0099ba4ca712173465059b0, type: 3}
   - {fileID: 400020, guid: 839b3bf082b1c1d418f93c25108bb68a, type: 3}
   - {fileID: 400042, guid: 6322ce682a6c69042b38a1f1edbaaba3, type: 3}

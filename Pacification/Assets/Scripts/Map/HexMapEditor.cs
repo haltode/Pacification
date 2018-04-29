@@ -26,6 +26,8 @@ public class HexMapEditor : MonoBehaviour
 
     public bool editor;
 
+    public GameObject barracks;
+
     void Awake()
     {
         SetEditMode(false);
@@ -41,17 +43,10 @@ public class HexMapEditor : MonoBehaviour
 
     void Update()
     {
-        if(client.player.canPlay && !EventSystem.current.IsPointerOverGameObject())
+        if(editor || client.player.canPlay && !EventSystem.current.IsPointerOverGameObject())
         {
             if(Input.GetMouseButton(0))
                 HandleInput();
-            /*else if(Input.GetKeyDown(controls.unitSpawn))
-            {
-                if(Input.GetKey(controls.unitDestroy))
-                    DestroyUnit();
-                else
-                    CreateUnit();
-            }*/
         }
         else
             previousCell = null;
@@ -68,6 +63,11 @@ public class HexMapEditor : MonoBehaviour
         HexCell currentCell = GetCellUnderCursor();
         if(currentCell)
         {
+            if(currentCell.FeatureIndex == 1) ///
+                barracks.SetActive(true);
+            else
+                barracks.SetActive(false);
+
             if(previousCell && previousCell != currentCell)
                 ValidateDrag(currentCell);
             else

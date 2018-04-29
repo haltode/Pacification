@@ -12900,6 +12900,7 @@ MonoBehaviour:
   hexGrid: {fileID: 0}
   client: {fileID: 0}
   editor: 0
+  barracks: {fileID: 1360624161}
 --- !u!114 &1701239725
 MonoBehaviour:
   m_ObjectHideFlags: 0

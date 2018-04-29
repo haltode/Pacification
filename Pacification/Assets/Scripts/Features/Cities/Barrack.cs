@@ -38,7 +38,7 @@ public class Barrack : MonoBehaviour
 
     void Start()
     {
-        Owner = new Player(); // TODO : link with the actual player, this is a placeholder
+        Owner = new Player(); // TODO : link with the actual player, this is a placeholder + don't forget to take the EDITOR into account ==> the player is not in the Client
         BarrackObject.SetActive(false);
         PopulateDictionary();
         counter = 0;
@@ -46,11 +46,6 @@ public class Barrack : MonoBehaviour
 	
 	void Update()
     {
-		if (Input.GetKeyDown(KeyCode.U))
-        {
-            BarrackObject.SetActive(!(BarrackObject.activeInHierarchy));
-        }
-
         if (counter == 0)
         {
             hme = GameObject.FindObjectOfType<HexMapEditor>().GetComponent<HexMapEditor>();

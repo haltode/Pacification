@@ -18,7 +18,7 @@ public class HexGameUI : MonoBehaviour
 
     void Update()
     {
-        if(client.player.canPlay && !EventSystem.current.IsPointerOverGameObject())
+        if(GameManager.Instance.editor || client.player.canPlay && !EventSystem.current.IsPointerOverGameObject())
         {
             if(Input.GetMouseButtonDown(0))
                 DoSelection();

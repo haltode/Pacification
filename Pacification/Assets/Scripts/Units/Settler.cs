@@ -4,10 +4,9 @@ using UnityEngine;
 
 public class Settler : Unit
 {
-    public Settler(ref Player owner, HexCell position)
+    public Settler(Player owner)
     {
         this.owner = owner;
-        this.position = position;
         type = UnitType.WORKER;
         mvtSPD = 2;
         hp = 100;
@@ -19,7 +18,7 @@ public class Settler : Unit
 
     public void Settle()
     {
-        new City(ref owner, position);
+        new City(ref owner, hexUnit.location);
         owner.RemoveUnit(this);
     }
 }

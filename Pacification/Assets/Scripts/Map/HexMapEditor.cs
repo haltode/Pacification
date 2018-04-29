@@ -45,13 +45,13 @@ public class HexMapEditor : MonoBehaviour
         {
             if(Input.GetMouseButton(0))
                 HandleInput();
-            else if(Input.GetKeyDown(controls.unitSpawn))
+            /*else if(Input.GetKeyDown(controls.unitSpawn))
             {
                 if(Input.GetKey(controls.unitDestroy))
                     DestroyUnit();
                 else
                     CreateUnit();
-            }
+            }*/
         }
         else
             previousCell = null;

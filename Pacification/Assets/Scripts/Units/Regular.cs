@@ -4,12 +4,11 @@ using UnityEngine;
 
 public class Regular : Attacker
 {
-    public Regular(ref Player owner, HexCell position, int level)
+    public Regular(Player owner)
     {
         this.owner = owner;
-        this.position = position;
         type = UnitType.REGULAR;
-        this.level = level;
+        this.level = owner.UnitLevel;
 
         upgradeHP = 20;
         hp = (isUpgraded() ? 420 : 150) - upgradeHP + (level * upgradeHP);
@@ -30,9 +29,11 @@ public class Regular : Attacker
             { UnitType.RANGED, (isUpgraded() ? 1.125f : 1.12f) },
             { UnitType.HEAVY, (isUpgraded() ? 1.5f : 1.25f) },
         };
+
+        id = owner.AddUnit(this);
     }
 
-    public void levelUp()
+    public void LevelUp()
     {
         if (isMaxed())
         {

@@ -5,7 +5,11 @@ using System.IO;
 
 public class HexUnit : MonoBehaviour
 {
-    HexCell location;
+    // W O R K S P A C E
+    public Unit Unit;
+    // // // // // // //
+
+    public HexCell location;
     HexCell currentTravelLocation;
     float orientation;
 

@@ -19,7 +19,7 @@ public class HexGrid : MonoBehaviour
 
     HexGridChunk[] chunks;
     int chunkCountX, chunkCountZ;
-    HexCell[] cells;
+    public HexCell[] cells;
     List<HexUnit> units = new List<HexUnit>();
 
     HexCellShaderData cellShaderData;

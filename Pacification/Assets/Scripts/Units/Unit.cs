@@ -4,6 +4,10 @@ using UnityEngine;
 
 public class Unit
 {
+
+    protected HexUnit hexUnit;
+    public GameObject hexUnitGameObect;
+
     public enum UnitType
     {
         WORKER,
@@ -15,7 +19,6 @@ public class Unit
 
     // TODO : couleur du joueur
     protected Player owner;
-    protected HexCell position;
     protected UnitType type;
     protected int mvtSPD;
     protected int hp;
@@ -50,19 +53,14 @@ public class Unit
         set { id = value; }
     }
 
-    public HexCell Position
+    public HexUnit HexUnit
     {
-        get { return position; }
-        set { position = value; }
+        get { return hexUnit; }
+        set { hexUnit = value; }
     }
 
-    public bool CanAttack(Unit unit)
+    public static bool CanAttack(Unit unit)
     {
         return (unit.Type == UnitType.REGULAR || unit.Type == UnitType.RANGED || unit.Type == UnitType.HEAVY);
-    }
-
-    public void MoveTo (HexCell target)
-    {
-        position = target;
     }
 }

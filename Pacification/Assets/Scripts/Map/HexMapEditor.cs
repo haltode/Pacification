@@ -41,7 +41,7 @@ public class HexMapEditor : MonoBehaviour
 
     void Update()
     {
-        if(!EventSystem.current.IsPointerOverGameObject())
+        if(client.player.canPlay && !EventSystem.current.IsPointerOverGameObject())
         {
             if(Input.GetMouseButton(0))
                 HandleInput();

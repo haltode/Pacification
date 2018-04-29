@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.IO;
 using System.Net.Sockets;
 using UnityEngine;
+using UnityEngine.UI;
 using UnityEngine.SceneManagement;
 
 public class Client : MonoBehaviour
@@ -20,6 +21,8 @@ public class Client : MonoBehaviour
 
     private HexMapEditor mapEditor;
     public Player player;
+
+    public Text text;
 
     void Start()
     {
@@ -131,6 +134,11 @@ public class Client : MonoBehaviour
 
             case "SLOD":
                 SceneManager.LoadScene("Map");
+                player.SetDisplayer();
+                player.UpdateMoneyDisplay();
+                player.UpdateHappinessDisplay();
+                player.UpdateProductionDisplay();
+                player.UpdateScienceDisplay();
                 break;
 
             case "SMAP":

@@ -43,9 +43,7 @@ public class ChatManager : MonoBehaviour
         {
             Transform chat = GameObject.Find("Chat").transform;
             foreach(Transform t in chat)
-            {
                 t.gameObject.SetActive(false);
-            }
         }
     }
 
@@ -177,7 +175,8 @@ public class ChatManager : MonoBehaviour
                     switch(ExtractCommand(ref index, input.text))
                     {
                         case "coinage":
-                            client.player.Money += 1000;
+                            client.player.money += 1000;
+                            client.player.UpdateMoneyDisplay();
                             break;
                     }
                     break;

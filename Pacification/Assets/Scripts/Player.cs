@@ -1,5 +1,6 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
+using UnityEngine.UI;
 using UnityEngine;
 
 public class Player
@@ -7,7 +8,10 @@ public class Player
     private int unitID;
     private int cityID;
 
-    private int money;
+    public int money;
+    public int science;
+    public int production;
+    public int happiness;
 
     private Dictionary<int, Unit> playerUnits;
     private Dictionary<int, City> playerCities;
@@ -16,12 +20,17 @@ public class Player
 
     public bool canPlay;
 
+    public DisplayInformationManager displayer;
+
     public Player()
     {
         unitID = 0;
         cityID = 0;
 
         money = 1000;
+        science = 0;
+        production = 0;
+        happiness = 5;
 
         playerUnits = new Dictionary<int, Unit>();
         playerCities = new Dictionary<int, City>();
@@ -56,11 +65,30 @@ public class Player
         playerCities.Remove(city.Id);
         city = null;
     }
-    
 
-    public int Money
+    public void SetDisplayer()
     {
-        get { return money; }
-        set { money = value; }
+        displayer = Object.FindObjectOfType<DisplayInformationManager>();
+        Debug.Log(displayer != null); //Probleme a résoudre
+    }
+
+    public void UpdateMoneyDisplay()
+    {
+        displayer.UpdateMoneyDisplay(money);
+    }
+
+    public void UpdateScienceDisplay()
+    {
+        displayer.UpdateScienceDisplay(science);
+    }
+
+    public void UpdateProductionDisplay()
+    {
+        displayer.UpdateProductionDisplay(production);
+    }
+
+    public void UpdateHappinessDisplay()
+    {
+        displayer.UpdateHappinessDisplay(happiness);
     }
 }

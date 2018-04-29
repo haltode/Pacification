@@ -13,7 +13,7 @@ public class DisplayInformationManager : MonoBehaviour {
 
     void Start()
     {
-        money.text = "Monney: 0";
+        money.text = "Money: 0";
         science.text = "Science: 0";
         production.text = "Production: 0";
         happiness.text = "Happiness: 0";
@@ -21,7 +21,7 @@ public class DisplayInformationManager : MonoBehaviour {
 
     public void UpdateMoneyDisplay(int value)
     {
-        money.text = "Monney: " + value;
+        money.text = "Money: " + value;
     }
 
     public void UpdateScienceDisplay(int value)

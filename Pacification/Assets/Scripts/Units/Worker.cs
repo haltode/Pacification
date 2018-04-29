@@ -4,10 +4,9 @@ using UnityEngine;
 
 public class Worker : Unit
 {
-    public Worker(ref Player owner, HexCell position)
+    public Worker(Player owner)
     {
         this.owner = owner;
-        this.position = position;
         type = UnitType.WORKER;
         mvtSPD = 2;
         hp = 300;

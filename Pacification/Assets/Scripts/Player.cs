@@ -7,6 +7,7 @@ public class Player
 {
     private int unitID;
     private int cityID;
+    private int unitLevel;
 
     public int money;
     public int science;
@@ -26,6 +27,7 @@ public class Player
     {
         unitID = 0;
         cityID = 0;
+        unitLevel = 1;
 
         money = 1000;
         science = 0;
@@ -65,6 +67,23 @@ public class Player
         playerCities.Remove(city.Id);
         city = null;
     }
+    
+    public void LevelUp()
+    {
+        unitLevel++;
+
+        foreach (KeyValuePair<int, Unit> entry in playerUnits)
+        {
+            Unit u = entry.Value;
+
+            if (u.Type == Unit.UnitType.REGULAR)
+                ((Regular)u).LevelUp();
+            if (u.Type == Unit.UnitType.RANGED)
+                ((Ranged)u).LevelUp();
+            if (u.Type == Unit.UnitType.HEAVY)
+                ((Heavy)u).LevelUp();
+        }
+    }
 
     public void SetDisplayer()
     {
@@ -90,5 +109,10 @@ public class Player
     public void UpdateHappinessDisplay()
     {
         displayer.UpdateHappinessDisplay(happiness);
+    }
+
+    public int UnitLevel
+    {
+        get { return unitLevel; }
     }
 }

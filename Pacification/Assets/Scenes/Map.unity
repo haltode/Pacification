@@ -3206,7 +3206,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 0, y: -0.00003269278}
+  m_AnchoredPosition: {x: 0, y: 0.000029214747}
   m_SizeDelta: {x: 400, y: 0}
   m_Pivot: {x: 0, y: 1}
 --- !u!114 &430921716
@@ -6166,7 +6166,7 @@ GameObject:
   - component: {fileID: 790259464}
   - component: {fileID: 790259465}
   m_Layer: 5
-  m_Name: Toggle Desert
+  m_Name: Toggle Plain
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -6475,7 +6475,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: Plain
+  m_Text: Desert
 --- !u!222 &823582990
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -6880,7 +6880,7 @@ GameObject:
   - component: {fileID: 881148590}
   - component: {fileID: 881148591}
   m_Layer: 5
-  m_Name: Toggle Snow
+  m_Name: Toggle Mountain
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -12529,7 +12529,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: Mountain
+  m_Text: Snow
 --- !u!222 &1660772989
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -12746,7 +12746,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: Desert
+  m_Text: Plain
 --- !u!222 &1676975091
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -13076,7 +13076,7 @@ GameObject:
   - component: {fileID: 1709973760}
   - component: {fileID: 1709973761}
   m_Layer: 5
-  m_Name: Toggle Plain
+  m_Name: Toggle Desert
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -13858,7 +13858,7 @@ GameObject:
   - component: {fileID: 1862082036}
   - component: {fileID: 1862082037}
   m_Layer: 5
-  m_Name: Toggle Mountain
+  m_Name: Toggle Snow
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -14410,7 +14410,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: Snow
+  m_Text: Moutain
 --- !u!222 &1909361432
 CanvasRenderer:
   m_ObjectHideFlags: 0

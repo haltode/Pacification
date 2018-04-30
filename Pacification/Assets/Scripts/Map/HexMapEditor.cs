@@ -211,7 +211,8 @@ public class HexMapEditor : MonoBehaviour
         }
     }
 
-    void CreateUnit()
+    // TODO: all these functions are now dead code, need a new way to handle this
+    /*void CreateUnit()
     {
         HexCell cell = GetCellUnderCursor();
         if(cell && !cell.Unit)
@@ -235,7 +236,7 @@ public class HexMapEditor : MonoBehaviour
 
         float orientation = UnityEngine.Random.Range(0f, 360f);
         hexGrid.AddUnit(unit, cell, orientation);
-    }
+    }*/
 
     void DestroyUnit()
     {

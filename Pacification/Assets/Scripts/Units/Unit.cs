@@ -63,4 +63,18 @@ public class Unit
     {
         return (unit.Type == UnitType.REGULAR || unit.Type == UnitType.RANGED || unit.Type == UnitType.HEAVY);
     }
+
+    public static UnitType StrToType(string type)
+    {
+        if(type == "settler")
+            return UnitType.SETTLER;
+        else if(type == "worker")
+            return UnitType.WORKER;
+        else if(type == "regular")
+            return UnitType.REGULAR;
+        else if(type == "ranged")
+            return UnitType.RANGED;
+        else
+            return UnitType.HEAVY;
+    }
 }

@@ -58,5 +58,14 @@ MonoBehaviour:
   cellLabelPrefab: {fileID: 11470134, guid: f68794ca03b6f4510b9a5bd6ee9ba2f4, type: 2}
   chunkPrefab: {fileID: 114452804204635946, guid: 83c084f44eaff4dff9d451e21a49c10c,
     type: 2}
-  unitPrefab: {fileID: 114899140608873982, guid: 6051e15cd963545a2a9f8bbfdfac4d09,
+  mainUnitPrefab: {fileID: 1755938730281386, guid: 6051e15cd963545a2a9f8bbfdfac4d09,
     type: 2}
+  unitPrefab:
+  - {fileID: 100004, guid: 42302a0e1d7475740bba6ce8528ca2bc, type: 3}
+  - {fileID: 100010, guid: 04a21b79fe66a304aa11aa2bdfc69f7f, type: 3}
+  - {fileID: 100020, guid: 6d0934fbc08bacc4caa4d04732694873, type: 3}
+  - {fileID: 100002, guid: 33a24ae299ffc0c45bee4c0b42cacf07, type: 3}
+  cells: []
+  currentPathStart: {fileID: 0}
+  currentPathEnd: {fileID: 0}
+  currentPathExists: 0

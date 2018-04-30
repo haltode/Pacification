@@ -83,10 +83,11 @@ public class Client : MonoBehaviour
                 FindObjectOfType<HexGameUI>().NetworkDoMove(receivedData[1]);
                 break;
 
-            case "SUNC":
+            // TODO: function NetworkCreateUnit does not exist anymore
+            /*case "SUNC":
                 mapEditor = FindObjectOfType<HexMapEditor>();
                 mapEditor.NetworkCreateUnit(receivedData[1]);
-                break;
+                break;*/
 
             case "SUND":
                 mapEditor = FindObjectOfType<HexMapEditor>();

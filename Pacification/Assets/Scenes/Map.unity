@@ -1221,21 +1221,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 25691f1fb396cce4c9ee81836efd323e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  HexUnitPrefab: {fileID: 1755938730281386, guid: 6051e15cd963545a2a9f8bbfdfac4d09,
-    type: 2}
   BarrackObject: {fileID: 1360624161}
-  SettlerPrefab: {fileID: 100004, guid: 42302a0e1d7475740bba6ce8528ca2bc, type: 3}
-  WorkerPrefab: {fileID: 100010, guid: 04a21b79fe66a304aa11aa2bdfc69f7f, type: 3}
-  RegularEra1Prefab: {fileID: 100020, guid: 6d0934fbc08bacc4caa4d04732694873, type: 3}
-  RegularEra2Prefab: {fileID: 1007486911197018, guid: 634c66b9c5ee41c45b022039bb92e9af,
-    type: 2}
-  RangedEra1Prefab: {fileID: 1007486911197018, guid: 634c66b9c5ee41c45b022039bb92e9af,
-    type: 2}
-  RangedEra2Prefab: {fileID: 1007486911197018, guid: 634c66b9c5ee41c45b022039bb92e9af,
-    type: 2}
-  HeavyEra1Prefab: {fileID: 1007486911197018, guid: 634c66b9c5ee41c45b022039bb92e9af,
-    type: 2}
-  HeavyEra2Prefab: {fileID: 100002, guid: 33a24ae299ffc0c45bee4c0b42cacf07, type: 3}
+  hexGrid: {fileID: 0}
 --- !u!4 &103168100
 Transform:
   m_ObjectHideFlags: 0
@@ -1786,7 +1773,7 @@ MonoBehaviour:
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
           m_IntArgument: 0
           m_FloatArgument: 0
-          m_StringArgument: Regular
+          m_StringArgument: regular
           m_BoolArgument: 0
         m_CallState: 2
     m_TypeName: UnityEngine.UI.Button+ButtonClickedEvent, UnityEngine.UI, Version=1.0.0.0,
@@ -5761,7 +5748,7 @@ MonoBehaviour:
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
           m_IntArgument: 0
           m_FloatArgument: 0
-          m_StringArgument: Ranged
+          m_StringArgument: ranged
           m_BoolArgument: 0
         m_CallState: 2
     m_TypeName: UnityEngine.UI.Button+ButtonClickedEvent, UnityEngine.UI, Version=1.0.0.0,
@@ -9456,8 +9443,13 @@ MonoBehaviour:
   cellLabelPrefab: {fileID: 11470134, guid: f68794ca03b6f4510b9a5bd6ee9ba2f4, type: 2}
   chunkPrefab: {fileID: 114452804204635946, guid: 83c084f44eaff4dff9d451e21a49c10c,
     type: 2}
-  unitPrefab: {fileID: 114899140608873982, guid: 6051e15cd963545a2a9f8bbfdfac4d09,
+  mainUnitPrefab: {fileID: 1755938730281386, guid: 6051e15cd963545a2a9f8bbfdfac4d09,
     type: 2}
+  unitPrefab:
+  - {fileID: 100004, guid: 42302a0e1d7475740bba6ce8528ca2bc, type: 3}
+  - {fileID: 100010, guid: 04a21b79fe66a304aa11aa2bdfc69f7f, type: 3}
+  - {fileID: 100020, guid: 6d0934fbc08bacc4caa4d04732694873, type: 3}
+  - {fileID: 100002, guid: 33a24ae299ffc0c45bee4c0b42cacf07, type: 3}
   cells: []
   currentPathStart: {fileID: 0}
   currentPathEnd: {fileID: 0}
@@ -11417,7 +11409,7 @@ MonoBehaviour:
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
           m_IntArgument: 0
           m_FloatArgument: 0
-          m_StringArgument: Worker
+          m_StringArgument: worker
           m_BoolArgument: 0
         m_CallState: 2
     m_TypeName: UnityEngine.UI.Button+ButtonClickedEvent, UnityEngine.UI, Version=1.0.0.0,
@@ -13812,7 +13804,7 @@ MonoBehaviour:
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
           m_IntArgument: 0
           m_FloatArgument: 0
-          m_StringArgument: Heavy
+          m_StringArgument: heavy
           m_BoolArgument: 0
         m_CallState: 2
     m_TypeName: UnityEngine.UI.Button+ButtonClickedEvent, UnityEngine.UI, Version=1.0.0.0,
@@ -14233,7 +14225,7 @@ MonoBehaviour:
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
           m_IntArgument: 0
           m_FloatArgument: 0
-          m_StringArgument: Settler
+          m_StringArgument: settler
           m_BoolArgument: 0
         m_CallState: 2
     m_TypeName: UnityEngine.UI.Button+ButtonClickedEvent, UnityEngine.UI, Version=1.0.0.0,

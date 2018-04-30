@@ -5,6 +5,8 @@ using UnityEngine;
 
 public class Player
 {
+    public HexGrid hexGrid;
+
     private int unitID;
     private int cityID;
     private int unitLevel;
@@ -38,6 +40,8 @@ public class Player
         playerCities = new Dictionary<int, City>();
 
         canPlay = false;
+
+        hexGrid = Object.FindObjectOfType<HexGrid>();
     }
 
     public int AddUnit(Unit unit)
@@ -52,6 +56,31 @@ public class Player
     {
         playerUnits.Remove(unit.Id);
         unit = null;
+    }
+
+    public void CreateUnit(Unit.UnitType type, HexCell location)
+    {
+        Unit unit = null;
+        if(type == Unit.UnitType.SETTLER)
+            unit = new Settler(this);
+        else if(type == Unit.UnitType.WORKER)
+            unit = new Worker(this);
+        else if(type == Unit.UnitType.REGULAR)
+            unit = new Regular(this);
+        else if(type == Unit.UnitType.RANGED)
+            unit = new Ranged(this);
+        else if(type == Unit.UnitType.HEAVY)
+            unit = new Heavy(this);
+        else
+            Debug.Log("Unknown unit type");
+
+        unit.hexUnitGameObect = GameObject.Instantiate(hexGrid.mainUnitPrefab);
+        unit.HexUnit = unit.hexUnitGameObect.GetComponent<HexUnit>();
+        unit.HexUnit.Unit = unit;
+        UnitGraphics.SetGraphics(unit.hexUnitGameObect, hexGrid.unitPrefab[(int)type]);
+
+        float orientation = UnityEngine.Random.Range(0f, 360f);
+        hexGrid.AddUnit(unit.HexUnit, location, orientation);
     }
     
     public int AddCity(City city)
@@ -83,6 +112,12 @@ public class Player
             if (u.Type == Unit.UnitType.HEAVY)
                 ((Heavy)u).LevelUp();
         }
+    }
+
+    public void IncreaseUnitLevel(int target)
+    {
+        while(unitLevel < target)
+            LevelUp();
     }
 
     public void SetDisplayer()

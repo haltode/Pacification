@@ -15,7 +15,8 @@ public class HexGrid : MonoBehaviour
     public Text cellLabelPrefab;
     public HexGridChunk chunkPrefab;
 
-    public HexUnit unitPrefab;
+    public GameObject mainUnitPrefab;
+    public GameObject[] unitPrefab;
 
     HexGridChunk[] chunks;
     int chunkCountX, chunkCountZ;
@@ -35,7 +36,6 @@ public class HexGrid : MonoBehaviour
     void Awake()
     {
         HexMetrics.InitializeHashGrid(seed);
-        HexUnit.unitPrefab = unitPrefab;
         cellShaderData = gameObject.AddComponent<HexCellShaderData>();
         cellShaderData.Grid = this;
         CreateMap(cellCountX, cellCountZ);
@@ -44,7 +44,6 @@ public class HexGrid : MonoBehaviour
     void OnEnable()
     {
         HexMetrics.InitializeHashGrid(seed);
-        HexUnit.unitPrefab = unitPrefab;
         ResetVisibility();
     }
 

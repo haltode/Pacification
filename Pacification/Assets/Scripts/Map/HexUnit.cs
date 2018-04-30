@@ -17,8 +17,6 @@ public class HexUnit : MonoBehaviour
     const float TravelSpeed = 4f;
     const float RotationSpeed = 180f;
 
-    public static HexUnit unitPrefab;
-
     public int Speed
     {
         // Temporary value
@@ -102,7 +100,8 @@ public class HexUnit : MonoBehaviour
     {
         HexCoordinates coordinates = HexCoordinates.Load(reader);
         float orientation = reader.ReadSingle();
-        grid.AddUnit(Instantiate(unitPrefab), grid.GetCell(coordinates), orientation);
+        // TODO: need to save player information to be able to recreate unit
+        //grid.AddUnit(Instantiate(unitPrefab), grid.GetCell(coordinates), orientation);
     }
 
     public int GetMoveCost(HexCell current, HexCell dest, HexDirection dir)

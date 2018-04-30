@@ -27,7 +27,6 @@ public class Client : MonoBehaviour
     {
         DontDestroyOnLoad(gameObject);
         player = new Player("null");
-        players.Add(player);
     }
 
     public bool ConnectToServer(string host, int port)
@@ -84,28 +83,70 @@ public class Client : MonoBehaviour
                 break;
 
             case "SUNC":
-                foreach(Player p in players)
+                if(clientName == receivedData[2])
+                    player.NetworkAddUnit(receivedData[1]);
+                else
                 {
-                    if(p.name == receivedData[2])
-                        p.NetworkAddUnit(receivedData[1]);
+                    foreach(Player p in players)
+                    {
+                        if(p.name == receivedData[2])
+                            p.NetworkAddUnit(receivedData[1]);
+                    }
                 }
                 break;
 
             case "SUND":
-                foreach(Player p in players)
+                if(clientName == receivedData[2])
+                    player.NetworkRemoveUnit(receivedData[1]);
+                else
                 {
-                    if(p.name == receivedData[2])
-                        p.NetworkRemoveUnit(receivedData[1]);
+                    foreach(Player p in players)
+                    {
+                        if(p.name == receivedData[2])
+                            p.NetworkRemoveUnit(receivedData[1]);
+                    }
                 }
                 break;
 
             case "SUNL":
-                foreach(Player p in players)
+                if(clientName == receivedData[2])
+                    player.NetworkLevelUp();
+                else
                 {
-                    if(p.name == receivedData[2])
-                        p.NetworkLevelUp();
+                    foreach(Player p in players)
+                    {
+                        if(p.name == receivedData[2])
+                            p.NetworkLevelUp();
+                    }
                 }
                 break;
+
+            case "SCIC":
+                if(clientName == receivedData[2])
+                    player.NetworkAddCity(receivedData[1]);
+                else
+                {
+                    foreach(Player p in players)
+                    {
+                        if(p.name == receivedData[2])
+                            p.NetworkAddCity(receivedData[1]);
+                    }
+                }
+                break;
+
+            case "SCID":
+                if(clientName == receivedData[2])
+                    player.NetworkRemoveCity(receivedData[1]);
+                else
+                {
+                    foreach(Player p in players)
+                    {
+                        if(p.name == receivedData[2])
+                            p.NetworkRemoveCity(receivedData[1]);
+                    }
+                }
+                break;
+
 
             case "SEDI":
                 mapEditor = FindObjectOfType<HexMapEditor>();

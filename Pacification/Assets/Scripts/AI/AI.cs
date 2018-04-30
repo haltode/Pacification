@@ -13,7 +13,7 @@ public class AI : MonoBehaviour
 
     public AI(Difficulty difficultyLevel)
     {
-        aiPlayer = new Player();
+        aiPlayer = new Player("Google");
         this.difficultyLevel = difficultyLevel;
         currentRound = 0;
         lastSpawnRound = 0;

@@ -37,7 +37,7 @@ public class GameManager : MonoBehaviour
 
             Client client = Instantiate(clientPrefab).GetComponent<Client>();
             client.clientName = nameHostInput.text;
-            client.player.name = client.clientName;
+            //client.player.name = client.clientName;
             client.isHost = true;
 
             if(client.clientName == "")

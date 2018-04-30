@@ -45,7 +45,13 @@ public class Player
 
         canPlay = false;
 
+        client = Object.FindObjectOfType<Client>();
+    }
+
+    public void FindMap()
+    {
         hexGrid = Object.FindObjectOfType<HexGrid>();
+        Debug.Log(hexGrid != null);
     }
 
     public void AddUnit(Unit.UnitType type, HexCell location)
@@ -55,6 +61,7 @@ public class Player
 
     public void NetworkAddUnit(string data)
     {
+        FindMap();
         string[] receivedData = data.Split('#');
 
         Unit.UnitType type = (Unit.UnitType)int.Parse(receivedData[0]);
@@ -102,6 +109,16 @@ public class Player
 
     public void AddCity(HexCell location, City.CitySize type)
     {
+        client.Send("CUNI|CIC|" + (int)type + "#" + location.coordinates.X + "#" + location.coordinates.Z);
+    }
+
+    public void NetworkAddCity(string data)
+    {
+        string[] receivedData = data.Split('#');
+
+        City.CitySize type = (City.CitySize)int.Parse(receivedData[0]);
+        HexCell location = hexGrid.GetCell(new HexCoordinates(int.Parse(receivedData[1]), int.Parse(receivedData[2])));
+
         int cityID = playerCities.Count;
         City city = new City(this, cityID, location);
 
@@ -117,9 +134,16 @@ public class Player
 
     public void RemoveCity(City city)
     {
-        Object.Destroy(city.instance);
-        playerUnits[city.Id] = null;
-        city = null;
+        client.Send("CUNI|CID|" + city.Position.Position.x  + "#" + city.Position.Position.z);
+    }
+
+    public void NetworkRemoveCity(string data)
+    {
+        string[] receivedData = data.Split('#');
+        //City city = hexGrid.GetCell(new HexCoordinates(int.Parse(receivedData[1]), int.Parse(receivedData[2]))). ****NECESSITE ACCES A VILLE DEPUIS HEXCELL****;
+        //Object.Destroy(city.instance);
+        //playerUnits[city.Id] = null;
+        //city = null;
     }
     
     public void LevelUp()
@@ -151,7 +175,7 @@ public class Player
     public void SetDisplayer()
     {
         displayer = Object.FindObjectOfType<DisplayInformationManager>();
-        Debug.Log(displayer != null); //Probleme a résoudre
+        //Debug.Log(displayer != null); //Probleme a résoudre
     }
 
     public void UpdateMoneyDisplay()

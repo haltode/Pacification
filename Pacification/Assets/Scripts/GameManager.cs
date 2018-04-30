@@ -8,11 +8,6 @@ public class GameManager : MonoBehaviour
 {
     public static GameManager Instance { set; get; }
 
-    public GameObject connectionMenu;
-    public GameObject waiting;
-    public GameObject host;
-    public GameObject joinMenu;
-
     public GameObject serverPrefab;
     public GameObject clientPrefab;
 
@@ -29,9 +24,6 @@ public class GameManager : MonoBehaviour
     {
         Instance = this;
         DontDestroyOnLoad(this);
-        waiting.SetActive(false);
-        host.SetActive(false);
-        joinMenu.SetActive(false);
     }
 
     public void StartingServer(bool isAlone = false)
@@ -72,24 +64,9 @@ public class GameManager : MonoBehaviour
         StartingServer(true);
     }
 
-    public void MainMenuHostButton()
-    {
-        host.SetActive(true);
-        connectionMenu.SetActive(false);
-    }
-
     public void MainMenuStartingServerButton()
     {
         StartingServer();
-
-        host.SetActive(false);
-        waiting.SetActive(true);
-    }
-
-    public void MainMenuJoinButton()
-    {
-        connectionMenu.SetActive(false);
-        joinMenu.SetActive(true);
     }
 
     public void MainMenuConnectToServerButton()
@@ -113,12 +90,7 @@ public class GameManager : MonoBehaviour
                     System.Random rnd = new System.Random();
                     client.clientName = "Player" + (rnd.Next(1000, 10000));
                 }
-
-                connectionMenu.SetActive(false);
                 isConnected = true;
-
-                joinMenu.SetActive(false);
-                waiting.SetActive(true);
             }
         }
         catch(Exception e)
@@ -132,11 +104,6 @@ public class GameManager : MonoBehaviour
 
     public void MainMenuBackButton()
     {
-        waiting.SetActive(false);
-        host.SetActive(false);
-        joinMenu.SetActive(false);
-        connectionMenu.SetActive(true);
-
         Server server = FindObjectOfType<Server>();
         if(server != null)
         {

@@ -211,33 +211,6 @@ public class HexMapEditor : MonoBehaviour
         }
     }
 
-    // TODO: all these functions are now dead code, need a new way to handle this
-    /*void CreateUnit()
-    {
-        HexCell cell = GetCellUnderCursor();
-        if(cell && !cell.Unit)
-        {
-            if(client)
-                client.Send("CUNI|UNC|" + "type_of_unit#" + cell.coordinates.X + "#" + cell.coordinates.Z + "#");
-            else
-            {
-                HexUnit unit = Instantiate(HexUnit.unitPrefab);
-                float orientation = UnityEngine.Random.Range(0f, 360f);
-                hexGrid.AddUnit(unit, cell, orientation);
-            }
-        }
-    }
-
-    public void NetworkCreateUnit(string data)
-    {
-        string[] receivedData = data.Split('#');
-        HexUnit unit = Instantiate(HexUnit.unitPrefab);
-        HexCell cell = hexGrid.GetCell(new HexCoordinates(int.Parse(receivedData[1]), int.Parse(receivedData[2])));
-
-        float orientation = UnityEngine.Random.Range(0f, 360f);
-        hexGrid.AddUnit(unit, cell, orientation);
-    }*/
-
     void DestroyUnit()
     {
         HexCell cell = GetCellUnderCursor();
@@ -247,7 +220,7 @@ public class HexMapEditor : MonoBehaviour
                 client.Send("CUNI|UND|" + cell.coordinates.X + "#" + cell.coordinates.Z + "#");
             else
                 hexGrid.RemoveUnit(cell.Unit);
-        }   
+        }
     }
 
     public void NetworkDestroyUnit(string data)

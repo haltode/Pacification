@@ -3,7 +3,6 @@ using System.Collections.Generic;
 using System.IO;
 using System.Net.Sockets;
 using UnityEngine;
-using UnityEngine.UI;
 using UnityEngine.SceneManagement;
 
 public class Client : MonoBehaviour
@@ -13,26 +12,27 @@ public class Client : MonoBehaviour
     public bool isHost;
     private bool isSocketStarted;
 
-    private List<GameClient> players = new List<GameClient>(); 
+    private List<GameClient> playerClients = new List<GameClient>(); 
     private TcpClient socket;
     private NetworkStream stream;
     private StreamWriter writer;
     private StreamReader reader;
 
     private HexMapEditor mapEditor;
-    public Player player;
 
-    public Text text;
+    public Player player;
+    public List<Player> players = new List<Player>();
 
     void Start()
     {
         DontDestroyOnLoad(gameObject);
-        player = new Player();
+        player = new Player("null");
+        players.Add(player);
     }
 
     public bool ConnectToServer(string host, int port)
     {
-        if(isSocketStarted) 
+        if(isSocketStarted)
             return false;
 
         try
@@ -83,15 +83,28 @@ public class Client : MonoBehaviour
                 FindObjectOfType<HexGameUI>().NetworkDoMove(receivedData[1]);
                 break;
 
-            // TODO: function NetworkCreateUnit does not exist anymore
-            /*case "SUNC":
-                mapEditor = FindObjectOfType<HexMapEditor>();
-                mapEditor.NetworkCreateUnit(receivedData[1]);
-                break;*/
+            case "SUNC":
+                foreach(Player p in players)
+                {
+                    if(p.name == receivedData[2])
+                        p.NetworkAddUnit(receivedData[1]);
+                }
+                break;
 
             case "SUND":
-                mapEditor = FindObjectOfType<HexMapEditor>();
-                mapEditor.NetworkDestroyUnit(receivedData[1]);
+                foreach(Player p in players)
+                {
+                    if(p.name == receivedData[2])
+                        p.NetworkRemoveUnit(receivedData[1]);
+                }
+                break;
+
+            case "SUNL":
+                foreach(Player p in players)
+                {
+                    if(p.name == receivedData[2])
+                        p.NetworkLevelUp();
+                }
                 break;
 
             case "SEDI":
@@ -136,15 +149,15 @@ public class Client : MonoBehaviour
             case "SLOD":
                 SceneManager.LoadScene("Map");
                 player.SetDisplayer();
-                player.UpdateMoneyDisplay();
-                player.UpdateHappinessDisplay();
-                player.UpdateProductionDisplay();
-                player.UpdateScienceDisplay();
                 break;
 
             case "SMAP":
                 MapSenderReceiver mapLoader = FindObjectOfType<MapSenderReceiver>();
                 mapLoader.StartGame(receivedData[1]);
+                player.UpdateMoneyDisplay();
+                player.UpdateHappinessDisplay();
+                player.UpdateProductionDisplay();
+                player.UpdateScienceDisplay();
                 break;
         }
     }
@@ -152,7 +165,7 @@ public class Client : MonoBehaviour
     void UserConnected(string name, bool host)
     {
         GameClient client = new GameClient { name = name };
-        players.Add(client);
+        playerClients.Add(client);
     }
 
     void OnApplicationQuit()

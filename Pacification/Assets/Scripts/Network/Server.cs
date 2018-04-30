@@ -151,7 +151,7 @@ public class Server : MonoBehaviour
                 Broadcast("SMOV|" + receivedData[1], clients);
                 break;
             case "CUNI":
-                Broadcast("S" + receivedData[1] +"|"+ receivedData[2], clients);
+                Broadcast("S" + receivedData[1] +"|"+ receivedData[2] + "|" + client.clientName, clients);
                 break;
 
             case "CEDI":

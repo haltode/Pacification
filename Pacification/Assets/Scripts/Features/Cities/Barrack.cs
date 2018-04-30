@@ -26,7 +26,7 @@ public class Barrack : MonoBehaviour
     void Start()
     {
         // TODO : link with the actual player, this is a placeholder + don't forget to take the EDITOR into account ==> the player is not in the Client
-        Owner = new Player();
+        Owner = new Player("bruh");
         hexGrid = FindObjectOfType<HexGrid>();
         cityLocation = hexGrid.GetCell(4, 2);
         BarrackObject.SetActive(false);

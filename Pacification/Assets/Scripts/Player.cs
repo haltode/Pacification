@@ -101,7 +101,7 @@ public class Player
     public void NetworkRemoveUnit(string data)
     {
         string[] receivedData = data.Split('#');
-        Unit unit = hexGrid.GetCell(new HexCoordinates(int.Parse(receivedData[1]), int.Parse(receivedData[2]))).Unit.Unit;
+        Unit unit = hexGrid.GetCell(new HexCoordinates(int.Parse(receivedData[0]), int.Parse(receivedData[1]))).Unit.Unit;
         hexGrid.RemoveUnit(unit.HexUnit);
         playerUnits[unit.Id] = null;
         unit = null;

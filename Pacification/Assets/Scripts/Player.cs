@@ -48,10 +48,11 @@ public class Player
         client = Object.FindObjectOfType<Client>();
     }
 
-    public void FindMap()
+    public void InitialSpawnUnit()
     {
         hexGrid = Object.FindObjectOfType<HexGrid>();
-        Debug.Log(hexGrid != null);
+        AddUnit(Unit.UnitType.SETTLER, hexGrid.GetCell(4, 2));
+        AddUnit(Unit.UnitType.REGULAR, hexGrid.GetCell(4, 3));
     }
 
     public void AddUnit(Unit.UnitType type, HexCell location)
@@ -61,7 +62,6 @@ public class Player
 
     public void NetworkAddUnit(string data)
     {
-        FindMap();
         string[] receivedData = data.Split('#');
 
         Unit.UnitType type = (Unit.UnitType)int.Parse(receivedData[0]);

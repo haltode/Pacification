@@ -195,6 +195,7 @@ public class Client : MonoBehaviour
             case "SMAP":
                 MapSenderReceiver mapLoader = FindObjectOfType<MapSenderReceiver>();
                 mapLoader.StartGame(receivedData[1]);
+                player.InitialSpawnUnit();
                 player.UpdateMoneyDisplay();
                 player.UpdateHappinessDisplay();
                 player.UpdateProductionDisplay();

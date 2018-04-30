@@ -4,6 +4,7 @@ using UnityEngine.EventSystems;
 public class HexGameUI : MonoBehaviour
 {
     public HexGrid grid;
+    ControlsManager controls;
 
     HexCell currentCell;
     HexUnit selectedUnit;
@@ -14,6 +15,7 @@ public class HexGameUI : MonoBehaviour
     {
         grid = FindObjectOfType<HexGrid>();
         client = FindObjectOfType<Client>();
+        controls = FindObjectOfType<ControlsManager>();
     }
 
     void Update()
@@ -26,6 +28,13 @@ public class HexGameUI : MonoBehaviour
             {
                 if(Input.GetMouseButtonDown(1))
                     DoMove();
+                else if(Input.GetKeyDown(controls.unitAction))
+                {
+                    if(selectedUnit.Unit.Type == Unit.UnitType.SETTLER)
+                        ((Settler)selectedUnit.Unit).Settle();
+                    else if(selectedUnit.Unit.Type == Unit.UnitType.WORKER)
+                        ((Worker)selectedUnit.Unit).Exploit();
+                }
                 else
                     DoPathfinding();
             }

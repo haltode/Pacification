@@ -18,6 +18,8 @@ public class HexGrid : MonoBehaviour
     public GameObject mainUnitPrefab;
     public GameObject[] unitPrefab;
 
+    public GameObject[] cityPrefab;
+
     HexGridChunk[] chunks;
     int chunkCountX, chunkCountZ;
     public HexCell[] cells;

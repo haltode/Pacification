@@ -47,7 +47,7 @@ public class Player
     public void AddUnit(Unit.UnitType type, HexCell location)
     {
         Unit unit = null;
-        int unitID = playerUnits.Count - 1;
+        int unitID = playerUnits.Count;
         if(type == Unit.UnitType.SETTLER)
             unit = new Settler(this, unitID);
         else if(type == Unit.UnitType.WORKER)
@@ -74,20 +74,30 @@ public class Player
 
     public void RemoveUnit(Unit unit)
     {
-        playerUnits.Remove(unit);
+        hexGrid.RemoveUnit(unit.HexUnit);
+        playerUnits[unit.Id] = null;
         unit = null;
     }
     
-    public void AddCity(HexCell location)
+    public void AddCity(HexCell location, City.CitySize type)
     {
-        int cityID = playerCities.Count - 1;
+        int cityID = playerCities.Count;
         City city = new City(this, cityID, location);
+
+        Vector3 position = location.Position;
+        float hash = HexMetrics.SampleHashGrid(position);
+        city.instance = GameObject.Instantiate(
+            hexGrid.cityPrefab[(int)type],
+            position,
+            Quaternion.Euler(0f, 360f * hash, 0f));
+
         playerCities.Add(city);
     }
 
     public void RemoveCity(City city)
     {
-        playerCities.Remove(city);
+        Object.Destroy(city.instance);
+        playerUnits[city.Id] = null;
         city = null;
     }
     

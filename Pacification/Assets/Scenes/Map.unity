@@ -9450,6 +9450,10 @@ MonoBehaviour:
   - {fileID: 100010, guid: 04a21b79fe66a304aa11aa2bdfc69f7f, type: 3}
   - {fileID: 100020, guid: 6d0934fbc08bacc4caa4d04732694873, type: 3}
   - {fileID: 100002, guid: 33a24ae299ffc0c45bee4c0b42cacf07, type: 3}
+  cityPrefab:
+  - {fileID: 100000, guid: 8cd39f9aa54a60c4690c647fe282139f, type: 3}
+  - {fileID: 100000, guid: b4768eee145282e42803b173574bfc87, type: 3}
+  - {fileID: 100000, guid: 18ee71fa52cd317409e4cd92de2b8c19, type: 3}
   cells: []
   currentPathStart: {fileID: 0}
   currentPathEnd: {fileID: 0}

@@ -16,6 +16,7 @@ public class City : Feature
     private CitySize size;
     private int id;
     private int hp;
+    public GameObject instance;
 
     public City (Player owner, int id, HexCell position)
     {

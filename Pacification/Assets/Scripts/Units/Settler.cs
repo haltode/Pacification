@@ -8,7 +8,7 @@ public class Settler : Unit
     {
         this.owner = owner;
         this.id = id;
-        type = UnitType.WORKER;
+        type = UnitType.SETTLER;
         mvtSPD = 2;
         hp = 100;
 
@@ -17,7 +17,7 @@ public class Settler : Unit
 
     public void Settle()
     {
-        owner.AddCity(hexUnit.location);
+        owner.AddCity(hexUnit.location, City.CitySize.SETTLEMENT);
         owner.RemoveUnit(this);
     }
 }

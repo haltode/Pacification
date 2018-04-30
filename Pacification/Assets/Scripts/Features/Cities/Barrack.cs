@@ -34,6 +34,6 @@ public class Barrack : MonoBehaviour
 
     public void CreateUnitButton(string type)
     {
-        Owner.CreateUnit(Unit.StrToType(type), cityLocation);
+        Owner.AddUnit(Unit.StrToType(type), cityLocation);
     }
 }

@@ -17,15 +17,14 @@ public class City : Feature
     private int id;
     private int hp;
 
-    public City (ref Player owner, HexCell position)
+    public City (Player owner, int id, HexCell position)
     {
         this.owner = owner;
+        this.id = id;
         this.position = position;
         type = FeatureType.CITY;
         size = CitySize.SETTLEMENT;
         hp = 600;
-
-        id = owner.AddCity(this);
 
         // TODO : couleur du joueur
     }

@@ -16,8 +16,8 @@ public class Player
     public int production;
     public int happiness;
 
-    private Dictionary<int, Unit> playerUnits;
-    private Dictionary<int, City> playerCities;
+    List<Unit> playerUnits;
+    List<City> playerCities;
     // TODO : couleur du joueur
     // TODO : tech tree
 
@@ -36,41 +36,28 @@ public class Player
         production = 0;
         happiness = 5;
 
-        playerUnits = new Dictionary<int, Unit>();
-        playerCities = new Dictionary<int, City>();
+        playerUnits = new List<Unit>();
+        playerCities = new List<City>();
 
         canPlay = false;
 
         hexGrid = Object.FindObjectOfType<HexGrid>();
     }
 
-    public int AddUnit(Unit unit)
-    {
-        unitID++;
-        playerUnits.Add(unitID, unit);
-
-        return unitID;
-    }
-
-    public void RemoveUnit(Unit unit)
-    {
-        playerUnits.Remove(unit.Id);
-        unit = null;
-    }
-
-    public void CreateUnit(Unit.UnitType type, HexCell location)
+    public void AddUnit(Unit.UnitType type, HexCell location)
     {
         Unit unit = null;
+        int unitID = playerUnits.Count - 1;
         if(type == Unit.UnitType.SETTLER)
-            unit = new Settler(this);
+            unit = new Settler(this, unitID);
         else if(type == Unit.UnitType.WORKER)
-            unit = new Worker(this);
+            unit = new Worker(this, unitID);
         else if(type == Unit.UnitType.REGULAR)
-            unit = new Regular(this);
+            unit = new Regular(this, unitID);
         else if(type == Unit.UnitType.RANGED)
-            unit = new Ranged(this);
+            unit = new Ranged(this, unitID);
         else if(type == Unit.UnitType.HEAVY)
-            unit = new Heavy(this);
+            unit = new Heavy(this, unitID);
         else
             Debug.Log("Unknown unit type");
 
@@ -81,19 +68,26 @@ public class Player
 
         float orientation = UnityEngine.Random.Range(0f, 360f);
         hexGrid.AddUnit(unit.HexUnit, location, orientation);
+    
+        playerUnits.Add(unit);
+    }
+
+    public void RemoveUnit(Unit unit)
+    {
+        playerUnits.Remove(unit);
+        unit = null;
     }
     
-    public int AddCity(City city)
+    public void AddCity(HexCell location)
     {
-        cityID++;
-        playerCities.Add(cityID, city);
-
-        return cityID;
+        int cityID = playerCities.Count - 1;
+        City city = new City(this, cityID, location);
+        playerCities.Add(city);
     }
 
     public void RemoveCity(City city)
     {
-        playerCities.Remove(city.Id);
+        playerCities.Remove(city);
         city = null;
     }
     
@@ -101,9 +95,9 @@ public class Player
     {
         unitLevel++;
 
-        foreach (KeyValuePair<int, Unit> entry in playerUnits)
+        for(int i = 0; i < playerUnits.Count; ++i)
         {
-            Unit u = entry.Value;
+            Unit u = playerUnits[i];
 
             if (u.Type == Unit.UnitType.REGULAR)
                 ((Regular)u).LevelUp();

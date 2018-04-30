@@ -4,14 +4,13 @@ using UnityEngine;
 
 public class Worker : Unit
 {
-    public Worker(Player owner)
+    public Worker(Player owner, int id)
     {
         this.owner = owner;
+        this.id = id;
         type = UnitType.WORKER;
         mvtSPD = 2;
         hp = 300;
-
-        id = owner.AddUnit(this);
 
         // TODO : couleur du joueur
     }

@@ -4,21 +4,20 @@ using UnityEngine;
 
 public class Settler : Unit
 {
-    public Settler(Player owner)
+    public Settler(Player owner, int id)
     {
         this.owner = owner;
+        this.id = id;
         type = UnitType.WORKER;
         mvtSPD = 2;
         hp = 100;
-
-        id = owner.AddUnit(this);
 
         // TODO : couleur du joueur
     }
 
     public void Settle()
     {
-        new City(ref owner, hexUnit.location);
+        owner.AddCity(hexUnit.location);
         owner.RemoveUnit(this);
     }
 }

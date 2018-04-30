@@ -8,6 +8,7 @@ public class HexGameUI : MonoBehaviour
 
     HexCell currentCell;
     HexUnit selectedUnit;
+    public City selectedCity;
 
     Client client;
 
@@ -20,24 +21,31 @@ public class HexGameUI : MonoBehaviour
 
     void Update()
     {
-        if(GameManager.Instance.editor || client.player.canPlay && !EventSystem.current.IsPointerOverGameObject())
+        if(!(GameManager.Instance.editor || client.player.canPlay && !EventSystem.current.IsPointerOverGameObject()))
+            return;
+
+        if(Input.GetMouseButtonDown(0))
         {
-            if(Input.GetMouseButtonDown(0))
-                DoSelection();
-            else if(selectedUnit)
+            DoSelection();
+            if(currentCell)
             {
-                if(Input.GetMouseButtonDown(1))
-                    DoMove();
-                else if(Input.GetKeyDown(controls.unitAction))
-                {
-                    if(selectedUnit.Unit.Type == Unit.UnitType.SETTLER)
-                        ((Settler)selectedUnit.Unit).Settle();
-                    else if(selectedUnit.Unit.Type == Unit.UnitType.WORKER)
-                        ((Worker)selectedUnit.Unit).Exploit();
-                }
-                else
-                    DoPathfinding();
+                if(currentCell.FeatureIndex == 1) // City
+                    selectedCity = client.player.GetCity(currentCell);
             }
+        }
+        else if(selectedUnit)
+        {
+            if(Input.GetMouseButtonDown(1))
+                DoMove();
+            else if(Input.GetKeyDown(controls.unitAction))
+            {
+                if(selectedUnit.Unit.Type == Unit.UnitType.SETTLER)
+                    ((Settler)selectedUnit.Unit).Settle();
+                else if(selectedUnit.Unit.Type == Unit.UnitType.WORKER)
+                    ((Worker)selectedUnit.Unit).Exploit();
+            }
+            else
+                DoPathfinding();
         }
     }
 

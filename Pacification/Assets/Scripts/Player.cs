@@ -118,6 +118,7 @@ public class Player
 
         City.CitySize type = (City.CitySize)int.Parse(receivedData[0]);
         HexCell location = hexGrid.GetCell(new HexCoordinates(int.Parse(receivedData[1]), int.Parse(receivedData[2])));
+        location.FeatureIndex = 1;
 
         int cityID = playerCities.Count;
         City city = new City(this, cityID, location);
@@ -141,9 +142,19 @@ public class Player
     {
         string[] receivedData = data.Split('#');
         //City city = hexGrid.GetCell(new HexCoordinates(int.Parse(receivedData[1]), int.Parse(receivedData[2]))). ****NECESSITE ACCES A VILLE DEPUIS HEXCELL****;
+        //TODO: change cell featureIndex back to 0
         //Object.Destroy(city.instance);
         //playerUnits[city.Id] = null;
         //city = null;
+    }
+
+    public City GetCity(HexCell location)
+    {
+        for(int i = 0; i < playerCities.Count; ++i)
+            if(playerCities[i] != null &&
+                playerCities[i].Position == location)
+                return playerCities[i];
+        return null;
     }
     
     public void LevelUp()

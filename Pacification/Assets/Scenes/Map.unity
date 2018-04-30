@@ -1221,8 +1221,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 25691f1fb396cce4c9ee81836efd323e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  BarrackObject: {fileID: 1360624161}
-  hexGrid: {fileID: 0}
 --- !u!4 &103168100
 Transform:
   m_ObjectHideFlags: 0
@@ -3206,7 +3204,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 0, y: 0.000029214747}
+  m_AnchoredPosition: {x: 0, y: -0.0000150566175}
   m_SizeDelta: {x: 400, y: 0}
   m_Pivot: {x: 0, y: 1}
 --- !u!114 &430921716
@@ -9446,10 +9444,10 @@ MonoBehaviour:
   mainUnitPrefab: {fileID: 1755938730281386, guid: 6051e15cd963545a2a9f8bbfdfac4d09,
     type: 2}
   unitPrefab:
-  - {fileID: 100004, guid: 42302a0e1d7475740bba6ce8528ca2bc, type: 3}
-  - {fileID: 100010, guid: 04a21b79fe66a304aa11aa2bdfc69f7f, type: 3}
-  - {fileID: 100020, guid: 6d0934fbc08bacc4caa4d04732694873, type: 3}
-  - {fileID: 100002, guid: 33a24ae299ffc0c45bee4c0b42cacf07, type: 3}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
   cityPrefab:
   - {fileID: 100000, guid: 8cd39f9aa54a60c4690c647fe282139f, type: 3}
   - {fileID: 100000, guid: b4768eee145282e42803b173574bfc87, type: 3}
@@ -9750,7 +9748,7 @@ MonoBehaviour:
     m_MaxSize: 100
     m_Alignment: 4
     m_AlignByGeometry: 0
-    m_RichText: 1
+    m_RichText: 0
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1

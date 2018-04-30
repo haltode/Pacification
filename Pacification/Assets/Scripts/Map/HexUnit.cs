@@ -5,9 +5,7 @@ using System.IO;
 
 public class HexUnit : MonoBehaviour
 {
-    // W O R K S P A C E
     public Unit Unit;
-    // // // // // // //
 
     public HexCell location;
     HexCell currentTravelLocation;
@@ -20,7 +18,7 @@ public class HexUnit : MonoBehaviour
     public int Speed
     {
         // Temporary value
-        get { return 24; }
+        get { return Unit.MvtSPD; }
     }
 
     public int VisionRange

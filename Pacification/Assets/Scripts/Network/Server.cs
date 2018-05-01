@@ -155,7 +155,7 @@ public class Server : MonoBehaviour
                 break;
 
             case "CUNM":
-                Broadcast("SUNM|" + receivedData[1] + "|" + receivedData[2] + "|" + client.clientName, clients);
+                Broadcast("S" + receivedData[1] + "|" + receivedData[2] + "|" + receivedData[3] + "|" + client.clientName, clients);
                 break;
 
             case "CEDI":

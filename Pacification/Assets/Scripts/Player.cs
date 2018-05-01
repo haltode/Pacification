@@ -70,6 +70,11 @@ public class Player
         HexMapCamera.FocusOnPosition(spawnSettler.Position);
     }
 
+    public void SettlerAction(HexCell location, City.CitySize type, Settler settler)
+    {
+        client.Send("CUNM|UCD|" + (int)type + "#" + location.coordinates.X + "#" + location.coordinates.Z + "|" + settler.HexUnit.location.coordinates.X + "#" + settler.HexUnit.location.coordinates.Z);
+    }
+
     public void AddUnit(Unit.UnitType type, HexCell location)
     {
         client.Send("CUNI|UNC|" + (int)type + "#" + location.coordinates.X + "#" + location.coordinates.Z);
@@ -77,7 +82,7 @@ public class Player
 
     public void AddUnit(Unit.UnitType type, HexCell location, Unit.UnitType type2, HexCell location2)
     {
-        client.Send("CUNM|" + (int)type + "#" + location.coordinates.X + "#" + location.coordinates.Z + "|" + (int)type2 + "#" + location2.coordinates.X + "#" + location2.coordinates.Z);
+        client.Send("CUNM|UAA|" + (int)type + "#" + location.coordinates.X + "#" + location.coordinates.Z + "|" + (int)type2 + "#" + location2.coordinates.X + "#" + location2.coordinates.Z);
     }
 
     public void NetworkAddUnit(string data)

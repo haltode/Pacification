@@ -17,7 +17,6 @@ public class Settler : Unit
 
     public void Settle()
     {
-        owner.AddCity(hexUnit.location, City.CitySize.SETTLEMENT);
-        owner.RemoveUnit(this);
+        owner.SettlerAction(hexUnit.location, City.CitySize.SETTLEMENT, this);
     }
 }

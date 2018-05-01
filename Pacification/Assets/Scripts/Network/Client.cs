@@ -82,13 +82,24 @@ public class Client : MonoBehaviour
                 FindObjectOfType<HexGameUI>().NetworkDoMove(receivedData[1]);
                 break;
 
-            case "SUNM":
+            case "SUAA":
                 foreach(Player p in players)
                 {
                     if(p.name == receivedData[3])
                     {
                         p.NetworkAddUnit(receivedData[1]);
                         p.NetworkAddUnit(receivedData[2]);
+                    }
+                }
+                break;
+
+            case "SUCD":
+                foreach(Player p in players)
+                {
+                    if(p.name == receivedData[3])
+                    {
+                        p.NetworkAddCity(receivedData[1]);
+                        p.NetworkRemoveUnit(receivedData[2]);
                     }
                 }
                 break;

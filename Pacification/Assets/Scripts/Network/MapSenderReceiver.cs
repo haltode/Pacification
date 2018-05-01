@@ -23,8 +23,10 @@ public class MapSenderReceiver : MonoBehaviour {
 
         saveAndLoad.Save(path);
         string map = File.ReadAllText(path);
+
         File.Delete(path);
 
+        StartGame(map);
         server.Broadcast("SMAP|" + map, server.clients);
     }
 

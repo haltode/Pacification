@@ -49,12 +49,8 @@ public class GameManager : MonoBehaviour
             client.isHost = true;
 
             if(client.clientName == "")
-            {
                 client.clientName = "Host";
-                client.player = new Player(client.clientName);
-            }
-            else
-                client.player = new Player(client.clientName);
+            client.player = new Player(client.clientName);
 
             client.ConnectToServer(Server.Localhost, Server.Port);
         }

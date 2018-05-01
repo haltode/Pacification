@@ -52,7 +52,7 @@
 
 La deuxième phase de développement de \textit{Pacification} touche à sa fin. Durant ces quelques semaines, nous avons pu beaucoup progresser sur l’évolution du jeu, qui commence à réellement prendre forme. 
 
-Nous somme partis d’un éditeur de map pour arriver à un solo et un multijoueur jouables (bien que incomplets pour le moment), avec des unités capables d'interagir avec leur environnement. Le réseau transmet correctement les informations, la map dispose d’une génération procédurale et d’un brouillard de guerre, et tous nos assets sont prêts.
+Nous somme partis d’un éditeur de map avec des fonctionnalités basiques pour arriver à un solo et un multijoueur jouables, avec des unités capables d'interagir avec leur environnement. Le réseau transmet correctement les informations, la map dispose d’une génération procédurale et d’un brouillard de guerre, et tous nos assets sont prêts.
 
 Malgré l’apparition de nouvelles difficultés, tous les membres du groupe ont pu travailler sur leurs parties et le résultat de cette période est conforme à nos attentes.
 
@@ -154,21 +154,59 @@ La ville disposera également d’améliorations, cependant elles dépendent de 
 
 \section{Assets (Cédric)}
 
+Les Assets ont été finis à 100\%, elles sont basées, pour la plupart, sur mes premières créations pour faire les suivantes. Nous sommes donc restés sur le style graphique sur lequel nous avons commencé. Trois nouvelles textures ont été créées  spécialement pour les villes.
+
 \begin{figure}[H]
     \centering
     \includegraphics[width=0.8\textwidth]{404}
-    \caption{TODO}
+    \caption{BlueRoof, RedRoof, DarkStoneWall}
 \end{figure}
+
+Les modèles 3D des bâtiments sont tous finis et et à l’exception des villes aucune n’a demandé de nouveau modèle à faire. Les derniers bâtiments pour les ressources ont été modélisés et comme pour les premières ressources déjà incluses dans le jeu, il existe deux modèles différents : la version naturelle et la version exploitée 
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.8\textwidth]{404}
+    \caption{foret naturelle et exploitée}
+\end{figure}
+
+Concernant les villes la première version a été légèrement modifiée, et les nouvelles textures créées permettent une meilleure différenciation des différents modèles correspondant aux différentes ères.
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.8\textwidth]{404}
+    \caption{villes}
+\end{figure}
+
+Concernant les unités ajoutées il y a les deux versions d’unité à portée, les deux versions des unités de siège (catapulte et canon), et le cavalier qui correspond à l’amélioration de l’infanterie. Comme pour les modèles précédent, la création des unités (notamment le canon et la catapulte) se sont fait à l’aide d’image de référence. Les modèles des unités humaines ont été construits à partir du modèle humain de base créer durant la première période du projet. Toutes les unités ont été agrandies pour faciliter leur sélection. Certains bug graphiques ont été corrigés.
+
+Les animations des personnages ont été considéré comme du bonus. Cependant des recherches ont quand même été faites sur cet aspect là : La catapulte a eu une première animation d’attaque, de déplacement et de destruction qui pourront pour certaines être réutilisé pour le canon. Des essais ont été faits sur l’animation de l’armature des unités humaines cependant celle-ci s’est trouvé très compliqué à gérer. Cependant le site internet Mixamo.com permet de donner une armature à un personnage humanoïde que l’on a créé et propose un panel d’animations très fluides et gratuites.
 
 \section{Interface (Cédric, Valérian, Antoine)}
 
+Pour le menu nous avons récupérer un menu créé par MICHSKY qui l’a rendu accessible à tous gratuitement sur internet. Nous l’avons aménagé de manière à ce qu’il s’adapte parfaitement à notre jeu.
+
 \begin{figure}[H]
     \centering
     \includegraphics[width=0.8\textwidth]{404}
-    \caption{TODO}
+    \caption{MainMenu}
 \end{figure}
 
-L’interface de la caserne (barrack) est reliée aux villes, et apparaît lorsqu’on clique sur une ville. Sa position et son échelle actuelle seront peut-être amenée à changer, l’interface actuelle n’étant pas encore parfaitement organisée. 
+ Le menu principal comporte un accès au “menu Play” qui regroupe les fonctionnalités du jeu en solo et du jeu en multijoueur.
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.8\textwidth]{404}
+    \caption{MenuPlay}
+\end{figure}
+
+ Les images apparaissant sur les boutons “Solo” “Host” et “Join” ont été faites grâce à blender. Les positions du soldat ont été possible grâce à l’armature et aux animations importés sur le site Mixamo.com cité prècedemment. Un menu “Paramètres” a été créé où l’on pourra par exemple changer la langue du jeu ou activer/désactiver du jeu. Un bouton “information”s est disponible et mène aux crédits du jeu.  On navigue de menu en menu grâce à des déplacements de caméras qui nous amènent sur des nouveaux canvas et des boutons back ont été placé pour simplifier cette navigation.
+
+%Le logo pacification a été créé sur le site FontStruct.com en s’inspirant d’un modèle trouvé sur internet. Pour insérer le titre correctement importer la police d’écriture ne suffisait pas car le texte apparaissait flou. Nous avons donc mis une image du texte. Pour cela nous avons utilisé le logiciel open source Krita qui a permis d’écrire et de rendre le fond transparent afin que le mot “Pacification” apparaisse sans fond sur le menu.
+
+De la musique a été ajoutée dans le jeu.
+
+L’interface de la caserne (barrack) est reliée aux villes. Sa position et son échelle actuelle seront peut-être amenée à changer, l’interface actuelle n’étant pas encore parfaitement organisée. 
 
 \section{IA (Thibault)}
 

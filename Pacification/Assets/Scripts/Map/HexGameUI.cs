@@ -7,6 +7,7 @@ public class HexGameUI : MonoBehaviour
     ControlsManager controls;
 
     HexCell currentCell;
+    HexCell targetCell;
     HexUnit selectedUnit;
     public City selectedCity;
 
@@ -25,6 +26,12 @@ public class HexGameUI : MonoBehaviour
             return;
         if(!(client.player.canPlay && !EventSystem.current.IsPointerOverGameObject()))
             return;
+
+        if (targetCell)
+        {
+            targetCell.DisableHighlight();
+            targetCell = null;
+        }
 
         if(Input.GetMouseButtonDown(0))
         {
@@ -51,12 +58,15 @@ public class HexGameUI : MonoBehaviour
                 else
                 {
                     Ray inputRay = Camera.main.ScreenPointToRay(Input.mousePosition);
-                    HexCell targetCell = grid.GetCell(inputRay);
+                    targetCell = grid.GetCell(inputRay);
 
                     if (selectedUnit.location.coordinates.DistanceTo(targetCell.coordinates) <= ((Attacker)selectedUnit.Unit).Range)
                     {
                         if (selectedUnit.Unit.Owner != targetCell.Unit.Unit.Owner)
+                        {
                             ((Attacker)selectedUnit.Unit).Attack(targetCell.Unit.Unit);
+                            targetCell.EnableHighlight(Color.red);
+                        }
                     }
                 }
             }

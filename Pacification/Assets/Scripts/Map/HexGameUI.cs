@@ -110,10 +110,7 @@ public class HexGameUI : MonoBehaviour
         if(grid.HasPath)
         {
             if(GameManager.Instance.editor)
-            {
-                Debug.Log("test : " + grid.GetPath().Count);
                 selectedUnit.Travel(grid.GetPath());
-            }
             else
             {
                 int xStart = selectedUnit.Location.coordinates.X;

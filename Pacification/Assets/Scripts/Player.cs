@@ -220,7 +220,6 @@ public class Player
     public void SetDisplayer()
     {
         displayer = Object.FindObjectOfType<DisplayInformationManager>();
-        //Debug.Log(displayer != null); //Probleme a résoudre
     }
 
     public void UpdateMoneyDisplay()

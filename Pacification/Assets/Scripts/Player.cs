@@ -82,6 +82,11 @@ public class Player
         else
             Debug.Log("Unknown unit type");
 
+        /* for upgraded model
+        if (Unit.CanAttack(unit) && unitLevel > 10)
+            (int)type += 3;
+        */
+
         unit.hexUnitGameObect = GameObject.Instantiate(hexGrid.mainUnitPrefab);
         unit.HexUnit = unit.hexUnitGameObect.GetComponent<HexUnit>();
         unit.HexUnit.Unit = unit;
@@ -164,16 +169,19 @@ public class Player
 
     public void NetworkLevelUp()
     {
-        unitLevel++;
-
-        foreach(Unit u in playerUnits)
+        if (unitLevel < 20)
         {
-            if(u.Type == Unit.UnitType.REGULAR)
-                ((Regular)u).LevelUp();
-            if(u.Type == Unit.UnitType.RANGED)
-                ((Ranged)u).LevelUp();
-            if(u.Type == Unit.UnitType.HEAVY)
-                ((Heavy)u).LevelUp();
+            unitLevel++;
+
+            foreach (Unit u in playerUnits)
+            {
+                if (u.Type == Unit.UnitType.REGULAR)
+                    ((Regular)u).LevelUp();
+                if (u.Type == Unit.UnitType.RANGED)
+                    ((Ranged)u).LevelUp();
+                if (u.Type == Unit.UnitType.HEAVY)
+                    ((Heavy)u).LevelUp();
+            }
         }
     }
 

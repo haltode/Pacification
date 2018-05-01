@@ -17,7 +17,6 @@ public class HexUnit : MonoBehaviour
 
     public int Speed
     {
-        // Temporary value
         get { return Unit.MvtSPD; }
     }
 

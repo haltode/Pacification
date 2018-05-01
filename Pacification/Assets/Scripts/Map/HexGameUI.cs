@@ -46,6 +46,15 @@ public class HexGameUI : MonoBehaviour
                     ((Settler)selectedUnit.Unit).Settle();
                 else if(selectedUnit.Unit.Type == Unit.UnitType.WORKER)
                     ((Worker)selectedUnit.Unit).Exploit();
+                else
+                {
+                    Ray inputRay = Camera.main.ScreenPointToRay(Input.mousePosition);
+                    HexCell targetCell = FindObjectOfType<HexGrid>().GetCell(inputRay);
+
+                    //TODO : differenciate owners. Currently teamkill is allowed for testing purposes.
+                    if (selectedUnit.location.coordinates.DistanceTo(targetCell.coordinates) <= ((Attacker)selectedUnit.Unit).Range)
+                        ((Attacker)selectedUnit.Unit).Attack(targetCell.Unit.Unit);
+                }
             }
         }
     }

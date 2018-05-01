@@ -61,7 +61,7 @@ public class Attacker : Unit
     }
 
     // A voir avec l'équilibrage si on veut que l'attaquant prenne des dégats ou non
-    public void Attack(ref Unit target)
+    public void Attack(Unit target)
     {
         float multiplier = 1f;
         dmgMult.TryGetValue(target.Type, out multiplier);
@@ -74,7 +74,7 @@ public class Attacker : Unit
         }
     }
     
-    public void Attack(ref City target)
+    public void Attack(City target)
     {
         target.Hp -= (int)((float)((defaultATK - upgradeATK) + upgradeATK * level) * dmgMultCity);
 

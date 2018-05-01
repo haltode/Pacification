@@ -9514,10 +9514,11 @@ MonoBehaviour:
   mainUnitPrefab: {fileID: 1755938730281386, guid: 6051e15cd963545a2a9f8bbfdfac4d09,
     type: 2}
   unitPrefab:
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
+  - {fileID: 100004, guid: 45fb97fc806f7d643812334fa7eaa60c, type: 3}
+  - {fileID: 100010, guid: c1a3a87b8b558634187bb270184ee52f, type: 3}
+  - {fileID: 100020, guid: 2d0fa57d9a6bbdd4fb0ca7480206fff4, type: 3}
+  - {fileID: 1007486911197018, guid: 634c66b9c5ee41c45b022039bb92e9af, type: 2}
+  - {fileID: 100000, guid: dd6bcd6a3c8d01e42992f4e86027bc29, type: 3}
   cityPrefab:
   - {fileID: 100000, guid: 8cd39f9aa54a60c4690c647fe282139f, type: 3}
   - {fileID: 100000, guid: b4768eee145282e42803b173574bfc87, type: 3}

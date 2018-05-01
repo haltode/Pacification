@@ -163,12 +163,7 @@ public class Server : MonoBehaviour
                 break;
 
             case "CEND":
-                if(playerNumber == 1)
-                {
-                    //Do stuff with AI
-                }
-                else
-                    playerPlaying = (playerPlaying + 1) % playerNumber;
+                playerPlaying = (playerPlaying + 1) % playerNumber;
 
                 Broadcast("SYGO|", clients[playerPlaying]);
                 break;

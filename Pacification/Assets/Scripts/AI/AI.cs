@@ -2,12 +2,13 @@
 using System;
 using System.Collections.Generic;
 
-public class AI : MonoBehaviour
+public class AI
 {
     public enum Difficulty { EASY, NORMAL, HARD };
 
     const int SpawnRadiusMin = 10;
     const int SpawnRadiusMax = 15;
+    const int MaxBarbarianUnits = 10;
 
     Player aiPlayer;
     Player ennemy;
@@ -25,8 +26,9 @@ public class AI : MonoBehaviour
         lastSpawnRound = 0;
     }
 
-    public void PlayTurn(int currentPlayerLvl)
+    public void PlayTurn()
     {
+        int currentPlayerLvl = ennemy.UnitLevel;
         ++currentRound;
         if(!IsSpawningTime())
             return;
@@ -41,11 +43,16 @@ public class AI : MonoBehaviour
 
         HexCell location = GetSpawningLocation();
         if(difficultyLevel == Difficulty.EASY)
-            aiPlayer.AddUnit(Unit.UnitType.REGULAR, location);
+        {
+            string cmd = (int)Unit.UnitType.REGULAR + "#" + location.coordinates.X + "#" + location.coordinates.Z;
+            aiPlayer.NetworkAddUnit(cmd);
+        }
         else
         {
             HexCell location2 = aiPlayer.hexGrid.GetNearFreeCell(location);
-            aiPlayer.AddUnit(Unit.UnitType.REGULAR, location,Unit.UnitType.HEAVY, location2);
+            string cmd = (int)Unit.UnitType.REGULAR + "#" + location.coordinates.X + "#" + location.coordinates.Z + "|" +
+                         (int)Unit.UnitType.HEAVY + "#" + location2.coordinates.X + "#" + location2.coordinates.Z;
+            aiPlayer.NetworkAddUnit(cmd);
         }
     }
 
@@ -53,7 +60,7 @@ public class AI : MonoBehaviour
     {
         List<HexCell> possibleLocation = new List<HexCell>();
         int nbCities = ennemy.playerCities.Count;
-        System.Random rnd = new System.Random();
+        System.Random rnd = ennemy.hexGrid.rnd;
         int choosenCity = rnd.Next(nbCities);
         HexCell location = ennemy.playerCities[choosenCity].Position;
 
@@ -61,7 +68,8 @@ public class AI : MonoBehaviour
         {
             HexCell cell = aiPlayer.hexGrid.cells[i];
             int dist = cell.coordinates.DistanceTo(location.coordinates);
-            if(dist <= SpawnRadiusMax && dist >= SpawnRadiusMin)
+            if(dist <= SpawnRadiusMax && dist >= SpawnRadiusMin && 
+                !aiPlayer.hexGrid.IsBorder(cell) && !cell.Unit && !cell.IsUnderWater)
                 possibleLocation.Add(cell);
         }
 
@@ -71,6 +79,11 @@ public class AI : MonoBehaviour
 
     bool IsSpawningTime()
     {
+        if(ennemy.playerCities.Count == 0)
+            return false;
+        if(aiPlayer.playerUnits.Count >= MaxBarbarianUnits)
+            return false;
+
         int diff = currentRound - lastSpawnRound;
         int randomRoundSpan = 0;
         int diffNbRound = 0;

@@ -21,6 +21,8 @@ public class Client : MonoBehaviour
     private HexMapEditor mapEditor;
 
     public Player player;
+    private AI ai;
+
     public List<Player> players = new List<Player>();
 
     void Start()
@@ -104,43 +106,35 @@ public class Client : MonoBehaviour
                 break;
 
             case "SUNC":
-                    foreach(Player p in players)
-                    {
-                        if(p.name == receivedData[2])
-                            p.NetworkAddUnit(receivedData[1]);
-                    }
+                foreach(Player p in players)
+                {
+                    if(p.name == receivedData[2])
+                        p.NetworkAddUnit(receivedData[1]);
+                }
                 break;
 
             case "SUND":
-                    foreach(Player p in players)
-                    {
-                        if(p.name == receivedData[2])
-                            p.NetworkRemoveUnit(receivedData[1]);
-                    }
+                foreach(Player p in players)
+                {
+                    if(p.name == receivedData[2])
+                        p.NetworkRemoveUnit(receivedData[1]);
+                }
                 break;
 
             case "SUNL":
-                    foreach(Player p in players)
-                    {
-                        if(p.name == receivedData[2])
-                            p.NetworkLevelUp();
-                    }
-                break;
-
-            case "SCIC":
-                    foreach(Player p in players)
-                    {
-                        if(p.name == receivedData[2])
-                            p.NetworkAddCity(receivedData[1]);
-                    }
+                foreach(Player p in players)
+                {
+                    if(p.name == receivedData[2])
+                        p.NetworkLevelUp();
+                }
                 break;
 
             case "SCID":
-                    foreach(Player p in players)
-                    {
-                        if(p.name == receivedData[2])
-                            p.NetworkRemoveCity(receivedData[1]);
-                    }
+                foreach(Player p in players)
+                {
+                    if(p.name == receivedData[2])
+                        p.NetworkRemoveCity(receivedData[1]);
+                }
                 break;
 
 
@@ -150,6 +144,8 @@ public class Client : MonoBehaviour
                 break;
 
             case "SYGO":
+                if(players.Count == 1)
+                    ai.PlayTurn();
                 FindObjectOfType<ButtonManager>().TakeTurn();
                 break;
 
@@ -196,6 +192,8 @@ public class Client : MonoBehaviour
                 player.UpdateHappinessDisplay();
                 player.UpdateProductionDisplay();
                 player.UpdateScienceDisplay();
+                if(players.Count == 1)
+                    ai = new AI(player, AI.Difficulty.EASY);
                 break;
         }
     }
@@ -204,8 +202,14 @@ public class Client : MonoBehaviour
     {
         GameClient client = new GameClient { name = name };
         playerClients.Add(client);
-        Player newPlayer = new Player(name);
-        players.Add(newPlayer);
+
+        if(name == clientName)
+            players.Add(player);
+        else
+        {
+            Player newPlayer = new Player(name);
+            players.Add(newPlayer);
+        }
     }
 
     void OnApplicationQuit()

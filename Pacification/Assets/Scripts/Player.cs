@@ -6,7 +6,7 @@ using UnityEngine;
 public class Player
 {
     public HexGrid hexGrid;
-    private Client client;
+    public Client client;
 
     private int unitID;
     private int cityID;
@@ -29,7 +29,7 @@ public class Player
 
     public Player(string name)
     {
-        Debug.Log("Player spawned");
+        Debug.Log("Player spawned: " + name);
         this.name = name;
         unitID = 0;
         cityID = 0;
@@ -45,6 +45,7 @@ public class Player
 
         canPlay = false;
         client = Object.FindObjectOfType<Client>();
+        hexGrid = Object.FindObjectOfType<HexGrid>();
     }
 
     public void InitialSpawnUnit()

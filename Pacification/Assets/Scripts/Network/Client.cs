@@ -147,7 +147,7 @@ public class Client : MonoBehaviour
                 if(GameManager.Instance.gamemode == GameManager.Gamemode.SOLO)
                 {
                     if(ai == null)
-                        ai = new AI(player, AI.Difficulty.EASY);
+                        ai = new AI(player, AI.Difficulty.HARD);
                     ai.PlayTurn();
                 }
                 FindObjectOfType<ButtonManager>().TakeTurn();

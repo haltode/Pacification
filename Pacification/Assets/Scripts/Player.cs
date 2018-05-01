@@ -57,12 +57,11 @@ public class Player
         for(int i = 0; i < hexGrid.cells.Length; ++i)
         {
             HexCell cell = hexGrid.cells[i];
-            if(!cell.IsUnderWater)
+            if(!cell.IsUnderWater && !hexGrid.IsBorder(cell))
                 possibleLocation.Add(cell);
         }
 
-        System.Random rnd = new System.Random();
-        int randomCell = rnd.Next(possibleLocation.Count);
+        int randomCell = hexGrid.rnd.Next(possibleLocation.Count);
         HexCell spawnSettler = possibleLocation[randomCell];
         HexCell spawnAttacker = hexGrid.GetNearFreeCell(spawnSettler);
 

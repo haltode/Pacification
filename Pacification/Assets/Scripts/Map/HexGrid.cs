@@ -20,6 +20,8 @@ public class HexGrid : MonoBehaviour
 
     public GameObject[] cityPrefab;
 
+    public System.Random rnd;
+
     HexGridChunk[] chunks;
     int chunkCountX, chunkCountZ;
     public HexCell[] cells;
@@ -38,6 +40,7 @@ public class HexGrid : MonoBehaviour
     void Awake()
     {
         HexMetrics.InitializeHashGrid(seed);
+        rnd = new System.Random();
         cellShaderData = gameObject.AddComponent<HexCellShaderData>();
         cellShaderData.Grid = this;
         CreateMap(cellCountX, cellCountZ);
@@ -45,6 +48,7 @@ public class HexGrid : MonoBehaviour
 
     void OnEnable()
     {
+        rnd = new System.Random();
         HexMetrics.InitializeHashGrid(seed);
         ResetVisibility();
     }
@@ -73,13 +77,23 @@ public class HexGrid : MonoBehaviour
         for(HexDirection dir = HexDirection.NE; dir <= HexDirection.NW; ++dir)
         {
             HexCell neighbor = location.GetNeighbor(dir);
-            if(neighbor && !neighbor.IsUnderWater && !neighbor.Unit)
+            if(neighbor && !neighbor.IsUnderWater && !neighbor.Unit && !IsBorder(neighbor))
                 possibleLocation.Add(neighbor);
         }
 
-        System.Random rnd = new System.Random();
         int randomCell = rnd.Next(possibleLocation.Count);
         return possibleLocation[randomCell];
+    }
+
+    public bool IsBorder(HexCell location)
+    {
+        for(HexDirection dir = HexDirection.NE; dir <= HexDirection.NW; ++dir)
+        {
+            HexCell neighbor = location.GetNeighbor(dir);
+            if(!neighbor)
+                return true;
+        }
+        return false;
     }
 
     public bool CreateMap(int sizeX, int sizeZ)

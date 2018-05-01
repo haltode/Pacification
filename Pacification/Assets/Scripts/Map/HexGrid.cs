@@ -397,6 +397,12 @@ public class HexGrid : MonoBehaviour
         units.Clear();
     }
 
+    public void ShowUI(bool visible)
+    {
+        for(int i = 0; i<chunks.Length; ++i)
+            chunks[i].ShowUI(visible);
+    }
+
     public void Save(BinaryWriter writer)
     {
         writer.Write(cellCountX);

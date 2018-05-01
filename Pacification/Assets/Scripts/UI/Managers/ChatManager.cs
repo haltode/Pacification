@@ -195,6 +195,21 @@ public class ChatManager : MonoBehaviour
                     }
                     break;
 
+                case "fog":
+                    string toggle = ExtractCommand(ref index, input.text);
+                    HexGrid grid = FindObjectOfType<HexGrid>();
+                    if(toggle == "off")
+                    {
+                        Shader.EnableKeyword("HEX_MAP_EDITOR");
+                        grid.ShowUI(false);
+                    }
+                    else if(toggle == "on")
+                    {
+                        Shader.DisableKeyword("HEX_MAP_EDITOR");
+                        grid.ShowUI(true);
+                    }
+            break;
+
                 default:
                     ChatMessage("ERROR: Unknown command \"" + command + "\"", MessageType.ALERT);
                     break;

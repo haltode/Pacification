@@ -103,8 +103,9 @@ public class GameManager : MonoBehaviour
                 {
                     System.Random rnd = new System.Random();
                     client.clientName = "Player" + (rnd.Next(1000, 10000));
-                    client.player = new Player(client.clientName);
                 }
+
+                client.player = new Player(client.clientName);
                 isConnected = true;
             }
         }

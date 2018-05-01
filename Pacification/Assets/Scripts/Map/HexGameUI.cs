@@ -83,7 +83,8 @@ public class HexGameUI : MonoBehaviour
         UpdateCurrentCell();
         if (currentCell)
         {
-            if (currentCell.Unit.Unit.Owner == client.player)
+            if (currentCell.Unit &&
+                currentCell.Unit.Unit.Owner == client.player)
                 selectedUnit = currentCell.Unit;
             else
                 selectedUnit = null;

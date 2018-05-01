@@ -21,7 +21,7 @@ public class Client : MonoBehaviour
     private HexMapEditor mapEditor;
 
     public Player player;
-    private AI ai;
+    private AI ai = null;
 
     public List<Player> players = new List<Player>();
 
@@ -144,8 +144,12 @@ public class Client : MonoBehaviour
                 break;
 
             case "SYGO":
-                if(players.Count == 1)
+                if(GameManager.Instance.gamemode == GameManager.Gamemode.SOLO)
+                {
+                    if(ai == null)
+                        ai = new AI(player, AI.Difficulty.EASY);
                     ai.PlayTurn();
+                }
                 FindObjectOfType<ButtonManager>().TakeTurn();
                 break;
 
@@ -192,8 +196,6 @@ public class Client : MonoBehaviour
                 player.UpdateHappinessDisplay();
                 player.UpdateProductionDisplay();
                 player.UpdateScienceDisplay();
-                if(players.Count == 1)
-                    ai = new AI(player, AI.Difficulty.EASY);
                 break;
         }
     }

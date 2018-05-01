@@ -18,7 +18,14 @@ public class GameManager : MonoBehaviour
     public HexGrid hexGrid;
     public ControlsManager controls;
 
-    public bool editor;
+    public Gamemode gamemode;
+
+    public enum Gamemode
+    {
+        SOLO,
+        MULTI,
+        EDITOR
+    }
 
     void Start()
     {
@@ -50,8 +57,6 @@ public class GameManager : MonoBehaviour
                 client.player = new Player(client.clientName);
 
             client.ConnectToServer(Server.Localhost, Server.Port);
-
-            editor = false;
         }
         catch(Exception e)
         {
@@ -61,22 +66,25 @@ public class GameManager : MonoBehaviour
 
     public void MainMenuEditorButton()
     {
-        editor = true;
+        gamemode = Gamemode.EDITOR;
         SceneManager.LoadScene("Map");
     }
 
     public void MainMenuSoloButton()
     {
+        gamemode = Gamemode.SOLO;
         StartingServer(true);
     }
 
     public void MainMenuStartingServerButton()
     {
+        gamemode = Gamemode.MULTI;
         StartingServer();
     }
 
     public void MainMenuConnectToServerButton()
     {
+        gamemode = Gamemode.MULTI;
         string hostAddress = GameObject.Find("HostAdressInput").GetComponent<InputField>().text;
         bool isConnected = false;
 

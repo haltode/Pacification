@@ -1,6 +1,6 @@
 fileFormatVersion: 2
-guid: 4a4f00e101197d140b0d98614e86c57d
-timeCreated: 1525127498
+guid: 2d0fa57d9a6bbdd4fb0ca7480206fff4
+timeCreated: 1525164909
 licenseType: Free
 ModelImporter:
   serializedVersion: 22
@@ -9,35 +9,30 @@ ModelImporter:
     100002: Bouclier3
     100004: Bracelet_armure
     100006: Bretelle_Armure
-    100008: Camera
-    100010: Casque
-    100012: Corps
-    100014: "Cr\xEAte"
-    100016: Jambes_armure
-    100018: Lamp
-    100020: Mains
-    100022: Pieds
-    100024: //RootNode
-    100026: Tunique
-    100028: Tunique.001
-    100030: Xiphos_manche
+    100008: Casque
+    100010: Corps
+    100012: "Cr\xEAte"
+    100014: Jambes_armure
+    100016: Mains
+    100018: Pieds
+    100020: //RootNode
+    100022: Tunique
+    100024: Tunique.001
+    100026: Xiphos_manche
     400000: Armure
     400002: Bouclier3
     400004: Bracelet_armure
     400006: Bretelle_Armure
-    400008: Camera
-    400010: Casque
-    400012: Corps
-    400014: "Cr\xEAte"
-    400016: Jambes_armure
-    400018: Lamp
-    400020: Mains
-    400022: Pieds
-    400024: //RootNode
-    400026: Tunique
-    400028: Tunique.001
-    400030: Xiphos_manche
-    2000000: Camera
+    400008: Casque
+    400010: Corps
+    400012: "Cr\xEAte"
+    400014: Jambes_armure
+    400016: Mains
+    400018: Pieds
+    400020: //RootNode
+    400022: Tunique
+    400024: Tunique.001
+    400026: Xiphos_manche
     2100000: Lame
     2100002: "Cr\xEAte"
     2100004: Armure
@@ -83,7 +78,6 @@ ModelImporter:
     4300020: Tunique
     4300022: Mains
     4300024: Corps
-    10800000: Lamp
   externalObjects:
   - first:
       type: UnityEngine:Material

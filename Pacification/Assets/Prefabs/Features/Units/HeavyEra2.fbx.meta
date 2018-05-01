@@ -1,31 +1,26 @@
 fileFormatVersion: 2
-guid: c68b84be18984b843a0361d63c546a7a
-timeCreated: 1525121924
+guid: dd6bcd6a3c8d01e42992f4e86027bc29
+timeCreated: 1525165314
 licenseType: Free
 ModelImporter:
   serializedVersion: 22
   fileIDToRecycleName:
-    100000: Camera
-    100002: //RootNode
-    100004: Circle
-    100006: Circle.001
-    100008: Cylinder
-    100010: Lamp
-    100012: Plane.001
-    100014: Plane.003
-    100016: Sphere
-    100018: WoodenArmature
-    400000: Camera
-    400002: //RootNode
-    400004: Circle
-    400006: Circle.001
-    400008: Cylinder
-    400010: Lamp
-    400012: Plane.001
-    400014: Plane.003
-    400016: Sphere
-    400018: WoodenArmature
-    2000000: Camera
+    100000: //RootNode
+    100002: Circle
+    100004: Circle.001
+    100006: Cylinder
+    100008: Plane.001
+    100010: Plane.003
+    100012: Sphere
+    100014: WoodenArmature
+    400000: //RootNode
+    400002: Circle
+    400004: Circle.001
+    400006: Cylinder
+    400008: Plane.001
+    400010: Plane.003
+    400012: Sphere
+    400014: WoodenArmature
     2100000: WoodArmature
     2100002: Steel
     2300000: Circle
@@ -49,7 +44,6 @@ ModelImporter:
     4300008: Circle.001
     4300010: Circle
     4300012: Sphere
-    10800000: Lamp
   externalObjects:
   - first:
       type: UnityEngine:Material

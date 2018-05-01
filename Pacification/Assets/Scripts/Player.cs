@@ -124,6 +124,7 @@ public class Player
         City.CitySize type = (City.CitySize)int.Parse(receivedData[0]);
         HexCell location = hexGrid.GetCell(new HexCoordinates(int.Parse(receivedData[1]), int.Parse(receivedData[2])));
         location.FeatureIndex = 1;
+        location.IncreaseVisibility();
 
         int cityID = playerCities.Count;
         City city = new City(this, cityID, location);

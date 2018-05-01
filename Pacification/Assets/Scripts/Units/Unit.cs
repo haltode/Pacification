@@ -10,8 +10,8 @@ public class Unit
 
     public enum UnitType
     {
-        WORKER,
         SETTLER,
+        WORKER,
         REGULAR,
         RANGED,
         HEAVY

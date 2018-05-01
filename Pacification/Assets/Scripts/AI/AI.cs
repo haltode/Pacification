@@ -1,19 +1,25 @@
 ﻿using UnityEngine;
 using System;
+using System.Collections.Generic;
 
 public class AI : MonoBehaviour
 {
     public enum Difficulty { EASY, NORMAL, HARD };
 
+    const int SpawnRadiusMin = 10;
+    const int SpawnRadiusMax = 15;
+
     Player aiPlayer;
+    Player ennemy;
 
     Difficulty difficultyLevel;
     int currentRound;
     int lastSpawnRound;
 
-    public AI(Difficulty difficultyLevel)
+    public AI(Player ennemy, Difficulty difficultyLevel)
     {
         aiPlayer = new Player("Google");
+        this.ennemy = ennemy;
         this.difficultyLevel = difficultyLevel;
         currentRound = 0;
         lastSpawnRound = 0;
@@ -44,13 +50,37 @@ public class AI : MonoBehaviour
 
     HexCell GetSpawningLocation()
     {
-        // TODO: get list of cities, choose random one, spawn near it
-        return null;
+        List<HexCell> possibleLocation = new List<HexCell>();
+        int nbCities = ennemy.playerCities.Count;
+        System.Random rnd = new System.Random();
+        int choosenCity = rnd.Next(nbCities);
+        HexCell location = ennemy.playerCities[choosenCity].Position;
+
+        for(int i = 0; i < aiPlayer.hexGrid.cells.Length; ++i)
+        {
+            HexCell cell = aiPlayer.hexGrid.cells[i];
+            int dist = cell.coordinates.DistanceTo(location.coordinates);
+            if(dist <= SpawnRadiusMax && dist >= SpawnRadiusMin)
+                possibleLocation.Add(cell);
+        }
+
+        int randomCell = rnd.Next(possibleLocation.Count);
+        return possibleLocation[randomCell];
     }
 
     HexCell GetNearFreeCell(HexCell location)
     {
-        return null;
+        List<HexCell> possibleLocation = new List<HexCell>();   
+        for(HexDirection dir = HexDirection.NE; dir <= HexDirection.NW; ++dir)
+        {
+            HexCell neighbor = location.GetNeighbor(dir);
+            if(neighbor && !neighbor.IsExplored && !neighbor.IsUnderWater && !neighbor.Unit)
+                possibleLocation.Add(neighbor);
+        }
+
+        System.Random rnd = new System.Random();
+        int randomCell = rnd.Next(possibleLocation.Count);
+        return possibleLocation[randomCell];
     }
 
     bool IsSpawningTime()

@@ -17,8 +17,8 @@ public class Player
     public int production;
     public int happiness;
 
-    List<Unit> playerUnits;
-    List<City> playerCities;
+    public List<Unit> playerUnits;
+    public List<City> playerCities;
 
     // TODO : couleur du joueur
     // TODO : tech tree

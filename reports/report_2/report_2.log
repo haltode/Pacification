@@ -1,4 +1,4 @@
-This is LuaTeX, Version 1.0.4 (TeX Live 2017/W32TeX)  (format=lualatex 2018.3.13)  1 MAY 2018 19:25
+This is LuaTeX, Version 1.0.4 (TeX Live 2017/W32TeX)  (format=lualatex 2018.3.13)  1 MAY 2018 21:14
  restricted system commands enabled.
 **report_2.tex
 (./report_2.tex
@@ -32,7 +32,7 @@ Inserting `luaotfload.aux.set_capheight' at position 3 in `luaotfload.patch_font
 '.
 Inserting `luaotfload.rewrite_fontname' at position 4 in `luaotfload.patch_font'
 .
-luaotfload | main : initialization completed in 0.426 seconds
+luaotfload | main : initialization completed in 0.200 seconds
 Babel <3.18> and hyphenation patterns for 1 language(s) loaded.
 (d:/Programs/texlive/2017/texmf-dist/tex/latex/base/report.cls
 Document Class: report 2014/09/29 v1.4h Standard LaTeX document class
@@ -1086,11 +1086,9 @@ Package luatex.def Info: ../../static/brainless_devs.pdf  used on input line 49.
 
 {d:/Programs/texlive/2017/texmf-var/fonts/map/pdftex/updmap/pdftex.map}<../../st
 atic/pacification_vector.pdf><../../static/brainless_devs.pdf>] (./report_2.toc
-(save: D:/Programs/texlive/2017/texmf-var/luatex-cache/generic/fonts/otl/lmroman
-8-regular.lua)(save: D:/Programs/texlive/2017/texmf-var/luatex-cache/generic/fon
-ts/otl/lmroman8-regular.luc)(save: D:/Programs/texlive/2017/texmf-var/luatex-cac
-he/generic/fonts/otl/lmroman6-regular.lua)(save: D:/Programs/texlive/2017/texmf-
-var/luatex-cache/generic/fonts/otl/lmroman6-regular.luc))
+(load luc: D:/Programs/texlive/2017/texmf-var/luatex-cache/generic/fonts/otl/lmr
+oman8-regular.luc)(load luc: D:/Programs/texlive/2017/texmf-var/luatex-cache/gen
+eric/fonts/otl/lmroman6-regular.luc))
 \tf@toc=\write4
 
 \openout4 = report_2.toc
@@ -1196,29 +1194,25 @@ Package luatex.def Info: img/class_hierarchy.png  used on input line 213.
  [17]
 File: img/404.jpg Graphic file (type jpg)
 <use img/404.jpg>
-Package luatex.def Info: img/404.jpg  used on input line 223.
+Package luatex.def Info: img/404.jpg  used on input line 225.
 (luatex.def)             Requested size: 312.00119pt x 207.9953pt.
  [18<./img/class_hierarchy.png>]
 File: img/404.jpg Graphic file (type jpg)
 <use img/404.jpg>
-Package luatex.def Info: img/404.jpg  used on input line 231.
+Package luatex.def Info: img/404.jpg  used on input line 233.
 (luatex.def)             Requested size: 312.00119pt x 207.9953pt.
  [19]
 File: img/404.jpg Graphic file (type jpg)
 <use img/404.jpg>
-Package luatex.def Info: img/404.jpg  used on input line 239.
+Package luatex.def Info: img/404.jpg  used on input line 241.
 (luatex.def)             Requested size: 312.00119pt x 207.9953pt.
  [20]
 File: img/404.jpg Graphic file (type jpg)
 <use img/404.jpg>
-Package luatex.def Info: img/404.jpg  used on input line 247.
+Package luatex.def Info: img/404.jpg  used on input line 249.
 (luatex.def)             Requested size: 312.00119pt x 207.9953pt.
  [21] [22]
 Chapitre 5.
-File: img/404.jpg Graphic file (type jpg)
-<use img/404.jpg>
-Package luatex.def Info: img/404.jpg  used on input line 255.
-(luatex.def)             Requested size: 312.00119pt x 207.9953pt.
 [23
 
 ]
@@ -1239,18 +1233,25 @@ Package atveryend Info: Empty hook `AfterLastShipout' on input line 276.
  (./report_2.aux)
 Package atveryend Info: Executing hook `AtVeryEndDocument' on input line 276.
 Package atveryend Info: Executing hook `AtEndAfterFileList' on input line 276.
-Package rerunfilecheck Info: File `report_2.out' has not changed.
-(rerunfilecheck)             Checksum: 42894B043D18E9BE33CC41AC5A643A63;866.
+
+
+Package rerunfilecheck Warning: File `report_2.out' has changed.
+(rerunfilecheck)                Rerun to get outlines right
+(rerunfilecheck)                or use package `bookmark'.
+
+Package rerunfilecheck Info: Checksums for `report_2.out':
+(rerunfilecheck)             Before: 54492465CA5C900209EC14443C868DE6;880
+(rerunfilecheck)             After:  42894B043D18E9BE33CC41AC5A643A63;866.
 Package atveryend Info: Empty hook `AtVeryVeryEnd' on input line 276.
 )
 
 Here is how much of LuaTeX's memory you used:
- 20103 strings out of 494480
+ 20075 strings out of 494480
  100000,552014 words of node,token memory allocated
- 46827 words of node memory still in use:
-   7 hlist, 2 vlist, 2 rule, 20 glue, 1 kern, 1 penalty, 7177 glyph, 1302 attrib
-ute, 83 glue_spec, 217 attribute_list, 1 write nodes
-   avail lists: 2:287,3:85,4:16,5:91,6:40,7:209,8:25,9:89,10:9,11:100
+ 53667 words of node memory still in use:
+   7 hlist, 2 vlist, 2 rule, 20 glue, 1 kern, 1 penalty, 8324 glyph, 1284 attrib
+ute, 83 glue_spec, 214 attribute_list, 1 write nodes
+   avail lists: 2:287,3:85,4:16,5:91,6:371,7:209,8:25,9:89,10:9,11:100
  23106 multiletter control sequences out of 65536+600000
  73 fonts using 7872827 bytes
  39i,6n,39p,679b,429s stack positions out of 5000i,500n,10000p,200000b,100000s
@@ -1260,10 +1261,10 @@ italic.otf><d:/programs/texlive/2017/texmf-dist/fonts/opentype/public/lm/lmroman
 12-bold.otf><d:/programs/texlive/2017/texmf-dist/fonts/opentype/public/lm/lmroma
 n12-regular.otf><d:/programs/texlive/2017/texmf-dist/fonts/opentype/public/lm/lm
 roman17-regular.otf>
-Output written on report_2.pdf (26 pages, 290245 bytes).
+Output written on report_2.pdf (26 pages, 292150 bytes).
 
-PDF statistics: 258 PDF objects out of 1000 (max. 8388607)
- 206 compressed objects within 3 object streams
- 62 named destinations out of 1000 (max. 131072)
+PDF statistics: 257 PDF objects out of 1000 (max. 8388607)
+ 205 compressed objects within 3 object streams
+ 61 named destinations out of 1000 (max. 131072)
  113 words of extra memory for PDF output out of 10000 (max. 100000000)
 

@@ -138,7 +138,7 @@ Au début de la partie, le joueur commence avec un colon et un fantassin. Le col
     \caption{Situation initiale}
 \end{figure}
 
-Les unités peuvent donc se déplacer (pour le moment sans animation développée, elles glissent sur la map et pivotent) et activer leur action propre (construire une ville, exploiter une ressource, attaquer une unité/ville ennemie).
+Les unités peuvent donc se déplacer (pour le moment sans animation développée, elles glissent sur la map et pivotent) et activer leur action propre (construire une ville, exploiter une ressource, attaquer une unité ennemie).
 
 \begin{figure}[H]
     \centering
@@ -216,6 +216,8 @@ Si on reprend la hiérarchie des classes présentée lors de la première souten
 
 Pour la soutenance finale, il reste donc à implémenter l’économie du jeu (donc les bâtiments des villes et les ressources) et adapter les paramètres des biomes/troupes afin d’obtenir un jeu le plus équilibré possible.
 
+La difficulté principale durant cette période a été d'apprendre à "lier" les classes selon Unity (qui doivent être instanciées pour être affichées sur la map), et celles de C\# qui appellent un constructeur (dont j'avais besoin pour gérer les unités et les villes), sans pour autant créer de conflits avec les autres systèmes eux aussi nécessaires au fonctionnement du jeu. Cela m'a pris plus de temps que prévu et a été une source de stress, mais tout a fini par fonctionner.
+
 \section*{Assets}
 
 \begin{figure}[H]
@@ -250,11 +252,9 @@ Pour la soutenance finale, il reste donc à implémenter l’économie du jeu (d
 
 \chapter{À venir}
 
-\begin{figure}[H]
-    \centering
-    \includegraphics[width=0.8\textwidth]{404}
-    \caption{TODO}
-\end{figure}
+Pour la troisième et dernière soutenance, nous allons devoir terminer \textit{Pacification}. Ce qui signifie mettre en place l'économie et équilibrer le gameplay, finir l'interface pour la rendre la plus confortable et intuitive possible, ajouter les ressources à la map, terminer l'IA, et bien sûr prendre le tout en compte dans le réseau qu'il faudra stabiliser.
+
+En somme, beaucoup de travail, mais rien que nous ne puissions faire à temps. Le jeu ayant déjà bien avancé, et les systèmes principaux étant déjà mis en place, nous saurons ajouter ces dernières fonctionnalités sans difficulté majeure.
 
 \chapter{Expériences personnelles}
 
@@ -262,7 +262,7 @@ Pour la soutenance finale, il reste donc à implémenter l’économie du jeu (d
 	\item \textbf{Thibault :} TODO
         \item \textbf{Valérian :} TODO
 	\item \textbf{Cédric :} TODO
-	\item \textbf{Antoine :} TODO
+	\item \textbf{Antoine :} Pour ma part, je suis satisfait de mes avancées, bien que, comme expliqué plus haut, je n'avais pas anticipé de telles difficultés pour lier les systèmes entre eux et les faire fonctionner correctement. Cependant, j'ai pu apprendre de ces problèmes et je sais maintenant les résoudre, ce qui me facilitera la tâche lors de la dernière phase de développement du projet.
 \end{itemize}
 
 \chapter{Conclusion}

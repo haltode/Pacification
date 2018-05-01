@@ -111,9 +111,9 @@ public class HexUnit : MonoBehaviour
         if(current.HasRoadThroughEdge(dir))
             moveCost = 1;
         else if(current.GetElevationDifference(dir) == 0)
-            moveCost = 5;
+            moveCost = 2;
         else
-            moveCost = 10;
+            moveCost = 3;
         return moveCost;
     }
 

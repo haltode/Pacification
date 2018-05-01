@@ -43,7 +43,7 @@ public class AI : MonoBehaviour
         aiPlayer.AddUnit(Unit.UnitType.REGULAR, location);
         if(difficultyLevel == Difficulty.NORMAL || difficultyLevel == Difficulty.HARD)
         {
-            HexCell location2 = GetNearFreeCell(location);
+            HexCell location2 = aiPlayer.hexGrid.GetNearFreeCell(location);
             aiPlayer.AddUnit(Unit.UnitType.HEAVY, location2);
         }
     }
@@ -64,21 +64,6 @@ public class AI : MonoBehaviour
                 possibleLocation.Add(cell);
         }
 
-        int randomCell = rnd.Next(possibleLocation.Count);
-        return possibleLocation[randomCell];
-    }
-
-    HexCell GetNearFreeCell(HexCell location)
-    {
-        List<HexCell> possibleLocation = new List<HexCell>();   
-        for(HexDirection dir = HexDirection.NE; dir <= HexDirection.NW; ++dir)
-        {
-            HexCell neighbor = location.GetNeighbor(dir);
-            if(neighbor && !neighbor.IsExplored && !neighbor.IsUnderWater && !neighbor.Unit)
-                possibleLocation.Add(neighbor);
-        }
-
-        System.Random rnd = new System.Random();
         int randomCell = rnd.Next(possibleLocation.Count);
         return possibleLocation[randomCell];
     }

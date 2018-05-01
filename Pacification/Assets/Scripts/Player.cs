@@ -51,8 +51,24 @@ public class Player
     public void InitialSpawnUnit()
     {
         hexGrid = Object.FindObjectOfType<HexGrid>();
-        AddUnit(Unit.UnitType.SETTLER, hexGrid.GetCell(4, 2));
-        AddUnit(Unit.UnitType.REGULAR, hexGrid.GetCell(4, 3));
+
+        List<HexCell> possibleLocation = new List<HexCell>();
+        for(int i = 0; i < hexGrid.cells.Length; ++i)
+        {
+            HexCell cell = hexGrid.cells[i];
+            if(!cell.IsUnderWater)
+                possibleLocation.Add(cell);
+        }
+
+        System.Random rnd = new System.Random();
+        int randomCell = rnd.Next(possibleLocation.Count);
+        HexCell spawnSettler = possibleLocation[randomCell];
+        HexCell spawnAttacker = hexGrid.GetNearFreeCell(spawnSettler);
+
+        AddUnit(Unit.UnitType.SETTLER, spawnSettler);
+        AddUnit(Unit.UnitType.REGULAR, spawnAttacker);
+
+        HexMapCamera.FocusOnPosition(spawnSettler.Position);
     }
 
     public void AddUnit(Unit.UnitType type, HexCell location)

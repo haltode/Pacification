@@ -67,6 +67,21 @@ public class HexGrid : MonoBehaviour
         return cells[cellIndex];
     }
 
+    public HexCell GetNearFreeCell(HexCell location)
+    {
+        List<HexCell> possibleLocation = new List<HexCell>();   
+        for(HexDirection dir = HexDirection.NE; dir <= HexDirection.NW; ++dir)
+        {
+            HexCell neighbor = location.GetNeighbor(dir);
+            if(neighbor && !neighbor.IsUnderWater && !neighbor.Unit)
+                possibleLocation.Add(neighbor);
+        }
+
+        System.Random rnd = new System.Random();
+        int randomCell = rnd.Next(possibleLocation.Count);
+        return possibleLocation[randomCell];
+    }
+
     public bool CreateMap(int sizeX, int sizeZ)
     {
         if( sizeX <= 0 || sizeX % HexMetrics.ChunkSizeX != 0 ||

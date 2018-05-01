@@ -80,4 +80,9 @@ public class HexMapCamera : MonoBehaviour
     {
         instance.AdjustPosition(0f, 0f);
     }
+
+    public static void FocusOnPosition(Vector3 position)
+    {
+        instance.transform.localPosition = position;
+    }
 }

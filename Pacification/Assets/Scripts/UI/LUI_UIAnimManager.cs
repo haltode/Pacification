@@ -20,7 +20,6 @@ public class LUI_UIAnimManager : MonoBehaviour {
 	{
 		oldAnimator.GetComponent<Animator>();
 		newAnimator.GetComponent<Animator>();
-		Button btn = animButton.GetComponent<Button>();
 		animButton.onClick.AddListener(TaskOnClick);
 	}
 

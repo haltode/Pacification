@@ -8,7 +8,6 @@ public class HexMapEditor : MonoBehaviour
 
     public HexGrid hexGrid;
     public Client client;
-    private ControlsManager controls;
 
     string data = "";
     string previousData = "";
@@ -36,7 +35,6 @@ public class HexMapEditor : MonoBehaviour
         hexGrid = FindObjectOfType<HexGrid>();
         client = FindObjectOfType<Client>();
         editor = FindObjectOfType<GameManager>().editor;
-        controls = FindObjectOfType<ControlsManager>();
     }
 
     void Update()

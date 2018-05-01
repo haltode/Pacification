@@ -5,7 +5,7 @@ public class LUI_MenuCamControl : MonoBehaviour {
 
 	[Header("OBJECTS")]
 	public Transform currentMount;
-	public Camera camera;
+	public new Camera camera;
 
 	[Header("SETTINGS")]
 	[Tooltip("Set 1.1 for instant fly")]

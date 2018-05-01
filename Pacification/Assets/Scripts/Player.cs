@@ -8,8 +8,6 @@ public class Player
     public HexGrid hexGrid;
     public Client client;
 
-    private int unitID;
-    private int cityID;
     private int unitLevel;
 
     public int money;
@@ -31,8 +29,6 @@ public class Player
     {
         Debug.Log("Player spawned: " + name);
         this.name = name;
-        unitID = 0;
-        cityID = 0;
         unitLevel = 1;
 
         money = 1000;

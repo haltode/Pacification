@@ -17,7 +17,7 @@ public class UnitGraphics : MonoBehaviour
         if (graphicsObject != null)
             Destroy(graphicsObject);
 
-        GameObject instantiated = Instantiate(obj, unit.transform.position + new Vector3(0, 2, 0), Quaternion.identity);
+        GameObject instantiated = Instantiate(obj, unit.transform.position + new Vector3(0, 1, 0), Quaternion.identity);
 
         instantiated.name = "Graphics";
 

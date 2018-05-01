@@ -21,7 +21,6 @@ public class Player
     public List<City> playerCities;
 
     // TODO : couleur du joueur
-    // TODO : tech tree
 
     public bool canPlay;
     public string name;
@@ -30,6 +29,7 @@ public class Player
 
     public Player(string name)
     {
+        Debug.Log("Player spawned");
         this.name = name;
         unitID = 0;
         cityID = 0;
@@ -44,12 +44,12 @@ public class Player
         playerCities = new List<City>();
 
         canPlay = false;
-
         client = Object.FindObjectOfType<Client>();
     }
 
     public void InitialSpawnUnit()
     {
+
         displayer = Object.FindObjectOfType<DisplayInformationManager>();
         hexGrid = Object.FindObjectOfType<HexGrid>();
 

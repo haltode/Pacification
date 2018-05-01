@@ -140,7 +140,7 @@ public class HexGameUI : MonoBehaviour
         HexCell cellEnd = grid.GetCell(new HexCoordinates(xEnd, zEnd));
 
         grid.ClearPath();
-        grid.FindPath(cellStart, cellEnd, selectedUnit);
+        grid.FindPath(cellStart, cellEnd, cellStart.Unit);
 
         cellStart.Unit.Travel(grid.GetPath());
         grid.ClearPath();

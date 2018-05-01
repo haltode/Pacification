@@ -40,11 +40,12 @@ public class AI : MonoBehaviour
             aiPlayer.IncreaseUnitLevel(currentPlayerLvl + 3);
 
         HexCell location = GetSpawningLocation();
-        aiPlayer.AddUnit(Unit.UnitType.REGULAR, location);
-        if(difficultyLevel == Difficulty.NORMAL || difficultyLevel == Difficulty.HARD)
+        if(difficultyLevel == Difficulty.EASY)
+            aiPlayer.AddUnit(Unit.UnitType.REGULAR, location);
+        else
         {
             HexCell location2 = aiPlayer.hexGrid.GetNearFreeCell(location);
-            aiPlayer.AddUnit(Unit.UnitType.HEAVY, location2);
+            aiPlayer.AddUnit(Unit.UnitType.REGULAR, location,Unit.UnitType.HEAVY, location2);
         }
     }
 

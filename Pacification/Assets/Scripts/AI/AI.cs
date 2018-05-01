@@ -34,25 +34,24 @@ public class AI
             return;
 
         lastSpawnRound = currentRound;
-        if(difficultyLevel == Difficulty.EASY)
+        // TODO: need level up
+        /*if(difficultyLevel == Difficulty.EASY)
             aiPlayer.IncreaseUnitLevel(currentPlayerLvl - 2);
         else if(difficultyLevel == Difficulty.NORMAL)
             aiPlayer.IncreaseUnitLevel(currentPlayerLvl + 1);
         else if(difficultyLevel == Difficulty.HARD)
-            aiPlayer.IncreaseUnitLevel(currentPlayerLvl + 3);
+            aiPlayer.IncreaseUnitLevel(currentPlayerLvl + 3);*/
 
         HexCell location = GetSpawningLocation();
-        if(difficultyLevel == Difficulty.EASY)
-        {
-            string cmd = (int)Unit.UnitType.REGULAR + "#" + location.coordinates.X + "#" + location.coordinates.Z;
-            aiPlayer.NetworkAddUnit(cmd);
-        }
-        else
+        string cmd = (int)Unit.UnitType.REGULAR + "#" + location.coordinates.X + "#" + location.coordinates.Z;
+        aiPlayer.NetworkAddUnit(cmd);
+
+        if(difficultyLevel == Difficulty.NORMAL || difficultyLevel == Difficulty.HARD)
         {
             HexCell location2 = aiPlayer.hexGrid.GetNearFreeCell(location);
-            string cmd = (int)Unit.UnitType.REGULAR + "#" + location.coordinates.X + "#" + location.coordinates.Z + "|" +
-                         (int)Unit.UnitType.HEAVY + "#" + location2.coordinates.X + "#" + location2.coordinates.Z;
-            aiPlayer.NetworkAddUnit(cmd);
+            string cmd2 = (int)Unit.UnitType.HEAVY + "#" + location2.coordinates.X + "#" + location2.coordinates.Z;
+            Debug.Log(cmd2);
+            aiPlayer.NetworkAddUnit(cmd2);
         }
     }
 

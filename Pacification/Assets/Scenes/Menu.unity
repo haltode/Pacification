@@ -4882,7 +4882,7 @@ MonoBehaviour:
   numberOfPlayerSlider: {fileID: 690270487}
   hexGrid: {fileID: 0}
   controls: {fileID: 0}
-  editor: 0
+  gamemode: 0
 --- !u!1 &335338558
 GameObject:
   m_ObjectHideFlags: 0
@@ -5695,13 +5695,13 @@ MonoBehaviour:
     m_BestFit: 1
     m_MinSize: 96
     m_MaxSize: 300
-    m_Alignment: 3
+    m_Alignment: 4
     m_AlignByGeometry: 1
     m_RichText: 1
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: Do You know da wae ?
+  m_Text: Are you sure ?
 --- !u!222 &374896766
 CanvasRenderer:
   m_ObjectHideFlags: 0

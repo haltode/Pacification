@@ -26,8 +26,6 @@ public class HexMapEditor : MonoBehaviour
 
     public bool editor;
 
-    public GameObject barracks;
-
     void Awake()
     {
         SetEditMode(false);
@@ -63,11 +61,6 @@ public class HexMapEditor : MonoBehaviour
         HexCell currentCell = GetCellUnderCursor();
         if(currentCell)
         {
-            if(currentCell.FeatureIndex == 1) ///
-                barracks.SetActive(true);
-            else
-                barracks.SetActive(false);
-
             if(previousCell && previousCell != currentCell)
                 ValidateDrag(currentCell);
             else
@@ -209,26 +202,6 @@ public class HexMapEditor : MonoBehaviour
             if(otherCell && roadMode == OptionalToggle.Yes)
                 otherCell.AddRoad(dragDirection);
         }
-    }
-
-    void DestroyUnit()
-    {
-        HexCell cell = GetCellUnderCursor();
-        if(cell && cell.Unit)
-        {
-            if(client)
-                client.Send("CUNI|UND|" + cell.coordinates.X + "#" + cell.coordinates.Z + "#");
-            else
-                hexGrid.RemoveUnit(cell.Unit);
-        }
-    }
-
-    public void NetworkDestroyUnit(string data)
-    {
-        string[] receivedData = data.Split('#');
-        HexCell cell = hexGrid.GetCell(new HexCoordinates(int.Parse(receivedData[0]), int.Parse(receivedData[1])));
-
-        hexGrid.RemoveUnit(cell.Unit);
     }
 
     public void SetEditMode(bool toggle)

@@ -12,6 +12,8 @@ public class DisplayInformationManager : MonoBehaviour {
     public Text happiness;
 
     public Transform downPannel;
+    public Transform upEditPannel;
+    public Transform upGamePannel;
 
     void Start()
     {
@@ -23,6 +25,14 @@ public class DisplayInformationManager : MonoBehaviour {
         if(GameManager.Instance.gamemode == GameManager.Gamemode.EDITOR)
         {
             foreach(Transform t in downPannel)
+                t.gameObject.SetActive(false);
+
+            foreach(Transform t in upGamePannel)
+                t.gameObject.SetActive(false);
+        }
+        else
+        {
+            foreach(Transform t in upEditPannel)
                 t.gameObject.SetActive(false);
         }
     }

@@ -54,7 +54,7 @@ public class Player
         for(int i = 0; i < hexGrid.cells.Length; ++i)
         {
             HexCell cell = hexGrid.cells[i];
-            if(!cell.IsUnderWater && !hexGrid.IsBorder(cell) && cell.Elevation <= 4)
+            if(!cell.IsUnderWater && !cell.Unit && !hexGrid.IsBorder(cell) && cell.Elevation <= 4)
                 possibleLocation.Add(cell);
         }
 

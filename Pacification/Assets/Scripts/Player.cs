@@ -50,6 +50,7 @@ public class Player
 
     public void InitialSpawnUnit()
     {
+        displayer = Object.FindObjectOfType<DisplayInformationManager>();
         hexGrid = Object.FindObjectOfType<HexGrid>();
 
         List<HexCell> possibleLocation = new List<HexCell>();

@@ -171,10 +171,10 @@ public class Client : MonoBehaviour
                 MapSenderReceiver mapLoader = FindObjectOfType<MapSenderReceiver>();
                 mapLoader.StartGame(receivedData[1]);
                 player.InitialSpawnUnit();
-                //player.UpdateMoneyDisplay();
-                //player.UpdateHappinessDisplay();
-                //player.UpdateProductionDisplay();
-                //player.UpdateScienceDisplay();
+                player.UpdateMoneyDisplay();
+                player.UpdateHappinessDisplay();
+                player.UpdateProductionDisplay();
+                player.UpdateScienceDisplay();
                 break;
         }
     }
@@ -185,6 +185,7 @@ public class Client : MonoBehaviour
         playerClients.Add(client);
         Player newPlayer = new Player(name);
         players.Add(newPlayer);
+        Debug.Log(players.Count);
     }
 
     void OnApplicationQuit()

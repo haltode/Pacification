@@ -37,7 +37,7 @@ public class ChatManager : MonoBehaviour
         client = FindObjectOfType<Client>();
         buttonManager = FindObjectOfType<ButtonManager>();
 
-        if(!GameManager.Instance.editor)
+        if(!(GameManager.Instance.gamemode == GameManager.Gamemode.EDITOR))
             notification = GetComponent<AudioSource>();
         else
         {

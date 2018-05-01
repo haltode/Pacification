@@ -12,7 +12,7 @@ public class LUI_RotateObject : MonoBehaviour {
 		// Enable this if you want to move Y rotation
         //float rotY = Input.GetAxis("Mouse Y")*rotSpeed*Mathf.Deg2Rad;
 
-        transform.RotateAround(Vector3.up, -rotX);
+        transform.Rotate(Vector3.up, -rotX);
 		// Enable this if you want to move Y rotation
         //transform.RotateAround(Vector3.right, rotY);
     }

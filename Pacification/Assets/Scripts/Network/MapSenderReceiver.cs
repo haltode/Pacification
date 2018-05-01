@@ -18,6 +18,9 @@ public class MapSenderReceiver : MonoBehaviour {
         if(!server)
             return;
 
+        HexMapGenerator generator = FindObjectOfType<HexMapGenerator>();
+        generator.GenerateMap(50, 50);
+
         saveAndLoad.Save(path);
         string map = File.ReadAllText(path);
         File.Delete(path);

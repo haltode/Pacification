@@ -21,7 +21,7 @@ public class HexGameUI : MonoBehaviour
 
     void Update()
     {
-        if(!(GameManager.Instance.editor || client.player.canPlay && !EventSystem.current.IsPointerOverGameObject()))
+        if(!(GameManager.Instance.gamemode == GameManager.Gamemode.EDITOR || client.player.canPlay && !EventSystem.current.IsPointerOverGameObject()))
             return;
 
         if(Input.GetMouseButtonDown(0))
@@ -111,7 +111,7 @@ public class HexGameUI : MonoBehaviour
     {
         if(grid.HasPath)
         {
-            if(GameManager.Instance.editor)
+            if(GameManager.Instance.gamemode == GameManager.Gamemode.EDITOR)
                 selectedUnit.Travel(grid.GetPath());
             else
             {

@@ -57,7 +57,6 @@ public class HexGridChunk : MonoBehaviour
         terrain.Apply();
         water.Apply();
         roads.Apply();
-        features.Apply();
     }
 
     void Triangulate(HexCell cell)

@@ -14,11 +14,6 @@ public class HexFeatureManager : MonoBehaviour
         featuresContainer.SetParent(transform, false);
     }
 
-    public void Apply()
-    {
-
-    }
-
     public void AddFeature(HexCell cell)
     {
         Transform instance = Instantiate(featuresPrefab[cell.FeatureIndex - 1]);

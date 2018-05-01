@@ -23,8 +23,6 @@ public class HexMapEditor : MonoBehaviour
     OptionalToggle roadMode;
     OptionalToggle underWaterMode;
 
-    public GameManager.Gamemode gamemode;
-
     void Awake()
     {
         SetEditMode(false);
@@ -34,7 +32,6 @@ public class HexMapEditor : MonoBehaviour
     {
         hexGrid = FindObjectOfType<HexGrid>();
         client = FindObjectOfType<Client>();
-        gamemode = FindObjectOfType<GameManager>().gamemode;
     }
 
     void Update()
@@ -88,7 +85,7 @@ public class HexMapEditor : MonoBehaviour
     {
         if(cell)
         {
-            if(gamemode == GameManager.Gamemode.EDITOR)
+            if(GameManager.Instance.gamemode == GameManager.Gamemode.EDITOR)
                 LocalEditCell(cell);
             else
             {

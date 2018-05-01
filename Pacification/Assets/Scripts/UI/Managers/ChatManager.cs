@@ -112,10 +112,6 @@ public class ChatManager : MonoBehaviour
                     string message = ExtractMessage(++index, input.text);
                     client.Send("CMSP|" + receiver + "|" + message);
                     break;
-                case "god":
-                    buttonManager.CheatMode();
-                    ChatMessage("GODMOD command", ChatManager.MessageType.ALERT);
-                    break;
 
                 case "clear":
                     string commandClear = ExtractCommand(ref index, input.text);
@@ -160,10 +156,6 @@ public class ChatManager : MonoBehaviour
                         {
                             case "msg":
                                 ChatMessage("Use to talk with another player in private : /msg playerName message", MessageType.ALERT);
-                                break;
-
-                            case "god":
-                                ChatMessage("Use to open the editor menu", MessageType.ALERT);
                                 break;
 
                             case "code":

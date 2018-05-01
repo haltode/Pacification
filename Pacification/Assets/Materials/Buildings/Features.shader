@@ -15,7 +15,7 @@
         #pragma surface surf StandardSpecular fullforwardshadows vertex:vert
         #pragma target 3.0
 
-        #pragma multi_compile _ HEX_MAP_EDIT_MODE
+        #pragma multi_compile _ HEX_MAP_EDITOR
 
         #include "../Terrain/HexCellData.cginc"
 

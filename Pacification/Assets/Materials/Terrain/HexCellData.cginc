@@ -3,7 +3,7 @@ float4 _HexCellData_TexelSize;
 
 float4 FilterCellData(float4 data)
 {
-    #if defined(HEX_MAP_EDIT_MODE)
+    #if defined(HEX_MAP_EDITOR)
         data.xy = 1;
     #endif
     return data;

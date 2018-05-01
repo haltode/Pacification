@@ -11,7 +11,6 @@ public class ButtonManager : MonoBehaviour {
     public ControlsManager controls;
 
     public bool cheatmode = false;
-    private float time = 0F;
 
     private Client client;
 
@@ -19,31 +18,6 @@ public class ButtonManager : MonoBehaviour {
     {
         controls = FindObjectOfType<ControlsManager>();
         client = FindObjectOfType<Client>();
-    }
-
-    void Update()
-    {
-        if(Input.GetKey(controls.cheat) && Time.time >= time)
-            CheatMode();
-    }
-
-    public void CheatMode()
-    {
-        if(cheatmode)
-        {
-            Debug.Log("CheatMode deactivated");
-            leftPannel.SetActive(false);
-            rightPannel.SetActive(false);
-            cheatmode = false;
-        }
-        else
-        {
-            Debug.Log("CheatMode activated");
-            leftPannel.SetActive(true);
-            rightPannel.SetActive(true);
-            cheatmode = true;
-        }
-        time = Time.time + 0.5F;
     }
 
     public void EndTurnButton()

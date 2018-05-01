@@ -14,8 +14,6 @@ public class ControlsManager : MonoBehaviour {
     public KeyCode uiMenu = KeyCode.Escape;
     public KeyCode uiBack = KeyCode.Escape;
 
-    public KeyCode cheat = KeyCode.Tab;
-
     void Start()
     {
         DontDestroyOnLoad(this);

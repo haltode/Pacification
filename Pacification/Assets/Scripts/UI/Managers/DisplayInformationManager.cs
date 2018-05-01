@@ -15,6 +15,9 @@ public class DisplayInformationManager : MonoBehaviour {
     public Transform upEditPannel;
     public Transform upGamePannel;
 
+    public GameObject editorPannel1;
+    public GameObject editorPannel2;
+
     void Start()
     {
         money.text = "Money: 0";
@@ -29,11 +32,21 @@ public class DisplayInformationManager : MonoBehaviour {
 
             foreach(Transform t in upGamePannel)
                 t.gameObject.SetActive(false);
+
+            editorPannel1.SetActive(true);
+            editorPannel2.SetActive(true);
+
+            Shader.EnableKeyword("HEX_MAP_EDITOR");
         }
         else
         {
             foreach(Transform t in upEditPannel)
                 t.gameObject.SetActive(false);
+
+            editorPannel1.SetActive(false);
+            editorPannel2.SetActive(false);
+
+            Shader.DisableKeyword("HEX_MAP_EDITOR");
         }
     }
 

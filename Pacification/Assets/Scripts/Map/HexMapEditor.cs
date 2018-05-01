@@ -23,11 +23,6 @@ public class HexMapEditor : MonoBehaviour
     OptionalToggle roadMode;
     OptionalToggle underWaterMode;
 
-    void Awake()
-    {
-        SetEditMode(false);
-    }
-
     void Start()
     {
         hexGrid = FindObjectOfType<HexGrid>();
@@ -36,11 +31,12 @@ public class HexMapEditor : MonoBehaviour
 
     void Update()
     {
-        if(GameManager.Instance.gamemode == GameManager.Gamemode.EDITOR || client.player.canPlay && !EventSystem.current.IsPointerOverGameObject())
-        {
+        if(GameManager.Instance.gamemode != GameManager.Gamemode.EDITOR)
+            return;
+
+        if(!EventSystem.current.IsPointerOverGameObject())
             if(Input.GetMouseButton(0))
                 HandleInput();
-        }
         else
             previousCell = null;
     }
@@ -197,11 +193,6 @@ public class HexMapEditor : MonoBehaviour
             if(otherCell && roadMode == OptionalToggle.Yes)
                 otherCell.AddRoad(dragDirection);
         }
-    }
-
-    public void SetEditMode(bool toggle)
-    {
-        enabled = toggle;
     }
 
     public void SetTerrainBiomeIndex(int index)

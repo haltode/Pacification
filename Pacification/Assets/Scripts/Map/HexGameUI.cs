@@ -21,7 +21,9 @@ public class HexGameUI : MonoBehaviour
 
     void Update()
     {
-        if(!(GameManager.Instance.gamemode == GameManager.Gamemode.EDITOR || client.player.canPlay && !EventSystem.current.IsPointerOverGameObject()))
+        if(GameManager.Instance.gamemode == GameManager.Gamemode.EDITOR)
+            return;
+        if(!(client.player.canPlay && !EventSystem.current.IsPointerOverGameObject()))
             return;
 
         if(Input.GetMouseButtonDown(0))
@@ -59,18 +61,6 @@ public class HexGameUI : MonoBehaviour
                 }
             }
         }
-    }
-
-    public void SetEditMode(bool toggle)
-    {
-        grid = FindObjectOfType<HexGrid>();
-        enabled = !toggle;
-        grid.ShowUI(!toggle);
-        grid.ClearPath();
-        if(toggle)
-            Shader.EnableKeyword("HEX_MAP_EDIT_MODE");
-        else
-            Shader.DisableKeyword("HEX_MAP_EDIT_MODE");
     }
 
     bool UpdateCurrentCell()

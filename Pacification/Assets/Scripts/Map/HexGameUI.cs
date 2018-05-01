@@ -33,9 +33,12 @@ public class HexGameUI : MonoBehaviour
                     selectedCity = client.player.GetCity(currentCell);
             }
         }
-        else if(selectedUnit)
+        
+        if(selectedUnit)
         {
-            if(Input.GetMouseButtonDown(1))
+            if(Input.GetMouseButton(0))
+                DoPathfinding();
+            else if(Input.GetMouseButtonUp(0))
                 DoMove();
             else if(Input.GetKeyDown(controls.unitAction))
             {
@@ -44,8 +47,6 @@ public class HexGameUI : MonoBehaviour
                 else if(selectedUnit.Unit.Type == Unit.UnitType.WORKER)
                     ((Worker)selectedUnit.Unit).Exploit();
             }
-            else
-                DoPathfinding();
         }
     }
 
@@ -67,7 +68,10 @@ public class HexGameUI : MonoBehaviour
         HexCell cell = grid.GetCell(inputRay);
         if(cell != currentCell)
         {
+            if(currentCell)
+                currentCell.DisableHighlight();
             currentCell = cell;
+            currentCell.EnableHighlight(Color.blue);
             return true;
         }
         return false;

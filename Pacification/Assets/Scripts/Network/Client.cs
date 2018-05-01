@@ -138,9 +138,8 @@ public class Client : MonoBehaviour
                 break;
 
 
-            case "SEDI":
-                mapEditor = FindObjectOfType<HexMapEditor>();
-                mapEditor.NetworkEditCell(receivedData[1]);
+            case "SROD":
+                // TODO: in solo/Multi need to handle roads + 
                 break;
 
             case "SYGO":

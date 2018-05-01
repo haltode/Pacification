@@ -154,6 +154,10 @@ public class Server : MonoBehaviour
                 Broadcast("S" + receivedData[1] +"|"+ receivedData[2] + "|" + client.clientName, clients);
                 break;
 
+            case "CUNM":
+                Broadcast("SUNM|" + receivedData[1] + "|" + receivedData[2] + "|" + client.clientName, clients);
+                break;
+
             case "CEDI":
                 Broadcast("SEDI|" + receivedData[1], clients);
                 break;

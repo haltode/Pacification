@@ -82,6 +82,17 @@ public class Client : MonoBehaviour
                 FindObjectOfType<HexGameUI>().NetworkDoMove(receivedData[1]);
                 break;
 
+            case "SUNM":
+                foreach(Player p in players)
+                {
+                    if(p.name == receivedData[3])
+                    {
+                        p.NetworkAddUnit(receivedData[1]);
+                        p.NetworkAddUnit(receivedData[2]);
+                    }
+                }
+                break;
+
             case "SUNC":
                     foreach(Player p in players)
                     {
@@ -185,7 +196,6 @@ public class Client : MonoBehaviour
         playerClients.Add(client);
         Player newPlayer = new Player(name);
         players.Add(newPlayer);
-        Debug.Log(players.Count);
     }
 
     void OnApplicationQuit()

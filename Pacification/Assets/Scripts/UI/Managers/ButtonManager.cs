@@ -13,9 +13,12 @@ public class ButtonManager : MonoBehaviour {
     public bool cheatmode = false;
     private float time = 0F;
 
+    private Client client;
+
     void Start()
     {
         controls = FindObjectOfType<ControlsManager>();
+        client = FindObjectOfType<Client>();
     }
 
     void Update()
@@ -45,7 +48,6 @@ public class ButtonManager : MonoBehaviour {
 
     public void EndTurnButton()
     {
-        Client client = FindObjectOfType<Client>();
         client.Send("CEND|" +  client.clientName);
         client.player.canPlay = false;
         EndTurn();
@@ -53,7 +55,6 @@ public class ButtonManager : MonoBehaviour {
 
     public void TakeTurn()
     {
-        Client client = FindObjectOfType<Client>();
         client.player.canPlay = true; ;
         activePlayer.SetActive(true);
     }
@@ -72,7 +73,7 @@ public class ButtonManager : MonoBehaviour {
             Destroy(server.gameObject);
         }
 
-        Client client = FindObjectOfType<Client>();
+        client = FindObjectOfType<Client>();
         if(client != null)
         {
             Destroy(client.gameObject);

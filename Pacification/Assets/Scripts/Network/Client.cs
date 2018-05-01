@@ -26,7 +26,6 @@ public class Client : MonoBehaviour
     void Start()
     {
         DontDestroyOnLoad(gameObject);
-        player = new Player("null");
     }
 
     public bool ConnectToServer(string host, int port)

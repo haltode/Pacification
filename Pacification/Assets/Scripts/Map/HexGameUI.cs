@@ -91,8 +91,13 @@ public class HexGameUI : MonoBehaviour
     void DoSelection()
     {
         UpdateCurrentCell();
-        if(currentCell)
-            selectedUnit = currentCell.Unit;
+        if (currentCell)
+        {
+            if (currentCell.Unit.Unit.Owner == client.player)
+                selectedUnit = currentCell.Unit;
+            else
+                selectedUnit = null;
+        }
     }
 
     void DoPathfinding()

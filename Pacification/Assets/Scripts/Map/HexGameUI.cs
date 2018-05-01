@@ -51,9 +51,11 @@ public class HexGameUI : MonoBehaviour
                     Ray inputRay = Camera.main.ScreenPointToRay(Input.mousePosition);
                     HexCell targetCell = grid.GetCell(inputRay);
 
-                    //TODO : differenciate owners. Currently teamkill is allowed for testing purposes.
                     if (selectedUnit.location.coordinates.DistanceTo(targetCell.coordinates) <= ((Attacker)selectedUnit.Unit).Range)
-                        ((Attacker)selectedUnit.Unit).Attack(targetCell.Unit.Unit);
+                    {
+                        if (selectedUnit.Unit.Owner != targetCell.Unit.Unit.Owner)
+                            ((Attacker)selectedUnit.Unit).Attack(targetCell.Unit.Unit);
+                    }
                 }
             }
         }

@@ -83,68 +83,43 @@ public class Client : MonoBehaviour
                 break;
 
             case "SUNC":
-                if(clientName == receivedData[2])
-                    player.NetworkAddUnit(receivedData[1]);
-                else
-                {
                     foreach(Player p in players)
                     {
                         if(p.name == receivedData[2])
                             p.NetworkAddUnit(receivedData[1]);
                     }
-                }
                 break;
 
             case "SUND":
-                if(clientName == receivedData[2])
-                    player.NetworkRemoveUnit(receivedData[1]);
-                else
-                {
                     foreach(Player p in players)
                     {
                         if(p.name == receivedData[2])
                             p.NetworkRemoveUnit(receivedData[1]);
                     }
-                }
                 break;
 
             case "SUNL":
-                if(clientName == receivedData[2])
-                    player.NetworkLevelUp();
-                else
-                {
                     foreach(Player p in players)
                     {
                         if(p.name == receivedData[2])
                             p.NetworkLevelUp();
                     }
-                }
                 break;
 
             case "SCIC":
-                if(clientName == receivedData[2])
-                    player.NetworkAddCity(receivedData[1]);
-                else
-                {
                     foreach(Player p in players)
                     {
                         if(p.name == receivedData[2])
                             p.NetworkAddCity(receivedData[1]);
                     }
-                }
                 break;
 
             case "SCID":
-                if(clientName == receivedData[2])
-                    player.NetworkRemoveCity(receivedData[1]);
-                else
-                {
                     foreach(Player p in players)
                     {
                         if(p.name == receivedData[2])
                             p.NetworkRemoveCity(receivedData[1]);
                     }
-                }
                 break;
 
 
@@ -186,7 +161,7 @@ public class Client : MonoBehaviour
             case "SKIK":
                 FindObjectOfType<ButtonManager>().DeconnectionButton();
                 break;
-
+                
             case "SLOD":
                 SceneManager.LoadScene("Map");
                 player.SetDisplayer();
@@ -196,10 +171,10 @@ public class Client : MonoBehaviour
                 MapSenderReceiver mapLoader = FindObjectOfType<MapSenderReceiver>();
                 mapLoader.StartGame(receivedData[1]);
                 player.InitialSpawnUnit();
-                player.UpdateMoneyDisplay();
-                player.UpdateHappinessDisplay();
-                player.UpdateProductionDisplay();
-                player.UpdateScienceDisplay();
+                //player.UpdateMoneyDisplay();
+                //player.UpdateHappinessDisplay();
+                //player.UpdateProductionDisplay();
+                //player.UpdateScienceDisplay();
                 break;
         }
     }
@@ -208,6 +183,8 @@ public class Client : MonoBehaviour
     {
         GameClient client = new GameClient { name = name };
         playerClients.Add(client);
+        Player newPlayer = new Player(name);
+        players.Add(newPlayer);
     }
 
     void OnApplicationQuit()

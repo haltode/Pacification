@@ -10,12 +10,15 @@ public class Barrack : MonoBehaviour
     void Start()
     {
         gameUI = FindObjectOfType<HexGameUI>();
-        BarrackObject.SetActive(false);
+        //BarrackObject.SetActive(false);
     }
 
     public void CreateUnitButton(string type)
     {
         City city = gameUI.selectedCity;
-        city.Owner.AddUnit(Unit.StrToType(type), city.Position);
+        Debug.Log(type);
+        Debug.Log(city == null);
+        if(city != null)
+            city.Owner.AddUnit(Unit.StrToType(type), city.Position);
     }
 }

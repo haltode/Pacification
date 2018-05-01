@@ -63,6 +63,7 @@ public class Player
     public void NetworkAddUnit(string data)
     {
         string[] receivedData = data.Split('#');
+        hexGrid = Object.FindObjectOfType<HexGrid>();
 
         Unit.UnitType type = (Unit.UnitType)int.Parse(receivedData[0]);
         HexCell location = hexGrid.GetCell(new HexCoordinates(int.Parse(receivedData[1]), int.Parse(receivedData[2])));
@@ -105,6 +106,8 @@ public class Player
 
     public void NetworkRemoveUnit(string data)
     {
+        hexGrid = Object.FindObjectOfType<HexGrid>();
+
         string[] receivedData = data.Split('#');
         Unit unit = hexGrid.GetCell(new HexCoordinates(int.Parse(receivedData[0]), int.Parse(receivedData[1]))).Unit.Unit;
         hexGrid.RemoveUnit(unit.HexUnit);
@@ -120,6 +123,7 @@ public class Player
     public void NetworkAddCity(string data)
     {
         string[] receivedData = data.Split('#');
+        hexGrid = Object.FindObjectOfType<HexGrid>();
 
         City.CitySize type = (City.CitySize)int.Parse(receivedData[0]);
         HexCell location = hexGrid.GetCell(new HexCoordinates(int.Parse(receivedData[1]), int.Parse(receivedData[2])));
@@ -147,11 +151,12 @@ public class Player
     public void NetworkRemoveCity(string data)
     {
         string[] receivedData = data.Split('#');
-        //City city = hexGrid.GetCell(new HexCoordinates(int.Parse(receivedData[1]), int.Parse(receivedData[2]))). ****NECESSITE ACCES A VILLE DEPUIS HEXCELL****;
-        //TODO: change cell featureIndex back to 0
-        //Object.Destroy(city.instance);
-        //playerUnits[city.Id] = null;
-        //city = null;
+        hexGrid = Object.FindObjectOfType<HexGrid>();
+
+        City city = GetCity(hexGrid.GetCell(new HexCoordinates(int.Parse(receivedData[1]), int.Parse(receivedData[2]))));
+        Object.Destroy(city.instance);
+        playerUnits[city.Id] = null;
+        city = null;
     }
 
     public City GetCity(HexCell location)

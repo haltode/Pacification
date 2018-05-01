@@ -11,12 +11,20 @@ public class DisplayInformationManager : MonoBehaviour {
     public Text production;
     public Text happiness;
 
+    public Transform downPannel;
+
     void Start()
     {
         money.text = "Money: 0";
         science.text = "Science: 0";
         production.text = "Production: 0";
         happiness.text = "Happiness: 0";
+
+        if(GameManager.Instance.gamemode == GameManager.Gamemode.EDITOR)
+        {
+            foreach(Transform t in downPannel)
+                t.gameObject.SetActive(false);
+        }
     }
 
     public void UpdateMoneyDisplay(int value)

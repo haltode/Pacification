@@ -1,6 +1,6 @@
 fileFormatVersion: 2
-guid: fd3761cd52c2978478dd6e350c8c0733
-timeCreated: 1525193776
+guid: 974bd232914c58c4f8004b8b1f8666dc
+timeCreated: 1525182852
 licenseType: Free
 ModelImporter:
   serializedVersion: 22
@@ -14,7 +14,7 @@ ModelImporter:
     100012: Cube.005
     100014: Cube.006
     100016: Cube.007
-    100018: Cylinder.001
+    100018: Cylinder
     100020: Cylinder.002
     100022: Cylinder.003
     100024: Cylinder.004
@@ -27,15 +27,15 @@ ModelImporter:
     400012: Cube.005
     400014: Cube.006
     400016: Cube.007
-    400018: Cylinder.001
+    400018: Cylinder
     400020: Cylinder.002
     400022: Cylinder.003
     400024: Cylinder.004
-    2100000: Tunique
-    2100002: Lame
-    2100004: Manche
+    2100000: Armure
+    2100002: Tunique
+    2100004: Lame
     2100006: "Cr\xEAte"
-    2100008: Material.001
+    2100008: Peau
     2100010: Chaussures
     2300000: Chaussures
     2300002: Cube
@@ -45,7 +45,7 @@ ModelImporter:
     2300010: Cube.005
     2300012: Cube.006
     2300014: Cube.007
-    2300016: Cylinder.001
+    2300016: Cylinder
     2300018: Cylinder.002
     2300020: Cylinder.003
     2300022: Cylinder.004
@@ -57,11 +57,11 @@ ModelImporter:
     3300010: Cube.005
     3300012: Cube.006
     3300014: Cube.007
-    3300016: Cylinder.001
+    3300016: Cylinder
     3300018: Cylinder.002
     3300020: Cylinder.003
     3300022: Cylinder.004
-    4300000: Cylinder.001
+    4300000: Cylinder
     4300002: Cylinder.004
     4300004: Cylinder.002
     4300006: Cylinder.003
@@ -74,6 +74,11 @@ ModelImporter:
     4300020: Cube
     4300022: Chaussures
   externalObjects:
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Armure
+    second: {fileID: 2100000, guid: 207e54b32b43dc54ab670f5d259e5f62, type: 2}
   - first:
       type: UnityEngine:Material
       assembly: UnityEngine.CoreModule
@@ -92,12 +97,7 @@ ModelImporter:
   - first:
       type: UnityEngine:Material
       assembly: UnityEngine.CoreModule
-      name: Manche
-    second: {fileID: 2100000, guid: 207e54b32b43dc54ab670f5d259e5f62, type: 2}
-  - first:
-      type: UnityEngine:Material
-      assembly: UnityEngine.CoreModule
-      name: Material.001
+      name: Peau
     second: {fileID: 2100000, guid: 8000f429022dafc41b4db40635eeabb0, type: 2}
   - first:
       type: UnityEngine:Material

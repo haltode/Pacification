@@ -18,13 +18,13 @@ public class GameManager : MonoBehaviour
     public HexGrid hexGrid;
     public ControlsManager controls;
 
+
     public enum Gamemode
     {
         SOLO,
         MULTI,
         EDITOR
     }
-
     public Gamemode gamemode;
 
     void Start()

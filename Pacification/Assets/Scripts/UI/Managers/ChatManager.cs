@@ -19,6 +19,9 @@ public class ChatManager : MonoBehaviour
     private ControlsManager controls;
 
     List<GameObject> allMessages;
+    Transform chat;
+
+    bool active;
 
     public enum MessageType
     {
@@ -37,22 +40,41 @@ public class ChatManager : MonoBehaviour
         client = FindObjectOfType<Client>();
         buttonManager = FindObjectOfType<ButtonManager>();
 
-        if(!(GameManager.Instance.gamemode == GameManager.Gamemode.EDITOR))
-            notification = GetComponent<AudioSource>();
-        else
-        {
-            Transform chat = GameObject.Find("Chat").transform;
-            foreach(Transform t in chat)
-                t.gameObject.SetActive(false);
-        }
+        notification = GetComponent<AudioSource>();
+
+        chat = GameObject.Find("Chat").transform;
+        HideCHat();
     }
 
     void Update()
     {
         if(Input.GetKeyUp(controls.chatFocus))
-            input.ActivateInputField();
+            ChatAppearManager();
         if(Input.GetKey(controls.chatSend))
             SendChatMessage();
+    }
+
+    public void ChatAppearManager()
+    {
+        if(active && input.text == "")
+            HideCHat();
+        else if(!active)
+            SpawnChat();
+    }
+
+    public void SpawnChat()
+    {
+        foreach(Transform t in chat)
+            t.gameObject.SetActive(true);
+        input.ActivateInputField();
+        active = true;
+    }
+
+    public void HideCHat()
+    {
+        foreach(Transform t in chat)
+            t.gameObject.SetActive(false);
+        active = false;
     }
 
     public void ChatMessage(string message, MessageType type)

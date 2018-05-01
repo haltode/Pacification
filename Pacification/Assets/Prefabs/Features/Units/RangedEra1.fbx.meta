@@ -1,94 +1,39 @@
 fileFormatVersion: 2
-guid: 1afeb9546d2e49f48bed9972b9976cd6
-timeCreated: 1525192746
+guid: 548bfeb02e452b94cafc2db39b66b1e4
+timeCreated: 1525172471
 licenseType: Free
 ModelImporter:
   serializedVersion: 22
   fileIDToRecycleName:
     100000: //RootNode
-    100002: Cube
-    100004: Cube.001
-    100006: Cube.002
-    100008: Cube.003
-    100010: Cube.004
-    100012: Cube.005
-    100014: Cube.006
-    100016: Cube.007
-    100018: Cylinder
-    100020: Cylinder.001
-    100022: Cylinder.002
-    100024: Cylinder.003
-    100026: Cylinder.004
+    100002: Cube.001
+    100004: Cylinder
+    100006: Cylinder.001
     400000: //RootNode
-    400002: Cube
-    400004: Cube.001
-    400006: Cube.002
-    400008: Cube.003
-    400010: Cube.004
-    400012: Cube.005
-    400014: Cube.006
-    400016: Cube.007
-    400018: Cylinder
-    400020: Cylinder.001
-    400022: Cylinder.002
-    400024: Cylinder.003
-    400026: Cylinder.004
-    2100000: Peau
-    2100002: Lame
-    2100004: Manche
-    2100006: "Cr\xEAte"
-    2100008: Armure
-    2100010: Tunique
-    2300000: Cube
-    2300002: Cube.001
-    2300004: Cube.002
-    2300006: Cube.003
-    2300008: Cube.004
-    2300010: Cube.005
-    2300012: Cube.006
-    2300014: Cube.007
-    2300016: Cylinder
-    2300018: Cylinder.001
-    2300020: Cylinder.002
-    2300022: Cylinder.003
-    2300024: Cylinder.004
-    3300000: Cube
-    3300002: Cube.001
-    3300004: Cube.002
-    3300006: Cube.003
-    3300008: Cube.004
-    3300010: Cube.005
-    3300012: Cube.006
-    3300014: Cube.007
-    3300016: Cylinder
-    3300018: Cylinder.001
-    3300020: Cylinder.002
-    3300022: Cylinder.003
-    3300024: Cylinder.004
-    4300000: Cylinder.004
-    4300002: Cylinder.002
-    4300004: Cylinder.003
-    4300006: Cube.007
-    4300008: Cube.006
-    4300010: Cube.005
-    4300012: Cylinder.001
-    4300014: Cylinder
-    4300016: Cube.004
-    4300018: Cube.001
-    4300020: Cube.002
-    4300022: Cube.003
-    4300024: Cube
+    400002: Cube.001
+    400004: Cylinder
+    400006: Cylinder.001
+    2100000: Armure
+    2100002: Manche
+    2100004: Tunique
+    2100006: Peau
+    2100008: Plume
+    2100010: Lame
+    2300000: Cube.001
+    2300002: Cylinder
+    2300004: Cylinder.001
+    3300000: Cube.001
+    3300002: Cylinder
+    3300004: Cylinder.001
+    4300000: Cylinder.001
+    4300002: Cylinder
+    4300004: Cube.001
   externalObjects:
   - first:
       type: UnityEngine:Material
       assembly: UnityEngine.CoreModule
       name: Armure
     second: {fileID: 2100000, guid: e038fc357b0f6d74797057c937e18266, type: 2}
-  - first:
-      type: UnityEngine:Material
-      assembly: UnityEngine.CoreModule
-      name: "Cr\xEAte"
-    second: {fileID: 2100000, guid: cb9fa179985f46443a31cf23e29c0832, type: 2}
   - first:
       type: UnityEngine:Material
       assembly: UnityEngine.CoreModule
@@ -104,6 +49,11 @@ ModelImporter:
       assembly: UnityEngine.CoreModule
       name: Peau
     second: {fileID: 2100000, guid: 8000f429022dafc41b4db40635eeabb0, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Plume
+    second: {fileID: 2100000, guid: cb9fa179985f46443a31cf23e29c0832, type: 2}
   - first:
       type: UnityEngine:Material
       assembly: UnityEngine.CoreModule

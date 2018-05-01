@@ -175,7 +175,9 @@ public class Player
         string[] receivedData = data.Split('#');
         hexGrid = Object.FindObjectOfType<HexGrid>();
 
-        City city = GetCity(hexGrid.GetCell(new HexCoordinates(int.Parse(receivedData[1]), int.Parse(receivedData[2]))));
+        HexCell location = hexGrid.GetCell(new HexCoordinates(int.Parse(receivedData[1]), int.Parse(receivedData[2])));
+        location.FeatureIndex = 0;
+        City city = GetCity(location);
         Object.Destroy(city.instance);
         playerUnits[city.Id] = null;
         city = null;

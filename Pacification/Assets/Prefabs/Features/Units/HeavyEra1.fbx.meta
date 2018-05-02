@@ -1,38 +1,36 @@
 fileFormatVersion: 2
-guid: 493f729d956a6ee4f9203850b72739a7
-timeCreated: 1525126194
+guid: 206dfb597bb1e7340a1bbebfd6938ae6
+timeCreated: 1525247840
 licenseType: Free
 ModelImporter:
   serializedVersion: 22
   fileIDToRecycleName:
     100000: //RootNode
-    100002: Circle.001
+    100002: Cube.004
     100004: Icosphere
     400000: //RootNode
-    400002: Circle.001
+    400002: Cube.004
     400004: Icosphere
-    2100000: Steel
-    2100002: WoodPillar
+    2100000: WoodPillar
+    2100002: Material
     2100004: Rock
-    2300000: Circle.001
+    2300000: Cube.004
     2300002: Icosphere
-    3300000: Circle.001
+    3300000: Cube.004
     3300002: Icosphere
-    4300000: Circle.001
+    4300000: Cube.004
     4300002: Icosphere
-    7400000: Icosphere|IcosphereAction
-    9500000: //RootNode
   externalObjects:
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Material
+    second: {fileID: 2100000, guid: f23fd90e9b0d3554396f50e078f41afd, type: 2}
   - first:
       type: UnityEngine:Material
       assembly: UnityEngine.CoreModule
       name: Rock
     second: {fileID: 2100000, guid: 558cbcd575cf95c49b65a95c01a8f0b3, type: 2}
-  - first:
-      type: UnityEngine:Material
-      assembly: UnityEngine.CoreModule
-      name: Steel
-    second: {fileID: 2100000, guid: f23fd90e9b0d3554396f50e078f41afd, type: 2}
   - first:
       type: UnityEngine:Material
       assembly: UnityEngine.CoreModule
@@ -111,7 +109,7 @@ ModelImporter:
     hasExtraRoot: 0
     skeletonHasParents: 1
   lastHumanDescriptionAvatarSource: {instanceID: 0}
-  animationType: 2
+  animationType: 0
   humanoidOversampling: 1
   additionalBone: 0
   userData: 

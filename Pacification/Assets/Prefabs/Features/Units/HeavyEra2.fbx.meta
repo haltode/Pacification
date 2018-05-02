@@ -1,49 +1,34 @@
 fileFormatVersion: 2
-guid: dd6bcd6a3c8d01e42992f4e86027bc29
-timeCreated: 1525165314
+guid: 8ec120181ae3d87428554283a897f59b
+timeCreated: 1525247669
 licenseType: Free
 ModelImporter:
   serializedVersion: 22
   fileIDToRecycleName:
     100000: //RootNode
-    100002: Circle
-    100004: Circle.001
-    100006: Cylinder
-    100008: Plane.001
-    100010: Plane.003
-    100012: Sphere
-    100014: WoodenArmature
+    100002: Cylinder
+    100004: Plane.001
+    100006: Plane.003
+    100008: WoodenArmature
     400000: //RootNode
-    400002: Circle
-    400004: Circle.001
-    400006: Cylinder
-    400008: Plane.001
-    400010: Plane.003
-    400012: Sphere
-    400014: WoodenArmature
+    400002: Cylinder
+    400004: Plane.001
+    400006: Plane.003
+    400008: WoodenArmature
     2100000: WoodArmature
     2100002: Steel
-    2300000: Circle
-    2300002: Circle.001
-    2300004: Cylinder
-    2300006: Plane.001
-    2300008: Plane.003
-    2300010: Sphere
-    2300012: WoodenArmature
-    3300000: Circle
-    3300002: Circle.001
-    3300004: Cylinder
-    3300006: Plane.001
-    3300008: Plane.003
-    3300010: Sphere
-    3300012: WoodenArmature
+    2300000: Cylinder
+    2300002: Plane.001
+    2300004: Plane.003
+    2300006: WoodenArmature
+    3300000: Cylinder
+    3300002: Plane.001
+    3300004: Plane.003
+    3300006: WoodenArmature
     4300000: WoodenArmature
     4300002: Plane.003
     4300004: Cylinder
     4300006: Plane.001
-    4300008: Circle.001
-    4300010: Circle
-    4300012: Sphere
   externalObjects:
   - first:
       type: UnityEngine:Material

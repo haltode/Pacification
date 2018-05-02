@@ -155,14 +155,15 @@ Une génération procédurale de carte est désormais intégrée au jeu, et le j
 peut maintenant sélectionner s'il souhaite utiliser une carte qu'il a lui-même
 édité ou bien en générer une nouvelle. Cette génération utilise une dizaine de
 paramètres que l'on peut configurer afin d'obtenir des types de cartes très
-variés : pourcentage de terre, taille des régions, nombres de régions, élévation
-maximale des montagnes, érosion des terrains, etc. Pour construire une nouvelle
-carte, il faut déterminer les bouts de terres que l'on veut surélever (de base,
-tout le terrain est submergé par l'eau). De l'aléatoire est donc nécessaire pour
-choisir cet emplacement, il suffit ensuite de rester dans les alentours de cette
-case à l'aide d'un parcours en largeur. Une fois le terrain formé, on attribue
-le type du biome en fonction de l'élévation (désert et plaine pour les terrains
-les plus plats, montagnes et neige pour les terrains extrêmes).
+variés : pourcentage de terre, taille des régions, nombres de régions,
+élévation maximale des montagnes, érosion des terrains, etc. Afin de construire
+une nouvelle carte, il faut déterminer les bouts de terres que l'on veut
+surélever (de base, tout le terrain est submergé par l'eau). De l'aléatoire est
+donc nécessaire pour choisir cet emplacement, il suffit ensuite de rester dans
+les alentours de cette case à l'aide d'un parcours en largeur. Une fois le
+terrain formé, on attribue le type du biome en fonction de l'élévation (désert
+et plaine pour les terrains les plus plats, montagnes et neige pour les
+terrains extrêmes).
 
 \begin{figure}[H]
     \centering
@@ -192,6 +193,8 @@ précédemment explorés mais hors de vision et portée de l'unité.
     \caption{Brouillard de guerre}
 \end{figure}
 
+\newpage
+
 \section{Réseau et multijoueur (Valérian)}
 
 Les bases du réseau ayant été mises en place pour la première soutenance, les
@@ -209,7 +212,7 @@ liste des autres joueurs présents, permettant d'identifier facilement
 l'appartenance des unités, et des villes sur la map.
 
 Pour la map, l’objectif était de transmettre en début de partie une carte de
-jeu généré aléatoirement. Cela nécessitant de réduire la map au strict minimum
+jeu générée aléatoirement. Cela nécessitant de réduire la map au strict minimum
 pour ensuite l’envoyer sous forme de string via le système Serveur/Client
 construit pour la première soutenance. Pour cela, nous avons utilisé le système
 de sauvegarde qui permet d’enregistrer la carte sous une forme condensée.
@@ -253,6 +256,8 @@ l’interface (en affichant différents éléments en fonction de la possibilit�
 joueur à bouger où non), et finalement le réseau (en évitant que plusieurs
 joueurs puisse jouer en même temps).
 
+\newpage
+
 \section{Gameplay (Antoine, Thibault)}
 
 Le gameplay a bien avancé. Nous disposons à présent d’unités correctement
@@ -293,6 +298,8 @@ la vitesse de déplacement.
 La ville disposera également d’améliorations, cependant elles dépendent de la
 population ainsi que de l’économie qui seront implémentés lors de la dernière
 phase de développement.
+
+\newpage
 
 \section{Assets (Cédric)}
 
@@ -352,6 +359,8 @@ armature à un personnage avec des animations fluides.
     \caption{Début d'animation}
 \end{figure}
 
+\newpage
+
 \section{Interface (Cédric, Valérian, Antoine)}
 
 Pour le menu principal, nous avons récupéré un asset créé par \textit{Michsky}
@@ -363,7 +372,7 @@ adapté rapidement au jeu :
 
 \begin{figure}[H]
     \centering
-    \includegraphics[width=0.8\textwidth]{MainMenuScreen}
+    \includegraphics[width=0.7\textwidth]{MainMenuScreen}
     \caption{Menu principal}
 \end{figure}
 
@@ -372,9 +381,9 @@ fonctionnalités de jeu en solo et en multijoueur.
 
 \begin{figure}[H]
     \centering
-    \includegraphics[width=0.3\textwidth]{SoloIcon}
-    \includegraphics[width=0.3\textwidth]{HostIcon}
-    \includegraphics[width=0.3\textwidth]{JoinIcon}
+    \includegraphics[width=0.25\textwidth]{SoloIcon}
+    \includegraphics[width=0.25\textwidth]{HostIcon}
+    \includegraphics[width=0.25\textwidth]{JoinIcon}
     \caption{Menu Play}
 \end{figure}
 
@@ -403,6 +412,8 @@ Une première musique d'ambiance a été rajoutée dans le jeu en solo et en
 multijoueur. On retrouve aussi différents effets sonores basiques comme les
 sons de notification du tchat, ou l'apparition d'une tribu barbare dans les
 environs.
+
+\newpage
 
 \section{IA (Thibault)}
 
@@ -444,16 +455,14 @@ environnement ce qui a pris relativement peu de temps à créer.
 
 \section*{Réseau et Multijoueur}
 
-L’avancement du réseau a suivi le cours de son développement prévu, et continue
-à prendre de l'avance. Tous les objectifs qui avaient été fixés pour cette
-seconde soutenance sont donc réalisés avec le bonus du tchat. Il était question
-de suivre les avancées du gameplay notamment l'implémentation des unités et
-villes en réseau, mais aussi l'IA pour le mode solo. Le système de tour par tour
-est maintenant en place, et la map est transmise en début de partie à tous les
-clients.
-
-Une fois les objectifs remplis, un tchat a pu être mis en place pour discuter
-dans le mode multijoueur ou encore utiliser des commandes de triche.
+L’avancement du réseau s'est rédoulé comme prévu, et continue à prendre de
+l'avance. Tous les objectifs qui avaient été fixés pour cette seconde
+soutenance sont donc réalisés avec le bonus du tchat. Il était question de
+suivre les avancées du gameplay notamment l'implémentation des unités et villes
+en réseau, mais aussi l'IA pour le mode solo. Le système de tour par tour est
+maintenant en place, et la map est transmise en début de partie à tous les
+clients. Une fois les objectifs remplis, un tchat a pu être mis en place pour
+discuter dans le mode multijoueur ou encore utiliser des commandes de triche.
 
 \section*{Gameplay}
 
@@ -472,10 +481,10 @@ organiser une probabilité d’apparition des différentes ressources.
 \end{figure}
 
 La difficulté principale durant cette période a été d'apprendre à "lier" les
-classes selon Unity (qui doivent être instanciées pour être affichées sur la
-map), et celles de C\# qui appellent un constructeur (dont j'avais besoin pour
+classes selon \textit{Unity} (qui doivent être instanciées pour être affichées
+sur la map), et celles de C\# qui appellent un constructeur (nécessaire pour
 gérer les unités et les villes), sans pour autant créer de conflits avec les
-autres systèmes eux aussi nécessaires au fonctionnement du jeu. Cela m'a pris
+autres systèmes eux aussi indispensables au fonctionnement du jeu. Cela a pris
 plus de temps que prévu et a été une source de stress, mais tout a fini par
 fonctionner.
 
@@ -540,8 +549,8 @@ saurons ajouter ces dernières fonctionnalités sans difficulté majeure.
     est une très belle réussite qui motive pour la suite. Concernant l’aspect de
     groupe, cette soutenance est celle qui a nécessité le plus d’interaction
     entre les différents membres du groupe, car il s’agissait de lier toutes nos
-    differentes parties ensemble. De cela j’ai appris qu’il pouvait être
-    complexe de s’accorder sur certains points pourtant nécessaire au bon
+    différentes parties ensemble. De cela, j’ai appris qu’il pouvait être
+    complexe de s’accorder sur certains points pourtant nécessaires au bon
     fonctionnement, mais utilisés de manière distincte par les différents
     membres du groupe. Il en ressort qu’une bonne communication résout
     facilement et rapidement ces différents.
@@ -552,13 +561,14 @@ saurons ajouter ces dernières fonctionnalités sans difficulté majeure.
     d’autres aspects du projet en travaillant sur l’interface de jeu. Cela m’a
     appris à mieux utiliser \textit{Unity}. Ces derniers mois ont aussi étés
     l’occasion de faire face à différents problèmes avec Git, ce qui a amené à
-    mieux comprendre comment fonctionne cet outil. Je retire au final beaucoup
-    d’expérience de cette phase du projet et une joie grandissante à voir le
-    projet se concrétiser de semaine en semaine.
+    mieux comprendre comment fonctionne cet outil.
+    Je retire au final beaucoup d’expérience de cette phase du projet et une
+    joie grandissante à voir le projet se concrétiser de semaine en semaine.
+    \newpage
     \item \textbf{Cédric :} Je suis très content de cette deuxième période de
     travail sur le projet. Il commence à prendre forme et à devenir jouable, ce
-    qui est très encourageant. Concernant le travail accompli je suis satisfait
-    de ce que j’ai fait. Cela m’a permi de beaucoup m’améliorer avec
+    qui est très encourageant. Concernant le travail accompli, je suis
+    satisfait de ce que j’ai fait. Cela m’a permis de beaucoup m’améliorer avec
     \textit{Blender} et de mieux comprendre le fonctionnement d’\textit{Unity}.
     \item \textbf{Antoine :} Pour ma part, je suis satisfait de mes avancées,
     bien que, comme expliqué plus haut, je n'avais pas anticipé de telles
@@ -579,10 +589,10 @@ toutes les nouveautés. En somme, la progression depuis la première soutenance 
 été très importante, et \textit{Pacification} a réellement une allure de jeu et
 non plus de simple prototype.
 
-Cette phase du développement a été très intéressante, et le résultat final et
-très motivant pour la suite, car on peut voir notre jeu évoluer et se rapprocher
-de ce à quoi nous pensions lors de la rédaction de notre cahier des charges. Les
-éléments restants à implémenter sont connus et clairs, et le jeu sera terminé et
-jouable pour la dernière soutenance, arrivant prochainement.
+Cette phase du développement a été très intéressante, et le résultat final est
+très motivant pour la suite, car on peut voir notre jeu évoluer et se
+rapprocher de ce à quoi nous pensions lors de la rédaction de notre cahier des
+charges. Les éléments restants à implémenter sont connus et clairs, et le jeu
+sera terminé et jouable pour la dernière soutenance, arrivant prochainement.
 
 \end{document}

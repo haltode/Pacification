@@ -4,13 +4,14 @@ using UnityEngine;
 
 public class Barrack : MonoBehaviour
 {
-    GameObject BarrackObject;
+    GameObject barrackObject;
     HexGameUI gameUI;
 
     void Start()
     {
         gameUI = FindObjectOfType<HexGameUI>();
-        //BarrackObject.SetActive(false);
+        barrackObject = gameObject;
+        barrackObject.SetActive(true);
     }
 
     public void CreateUnitButton(string type)
@@ -18,5 +19,10 @@ public class Barrack : MonoBehaviour
         City city = gameUI.selectedCity;
         if(city != null)
             city.Owner.AddUnit(Unit.StrToType(type), city.Position);
+    }
+
+    public GameObject GetBarrackObject
+    {
+        get { return barrackObject; }
     }
 }

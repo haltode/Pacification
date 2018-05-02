@@ -8330,6 +8330,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   grid: {fileID: 0}
+  barrack: {fileID: 0}
 --- !u!1 &1166793469
 GameObject:
   m_ObjectHideFlags: 0

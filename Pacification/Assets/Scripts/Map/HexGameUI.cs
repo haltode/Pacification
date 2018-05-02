@@ -10,6 +10,7 @@ public class HexGameUI : MonoBehaviour
     HexCell targetCell;
     HexUnit selectedUnit;
     public City selectedCity;
+    public Barrack barrack;
 
     Client client;
 
@@ -18,6 +19,8 @@ public class HexGameUI : MonoBehaviour
         grid = FindObjectOfType<HexGrid>();
         client = FindObjectOfType<Client>();
         controls = FindObjectOfType<ControlsManager>();
+        barrack = FindObjectOfType<Barrack>();
+        barrack.GetBarrackObject.SetActive(false);
     }
 
     void Update()
@@ -38,8 +41,15 @@ public class HexGameUI : MonoBehaviour
             DoSelection();
             if(currentCell)
             {
-                if(currentCell.FeatureIndex == 1) // City
+                if (currentCell.FeatureIndex == 1) // City
+                {
                     selectedCity = client.player.GetCity(currentCell);
+                    barrack.GetBarrackObject.SetActive(true);
+                }
+                else
+                {
+                    barrack.GetBarrackObject.SetActive(false);
+                }
             }
         }
         

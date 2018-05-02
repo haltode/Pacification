@@ -54,7 +54,7 @@ La deuxième phase de développement de \textit{Pacification} touche à sa fin.
 Durant ces quelques semaines, nous avons pu beaucoup progresser sur l’évolution
 du jeu, qui commence à réellement prendre forme. 
 
-Nous somme partis d’un éditeur de map avec des fonctionnalités basiques pour
+Nous sommes partis d’un éditeur de map avec des fonctionnalités basiques pour
 arriver à un solo et un multijoueur jouables, avec des unités capables
 d'interagir avec leur environnement. Le réseau transmet correctement les
 informations, la map dispose d’une génération procédurale et d’un brouillard de
@@ -111,32 +111,32 @@ jeu qui a bien évolué depuis.
 
 Les dernières fonctionnalités de la map sont désormais en place, c'est-à-dire la
 génération automatique de carte, le brouillard de guerre ainsi que les unités
-qui peuvent se déplacer et intéragir avec la map. Il restera toujours quelques
+qui peuvent se déplacer et interagir avec la map. Il restera toujours quelques
 légers peaufinements pour la soutenance finale.
 
 L’IA a progressé comme prévue, son fonctionnement sera détaillé plus bas.
 
 Le gameplay a également atteint ses objectifs, les unités sont implémentées et
-fonctionnelles, les villes sont utilisables, le Player fait partie intégrante
-du jeu, il ne reste maintenant qu’à implémenter une économie au jeu grâce aux
-ressources et aux bâtiments des villes ; et à prendre les biomes en compte dans
-les calculs des unités.
+fonctionnelles, les villes sont utilisables, la class Player fait partie
+intégrante du jeu, il ne reste maintenant qu’à implémenter une économie au jeu
+grâce aux ressources et aux bâtiments des villes et à prendre les biomes en
+compte dans les calculs des unités.
 
 \chapter{Avancement}
 
 \section{Map (Thibault)}
 
-La première chose qu'il a fallu intégrer à la map était les unités en elles
-mêmes. Le système de pathfinding était déjà en place, mais le fait de
+La première chose qu'il a fallu intégrer à la map était les unités en
+elles-mêmes. Le système de pathfinding était déjà en place, mais le fait de
 positionner les unités, de pouvoir les sélectionner, les déplacer, représentait
-une tâche importante et majeure du jeu. 
+une tâche majeure du jeu. 
 
-En utilisant des courbes de Bézier nous avons désormais des déplacements fluides
-et assez naturels sur la carte, d'autant plus que ces courbes nous permettent de
-gérer facilement l'orientation des unités qui se tournent avant et pendant leurs
-déplacements.
+En utilisant des courbes de Bézier nous disposons désormais des déplacements
+fluides et assez naturels sur la carte, d'autant plus que ces courbes nous
+permettent de gérer facilement l'orientation des unités qui se tournent avant
+et pendant leurs déplacements.
 
-Lors de la soutenance précédente nous avions mis en place des menus pour éditer
+Lors de la soutenance précédente, nous avions mis en place des menus pour éditer
 la carte afin de montrer les différentes fonctionnalités. Nous avons décidé de
 réutiliser cette partie pour mettre en place un éditeur de map afin de créer ses
 propres cartes sur lesquelles on pourra ensuite jouer.
@@ -147,16 +147,17 @@ propres cartes sur lesquelles on pourra ensuite jouer.
     \caption{Editeur de map}
 \end{figure}
 
-Cependant, il était prévu depuis le début de générer des cartes lors d'un début
-de partie pour avoir à chaque nouveau lancement de jeu une situation différente.
+Cependant, il était surtout prévu depuis le début de générer des cartes lors
+d'un début de partie pour avoir à chaque nouveau lancement de jeu une situation
+différente.
 
-Une génération de carte procédurale est désormais intégrée au jeu, et le joueur
-peut maintenant sélectionner s'il souhaite utiliser une carte qu'il a lui même
+Une génération procédurale de carte est désormais intégrée au jeu, et le joueur
+peut maintenant sélectionner s'il souhaite utiliser une carte qu'il a lui-même
 édité ou bien en générer une nouvelle. Cette génération utilise une dizaine de
 paramètres que l'on peut configurer afin d'obtenir des types de cartes très
 variés : pourcentage de terre, taille des régions, nombres de régions, élévation
 maximale des montagnes, érosion des terrains, etc. Pour construire une nouvelle
-carte il faut déterminer les bouts de terres que l'on veut surélever (de base,
+carte, il faut déterminer les bouts de terres que l'on veut surélever (de base,
 tout le terrain est submergé par l'eau). De l'aléatoire est donc nécessaire pour
 choisir cet emplacement, il suffit ensuite de rester dans les alentours de cette
 case à l'aide d'un parcours en largeur. Une fois le terrain formé, on attribue
@@ -175,15 +176,15 @@ les plus plats, montagnes et neige pour les terrains extrêmes).
     \caption{Génération de carte 2}
 \end{figure}
 
-La dernière fonctionnalité que nous voulions intégrer à la carte de Pacification
-était le brouillard de guerre, élément indispensable pour ce type de jeu de
-stratégie. Il a fallu adapter les shaders ainsi que les textures pour cacher ou
-montrer des parties de la carte en fonction de plusieurs critères comme : la
-hauteur de la case sur laquelle se trouve l'unité, son nombre de point de
-vision, si la case a déjà été visité ou non. On différencie donc deux types de
-brouillard : d'une part les terrains inexplorés qui sont totalement cachés du
-joueur et de l'autre les terrain précédemments explorés mais hors de vision et
-portée de l'unité.
+La dernière fonctionnalité que nous voulions intégrer à la carte de
+\textit{Pacification} était le brouillard de guerre, élément indispensable pour
+ce type de jeu de stratégie. Il a fallu adapter les shaders ainsi que les
+textures pour cacher ou montrer des parties de la carte en fonction de
+plusieurs critères comme : la hauteur de la case sur laquelle se trouve
+l'unité, son nombre de points de vision, si la case a déjà été visitée ou non.
+On différencie donc deux types de brouillard : d'une part les terrains
+inexplorés qui sont totalement cachés du joueur et de l'autre les terrain
+précédemment explorés mais hors de vision et portée de l'unité.
 
 \begin{figure}[H]
     \centering
@@ -195,8 +196,8 @@ portée de l'unité.
 
 Les bases du réseau ayant été mises en place pour la première soutenance, les
 objectifs pour celle-ci consistaient majoritairement à adapter les nouvelles
-fonctionnalités apportées par le gameplay ainsi que par l’avancé de la map et
-de l’IA, mais aussi à implémenter des choses nouvelles tel qu’un tchat et le
+fonctionnalités apportées par le gameplay ainsi que par l’avancée de la map et
+de l’IA, mais aussi à implémenter des choses nouvelles telles qu’un tchat et le
 principe de tour par tour, sur lequel se base le jeu.
 
 Concernant le gameplay, il a fallu prendre en compte l’implémentation des
@@ -212,7 +213,7 @@ jeu généré aléatoirement. Cela nécessitant de réduire la map au strict min
 pour ensuite l’envoyer sous forme de string via le système Serveur/Client
 construit pour la première soutenance. Pour cela, nous avons utilisé le système
 de sauvegarde qui permet d’enregistrer la carte sous une forme condensée.
-Réaliser cet objectif n’a pas été une difficulté en soit mais nous a permi de
+Réaliser cet objectif n’a pas été une difficulté en soit mais nous a permis de
 nous rendre compte de certaines limites de vitesses de notre système réseau,
 lors des transferts de cartes de taille importante.
 
@@ -228,10 +229,10 @@ que vous souhaitez.
 
 L’implémentation du tchat à ouvert la porte à l’implémentation d’une console de
 débogage pour nous faciliter les phases de test durant le développement de
-nouvelles fonctionnalitées. On compte dans cette console les commandes
+nouvelles fonctionnalités. On compte dans cette console les commandes
 suivantes : 
 
-/help : Commande qui suivi d’une autre, permet d’obtenir la documentation
+/help : Commande qui suivit d’une autre, permet d’obtenir la documentation
 nécessaire au fonctionnement de cette dernière.
 
 /kick : Commande permettant d’éjecter un joueur de la partie en cas de
@@ -270,7 +271,7 @@ alors recouverte par le brouillard de guerre.
 
 Les unités peuvent donc se déplacer et activer leur action propre (construire
 une ville pour le colon, exploiter une ressource pour l'ouvrier, attaquer un 
-ennemie pour les unités offensives).
+ennemi pour les unités offensives).
 
 \begin{figure}[H]
     \centering
@@ -278,16 +279,16 @@ ennemie pour les unités offensives).
     \caption{Pathfinding}
 \end{figure}
 
-La ville permet pour le moment de produire d’autres unités qui apparaîtront dans
+La ville permet pour le moment de produire d’autres unités qui apparaîtront
 dans cette dernière grâce au menu “barrack”. Il est ainsi possible de créer un
 autre colon, un travailleur, ou une des différentes unités offensives.
 
 Chaque unité possède des caractéristiques qui lui sont propres, ainsi qu’un
 modèle 3D assigné à sa création selon son type (les unités d’attaque possèdent
 un second modèle amélioré qu’elles obtiennent à partir du niveau 11). Ces
-statistiques, présentées dans les tableaux de la première soutenance, influeront
-notamment sur le nombre de tour nécessaire pour tuer une cible et  la vitesse de
-déplacement.
+statistiques, présentées dans les tableaux de la première soutenance,
+influeront notamment sur le nombre de tours nécessaire pour tuer une cible et
+la vitesse de déplacement.
 
 La ville disposera également d’améliorations, cependant elles dépendent de la
 population ainsi que de l’économie qui seront implémentés lors de la dernière
@@ -308,8 +309,8 @@ ont été créées spécialement pour les villes.
 \end{figure}
 
 Les modèles 3D des bâtiments sont tous finis. Seuls les villes ont nécessité de
-nouveaux modèles car ceux de la dernière soutenance ont pu être réutilisé, comme
-prévu, pour gagner du temps. Il existe deux modèles différents pour les
+nouveaux modèles car ceux de la dernière soutenance ont pu être réutilisés,
+comme prévu, pour gagner du temps. Il existe deux modèles différents pour les
 ressources du jeu : la version naturelle et la version exploitée.
 
 \begin{figure}[H]
@@ -326,7 +327,7 @@ ressources du jeu : la version naturelle et la version exploitée.
 
 Concernant les unités ajoutées il y a les deux versions d’unité à portée, les
 deux versions des unités de siège (catapulte et canon), et le cavalier qui
-correspond à l’amélioration de l’infanterie. Comme pour les modèles précédent,
+correspond à l’amélioration de l’infanterie. Comme pour les modèles précédents,
 la création des unités (notamment le canon et la catapulte) se sont fait à
 l’aide d’image de référence. Les modèles des unités humaines ont été construits
 à partir du modèle humain de base créer durant la première période du projet.
@@ -337,13 +338,13 @@ l’aide d’image de référence. Les modèles des unités humaines ont été c
     \caption{Nouvelles unités}
 \end{figure}
 
-Les animations des personnages ont toujours été considéré comme du bonus.
+Les animations des personnages ont toujours été considérés comme du bonus.
 Cependant, des premiers tests pour la catapulte ont été faits, mais ne sont pas
 encore intégrés au jeu. Ces animations pourront être réutilisées par la suite
 par le canon ou d'autres unités. L'animation des armatures humaines semblent
 assez complexe à gérer, d'où l'utilisation d'un outil externe hébergé par le
-site internet gratuit mixamo.com permettant de donner simplement une armature à
-un personnage avec des animations fluides.
+site internet gratuit \url{mixamo.com} permettant de donner simplement une
+armature à un personnage avec des animations fluides.
 
 \begin{figure}[H]
     \centering
@@ -353,7 +354,7 @@ un personnage avec des animations fluides.
 
 \section{Interface (Cédric, Valérian, Antoine)}
 
-Pour le menu principal nous avons récupéré un asset créé par \textit{Michsky}
+Pour le menu principal, nous avons récupéré un asset créé par \textit{Michsky}
 qui l’a rendu accessible à tous gratuitement sur internet. Le fait de
 réutiliser un menu existant nous a permis de nous concentrer sur d'autres
 aspects graphiques du jeu nécessitant une réelle customisation pour suivre le
@@ -378,27 +379,27 @@ fonctionnalités de jeu en solo et en multijoueur.
 \end{figure}
 
 Les images apparaissant sur les boutons “Solo” “Host” et “Join” ont été faites
-grâce à blender. Les positions du soldat ont été possible grâce à l’armature et
-aux animations importés sur le site mixamo.com cité prècedemment. Un menu
-“Paramètres” a été créé où l’on pourra par exemple gérer le son, la musique, et
-les touches de jeu. Un bouton “informations” est disponible et mène aux crédits
-du jeu. On navigue de menu en menu grâce à des déplacements de caméras qui
-nous amènent sur des nouveaux canvas et des boutons back ont été placé pour
-simplifier cette navigation.
+grâce à blender. Les positions du soldat ont été possibles grâces à l’armature
+et aux animations importées sur le site \url{mixamo.com} cité précédemment. Un
+menu “Paramètres” a été créé où l’on pourra par exemple gérer le son, la
+musique, et les touches de jeu. Un bouton “informations” est disponible et mène
+aux crédits du jeu. On navigue de menu en menu grâce à des déplacements de
+caméras qui nous amènent sur des nouveaux canvas et des boutons back ont été
+placé pour simplifier cette navigation.
 
 Concernant l'interface dans le jeu, la sélection d'une ville déclenche
 l'interface de la caserne (barrack) permettant de construire des unités. Un
 bandeau d'information est désormais situé en haut de l'écran et informe le
 joueur des informations de son empire (argent, productivité, science, bonheur
 de la population). Dans l'éditeur de map ce bandeau est remplacé par de simples
-bouttons permettant de sauvegarder, charger et générer une carte.
+boutons permettant de sauvegarder, charger et générer une carte.
 
 Enfin, un tchat est disponible pour s'envoyer des messages ou utiliser des
 commandes spéciales. Son développement a représenté un certain challenge vis à
 vis de l'interface, mais représente un élément important notamment pour
 l'aspect multijoueur.
 
-Une première musique d'ambiance a été rajouté dans le jeu en solo et en
+Une première musique d'ambiance a été rajoutée dans le jeu en solo et en
 multijoueur. On retrouve aussi différents effets sonores basiques comme les
 sons de notification du tchat, ou l'apparition d'une tribu barbare dans les
 environs.
@@ -420,7 +421,7 @@ la ville.
 En ce qui concerne le site web, des mises à jour de fonctionnalités n’ont pas
 été nécessaire, car le site avait été développé avec de l’avance pour la
 première soutenance. Il suffisait donc pour cette soutenance de le tenir à
-jour, en ajoutant les articles correspondantes et les images de développement.
+jour, en ajoutant les articles correspondants et les images de développement.
 
 Cette soutenance a aussi été l’occasion de changer d'hébergeur, passant de Git
 Pages à Lixia. Ce choix s’est principalement fait pour utiliser du PHP sur le
@@ -438,13 +439,13 @@ ont été difficile à correctement mettre en place afin d'avoir d'une part les
 terres inexplorées et d'autre part les parties précédemment explorées mais hors
 de vision des unités. La génération de map fut assez rapide à implémenter grâce
 aux fonctions de la première soutenance pour modifier une carte. Les unités
-peuvent maintenant se déplacer, s'orienter ainsi qu'intéragir avec leur
-environnement.
+peuvent maintenant se déplacer, s'orienter ainsi qu'interagir avec leur
+environnement ce qui a pris relativement peu de temps à créer.
 
 \section*{Réseau et Multijoueur}
 
 L’avancement du réseau a suivi le cours de son développement prévu, et continue
-à prendre de l'avance. Tous les objectifs qui avaient été fixé pour cette
+à prendre de l'avance. Tous les objectifs qui avaient été fixés pour cette
 seconde soutenance sont donc réalisés avec le bonus du tchat. Il était question
 de suivre les avancées du gameplay notamment l'implémentation des unités et
 villes en réseau, mais aussi l'IA pour le mode solo. Le système de tour par tour
@@ -458,11 +459,11 @@ dans le mode multijoueur ou encore utiliser des commandes de triche.
 
 Si on reprend la hiérarchie des classes présentée lors de la première
 soutenance, on peut voir que les unités sont complètement implémentées, et les
-villes le sont en partie (l’économie reste à faire). Le “Player” est également
-géré par le réseau et permet de coordonner les villes et les unités.  Les biomes
-sont présents dans le code, mais pour le moment ils ne sont pas pris en compte
-par le pathfinding et la génération de la map car il reste à organiser une
-probabilité d’apparition des différentes ressources.
+villes le sont en partie (l’économie reste à faire). La classe Player est
+également gérée par le réseau et permet de coordonner les villes et les unités.
+Les biomes sont présents dans le code, mais pour le moment, ils ne sont pas
+pris en compte par le pathfinding et la génération de la map car il reste à
+organiser une probabilité d’apparition des différentes ressources.
 
 \begin{figure}[H]
     \centering
@@ -480,46 +481,85 @@ fonctionner.
 
 \section*{Assets}
 
+Concernant la création des modèles 3D il y a eu beaucoup moins de difficultés
+rencontrées par rapport à la première période de travail. Celle-ci ayant
+beaucoup aidé pour la modélisation. Les quelques problèmes survenus étaient
+mineurs (disparition d'une partie du personnage comme le bouclier du soldat en
+fonction de l'angle de la caméra), et ont pu être rapidement corrigés.
+
 \section*{Interface}
+
+Une des principales difficultés liées à l’interface a été de réparer les
+polices d’écritures, de trop faible résolution, qui donnaient un rendu “flou”.
+Une autre modification importante a été de différencier le jeu de l’éditeur, ce
+qui a été fastidieux mais pas compliqué pour autant. En somme, l’interface
+actuelle permet au jeu de fonctionner efficacement, mais il faudra bien
+évidemment ajouter des boutons ou menus au fur et à mesure que de nouvelles
+fonctionnalités seront implémentées.
 
 \section*{IA}
 
+L'intelligence artificielle pour le mode solo est en place, et les bases de
+cette dernière n'ont pas représenté de difficultés particulières dans son
+implémentation, mais davantage dans le fait d'adapter le solo ainsi que le
+système de tour par tour pour ajouter l'IA en jeu.
+
 \section*{Site web}
+
+Le site web étant largement en avance lors de la soutenance 1, nous n’avions pas
+à y consacrer beaucoup de temps. Après une mise à jour de contenu, le site est
+dans l’état attendu pour la seconde soutenance.
 
 \chapter{À venir}
 
 Pour la troisième et dernière soutenance, nous allons devoir terminer
 \textit{Pacification}. Ce qui signifie mettre en place l'économie et équilibrer
-le gameplay, finir l'interface pour la rendre la plus confortable et intuitive
-possible, ajouter les ressources à la map, terminer l'IA, et bien sûr prendre
-le tout en compte dans le réseau qu'il faudra stabiliser.
+le gameplay, finir l'interface pour la rendre plus confortable et intuitive,
+ajouter les ressources à la map, terminer l'IA, et bien sûr prendre le tout en
+compte dans le réseau qu'il faudra stabiliser.
 
-En somme, beaucoup de travail, mais rien que nous ne puissions faire à temps.
-Le jeu ayant déjà bien avancé, et les systèmes principaux étant déjà mis en
-place, nous saurons ajouter ces dernières fonctionnalités sans difficulté
-majeure.
+Pour le réseau, les aspects nécessitant encore du développement sont : à nouveau
+suivre l’avancée du gameplay pour ajouter ses nouvelles fonctionnalités, mais
+aussi ajouter quelques optimisations de la transmission en réseau et compléter
+des détails au niveau de l’interface pour permettre aux joueurs d’avoir plus de
+choix de génération de map (lobby solo), et plus de visibilité sur les joueurs
+connectés en multijoueur (lobby multijoueur).
 
-TODO: 
-En prévision de la soutenance finale, les aspects nécessitant encore du
-développement sont : à nouveau suivre l’avancé du gameplay pour ajouter les
-nouvelles fonctionnalités, mais aussi ajouter quelques optimisations de la
-transmission en réseau et compléter des détails au niveau de l’interface pour
-permettre aux joueurs d’avoir plus de choix de génération de map (lobby solo),
-et plus de visibilité sur les joueurs connectés en multijoueur (lobby
-multijoueur).
-
-TODO;
-Pour la soutenance finale, il reste donc à implémenter l’économie du jeu (les
+Enfin pour le gameplay, il reste donc à implémenter l’économie du jeu (les
 bâtiments des villes et les ressources) et adapter les paramètres des
 biomes/troupes afin d’obtenir un jeu le plus équilibré possible.
 
+En somme, beaucoup de travail, mais rien que nous ne puissions faire à temps. Le
+jeu ayant déjà bien avancé, et les systèmes principaux étant mis en place, nous
+saurons ajouter ces dernières fonctionnalités sans difficulté majeure.
 
 \chapter{Expériences personnelles}
 
 \begin{itemize}
-	\item \textbf{Thibault :} TODO
-        \item \textbf{Valérian :} TODO
-	\item \textbf{Cédric :} TODO
+    \item \textbf{Thibault :} De manière générale, voir le jeu avancer autant
+    est une très belle réussite qui motive pour la suite. Concernant l’aspect de
+    groupe, cette soutenance est celle qui a nécessité le plus d’interaction
+    entre les différents membres du groupe, car il s’agissait de lier toutes nos
+    differentes parties ensemble. De cela j’ai appris qu’il pouvait être
+    complexe de s’accorder sur certains points pourtant nécessaire au bon
+    fonctionnement, mais utilisés de manière distincte par les différents
+    membres du groupe. Il en ressort qu’une bonne communication résout
+    facilement et rapidement ces différents.
+    \item \textbf{Valérian :} Cette deuxième phase de développement s’est très
+    bien déroulée pour ma part, tant au niveau de mon travail personnel que
+    celui du groupe. Si pour la première soutenance je me suis principalement
+    concentré sur le réseau, j’ai pu pour cette seconde soutenance découvrir
+    d’autres aspects du projet en travaillant sur l’interface de jeu. Cela m’a
+    appris à mieux utiliser \textit{Unity}. Ces derniers mois ont aussi étés
+    l’occasion de faire face à différents problèmes avec Git, ce qui a amené à
+    mieux comprendre comment fonctionne cet outil. Je retire au final beaucoup
+    d’expérience de cette phase du projet et une joie grandissante à voir le
+    projet se concrétiser de semaine en semaine.
+    \item \textbf{Cédric :} Je suis très content de cette deuxième période de
+    travail sur le projet. Il commence à prendre forme et à devenir jouable, ce
+    qui est très encourageant. Concernant le travail accompli je suis satisfait
+    de ce que j’ai fait. Cela m’a permi de beaucoup m’améliorer avec
+    \textit{Blender} et de mieux comprendre le fonctionnement d’\textit{Unity}.
     \item \textbf{Antoine :} Pour ma part, je suis satisfait de mes avancées,
     bien que, comme expliqué plus haut, je n'avais pas anticipé de telles
     difficultés pour lier les systèmes entre eux et les faire fonctionner

@@ -169,6 +169,10 @@ public class Client : MonoBehaviour
                     chat.OpDeop("", false);
                 break;
 
+            case "SCLS":
+                player.hexGrid.ClearUnits();
+                break;
+
             /////// REGISTER ON SERVER
             case "SWHO":
                 for(int i = 1; i < receivedData.Length - 1; ++i)

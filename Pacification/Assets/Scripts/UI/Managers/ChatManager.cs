@@ -124,7 +124,7 @@ public class ChatManager : MonoBehaviour
                             NoPermission();
                             break;
                         }
-                        FindObjectOfType<HexGrid>().ClearUnits();
+                        client.Send("CUNI|CLS|0|0");
                     }
                     else if(commandClear == "" || commandClear == "msg" || commandClear == "message" || commandClear == "messages")
                     {

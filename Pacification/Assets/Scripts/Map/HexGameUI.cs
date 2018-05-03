@@ -109,8 +109,8 @@ public class HexGameUI : MonoBehaviour
         if(selectedUnit.Type == Unit.UnitType.SETTLER)
         {
             ((Settler)selectedUnit).Settle();
-            selectedCity = GetSelectCity(selectedUnit.HexUnit.location);
             selectedUnit = null;
+            currentCell = null;
         }
         else if(selectedUnit.Type == Unit.UnitType.WORKER)
             ((Worker)selectedUnit).Exploit();

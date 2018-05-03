@@ -16,12 +16,13 @@ public class ChatManager : MonoBehaviour
 
     public Client client;
     public ButtonManager buttonManager;
-    private ControlsManager controls;
+    ControlsManager controls;
 
     List<GameObject> allMessages;
     Transform chat;
 
-    bool active;
+    bool isChatActive = false;
+    bool isOp = false;
 
     public enum MessageType
     {
@@ -56,9 +57,9 @@ public class ChatManager : MonoBehaviour
 
     public void ChatAppearManager()
     {
-        if(active && input.text == "")
+        if(isChatActive && input.text == "")
             HideCHat();
-        else if(!active)
+        else if(!isChatActive)
             SpawnChat();
     }
 
@@ -67,14 +68,14 @@ public class ChatManager : MonoBehaviour
         foreach(Transform t in chat)
             t.gameObject.SetActive(true);
         input.ActivateInputField();
-        active = true;
+        isChatActive = true;
     }
 
     public void HideCHat()
     {
         foreach(Transform t in chat)
             t.gameObject.SetActive(false);
-        active = false;
+        isChatActive = false;
     }
 
     public void ChatMessage(string message, MessageType type)
@@ -117,7 +118,14 @@ public class ChatManager : MonoBehaviour
                 case "clear":
                     string commandClear = ExtractCommand(ref index, input.text);
                     if(commandClear == "unit" || commandClear == "units")
+                    {
+                        if(!isOp)
+                        {
+                            NoPermission();
+                            break;
+                        }
                         FindObjectOfType<HexGrid>().ClearUnits();
+                    }
                     else if(commandClear == "" || commandClear == "msg" || commandClear == "message" || commandClear == "messages")
                     {
                         int indexMessages = allMessages.Count - 1;
@@ -133,57 +141,31 @@ public class ChatManager : MonoBehaviour
                     break;
 
                 case "unit":
-                    string commandUnit = ExtractCommand(ref index, input.text);
+                    if(!isOp)
+                    {
+                        NoPermission();
+                        break;
+                    }
 
+                    string commandUnit = ExtractCommand(ref index, input.text);
+                    
+                    //Add unit spawning code on location pointed by player
 
                     ChatMessage("ERROR: Unknown command \"unit " + commandUnit + "\"", MessageType.ALERT);
                     break;
 
                 case "kick":
-                    string kicked = ExtractCommand(ref index, input.text);
-                    if(kicked == "")
+                    if(!isOp)
+                    {
+                        NoPermission();
+                        break;
+                    }
+
+                    string kickedPlayer = ExtractCommand(ref index, input.text);
+                    if(kickedPlayer == "")
                         ChatMessage("You didn't specified the player to kick", MessageType.ALERT);
                     string kickMessage = ExtractMessage(++index, input.text);
-                    client.Send("CKIK|" + kicked + "|" + kickMessage);
-                    break;
-
-                case "help":
-                    string helpCommand = ExtractCommand(ref index, input.text);
-                    if(helpCommand == "")
-                        ChatMessage("The available commands are : msg, clear, unit, kick", MessageType.ALERT);
-                    else
-                    {
-                        switch(helpCommand)
-                        {
-                            case "msg":
-                                ChatMessage("Use to talk with another player in private : /msg playerName message", MessageType.ALERT);
-                                break;
-
-                            case "code":
-                                ChatMessage("Use this command to enter a cheat code", MessageType.ALERT);
-                                break;
-
-                            case "clear":
-                                ChatMessage("Use to clear something (messages by default): /clear [msg.message.messages.unit.units]", MessageType.ALERT);
-                                break;
-
-                            case "unit":
-                                ChatMessage("Use to spawn unit : /unit ????", MessageType.ALERT);
-                                break;
-
-                            case "kick":
-                                ChatMessage("Use to kick a player : /kick playerName [reason]", MessageType.ALERT);
-                                break;
-
-                            case "help":
-                                ChatMessage("You need help...", MessageType.ALERT);
-                                break;
-
-                            default:
-                                ChatMessage("ERROR: Unknown command \"" + helpCommand + "\"", MessageType.ALERT);
-                                break;
-                        }
-                    }
+                    client.Send("CKIK|" + kickedPlayer + "|" + kickMessage == "" ? "NO_REASON_GIVEN": kickMessage);
                     break;
 
                 case "code":
@@ -211,6 +193,59 @@ public class ChatManager : MonoBehaviour
                     }
                     break;
 
+                case "op":
+                    if(!isOp && !client.isHost)
+                        NoPermission();
+                    else
+                        OpDeop(ExtractCommand(ref index, input.text), true);
+                    break;
+
+                case "deop":
+                    if(!isOp)
+                        NoPermission();
+                    else
+                        OpDeop(ExtractCommand(ref index, input.text), false);
+                    break;
+
+                case "help":
+                    string helpCommand = ExtractCommand(ref index, input.text);
+                    if(helpCommand == "")
+                        ChatMessage("The available commands are : msg, clear, unit, kick", MessageType.ALERT);
+                    else
+                    {
+                        switch(helpCommand)
+                        {
+                            case "msg":
+                                ChatMessage("Use to talk with another player in private : /msg [playerName] [message]", MessageType.ALERT);
+                                break;
+
+                            case "clear":
+                                ChatMessage("Use to clear something (messages by default): /clear [msg.unit]", MessageType.ALERT);
+                                break;
+
+                            case "unit":
+                                ChatMessage("Use to spawn a unit : /unit [type]", MessageType.ALERT);
+                                break;
+
+                            case "kick":
+                                ChatMessage("Use to kick a player : /kick [playerName] [reason]", MessageType.ALERT);
+                                break;
+
+                            case "help":
+                                ChatMessage("You need help...", MessageType.ALERT);
+                                break;
+
+                            case "code":
+                                ChatMessage("No help is provided for the cheating!", MessageType.ALERT);
+                                break;
+
+                            default:
+                                ChatMessage("ERROR: Unknown command \"" + helpCommand + "\"", MessageType.ALERT);
+                                break;
+                        }
+                    }
+                    break;
+
                 default:
                     ChatMessage("ERROR: Unknown command \"" + command + "\"", MessageType.ALERT);
                     break;
@@ -218,7 +253,9 @@ public class ChatManager : MonoBehaviour
         }
         else
             client.Send("CMSG|0|" + input.text);
+
         input.text = "";
+        input.ActivateInputField();
     }
 
     string ExtractCommand(ref int index, string data)
@@ -241,5 +278,28 @@ public class ChatManager : MonoBehaviour
             index++;
         }
         return message;
+    }
+
+    void NoPermission()
+    {
+        ChatMessage("You do not have permission to use this command", MessageType.ALERT);
+    }
+
+    public void OpDeop(string playerName, bool toOp)
+    {
+        if(toOp == isOp && playerName == "")
+            return;
+
+        if(playerName == "")
+        {
+            isOp = toOp;
+            string message = toOp ? "now op" : "no longer op";
+            client.Send("CMSG|3|The player " + client.clientName + " is " + message);
+        }
+        else
+        {
+            string opMSG = toOp ? "1" : "0";
+            client.Send("CYOP|" + opMSG + "|" + playerName);
+        }
     }
 }

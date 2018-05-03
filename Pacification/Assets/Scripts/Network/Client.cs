@@ -162,6 +162,13 @@ public class Client : MonoBehaviour
                 chat.ChatMessage(receivedData[1], ChatManager.MessageType.ALERT);
                 break;
 
+            case "SYOP":
+                if(receivedData[1] == "1")
+                    chat.OpDeop("", true);
+                else
+                    chat.OpDeop("", false);
+                break;
+
             /////// REGISTER ON SERVER
             case "SWHO":
                 for(int i = 1; i < receivedData.Length - 1; ++i)

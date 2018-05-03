@@ -181,6 +181,14 @@ public class Server : MonoBehaviour
                     Broadcast("SMSE| ERROR : The player " + receivedData[1] + " is unreacheable", client);
                 break;
 
+            case "CYOP":
+                ServerClient clientToOp = clients.Find(clientOpped => clientOpped.clientName == receivedData[2]);
+                if(clientToOp != null)
+                    Broadcast("SYOP|" + receivedData[1], clients.Find(clientOpped => clientOpped.clientName == receivedData[2]));
+                else
+                    Broadcast("SMSE| ERROR : The player " + receivedData[2] + " is unreacheable", client);
+                break;
+
             /////// REGISTER A CLIENT
             case "CIAM":
                 string[] clientStatus = receivedData[1].Split('#');

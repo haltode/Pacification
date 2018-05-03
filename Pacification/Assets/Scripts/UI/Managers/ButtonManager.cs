@@ -51,9 +51,7 @@ public class ButtonManager : MonoBehaviour {
 
         client = FindObjectOfType<Client>();
         if(client != null)
-        {
             Destroy(client.gameObject);
-        }
         SceneManager.LoadScene("Menu");
 
         Destroy(GameObject.Find("GameManager"));

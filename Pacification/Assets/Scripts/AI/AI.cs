@@ -33,6 +33,7 @@ public class AI
         if(!IsSpawningTime())
             return;
 
+        UnityEngine.Object.FindObjectOfType<SoundManager>().PlayBarbarianSpawn();
         lastSpawnRound = currentRound;
         // TODO: need level up
         /*if(difficultyLevel == Difficulty.EASY)

@@ -12,8 +12,6 @@ public class HexMapEditor : MonoBehaviour
     int activeElevation;
     int activeFeature;
     bool applyElevation;
-    
-    HexCell previousCell;
 
     OptionalToggle underWaterMode;
 
@@ -30,8 +28,6 @@ public class HexMapEditor : MonoBehaviour
         if(!EventSystem.current.IsPointerOverGameObject())
             if(Input.GetMouseButton(0))
                 HandleInput();
-        else
-            previousCell = null;
     }
 
     HexCell GetCellUnderCursor()
@@ -44,12 +40,7 @@ public class HexMapEditor : MonoBehaviour
     {
         HexCell currentCell = GetCellUnderCursor();
         if(currentCell)
-        {
             EditCell(currentCell);
-            previousCell = currentCell;
-        }
-        else
-            previousCell = null;
     }
 
     public void EditCell(HexCell cell)

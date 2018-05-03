@@ -95,10 +95,11 @@ public class HexUnit : MonoBehaviour
 
     public static void Load(BinaryReader reader, HexGrid grid)
     {
+        /* TODO: need to save player information to be able to recreate unit
         HexCoordinates coordinates = HexCoordinates.Load(reader);
         float orientation = reader.ReadSingle();
-        // TODO: need to save player information to be able to recreate unit
-        //grid.AddUnit(Instantiate(unitPrefab), grid.GetCell(coordinates), orientation);
+        grid.AddUnit(Instantiate(unitPrefab), grid.GetCell(coordinates), orientation);
+        */
     }
 
     public int GetMoveCost(HexCell current, HexCell dest, HexDirection dir)

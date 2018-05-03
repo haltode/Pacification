@@ -156,6 +156,11 @@ public class HexCell : MonoBehaviour
         get { return featureIndex > 0; }
     }
 
+    public bool HasCity
+    {
+        get { return featureIndex == 1 || featureIndex == 2 || featureIndex == 3; }
+    }
+
     public bool Explorable { get; set; }
 
     public bool IsVisible
@@ -279,7 +284,13 @@ public class HexCell : MonoBehaviour
     public void DisableHighlight()
     {
         Image highlight = uiRect.GetChild(0).GetComponent<Image>();
-        highlight.enabled = false;        
+        highlight.enabled = false;
+    }
+
+    public bool IsHighlighted()
+    {
+        Image highlight = uiRect.GetChild(0).GetComponent<Image>();
+        return highlight.isActiveAndEnabled;
     }
 
     public void SetLabel(string text)

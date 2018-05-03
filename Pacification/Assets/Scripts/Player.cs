@@ -137,6 +137,15 @@ public class Player
         unit = null;
     }
 
+    public Unit GetUnit(HexCell location)
+    {
+        for(int i = 0; i < playerUnits.Count; ++i)
+            if(playerUnits[i] != null &&
+                playerUnits[i].HexUnit.location == location)
+                return playerUnits[i];
+        return null;
+    }
+
     public void AddCity(HexCell location, City.CitySize type)
     {
         client.Send("CUNI|CIC|" + (int)type + "#" + location.coordinates.X + "#" + location.coordinates.Z);

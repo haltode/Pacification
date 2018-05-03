@@ -3,14 +3,15 @@ using UnityEngine.EventSystems;
 
 public class HexGameUI : MonoBehaviour
 {
-    public HexGrid grid;
+    public HexGrid hexGrid;
     ControlsManager controls;
 
     HexCell currentCell;
-    HexCell targetCell;
-    HexUnit selectedUnit;
+    HexCell attackTargetCell;
+    public Unit selectedUnit;
     public City selectedCity;
     public Barrack barrack;
+    bool didPathfinding;
 
     Client client;
 
@@ -23,7 +24,7 @@ public class HexGameUI : MonoBehaviour
             return;
         }
 
-        grid = FindObjectOfType<HexGrid>();
+        hexGrid = FindObjectOfType<HexGrid>();
         client = FindObjectOfType<Client>();
         controls = FindObjectOfType<ControlsManager>();
         barrack = FindObjectOfType<Barrack>();
@@ -32,66 +33,49 @@ public class HexGameUI : MonoBehaviour
 
     void Update()
     {
-        if(!(client.player.canPlay && !EventSystem.current.IsPointerOverGameObject()))
+        if(!client.player.canPlay || EventSystem.current.IsPointerOverGameObject())
             return;
 
-        if (targetCell)
+        if(attackTargetCell)
         {
-            targetCell.DisableHighlight();
-            targetCell = null;
+            attackTargetCell.DisableHighlight();
+            attackTargetCell = null;
         }
 
         if(Input.GetMouseButtonDown(0))
-        {
             DoSelection();
-            if(currentCell)
-            {
-                if (currentCell.FeatureIndex == 1) // City
-                {
-                    selectedCity = client.player.GetCity(currentCell);
-                    barrack.GetBarrackObject.SetActive(true);
-                }
-                else
-                {
-                    barrack.GetBarrackObject.SetActive(false);
-                }
-            }
-        }
         
-        if(selectedUnit)
+        if(selectedUnit != null)
         {
-            if(Input.GetMouseButton(0))
+            if(Input.GetMouseButton(1))
                 DoPathfinding();
-            else if(Input.GetMouseButtonUp(0))
+            else if(Input.GetMouseButtonUp(1))
                 DoMove();
             else if(Input.GetKeyDown(controls.unitAction))
-            {
-                if(selectedUnit.Unit.Type == Unit.UnitType.SETTLER)
-                    ((Settler)selectedUnit.Unit).Settle();
-                else if(selectedUnit.Unit.Type == Unit.UnitType.WORKER)
-                    ((Worker)selectedUnit.Unit).Exploit();
-                else
-                {
-                    Ray inputRay = Camera.main.ScreenPointToRay(Input.mousePosition);
-                    targetCell = grid.GetCell(inputRay);
-
-                    if (selectedUnit.location.coordinates.DistanceTo(targetCell.coordinates) <= ((Attacker)selectedUnit.Unit).Range)
-                    {
-                        if (selectedUnit.Unit.Owner != targetCell.Unit.Unit.Owner)
-                        {
-                            ((Attacker)selectedUnit.Unit).Attack(targetCell.Unit.Unit);
-                            targetCell.EnableHighlight(Color.red);
-                        }
-                    }
-                }
-            }
+                DoAction();
+            // After pathfinding clearing
+            if(selectedUnit != null && !selectedUnit.HexUnit.location.IsHighlighted())
+                selectedUnit.HexUnit.location.EnableHighlight(Color.blue);
         }
+    }
+
+    HexCell GetCellUnderCursor()
+    {
+        Ray inputRay = Camera.main.ScreenPointToRay(Input.mousePosition);
+        return hexGrid.GetCell(inputRay);
+    }
+
+    City GetSelectCity(HexCell location)
+    {
+        City city = client.player.GetCity(location);
+        if(city != null)
+            barrack.GetBarrackObject.SetActive(true);
+        return city;
     }
 
     bool UpdateCurrentCell()
     {
-        Ray inputRay = Camera.main.ScreenPointToRay(Input.mousePosition);
-        HexCell cell = grid.GetCell(inputRay);
+        HexCell cell = GetCellUnderCursor();
         if(cell != currentCell)
         {
             if(currentCell)
@@ -106,45 +90,73 @@ public class HexGameUI : MonoBehaviour
     void DoSelection()
     {
         UpdateCurrentCell();
-        if (currentCell)
+        if(selectedUnit != null)
+            selectedUnit.HexUnit.location.DisableHighlight();
+        selectedUnit = null;
+        selectedCity = null;
+        barrack.GetBarrackObject.SetActive(false);
+        if(currentCell)
         {
-            if (currentCell.Unit &&
-                currentCell.Unit.Unit.Owner == client.player)
-                selectedUnit = currentCell.Unit;
-            else
-                selectedUnit = null;
+            if(currentCell.Unit)
+                selectedUnit = client.player.GetUnit(currentCell);
+            else if(currentCell.HasCity)
+                selectedCity = GetSelectCity(currentCell);
+        }
+    }
+
+    void DoAction()
+    {
+        if(selectedUnit.Type == Unit.UnitType.SETTLER)
+        {
+            ((Settler)selectedUnit).Settle();
+            selectedCity = GetSelectCity(selectedUnit.HexUnit.location);
+            selectedUnit = null;
+        }
+        else if(selectedUnit.Type == Unit.UnitType.WORKER)
+            ((Worker)selectedUnit).Exploit();
+        else
+        {
+            attackTargetCell = GetCellUnderCursor();
+            if(attackTargetCell && attackTargetCell.Unit && selectedUnit.Owner != attackTargetCell.Unit.Unit.Owner &&
+                selectedUnit.HexUnit.location.coordinates.DistanceTo(attackTargetCell.coordinates) <= ((Attacker)selectedUnit).Range)
+            {
+                ((Attacker)selectedUnit).Attack(attackTargetCell.Unit.Unit);
+                attackTargetCell.EnableHighlight(Color.red);
+            }
         }
     }
 
     void DoPathfinding()
     {
-        grid = FindObjectOfType<HexGrid>();
         if(UpdateCurrentCell())
         {
-            if(currentCell && selectedUnit.IsValidDestination(currentCell))
-                grid.FindPath(selectedUnit.Location, currentCell, selectedUnit);
+            didPathfinding = true;
+            if(currentCell)
+                hexGrid.FindPath(selectedUnit.HexUnit.location, currentCell, selectedUnit.HexUnit);
             else
-                grid.ClearPath();
+                hexGrid.ClearPath();
         }
     }
 
     void DoMove()
     {
-        if(grid.HasPath)
+        if(!didPathfinding)
+            return;
+        if(didPathfinding && !hexGrid.HasPath)
         {
-            if(GameManager.Instance.gamemode == GameManager.Gamemode.EDITOR)
-                selectedUnit.Travel(grid.GetPath());
-            else
-            {
-                int xStart = selectedUnit.Location.coordinates.X;
-                int zStart = selectedUnit.Location.coordinates.Z;
-
-                int xEnd = currentCell.coordinates.X;
-                int zEnd = currentCell.coordinates.Z;
-
-                client.Send("CMOV|" + xStart + "#" + zStart + "#" + xEnd + "#" + zEnd);
-            }
+            currentCell = null;
+            didPathfinding = false;
+            hexGrid.ClearPath();
+            return;
         }
+
+        int xStart = selectedUnit.HexUnit.location.coordinates.X;
+        int zStart = selectedUnit.HexUnit.location.coordinates.Z;
+
+        int xEnd = currentCell.coordinates.X;
+        int zEnd = currentCell.coordinates.Z;
+
+        client.Send("CMOV|" + xStart + "#" + zStart + "#" + xEnd + "#" + zEnd);
     }
 
     public void NetworkDoMove(string data)
@@ -157,13 +169,13 @@ public class HexGameUI : MonoBehaviour
         int xEnd = int.Parse(receiverdData[2]);
         int zEnd = int.Parse(receiverdData[3]);
 
-        HexCell cellStart = grid.GetCell(new HexCoordinates(xStart, zStart));
-        HexCell cellEnd = grid.GetCell(new HexCoordinates(xEnd, zEnd));
+        HexCell cellStart = hexGrid.GetCell(new HexCoordinates(xStart, zStart));
+        HexCell cellEnd = hexGrid.GetCell(new HexCoordinates(xEnd, zEnd));
 
-        grid.ClearPath();
-        grid.FindPath(cellStart, cellEnd, cellStart.Unit);
+        hexGrid.ClearPath();
+        hexGrid.FindPath(cellStart, cellEnd, cellStart.Unit);
 
-        cellStart.Unit.Travel(grid.GetPath());
-        grid.ClearPath();
+        cellStart.Unit.Travel(hexGrid.GetPath());
+        hexGrid.ClearPath();
     }
 }

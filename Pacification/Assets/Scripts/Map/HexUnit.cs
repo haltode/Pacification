@@ -77,7 +77,10 @@ public class HexUnit : MonoBehaviour
     public void Die()
     {
         if(location)
+        {
             Grid.DecreaseVisibility(location, VisionRange);
+            location.DisableHighlight();
+        }
         location.Unit = null;
         Destroy(gameObject);
     }
@@ -120,6 +123,8 @@ public class HexUnit : MonoBehaviour
 
     public void Travel(List<HexCell> path)
     {
+        if(path.Count <= 1)
+            return;
         location.Unit = null;
         location = path[path.Count - 1];
         location.Unit = this;

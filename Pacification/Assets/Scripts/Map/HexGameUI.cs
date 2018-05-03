@@ -51,10 +51,14 @@ public class HexGameUI : MonoBehaviour
                 DoPathfinding();
             else if(Input.GetMouseButtonUp(1))
                 DoMove();
-            else if(Input.GetKeyDown(controls.unitAction))
-                DoAction();
-            else if(selectedUnit.Type == Unit.UnitType.WORKER && Input.GetKeyDown(controls.workerAddRoad))
-                WorkerAddRoad();
+            else
+            {
+                bool unitAction = Input.GetKeyDown(controls.unitAction);
+                bool workerRoad = Input.GetKeyDown(controls.workerAddRoad);
+                // Worker has two actions (exploit resources or add road)
+                if(unitAction || workerRoad)
+                    DoAction(unitAction);
+            }
             // After pathfinding clearing
             if(selectedUnit != null && !selectedUnit.HexUnit.location.IsHighlighted())
                 selectedUnit.HexUnit.location.EnableHighlight(Color.blue);
@@ -114,7 +118,7 @@ public class HexGameUI : MonoBehaviour
         }
     }
 
-    void DoAction()
+    void DoAction(bool unitAction)
     {
         if(selectedUnit.Type == Unit.UnitType.SETTLER)
         {
@@ -123,7 +127,22 @@ public class HexGameUI : MonoBehaviour
             currentCell = null;
         }
         else if(selectedUnit.Type == Unit.UnitType.WORKER)
-            ((Worker)selectedUnit).Exploit();
+        {
+            if(unitAction)
+                ((Worker)selectedUnit).Exploit();
+            else
+            {
+                HexCell roadCell = GetCellUnderCursor();
+                if(!roadCell || roadCell.IsUnderWater || !roadCell.IsExplored || roadCell.Unit)
+                    return;
+                bool roadOk = ((Worker)selectedUnit).AddRoad(roadCell);
+                if(roadOk)
+                {
+                    MoveUnit(currentCell, roadCell);
+                    currentCell = roadCell;
+                }
+            }
+        }
         else
         {
             attackTargetCell = GetCellUnderCursor();
@@ -190,29 +209,5 @@ public class HexGameUI : MonoBehaviour
 
         cellStart.Unit.Travel(hexGrid.GetPath());
         hexGrid.ClearPath();
-    }
-
-    void WorkerAddRoad()
-    {
-        HexCell roadCell = GetCellUnderCursor();
-        if(!roadCell || roadCell.IsUnderWater || !roadCell.IsExplored || roadCell.Unit)
-            return;
-        bool isNeighbor = false;
-        HexDirection roadDir = HexDirection.NE;
-        for(HexDirection dir = HexDirection.NE; dir <= HexDirection.NW && !isNeighbor; ++dir)
-        {
-            HexCell neighbor = currentCell.GetNeighbor(dir);
-            if(neighbor == roadCell)
-            {
-                isNeighbor = true;
-                roadDir = dir;
-            }
-        }
-        if(!isNeighbor || !currentCell.IsReachable(roadDir))
-            return;
-
-        currentCell.AddRoad(roadDir);
-        MoveUnit(currentCell, roadCell);
-        currentCell = roadCell;
     }
 }

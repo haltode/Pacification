@@ -159,7 +159,7 @@ public class ChatManager : MonoBehaviour
                                 break;
 
                             case "code":
-                                ChatMessage("Use this command to enter cheat code", MessageType.ALERT);
+                                ChatMessage("Use this command to enter a cheat code", MessageType.ALERT);
                                 break;
 
                             case "clear":
@@ -192,23 +192,23 @@ public class ChatManager : MonoBehaviour
                             client.player.money += 1000;
                             client.player.UpdateMoneyDisplay();
                             break;
+
+                        case "fog":
+                            string toggle = ExtractCommand(ref index, input.text);
+                            HexGrid grid = FindObjectOfType<HexGrid>();
+                            if(toggle == "off")
+                            {
+                                Shader.EnableKeyword("HEX_MAP_EDITOR");
+                                grid.ShowUI(false);
+                            }
+                            else if(toggle == "on")
+                            {
+                                Shader.DisableKeyword("HEX_MAP_EDITOR");
+                                grid.ShowUI(true);
+                            }
+                            break;
                     }
                     break;
-
-                case "fog":
-                    string toggle = ExtractCommand(ref index, input.text);
-                    HexGrid grid = FindObjectOfType<HexGrid>();
-                    if(toggle == "off")
-                    {
-                        Shader.EnableKeyword("HEX_MAP_EDITOR");
-                        grid.ShowUI(false);
-                    }
-                    else if(toggle == "on")
-                    {
-                        Shader.DisableKeyword("HEX_MAP_EDITOR");
-                        grid.ShowUI(true);
-                    }
-            break;
 
                 default:
                     ChatMessage("ERROR: Unknown command \"" + command + "\"", MessageType.ALERT);

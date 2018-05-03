@@ -16,6 +16,13 @@ public class HexGameUI : MonoBehaviour
 
     void Start()
     {
+        // Editor should not have the game UI enabled
+        if(GameManager.Instance.gamemode == GameManager.Gamemode.EDITOR)
+        {
+            gameObject.SetActive(false);
+            return;
+        }
+
         grid = FindObjectOfType<HexGrid>();
         client = FindObjectOfType<Client>();
         controls = FindObjectOfType<ControlsManager>();
@@ -25,8 +32,6 @@ public class HexGameUI : MonoBehaviour
 
     void Update()
     {
-        if(GameManager.Instance.gamemode == GameManager.Gamemode.EDITOR)
-            return;
         if(!(client.player.canPlay && !EventSystem.current.IsPointerOverGameObject()))
             return;
 

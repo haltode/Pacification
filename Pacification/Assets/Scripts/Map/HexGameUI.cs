@@ -120,7 +120,7 @@ public class HexGameUI : MonoBehaviour
 
     void DoAction(bool unitAction)
     {
-        if(selectedUnit.Type == Unit.UnitType.SETTLER)
+        if(selectedUnit.Type == Unit.UnitType.SETTLER && unitAction)
         {
             ((Settler)selectedUnit).Settle();
             selectedUnit = null;
@@ -143,7 +143,7 @@ public class HexGameUI : MonoBehaviour
                 }
             }
         }
-        else
+        else if(unitAction)
         {
             attackTargetCell = GetCellUnderCursor();
             if(attackTargetCell && attackTargetCell.Unit && selectedUnit.Owner != attackTargetCell.Unit.Unit.Owner &&

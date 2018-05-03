@@ -37,7 +37,7 @@ public class Worker : Unit
         if(!isNeighbor || !currentCell.IsReachable(roadDir))
             return false;
 
-        currentCell.AddRoad(roadDir);
+        currentCell.AddRoad(roadDir, currentCell);
         return true;
     }
 }

@@ -137,10 +137,7 @@ public class HexGameUI : MonoBehaviour
                     return;
                 bool roadOk = ((Worker)selectedUnit).AddRoad(roadCell);
                 if(roadOk)
-                {
-                    MoveUnit(currentCell, roadCell);
                     currentCell = roadCell;
-                }
             }
         }
         else if(unitAction)
@@ -188,18 +185,19 @@ public class HexGameUI : MonoBehaviour
         int zStart = start.coordinates.Z;
         int xEnd = end.coordinates.X;
         int zEnd = end.coordinates.Z;
+
         client.Send("CMOV|" + xStart + "#" + zStart + "#" + xEnd + "#" + zEnd);
     }
 
     public void NetworkMoveUnit(string data)
     {
-        string[] receiverdData = data.Split('#');
+        string[] receivedData = data.Split('#');
 
-        int xStart = int.Parse(receiverdData[0]);
-        int zStart = int.Parse(receiverdData[1]);
+        int xStart = int.Parse(receivedData[0]);
+        int zStart = int.Parse(receivedData[1]);
 
-        int xEnd = int.Parse(receiverdData[2]);
-        int zEnd = int.Parse(receiverdData[3]);
+        int xEnd = int.Parse(receivedData[2]);
+        int zEnd = int.Parse(receivedData[3]);
 
         HexCell cellStart = hexGrid.GetCell(new HexCoordinates(xStart, zStart));
         HexCell cellEnd = hexGrid.GetCell(new HexCoordinates(xEnd, zEnd));
@@ -209,5 +207,20 @@ public class HexGameUI : MonoBehaviour
 
         cellStart.Unit.Travel(hexGrid.GetPath());
         hexGrid.ClearPath();
+    }
+
+    public void NetworkRoad(string data)
+    {
+        string[] receivedData = data.Split('#');
+
+        int x = int.Parse(receivedData[0]);
+        int z = int.Parse(receivedData[1]);
+
+        HexCell cell = hexGrid.GetCell(new HexCoordinates(x, z));
+
+        if(receivedData[2] == "1")
+            cell.SetRoad(int.Parse(receivedData[3]), true);
+        else
+            cell.NetworkRemoveRoad();
     }
 }

@@ -59,20 +59,30 @@ public class HexCell : MonoBehaviour
         }
     }
 
-    public void AddRoad(HexDirection direction)
+    public void AddRoad(HexDirection direction, HexCell currentCell)
     {
-        if(!roads[(int) direction] && IsReachable(direction))
-            SetRoad((int) direction, true);
+        int xStart = currentCell.coordinates.X;
+        int zStart = currentCell.coordinates.Z;
+        int xEnd = neighbors[(int)direction].coordinates.X;
+        int zEnd = neighbors[(int)direction].coordinates.Z;
+
+        if(!roads[(int)direction] && IsReachable(direction))
+            FindObjectOfType<Client>().Send("CUNM|ROD|" + coordinates.X + "#" + coordinates.Z + "#" + 1 + "#" + (int)direction + "|" + xStart + "#" + zStart + "#" + xEnd + "#" + zEnd);
     }
 
     public void RemoveRoads()
     {
-        for(int i =  0; i < neighbors.Length; ++i)
+        FindObjectOfType<Client>().Send("CUNI|ROD|" + coordinates.X + "#" + coordinates.Z + "#" + 0);
+    }
+
+    public void NetworkRemoveRoad()
+    {
+        for(int i = 0; i < neighbors.Length; ++i)
             if(roads[i])
                 SetRoad(i, false);
     }
 
-    void SetRoad(int index, bool state)
+    public void SetRoad(int index, bool state)
     {
         roads[index] = state;
         neighbors[index].roads[(int) ((HexDirection) index).Opposite()] = state;
@@ -105,11 +115,6 @@ public class HexCell : MonoBehaviour
             elevation = value;
             ShaderData.ViewElevationChanged();
             RefreshPosition();
-
-            for(int i = 0; i < roads.Length; ++i)
-                if(roads[i] && !IsReachable((HexDirection) i))
-                    SetRoad(i, false);
-
             Refresh();
         }
     }

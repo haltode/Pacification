@@ -138,9 +138,9 @@ public class Client : MonoBehaviour
                 }
                 break;
 
-
             case "SROD":
-                // TODO: in solo/Multi need to handle roads + 
+                FindObjectOfType<HexGameUI>().NetworkRoad(receivedData[1]);
+                FindObjectOfType<HexGameUI>().NetworkMoveUnit(receivedData[2]);
                 break;
 
             case "SYGO":

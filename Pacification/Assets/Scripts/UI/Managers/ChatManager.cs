@@ -111,6 +111,7 @@ public class ChatManager : MonoBehaviour
                     string receiver = ExtractCommand(ref index, input.text);
                     string message = ExtractMessage(++index, input.text);
                     client.Send("CMSP|" + receiver + "|" + message);
+                    ChatMessage("You whispered to " + receiver + " >> " + message, MessageType.PRIVATE);
                     break;
 
                 case "clear":

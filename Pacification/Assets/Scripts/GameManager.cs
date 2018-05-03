@@ -119,7 +119,6 @@ public class GameManager : MonoBehaviour
         Server server = FindObjectOfType<Server>();
         if(server != null)
         {
-            Debug.Log("finfk,");
             server.server.Stop();
             Destroy(server.gameObject);
         }

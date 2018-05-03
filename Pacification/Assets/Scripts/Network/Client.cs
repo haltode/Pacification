@@ -81,7 +81,7 @@ public class Client : MonoBehaviour
         {
             /////// GAMEPLAY
             case "SMOV":
-                FindObjectOfType<HexGameUI>().NetworkDoMove(receivedData[1]);
+                FindObjectOfType<HexGameUI>().NetworkMoveUnit(receivedData[1]);
                 break;
 
             case "SUAA":

@@ -53,6 +53,8 @@ public class HexGameUI : MonoBehaviour
                 DoMove();
             else if(Input.GetKeyDown(controls.unitAction))
                 DoAction();
+            else if(selectedUnit.Type == Unit.UnitType.WORKER && Input.GetKeyDown(controls.workerAddRoad))
+                WorkerAddRoad();
             // After pathfinding clearing
             if(selectedUnit != null && !selectedUnit.HexUnit.location.IsHighlighted())
                 selectedUnit.HexUnit.location.EnableHighlight(Color.blue);
@@ -158,16 +160,19 @@ public class HexGameUI : MonoBehaviour
             return;
         }
 
-        int xStart = selectedUnit.HexUnit.location.coordinates.X;
-        int zStart = selectedUnit.HexUnit.location.coordinates.Z;
+        MoveUnit(selectedUnit.HexUnit.location, currentCell);
+    }
 
-        int xEnd = currentCell.coordinates.X;
-        int zEnd = currentCell.coordinates.Z;
-
+    void MoveUnit(HexCell start, HexCell end)
+    {
+        int xStart = start.coordinates.X;
+        int zStart = start.coordinates.Z;
+        int xEnd = end.coordinates.X;
+        int zEnd = end.coordinates.Z;
         client.Send("CMOV|" + xStart + "#" + zStart + "#" + xEnd + "#" + zEnd);
     }
 
-    public void NetworkDoMove(string data)
+    public void NetworkMoveUnit(string data)
     {
         string[] receiverdData = data.Split('#');
 
@@ -185,5 +190,29 @@ public class HexGameUI : MonoBehaviour
 
         cellStart.Unit.Travel(hexGrid.GetPath());
         hexGrid.ClearPath();
+    }
+
+    void WorkerAddRoad()
+    {
+        HexCell roadCell = GetCellUnderCursor();
+        if(!roadCell || roadCell.IsUnderWater || !roadCell.IsExplored || roadCell.Unit)
+            return;
+        bool isNeighbor = false;
+        HexDirection roadDir = HexDirection.NE;
+        for(HexDirection dir = HexDirection.NE; dir <= HexDirection.NW && !isNeighbor; ++dir)
+        {
+            HexCell neighbor = currentCell.GetNeighbor(dir);
+            if(neighbor == roadCell)
+            {
+                isNeighbor = true;
+                roadDir = dir;
+            }
+        }
+        if(!isNeighbor || !currentCell.IsReachable(roadDir))
+            return;
+
+        currentCell.AddRoad(roadDir);
+        MoveUnit(currentCell, roadCell);
+        currentCell = roadCell;
     }
 }

@@ -20,7 +20,6 @@
 
         Cull Off
         ZWrite Off
-        ZTest Always
         Blend One OneMinusSrcAlpha
 
         Pass {

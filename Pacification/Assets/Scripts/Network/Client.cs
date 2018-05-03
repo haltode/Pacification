@@ -163,10 +163,7 @@ public class Client : MonoBehaviour
                 break;
 
             case "SYOP":
-                if(receivedData[1] == "1")
-                    chat.OpDeop("", true);
-                else
-                    chat.OpDeop("", false);
+                chat.OpDeop("", receivedData[1] == "1");
                 break;
 
             case "SCLS":

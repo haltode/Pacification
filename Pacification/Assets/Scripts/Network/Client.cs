@@ -19,6 +19,7 @@ public class Client : MonoBehaviour
     private StreamReader reader;
 
     private HexMapEditor mapEditor;
+    private ChatManager chat;
 
     public Player player;
     private AI ai = null;
@@ -154,11 +155,11 @@ public class Client : MonoBehaviour
 
             /////// CHAT
             case "SMSG":
-                FindObjectOfType<ChatManager>().ChatMessage(receivedData[2], (ChatManager.MessageType)int.Parse(receivedData[1]));
+                chat.ChatMessage(receivedData[2], (ChatManager.MessageType)int.Parse(receivedData[1]));
                 break;
 
             case "SMSE":
-                FindObjectOfType<ChatManager>().ChatMessage(receivedData[1], ChatManager.MessageType.ALERT);
+                chat.ChatMessage(receivedData[1], ChatManager.MessageType.ALERT);
                 break;
 
             /////// REGISTER ON SERVER
@@ -175,7 +176,7 @@ public class Client : MonoBehaviour
                 break;
 
             case "SDEC":
-                FindObjectOfType<ChatManager>().ChatMessage(receivedData[1] + " left the game.", ChatManager.MessageType.ALERT);
+                chat.ChatMessage(receivedData[1] + " left the game.", ChatManager.MessageType.ALERT);
                 break;
 
             case "SKIK":
@@ -198,6 +199,7 @@ public class Client : MonoBehaviour
                 player.UpdateHappinessDisplay();
                 player.UpdateProductionDisplay();
                 player.UpdateScienceDisplay();
+                chat = FindObjectOfType<ChatManager>();
                 break;
         }
     }

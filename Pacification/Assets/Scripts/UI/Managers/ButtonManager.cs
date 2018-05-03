@@ -43,6 +43,8 @@ public class ButtonManager : MonoBehaviour {
         Server server = FindObjectOfType<Server>();
         if(server != null)
         {
+            if(GameManager.Instance.gamemode == GameManager.Gamemode.MULTI)
+                server.Broadcast("SKIK|The Host left the game", server.clients);
             server.server.Stop();
             Destroy(server.gameObject);
         }

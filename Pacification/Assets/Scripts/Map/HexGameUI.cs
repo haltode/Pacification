@@ -98,9 +98,17 @@ public class HexGameUI : MonoBehaviour
         if(currentCell)
         {
             if(currentCell.Unit)
+            {
                 selectedUnit = client.player.GetUnit(currentCell);
+                if(selectedUnit != null)
+                    StartCoroutine(HexMapCamera.FocusSmoothTransition(currentCell.Position));
+            }
             else if(currentCell.HasCity)
+            {
                 selectedCity = GetSelectCity(currentCell);
+                if(selectedCity != null)
+                    StartCoroutine(HexMapCamera.FocusSmoothTransition(currentCell.Position));
+            }
         }
     }
 

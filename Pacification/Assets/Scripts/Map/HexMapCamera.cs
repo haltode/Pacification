@@ -1,4 +1,5 @@
 ﻿using UnityEngine;
+using System.Collections;
 
 public class HexMapCamera : MonoBehaviour
 {
@@ -7,6 +8,8 @@ public class HexMapCamera : MonoBehaviour
     {
         set { instance.enabled = !value; }
     }
+
+    const float TimeToMove = 0.4f;
 
     Transform swivel, stick;
 
@@ -84,5 +87,17 @@ public class HexMapCamera : MonoBehaviour
     public static void FocusOnPosition(Vector3 position)
     {
         instance.transform.localPosition = position;
+    }
+
+    public static IEnumerator FocusSmoothTransition(Vector3 position)
+    {
+        Vector3 currentPos = instance.transform.position;
+        float t = 0f;
+        while(t < 1)
+        {
+             t += Time.deltaTime / TimeToMove;
+             instance.transform.position = Vector3.Lerp(currentPos, position, t);
+             yield return null;
+        }
     }
 }

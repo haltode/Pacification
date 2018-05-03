@@ -59,10 +59,10 @@ public class HexCell : MonoBehaviour
         }
     }
 
-    public void AddRoad(HexDirection direction, HexCell currentCell)
+    public void AddRoad(HexDirection direction)
     {
-        int xStart = currentCell.coordinates.X;
-        int zStart = currentCell.coordinates.Z;
+        int xStart = coordinates.X;
+        int zStart = coordinates.Z;
         int xEnd = neighbors[(int)direction].coordinates.X;
         int zEnd = neighbors[(int)direction].coordinates.Z;
 

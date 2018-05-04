@@ -261,10 +261,8 @@ public class ChatManager : MonoBehaviour
     string ExtractCommand(ref int index, string data)
     {
         string command = "";
-        Debug.Log(data[index]);
         while(index < data.Length && data[index] != ' ')
         {
-            Debug.Log(data[index]);
             command += data[index];
             index++;
         }

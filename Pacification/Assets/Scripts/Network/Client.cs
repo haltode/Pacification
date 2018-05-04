@@ -178,7 +178,7 @@ public class Client : MonoBehaviour
 
                 string[] roadData = receivedData[1].Split('#');
                 HexCell destination = player.hexGrid.GetCell(new HexCoordinates(int.Parse(roadData[0]), int.Parse(roadData[1]))).GetNeighbor((HexDirection)int.Parse(roadData[3]));
-                string moveUnitData = roadData[0] + "#" + roadData[1] + "#" + destination.coordinates.X + "#" + destination.coordinates.Z;
+                string moveUnitData = roadData[0] + "#" + roadData[1] + "#" + destination.coordinates.X + "#" + destination.coordinates.Z + "#0"; // 0 means not an AI
                 player.NetworkMoveUnit(moveUnitData);
                 break;
 

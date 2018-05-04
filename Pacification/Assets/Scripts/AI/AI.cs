@@ -58,7 +58,6 @@ public class AI
         {
             HexCell location2 = aiPlayer.hexGrid.GetNearFreeCell(location);
             string cmd2 = (int)Unit.UnitType.HEAVY + "#" + location2.coordinates.X + "#" + location2.coordinates.Z;
-            Debug.Log(cmd2);
             aiPlayer.NetworkAddUnit(cmd2);
         }
     }

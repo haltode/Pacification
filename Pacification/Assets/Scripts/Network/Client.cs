@@ -139,7 +139,7 @@ public class Client : MonoBehaviour
 
             //Unit Movement
             case "SMOV":
-                gameUI.NetworkMoveUnit(receivedData[1]);
+                player.NetworkMoveUnit(receivedData[1]);
                 break;
 
             //Unit LevelUp
@@ -179,7 +179,7 @@ public class Client : MonoBehaviour
                 string[] roadData = receivedData[1].Split('#');
                 HexCell destination = player.hexGrid.GetCell(new HexCoordinates(int.Parse(roadData[0]), int.Parse(roadData[1]))).GetNeighbor((HexDirection)int.Parse(roadData[3]));
                 string moveUnitData = roadData[0] + "#" + roadData[1] + "#" + destination.coordinates.X + "#" + destination.coordinates.Z;
-                gameUI.NetworkMoveUnit(moveUnitData);
+                player.NetworkMoveUnit(moveUnitData);
                 break;
 
             //Worker : Exploit ressources

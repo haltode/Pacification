@@ -62,7 +62,7 @@ public class Player
         HexCell spawnSettler = possibleLocation[randomCell];
         HexCell spawnAttacker = hexGrid.GetNearFreeCell(spawnSettler);
 
-        AddUnit(Unit.UnitType.SETTLER, spawnSettler, Unit.UnitType.REGULAR, spawnAttacker);
+        AddUnits(Unit.UnitType.SETTLER, spawnSettler, Unit.UnitType.REGULAR, spawnAttacker);
 
         HexMapCamera.FocusOnPosition(spawnSettler.Position);
     }
@@ -72,7 +72,7 @@ public class Player
         client.Send("CUNI|UNC|" + (int)type + "#" + location.coordinates.X + "#" + location.coordinates.Z);
     }
 
-    public void AddUnit(Unit.UnitType type, HexCell location, Unit.UnitType type2, HexCell location2)
+    public void AddUnits(Unit.UnitType type, HexCell location, Unit.UnitType type2, HexCell location2)
     {
         client.Send("CUNM|UAA|" + (int)type + "#" + location.coordinates.X + "#" + location.coordinates.Z + "|" + (int)type2 + "#" + location2.coordinates.X + "#" + location2.coordinates.Z);
     }
@@ -130,6 +130,36 @@ public class Player
         hexGrid.RemoveUnit(unit.HexUnit);
         playerUnits[unit.Id] = null;
         unit = null;
+    }
+
+    public void MoveUnit(HexCell start, HexCell end)
+    {
+        int xStart = start.coordinates.X;
+        int zStart = start.coordinates.Z;
+        int xEnd = end.coordinates.X;
+        int zEnd = end.coordinates.Z;
+
+        client.Send("CMOV|" + xStart + "#" + zStart + "#" + xEnd + "#" + zEnd);
+    }
+
+    public void NetworkMoveUnit(string data)
+    {
+        string[] receivedData = data.Split('#');
+
+        int xStart = int.Parse(receivedData[0]);
+        int zStart = int.Parse(receivedData[1]);
+
+        int xEnd = int.Parse(receivedData[2]);
+        int zEnd = int.Parse(receivedData[3]);
+
+        HexCell cellStart = hexGrid.GetCell(new HexCoordinates(xStart, zStart));
+        HexCell cellEnd = hexGrid.GetCell(new HexCoordinates(xEnd, zEnd));
+
+        hexGrid.ClearPath();
+        hexGrid.FindPath(cellStart, cellEnd, cellStart.Unit);
+
+        cellStart.Unit.Travel(hexGrid.GetPath());
+        hexGrid.ClearPath();
     }
 
     public Unit GetUnit(HexCell location)

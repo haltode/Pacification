@@ -176,37 +176,7 @@ public class HexGameUI : MonoBehaviour
             return;
         }
 
-        MoveUnit(selectedUnit.HexUnit.location, currentCell);
-    }
-
-    void MoveUnit(HexCell start, HexCell end)
-    {
-        int xStart = start.coordinates.X;
-        int zStart = start.coordinates.Z;
-        int xEnd = end.coordinates.X;
-        int zEnd = end.coordinates.Z;
-
-        client.Send("CMOV|" + xStart + "#" + zStart + "#" + xEnd + "#" + zEnd);
-    }
-
-    public void NetworkMoveUnit(string data)
-    {
-        string[] receivedData = data.Split('#');
-
-        int xStart = int.Parse(receivedData[0]);
-        int zStart = int.Parse(receivedData[1]);
-
-        int xEnd = int.Parse(receivedData[2]);
-        int zEnd = int.Parse(receivedData[3]);
-
-        HexCell cellStart = hexGrid.GetCell(new HexCoordinates(xStart, zStart));
-        HexCell cellEnd = hexGrid.GetCell(new HexCoordinates(xEnd, zEnd));
-
-        hexGrid.ClearPath();
-        hexGrid.FindPath(cellStart, cellEnd, cellStart.Unit);
-
-        cellStart.Unit.Travel(hexGrid.GetPath());
-        hexGrid.ClearPath();
+        client.player.MoveUnit(selectedUnit.HexUnit.location, currentCell);
     }
 
     public void NetworkRoad(string data)

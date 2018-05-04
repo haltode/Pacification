@@ -177,17 +177,17 @@ public class ChatManager : MonoBehaviour
                             break;
 
                         case "fog":
+                            ++index;
                             string toggle = ExtractCommand(ref index, input.text);
-                            HexGrid grid = FindObjectOfType<HexGrid>();
                             if(toggle == "off")
                             {
                                 Shader.EnableKeyword("HEX_MAP_EDITOR");
-                                grid.ShowUI(false);
+                                client.player.hexGrid.ShowUI(false);
                             }
                             else if(toggle == "on")
                             {
                                 Shader.DisableKeyword("HEX_MAP_EDITOR");
-                                grid.ShowUI(true);
+                                client.player.hexGrid.ShowUI(true);
                             }
                             break;
                     }
@@ -261,8 +261,10 @@ public class ChatManager : MonoBehaviour
     string ExtractCommand(ref int index, string data)
     {
         string command = "";
+        Debug.Log(data[index]);
         while(index < data.Length && data[index] != ' ')
         {
+            Debug.Log(data[index]);
             command += data[index];
             index++;
         }

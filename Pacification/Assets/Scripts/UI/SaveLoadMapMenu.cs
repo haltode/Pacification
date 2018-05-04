@@ -67,6 +67,13 @@ public class SaveLoadMapMenu : MonoBehaviour
     {
         HexGrid hexGrid = FindObjectOfType<HexGrid>();
 
+        // Easter egg =)
+        if(Path.GetFileName(path) == "thesims.map")
+        {
+            FindObjectOfType<SoundManager>().PlayTheSimsMusic();
+            return;
+        }
+
         if(!File.Exists(path))
         {
             Debug.LogError("File does not exist " + path);

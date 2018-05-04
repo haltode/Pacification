@@ -2,15 +2,20 @@
 
 public class SoundManager : MonoBehaviour
 {
+    AudioSource[] gameSoundtrack;
     public AudioClip barbarianSpawn;
 
     private void Start()
     {
-        AudioSource[] audio = GetComponents<AudioSource>();
-        if(GameManager.Instance.gamemode == GameManager.Gamemode.EDITOR)
-            audio[1].Play();
-        else
-            audio[0].Play();
+        gameSoundtrack = GetComponents<AudioSource>();
+        gameSoundtrack[0].Play();
+    }
+
+    public void PlayTheSimsMusic()
+    {
+        if(gameSoundtrack[0].isPlaying)
+            gameSoundtrack[0].Stop();
+        gameSoundtrack[1].Play();
     }
 
     public void PlayBarbarianSpawn()

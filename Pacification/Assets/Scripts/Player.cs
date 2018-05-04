@@ -132,17 +132,17 @@ public class Player
         unit = null;
     }
 
-    public void MoveUnit(Unit unit, HexCell end, bool isAI=false)
+    public void MoveUnit(Unit unit, HexCell end)
     {
         int xStart = unit.HexUnit.location.coordinates.X;
         int zStart = unit.HexUnit.location.coordinates.Z;
         int xEnd = end.coordinates.X;
         int zEnd = end.coordinates.Z;
 
-        client.Send("CMOV|" + xStart + "#" + zStart + "#" + xEnd + "#" + zEnd + "#" + System.Convert.ToInt32(isAI));
+        client.Send("CMOV|" + xStart + "#" + zStart + "#" + xEnd + "#" + zEnd + "#");
     }
 
-    public void NetworkMoveUnit(string data)
+    public void NetworkMoveUnit(string data, bool isAI=false)
     {
         string[] receivedData = data.Split('#');
 
@@ -151,8 +151,6 @@ public class Player
 
         int xEnd = int.Parse(receivedData[2]);
         int zEnd = int.Parse(receivedData[3]);
-
-        bool isAI = System.Convert.ToBoolean((int.Parse(receivedData[4])));
 
         HexCell cellStart = hexGrid.GetCell(new HexCoordinates(xStart, zStart));
         HexCell cellEnd = hexGrid.GetCell(new HexCoordinates(xEnd, zEnd));

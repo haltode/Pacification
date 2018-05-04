@@ -33,8 +33,11 @@ public class AI
         if(IsSpawningTime())
             SpawnBarbarianUnits();
         else
+        {
             foreach(Unit unit in aiPlayer.playerUnits)
-                DoActionBarbarianUnit(unit);
+                if(unit != null)
+                    DoActionBarbarianUnit(unit);
+        }
     }
 
     void SpawnBarbarianUnits()
@@ -133,7 +136,9 @@ public class AI
             ++index;
         }
         aiPlayer.hexGrid.ClearPath();
-        aiPlayer.MoveUnit(unit, targetCell, isAI:true);
+        string cmd = start.coordinates.X + "#" + start.coordinates.Z + "#" +
+                     targetCell.coordinates.X + "#" + targetCell.coordinates.Z;
+        aiPlayer.NetworkMoveUnit(cmd, isAI: true);
     }
 
     void MoveBarbarianUnit(Unit unit)

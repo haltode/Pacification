@@ -158,10 +158,6 @@ public class Server : MonoBehaviour
                 Broadcast("S" + receivedData[1] + "|" + receivedData[2] + "|" + receivedData[3] + "|" + client.clientName, clients);
                 break;
 
-            case "CROD":
-                Broadcast("SROD|" + receivedData[1], clients);
-                break;
-
             case "CEND":
                 playerPlaying = (playerPlaying + 1) % playerNumber;
 

@@ -20,6 +20,7 @@ public class Client : MonoBehaviour
 
     private HexMapEditor mapEditor;
     private ChatManager chat;
+    private HexGameUI gameUI;
 
     public Player player;
     private AI ai = null;
@@ -81,7 +82,7 @@ public class Client : MonoBehaviour
         {
             /////// GAMEPLAY
             case "SMOV":
-                FindObjectOfType<HexGameUI>().NetworkMoveUnit(receivedData[1]);
+                gameUI.NetworkMoveUnit(receivedData[1]);
                 break;
 
             case "SUAA":
@@ -140,7 +141,11 @@ public class Client : MonoBehaviour
 
             case "SROD":
                 FindObjectOfType<HexGameUI>().NetworkRoad(receivedData[1]);
-                FindObjectOfType<HexGameUI>().NetworkMoveUnit(receivedData[2]);
+
+                string[] roadData = receivedData[1].Split('#');
+                HexCell destination = player.hexGrid.GetCell(new HexCoordinates(int.Parse(roadData[0]), int.Parse(roadData[1]))).GetNeighbor((HexDirection)int.Parse(roadData[3]));
+                string moveUnitData = roadData[0] + "#" + roadData[1] + "#" + destination.coordinates.X + "#" + destination.coordinates.Z;
+                gameUI.NetworkMoveUnit(moveUnitData);
                 break;
 
             case "SYGO":
@@ -208,6 +213,7 @@ public class Client : MonoBehaviour
                 player.UpdateProductionDisplay();
                 player.UpdateScienceDisplay();
                 chat = FindObjectOfType<ChatManager>();
+                gameUI = FindObjectOfType<HexGameUI>();
                 break;
         }
     }

@@ -62,13 +62,7 @@ public class HexCell : MonoBehaviour
     public void AddRoad(HexDirection direction)
     {
         if(!roads[(int)direction] && IsReachable(direction))
-        {
-            HexCell neighbor = GetNeighbor(direction);
-            int xEnd = neighbor.coordinates.X;
-            int zEnd = neighbor.coordinates.Z;
-
-            FindObjectOfType<Client>().Send("CUNM|ROD|" + coordinates.X + "#" + coordinates.Z + "#" + 1 + "#" + (int)direction + "|" + coordinates.X + "#" + coordinates.Z + "#" + xEnd + "#" + zEnd);
-        }
+            FindObjectOfType<Client>().Send("CUNI|ROD|" + coordinates.X + "#" + coordinates.Z + "#" + 1 + "#" + (int)direction);
     }
 
     public void RemoveRoads()

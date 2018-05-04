@@ -150,6 +150,7 @@ public class Server : MonoBehaviour
             case "CMOV":
                 Broadcast("SMOV|" + receivedData[1], clients);
                 break;
+
             case "CUNI":
                 Broadcast("S" + receivedData[1] +"|"+ receivedData[2] + "|" + client.clientName, clients);
                 break;
@@ -160,7 +161,6 @@ public class Server : MonoBehaviour
 
             case "CEND":
                 playerPlaying = (playerPlaying + 1) % playerNumber;
-
                 Broadcast("SYGO|", clients[playerPlaying]);
                 break;
 

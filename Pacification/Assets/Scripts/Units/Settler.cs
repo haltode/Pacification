@@ -17,6 +17,6 @@ public class Settler : Unit
 
     public void Settle()
     {
-        owner.SettlerAction(hexUnit.location, City.CitySize.SETTLEMENT, this);
+        owner.client.Send("CUNM|CIT|" + (int)type + "#" + hexUnit.location.coordinates.X + "#" + hexUnit.location.coordinates.Z + "|" + this.HexUnit.location.coordinates.X + "#" + this.HexUnit.location.coordinates.Z);
     }
 }

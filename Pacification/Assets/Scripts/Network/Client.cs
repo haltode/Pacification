@@ -76,15 +76,47 @@ public class Client : MonoBehaviour
     void Read(string data)
     {
         Debug.Log("Client " + clientName + " received: " + data);
-
+        /* LIST OF USED COMMAND : 
+         * CID
+         * CIT
+         * CLS
+         * CNN
+         * DEC
+         * DED
+         * 
+         * EXP
+         * KIK
+         * KIL
+         * LOD
+         * 
+         * MAP
+         * MSE
+         * MSG
+         * MOV
+         * ROD
+         * 
+         * UAA
+         * UNC
+         * UND
+         * UNL
+         * 
+         * YGO
+         * YOP
+         * WHO
+         */
         string[] receivedData = data.Split('|');
         switch(receivedData[0])
         {
-            /////// GAMEPLAY
-            case "SMOV":
-                gameUI.NetworkMoveUnit(receivedData[1]);
+            ////// UNITS : Adding
+            case "SUNC":
+                foreach(Player p in players)
+                {
+                    if(p.name == receivedData[2])
+                        p.NetworkAddUnit(receivedData[1]);
+                }
                 break;
 
+            //Unit Adding Multiple
             case "SUAA":
                 foreach(Player p in players)
                 {
@@ -96,7 +128,31 @@ public class Client : MonoBehaviour
                 }
                 break;
 
-            case "SUCD":
+            //Unit Remove
+            case "SUND":
+                foreach(Player p in players)
+                {
+                    if(p.name == receivedData[2])
+                        p.NetworkRemoveUnit(receivedData[1]);
+                }
+                break;
+
+            //Unit Movement
+            case "SMOV":
+                gameUI.NetworkMoveUnit(receivedData[1]);
+                break;
+
+            //Unit LevelUp
+            case "SUNL":
+                foreach(Player p in players)
+                {
+                    if(p.name == receivedData[2])
+                        p.NetworkLevelUp();
+                }
+                break;
+                
+            ////// SETTLER : City creation
+            case "SCIT":
                 foreach(Player p in players)
                 {
                     if(p.name == receivedData[3])
@@ -107,30 +163,7 @@ public class Client : MonoBehaviour
                 }
                 break;
 
-            case "SUNC":
-                foreach(Player p in players)
-                {
-                    if(p.name == receivedData[2])
-                        p.NetworkAddUnit(receivedData[1]);
-                }
-                break;
-
-            case "SUND":
-                foreach(Player p in players)
-                {
-                    if(p.name == receivedData[2])
-                        p.NetworkRemoveUnit(receivedData[1]);
-                }
-                break;
-
-            case "SUNL":
-                foreach(Player p in players)
-                {
-                    if(p.name == receivedData[2])
-                        p.NetworkLevelUp();
-                }
-                break;
-
+            //City destruction
             case "SCID":
                 foreach(Player p in players)
                 {
@@ -139,8 +172,9 @@ public class Client : MonoBehaviour
                 }
                 break;
 
+            ///// WORKER : Build.Destroy road
             case "SROD":
-                FindObjectOfType<HexGameUI>().NetworkRoad(receivedData[1]);
+                gameUI.NetworkRoad(receivedData[1]);
 
                 string[] roadData = receivedData[1].Split('#');
                 HexCell destination = player.hexGrid.GetCell(new HexCoordinates(int.Parse(roadData[0]), int.Parse(roadData[1]))).GetNeighbor((HexDirection)int.Parse(roadData[3]));
@@ -148,6 +182,11 @@ public class Client : MonoBehaviour
                 gameUI.NetworkMoveUnit(moveUnitData);
                 break;
 
+            //Worker : Exploit ressources
+            case "SEXP":
+                break;
+
+            /////PLAYER : Take turn
             case "SYGO":
                 if(GameManager.Instance.gamemode == GameManager.Gamemode.SOLO)
                 {
@@ -157,25 +196,46 @@ public class Client : MonoBehaviour
                 }
                 FindObjectOfType<ButtonManager>().TakeTurn();
                 break;
+            
+            //Player : Death
+            case "SDED":
+                break;
+           
+            //Player : Disconnected
+            case "SDEC":
+                chat.ChatMessage(receivedData[1] + " left the game.", ChatManager.MessageType.ALERT);
+                break;
 
-            /////// CHAT
+            /////// CHAT : Global Message
             case "SMSG":
                 chat.ChatMessage(receivedData[2], (ChatManager.MessageType)int.Parse(receivedData[1]));
                 break;
 
+            //Chat : Private Message
             case "SMSE":
                 chat.ChatMessage(receivedData[1], ChatManager.MessageType.ALERT);
                 break;
-
-            case "SYOP":
+            
+            //Chat : Op.DeOp a player
+            case "SYOP": 
                 chat.OpDeop("", receivedData[1] == "1");
                 break;
 
-            case "SCLS":
+            //Chat : Clear units
+            case "SCLS": 
                 player.hexGrid.ClearUnits();
                 break;
 
-            /////// REGISTER ON SERVER
+            //Chat : Kill player
+            case "SKIL":
+                break;
+
+            //Chat : Kick player
+            case "SKIK":
+                FindObjectOfType<ButtonManager>().DeconnectionButton();
+                break;
+
+            /////// REGISTRATION ON SERVER
             case "SWHO":
                 for(int i = 1; i < receivedData.Length - 1; ++i)
                     UserConnected(receivedData[i], false);
@@ -188,14 +248,6 @@ public class Client : MonoBehaviour
                 UserConnected(clientStatus[0], (clientStatus[1]) == "1");
                 break;
 
-            case "SDEC":
-                chat.ChatMessage(receivedData[1] + " left the game.", ChatManager.MessageType.ALERT);
-                break;
-
-            case "SKIK":
-                FindObjectOfType<ButtonManager>().DeconnectionButton();
-                break;
-                
             case "SLOD":
                 SceneManager.LoadScene("Map");
                 player.SetDisplayer();

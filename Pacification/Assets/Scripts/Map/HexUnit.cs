@@ -45,11 +45,6 @@ public class HexUnit : MonoBehaviour
         }
     }
 
-    public bool IsValidDestination(HexCell cell)
-    {
-        return cell.IsExplored && !cell.IsUnderWater && !cell.Unit;
-    }
-
     public float Orientation
     {
         get { return orientation; }
@@ -105,8 +100,9 @@ public class HexUnit : MonoBehaviour
         */
     }
 
-    public int GetMoveCost(HexCell current, HexCell dest, HexDirection dir)
+    public int GetMoveCost(HexCell current, HexCell dest)
     {
+        HexDirection dir = current.GetNeighborDir(dest);
         if(!current.IsReachable(dir))
             return -1;
 

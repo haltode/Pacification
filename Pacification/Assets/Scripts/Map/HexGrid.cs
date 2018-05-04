@@ -227,16 +227,17 @@ public class HexGrid : MonoBehaviour
             cells[i].Distance = int.MaxValue;    
     }
 
-    public void FindPath(HexCell start, HexCell end, HexUnit unit)
+    public void FindPath(HexCell start, HexCell end, HexUnit unit, bool isAI=false)
     {
         ClearPath();
         currentPathStart = start;
         currentPathEnd = end;
-        currentPathExists = SearchPath(start, end, unit);
-        ShowPath(unit.Speed);
+        currentPathExists = SearchPath(start, end, unit, isAI);
+        if(!isAI)
+            ShowPath(unit.Speed);
     }
 
-    public bool SearchPath(HexCell start, HexCell end, HexUnit unit)
+    public bool SearchPath(HexCell start, HexCell end, HexUnit unit, bool isAI=false)
     {
         PriorityQueue<HexCell> searchQueue = new PriorityQueue<HexCell>(HexCell.CompareCells);
         start.Distance = 0;
@@ -252,12 +253,16 @@ public class HexGrid : MonoBehaviour
             for(HexDirection dir = HexDirection.NE; dir <= HexDirection.NW; ++dir)
             {
                 HexCell neighbor = current.GetNeighbor(dir);
-                if(neighbor == null || neighbor.Distance != int.MaxValue)
+                if(neighbor == null || neighbor.Distance != int.MaxValue || neighbor.IsUnderWater)
                     continue;
-                if(!unit.IsValidDestination(neighbor))
+                // In case a unit is in the targeted city
+                if(isAI && (neighbor != end && neighbor.Unit))
+                    continue;
+                // AI ignores fog
+                if(!isAI && (!neighbor.IsExplored || neighbor.Unit))
                     continue;
 
-                int moveCost = unit.GetMoveCost(current, neighbor, dir);
+                int moveCost = unit.GetMoveCost(current, neighbor);
                 if(moveCost == -1)
                     continue;
                 int newDist = current.Distance + moveCost;

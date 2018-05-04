@@ -9,6 +9,7 @@ public class AI
     const int SpawnRadiusMin = 10;
     const int SpawnRadiusMax = 15;
     const int MaxBarbarianUnits = 10;
+    const int MovePointPerUnit = 7;
 
     Player aiPlayer;
     Player ennemy;
@@ -28,15 +29,21 @@ public class AI
 
     public void PlayTurn()
     {
-        int currentPlayerLvl = ennemy.UnitLevel;
         ++currentRound;
-        if(!IsSpawningTime())
-            return;
+        if(IsSpawningTime())
+            SpawnBarbarianUnits();
+        else
+            foreach(Unit unit in aiPlayer.playerUnits)
+                DoActionBarbarianUnit(unit);
+    }
 
+    void SpawnBarbarianUnits()
+    {
         UnityEngine.Object.FindObjectOfType<SoundManager>().PlayBarbarianSpawn();
         lastSpawnRound = currentRound;
         // TODO: need level up
-        /*if(difficultyLevel == Difficulty.EASY)
+        /*int currentPlayerLvl = ennemy.UnitLevel;
+        if(difficultyLevel == Difficulty.EASY)
             aiPlayer.IncreaseUnitLevel(currentPlayerLvl - 2);
         else if(difficultyLevel == Difficulty.NORMAL)
             aiPlayer.IncreaseUnitLevel(currentPlayerLvl + 1);
@@ -105,5 +112,59 @@ public class AI
         }
         int sign = (UnityEngine.Random.value < 0.5) ? 1 : -1;
         return diff > (diffNbRound + randomRoundSpan * sign);
+    }
+
+    void MovePathfinding(Unit unit, HexCell end)
+    {
+        HexCell start = unit.HexUnit.location;
+        aiPlayer.hexGrid.FindPath(start, end, unit.HexUnit, isAI:true);
+        if(!aiPlayer.hexGrid.currentPathExists)
+        {
+            aiPlayer.hexGrid.ClearPath();
+            return;
+        }
+        List<HexCell> pathToCity = aiPlayer.hexGrid.GetPath();
+        HexCell targetCell = start;
+        int movePoints = 0;
+        int index = 0;
+        while(movePoints < MovePointPerUnit && index < pathToCity.Count)
+        {
+            movePoints += unit.HexUnit.GetMoveCost(targetCell, pathToCity[index]);
+            targetCell = pathToCity[index];
+            ++index;
+        }
+        aiPlayer.hexGrid.ClearPath();
+        aiPlayer.MoveUnit(unit, targetCell, isAI:true);
+    }
+
+    void MoveBarbarianUnit(Unit unit)
+    {
+        City target = null;
+        int bestDist = Int32.MaxValue;
+        foreach(City city in ennemy.playerCities)
+        {
+            int dist = unit.HexUnit.location.coordinates.DistanceTo(city.Position.coordinates);
+            if(dist < bestDist)
+            {
+                bestDist = dist;
+                target = city;
+            }
+        }
+        if(target == null)
+            return;
+
+        MovePathfinding(unit, target.Position);
+    }
+
+    bool TryAttackCity(Unit unit)
+    {
+        return false;
+    }
+
+    void DoActionBarbarianUnit(Unit unit)
+    {
+        bool canAttack = TryAttackCity(unit);
+        if(!canAttack)
+            MoveBarbarianUnit(unit);
     }
 }

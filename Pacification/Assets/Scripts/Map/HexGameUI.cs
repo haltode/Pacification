@@ -176,7 +176,7 @@ public class HexGameUI : MonoBehaviour
             return;
         }
 
-        client.player.MoveUnit(selectedUnit.HexUnit.location, currentCell);
+        client.player.MoveUnit(selectedUnit, currentCell);
     }
 
     public void NetworkRoad(string data)

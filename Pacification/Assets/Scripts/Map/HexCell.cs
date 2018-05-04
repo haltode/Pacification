@@ -36,6 +36,14 @@ public class HexCell : MonoBehaviour
         return neighbors[(int) direction];
     }
 
+    public HexDirection GetNeighborDir(HexCell neighbor)
+    {
+        for(HexDirection dir = HexDirection.NE; dir <= HexDirection.NW; ++dir)
+            if(GetNeighbor(dir) == neighbor)
+                return dir;
+        return default(HexDirection);
+    }
+
     public void SetNeighbor(HexDirection direction, HexCell cell)
     {
         neighbors[(int) direction] = cell;

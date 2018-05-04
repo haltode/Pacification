@@ -107,7 +107,7 @@ public class Client : MonoBehaviour
         string[] receivedData = data.Split('|');
         switch(receivedData[0])
         {
-            ////// UNITS : Adding
+            ////// UNITS : Add
             case "SUNC":
                 foreach(Player p in players)
                 {
@@ -116,7 +116,7 @@ public class Client : MonoBehaviour
                 }
                 break;
 
-            //Unit Adding Multiple
+            //Unit Add Multiple
             case "SUAA":
                 foreach(Player p in players)
                 {

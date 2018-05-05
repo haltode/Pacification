@@ -22,6 +22,7 @@ public class Player
 
     public bool canPlay;
     public string name;
+    private int roundNb;
 
     public DisplayInformationManager displayer;
 
@@ -35,6 +36,7 @@ public class Player
         science = 0;
         production = 0;
         happiness = 5;
+        roundNb = 0;
 
         playerUnits = new List<Unit>();
         playerCities = new List<City>();
@@ -291,6 +293,12 @@ public class Player
     public void UpdateHappinessDisplay()
     {
         displayer.UpdateHappinessDisplay(happiness);
+    }
+
+    public void UpdateRoundDisplay()
+    {
+        ++roundNb;
+        displayer.UpdateRoundDisplay(roundNb);
     }
 
     public int UnitLevel

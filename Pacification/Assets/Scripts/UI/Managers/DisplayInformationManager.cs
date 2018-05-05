@@ -10,6 +10,7 @@ public class DisplayInformationManager : MonoBehaviour {
     public Text science;
     public Text production;
     public Text happiness;
+    public Text nbRound;
 
     public Transform downPannel;
     public Transform upEditPannel;
@@ -68,5 +69,10 @@ public class DisplayInformationManager : MonoBehaviour {
     public void UpdateHappinessDisplay(int value)
     {
         happiness.text = "Happiness: " + value;
+    }
+
+    public void UpdateRoundDisplay(int value)
+    {
+        nbRound.text = "Round  " + value;
     }
 }

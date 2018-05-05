@@ -200,6 +200,8 @@ public class Client : MonoBehaviour
                     }
                     ai.PlayTurn();
                 }
+                if(player.displayer != null)
+                    player.UpdateRoundDisplay();
                 FindObjectOfType<ButtonManager>().TakeTurn();
                 break;
             

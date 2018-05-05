@@ -7,7 +7,7 @@ public class Ranged : Attacker
     public Ranged(Player owner)
     {
         this.owner = owner;
-        type = UnitType.REGULAR;
+        type = UnitType.RANGED;
         this.level = owner.UnitLevel;
 
         upgradeHP = 25;

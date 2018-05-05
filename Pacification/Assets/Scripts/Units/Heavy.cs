@@ -35,9 +35,7 @@ public class Heavy : Attacker
     public void LevelUp()
     {
         if (isMaxed())
-        {
             return;
-        }
         else if (level == 10)
         {
             range = 2;

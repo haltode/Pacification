@@ -116,20 +116,30 @@ public class Player
         playerUnits.Add(unit);
     }
 
-    public void RemoveUnit(Unit unit)
-    {
-        client.Send("CUNI|UND|" + unit.HexUnit.location.coordinates.X + "#" + unit.HexUnit.location.coordinates.Z);
-    }
-
-    public void NetworkRemoveUnit(string data)
+    public void NetworkTakeDamage(string data)
     {
         hexGrid = Object.FindObjectOfType<HexGrid>();
 
         string[] receivedData = data.Split('#');
-        Unit unit = hexGrid.GetCell(new HexCoordinates(int.Parse(receivedData[0]), int.Parse(receivedData[1]))).Unit.Unit;
-        hexGrid.RemoveUnit(unit.HexUnit);
+        HexCell attackedCell = hexGrid.GetCell(new HexCoordinates(int.Parse(receivedData[0]), int.Parse(receivedData[1])));
+        Unit unit = attackedCell.Unit.Unit;
+
+        unit.Hp -= int.Parse(receivedData[2]);
+
+        attackedCell.EnableHighlight(Color.red);
+
+        if(unit.Hp <= 0)
+            RemoveUnit(unit);
+    }
+
+    public void RemoveUnit(Unit unit)
+    {
+        hexGrid = Object.FindObjectOfType<HexGrid>();
+
+        unit.HexUnit.location.EnableHighlight(Color.red);
         playerUnits[unit.Id] = null;
-        unit = null;
+        hexGrid.RemoveUnit(unit.HexUnit);
+        //unit.HexUnit.location.Unit.Die();  // What purpose ?
     }
 
     public void MoveUnit(Unit unit, HexCell end)

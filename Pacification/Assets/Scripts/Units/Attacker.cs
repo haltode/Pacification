@@ -65,23 +65,20 @@ public class Attacker : Unit
     {
         float multiplier = 1f;
         dmgMult.TryGetValue(target.Type, out multiplier);
-        target.Hp -= (int)((float)((defaultATK - upgradeATK) + upgradeATK * level) * multiplier);
+        int damage = (int)((float)((defaultATK - upgradeATK) + upgradeATK * level) * multiplier);
 
-        if (target.Hp <= 0)
-        {
-            target.Owner.RemoveUnit(target);
-            target.HexUnit.location.Unit.Die();
-        }
+        if(GameManager.Instance.gamemode == GameManager.Gamemode.MULTI)
+            owner.client.Send("CUNM|UTD|" + target.HexUnit.location.coordinates.X + "#" + target.HexUnit.location.coordinates.Z + "#" + damage + "|" + target.owner.name);
+        else
+            target.owner.NetworkTakeDamage(target.HexUnit.location.coordinates.X + "#" + target.HexUnit.location.coordinates.Z + "#" + damage);
     }
-    
+
     public void Attack(City target)
     {
         target.Hp -= (int)((float)((defaultATK - upgradeATK) + upgradeATK * level) * dmgMultCity);
 
         if (target.Hp <= 0)
-        {
             target.Owner.RemoveCity(target);
-        }
     }
     
 }

@@ -35,9 +35,7 @@ public class Ranged : Attacker
     public void LevelUp()
     {
         if (isMaxed())
-        {
             return;
-        }
         else if (level == 10)
         {
             hp = 400;

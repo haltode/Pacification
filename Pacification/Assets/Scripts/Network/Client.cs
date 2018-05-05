@@ -97,7 +97,7 @@ public class Client : MonoBehaviour
          * 
          * UAA
          * UNC
-         * UND
+         * UTD
          * UNL
          * 
          * YGO
@@ -128,12 +128,12 @@ public class Client : MonoBehaviour
                 }
                 break;
 
-            //Unit Remove
-            case "SUND":
+            //Unit TakeDamage
+            case "SUTD":
                 foreach(Player p in players)
                 {
                     if(p.name == receivedData[2])
-                        p.NetworkRemoveUnit(receivedData[1]);
+                        p.NetworkTakeDamage(receivedData[1]);
                 }
                 break;
 
@@ -158,7 +158,10 @@ public class Client : MonoBehaviour
                     if(p.name == receivedData[3])
                     {
                         p.NetworkAddCity(receivedData[1]);
-                        p.NetworkRemoveUnit(receivedData[2]);
+
+                        string[] remover = receivedData[2].Split('#');
+                        Unit unit = player.hexGrid.GetCell(new HexCoordinates(int.Parse(remover[0]), int.Parse(remover[1]))).Unit.Unit;
+                        p.RemoveUnit(unit);
                     }
                 }
                 break;
@@ -191,7 +194,10 @@ public class Client : MonoBehaviour
                 if(GameManager.Instance.gamemode == GameManager.Gamemode.SOLO)
                 {
                     if(ai == null)
+                    {
                         ai = new AI(player, AI.Difficulty.HARD);
+                        //players.Add(ai);
+                    }
                     ai.PlayTurn();
                 }
                 FindObjectOfType<ButtonManager>().TakeTurn();

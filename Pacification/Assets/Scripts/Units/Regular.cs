@@ -35,9 +35,7 @@ public class Regular : Attacker
     public void LevelUp()
     {
         if (isMaxed())
-        {
             return;
-        }
         else if (level == 10)
         {
             mvtSPD = 3;

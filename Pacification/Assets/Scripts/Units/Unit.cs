@@ -18,17 +18,11 @@ public class Unit
     }
 
     // TODO : couleur du joueur
-    protected Player owner;
+    public Player owner;
     protected UnitType type;
     protected int mvtSPD;
     protected int hp;
     protected int id;
-
-    public Player Owner
-    {
-        get { return owner; }
-        set { owner = value; }
-    }
 
     public UnitType Type
     {

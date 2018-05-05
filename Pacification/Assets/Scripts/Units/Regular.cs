@@ -4,10 +4,9 @@ using UnityEngine;
 
 public class Regular : Attacker
 {
-    public Regular(Player owner, int id)
+    public Regular(Player owner)
     {
         this.owner = owner;
-        this.id = id;
         type = UnitType.REGULAR;
         this.level = owner.UnitLevel;
 

@@ -4,10 +4,9 @@ using UnityEngine;
 
 public class Worker : Unit
 {
-    public Worker(Player owner, int id)
+    public Worker(Player owner)
     {
         this.owner = owner;
-        this.id = id;
         type = UnitType.WORKER;
         mvtSPD = 2;
         hp = 300;

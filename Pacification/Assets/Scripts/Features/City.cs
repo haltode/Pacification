@@ -14,26 +14,18 @@ public class City : Feature
     }
 
     private CitySize size;
-    private int id;
     private int hp;
     public GameObject instance;
 
-    public City (Player owner, int id, HexCell position)
+    public City (Player owner, HexCell position)
     {
         this.owner = owner;
-        this.id = id;
         this.position = position;
         type = FeatureType.CITY;
         size = CitySize.SETTLEMENT;
         hp = 600;
 
         // TODO : couleur du joueur
-    }
-
-    public int Id
-    {
-        get { return id; }
-        set { id = value; }
     }
 
     public int Hp

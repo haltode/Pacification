@@ -4,10 +4,9 @@ using UnityEngine;
 
 public class Heavy : Attacker
 {
-    public Heavy(Player owner, int id)
+    public Heavy(Player owner)
     {
         this.owner = owner;
-        this.id = id;
         type = UnitType.REGULAR;
         this.level = owner.UnitLevel;
 

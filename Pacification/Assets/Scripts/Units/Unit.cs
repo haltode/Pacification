@@ -22,7 +22,6 @@ public class Unit
     protected UnitType type;
     protected int mvtSPD;
     protected int hp;
-    protected int id;
 
     public UnitType Type
     {
@@ -39,12 +38,6 @@ public class Unit
     {
         get { return hp; }
         set { hp = value; }
-    }
-
-    public int Id
-    {
-        get { return id; }
-        set { id = value; }
     }
 
     public HexUnit HexUnit

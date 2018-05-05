@@ -4,10 +4,9 @@ using UnityEngine;
 
 public class Ranged : Attacker
 {
-    public Ranged(Player owner, int id)
+    public Ranged(Player owner)
     {
         this.owner = owner;
-        this.id = id;
         type = UnitType.REGULAR;
         this.level = owner.UnitLevel;
 

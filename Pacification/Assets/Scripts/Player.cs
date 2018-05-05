@@ -85,18 +85,17 @@ public class Player
         Unit.UnitType type = (Unit.UnitType)int.Parse(receivedData[0]);
         HexCell location = hexGrid.GetCell(new HexCoordinates(int.Parse(receivedData[1]), int.Parse(receivedData[2])));
         Unit unit = null;
-        int unitID = playerUnits.Count;
 
         if(type == Unit.UnitType.SETTLER)
-            unit = new Settler(this, unitID);
+            unit = new Settler(this);
         else if(type == Unit.UnitType.WORKER)
-            unit = new Worker(this, unitID);
+            unit = new Worker(this);
         else if(type == Unit.UnitType.REGULAR)
-            unit = new Regular(this, unitID);
+            unit = new Regular(this);
         else if(type == Unit.UnitType.RANGED)
-            unit = new Ranged(this, unitID);
+            unit = new Ranged(this);
         else if(type == Unit.UnitType.HEAVY)
-            unit = new Heavy(this, unitID);
+            unit = new Heavy(this);
         else
             Debug.Log("Unknown unit type");
 
@@ -135,7 +134,7 @@ public class Player
         hexGrid = Object.FindObjectOfType<HexGrid>();
 
         hexGrid.RemoveUnit(unit.HexUnit);
-        playerUnits[unit.Id] = null;
+        playerUnits.Remove(unit);
         unit = null;
     }
 
@@ -172,8 +171,7 @@ public class Player
     public Unit GetUnit(HexCell location)
     {
         for(int i = 0; i < playerUnits.Count; ++i)
-            if(playerUnits[i] != null &&
-                playerUnits[i].HexUnit.location == location)
+            if(playerUnits[i].HexUnit.location == location)
                 return playerUnits[i];
         return null;
     }
@@ -193,8 +191,7 @@ public class Player
         location.FeatureIndex = 1;
         location.IncreaseVisibility();
 
-        int cityID = playerCities.Count;
-        City city = new City(this, cityID, location);
+        City city = new City(this, location);
         location.feature = city;
 
         Vector3 position = location.Position;
@@ -229,7 +226,7 @@ public class Player
         HexCell location = city.position;
         location.FeatureIndex = 0;
         Object.Destroy(city.instance);
-        playerCities[city.Id] = null;
+        playerCities.Remove(city);
         location.feature = null;
         city = null;
     }
@@ -237,8 +234,7 @@ public class Player
     public City GetCity(HexCell location)
     {
         for(int i = 0; i < playerCities.Count; ++i)
-            if(playerCities[i] != null &&
-                playerCities[i].Position == location)
+            if(playerCities[i].Position == location)
                 return playerCities[i];
         return null;
     }

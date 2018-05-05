@@ -4,10 +4,9 @@ using UnityEngine;
 
 public class Settler : Unit
 {
-    public Settler(Player owner, int id)
+    public Settler(Player owner)
     {
         this.owner = owner;
-        this.id = id;
         type = UnitType.SETTLER;
         mvtSPD = 2;
         hp = 100;

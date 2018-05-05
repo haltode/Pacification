@@ -34,7 +34,7 @@ public class AI
             SpawnBarbarianUnits();
         else
         {
-            foreach(Unit unit in aiPlayer.playerUnits)
+            foreach(Attacker unit in aiPlayer.playerUnits)
                 if(unit != null)
                     DoActionBarbarianUnit(unit);
         }
@@ -116,32 +116,7 @@ public class AI
         return diff > (diffNbRound + randomRoundSpan * sign);
     }
 
-    void MovePathfinding(Unit unit, HexCell end)
-    {
-        HexCell start = unit.HexUnit.location;
-        aiPlayer.hexGrid.FindPath(start, end, unit.HexUnit, isAI:true);
-        if(!aiPlayer.hexGrid.currentPathExists)
-        {
-            aiPlayer.hexGrid.ClearPath();
-            return;
-        }
-        List<HexCell> pathToCity = aiPlayer.hexGrid.GetPath();
-        HexCell targetCell = start;
-        int movePoints = 0;
-        int index = 0;
-        while(movePoints < MovePointPerUnit && index < pathToCity.Count)
-        {
-            movePoints += unit.HexUnit.GetMoveCost(targetCell, pathToCity[index]);
-            targetCell = pathToCity[index];
-            ++index;
-        }
-        aiPlayer.hexGrid.ClearPath();
-        string cmd = start.coordinates.X + "#" + start.coordinates.Z + "#" +
-                     targetCell.coordinates.X + "#" + targetCell.coordinates.Z;
-        aiPlayer.NetworkMoveUnit(cmd, isAI: true);
-    }
-
-    void MoveBarbarianUnit(Unit unit)
+    City FindClosestPlayerCity(Attacker unit)
     {
         City target = null;
         int bestDist = Int32.MaxValue;
@@ -154,18 +129,56 @@ public class AI
                 target = city;
             }
         }
+        return target;
+    }
+
+    void MovePathfinding(Attacker unit, HexCell end)
+    {
+        HexCell start = unit.HexUnit.location;
+        aiPlayer.hexGrid.FindPath(start, end, unit.HexUnit, isAI:true);
+        if(!aiPlayer.hexGrid.currentPathExists)
+        {
+            aiPlayer.hexGrid.ClearPath();
+            return;
+        }
+        List<HexCell> pathToCity = aiPlayer.hexGrid.GetPath();
+        HexCell targetCell = start;
+        int movePoints = 0;
+        int index = 1;
+        while(movePoints < MovePointPerUnit && index < pathToCity.Count)
+        {
+            if(targetCell.coordinates.DistanceTo(end.coordinates) <= unit.Range)
+                break;
+            movePoints += unit.HexUnit.GetMoveCost(targetCell, pathToCity[index]);
+            targetCell = pathToCity[index];
+            ++index;
+        }
+        aiPlayer.hexGrid.ClearPath();
+        string cmd = start.coordinates.X + "#" + start.coordinates.Z + "#" +
+                     targetCell.coordinates.X + "#" + targetCell.coordinates.Z;
+        aiPlayer.NetworkMoveUnit(cmd, isAI: true);
+    }
+
+    void MoveBarbarianUnit(Attacker unit)
+    {
+        City target = FindClosestPlayerCity(unit);
         if(target == null)
             return;
-
         MovePathfinding(unit, target.Position);
     }
 
-    bool TryAttackCity(Unit unit)
+    bool TryAttackCity(Attacker unit)
     {
-        return false;
+        City target = FindClosestPlayerCity(unit);
+        if(target == null)
+            return false;
+        if(!unit.IsInRangeToAttack(target.Position))
+            return false;
+        unit.Attack(target);
+        return true;
     }
 
-    void DoActionBarbarianUnit(Unit unit)
+    void DoActionBarbarianUnit(Attacker unit)
     {
         bool canAttack = TryAttackCity(unit);
         if(!canAttack)

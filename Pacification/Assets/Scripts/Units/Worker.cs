@@ -10,6 +10,7 @@ public class Worker : Unit
         type = UnitType.WORKER;
         mvtSPD = 2;
         hp = 300;
+        maxHP = hp;
 
         // TODO : couleur du joueur
     }

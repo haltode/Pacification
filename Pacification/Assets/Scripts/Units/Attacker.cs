@@ -4,7 +4,6 @@ using UnityEngine;
 
 public class Attacker : Unit
 {
-    protected int maxHP;
     protected int upgradeHP;
     protected int defaultATK;
     protected int upgradeATK;

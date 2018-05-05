@@ -1,5 +1,6 @@
 ﻿using UnityEngine;
 using UnityEngine.EventSystems;
+using UnityEngine.UI;
 
 public class HexGameUI : MonoBehaviour
 {
@@ -11,7 +12,18 @@ public class HexGameUI : MonoBehaviour
     HexCell attackTargetCell;
     public Unit selectedUnit;
     public City selectedCity;
-    public Barrack barrack;
+
+    public GameObject cityUI;
+    public GameObject unitUI;
+    public GameObject cityAndUnitUI;
+
+    public Text unitType;
+    public Text unitTypeBoth;
+
+    public RectTransform healthUnit;
+    public RectTransform healthCity;
+    public RectTransform healthUnitBoth;
+    
     bool didPathfinding;
 
     Client client;
@@ -29,8 +41,6 @@ public class HexGameUI : MonoBehaviour
         client = FindObjectOfType<Client>();
         mapCamera = FindObjectOfType<HexMapCamera>();
         controls = FindObjectOfType<ControlsManager>();
-        barrack = FindObjectOfType<Barrack>();
-        barrack.GetBarrackObject.SetActive(false);
     }
 
     void Update()
@@ -57,14 +67,21 @@ public class HexGameUI : MonoBehaviour
             if(Input.GetMouseButton(1))
                 DoPathfinding();
             else if(Input.GetMouseButtonUp(1))
+            {
                 DoMove();
+                cityAndUnitUI.SetActive(false);
+                unitUI.SetActive(false);
+                cityUI.SetActive(false);
+            }
             else
             {
                 bool unitAction = Input.GetKeyDown(controls.unitAction);
                 bool workerRoad = Input.GetKeyDown(controls.workerAddRoad);
                 // Worker has two actions (exploit resources or add road)
                 if(unitAction || workerRoad)
+                {
                     DoAction(unitAction);
+                }
             }
             // After pathfinding clearing
             if(selectedUnit != null && !selectedUnit.HexUnit.location.IsHighlighted())
@@ -82,8 +99,23 @@ public class HexGameUI : MonoBehaviour
     {
         City city = client.player.GetCity(location);
         if(city != null)
-            barrack.GetBarrackObject.SetActive(true);
+        {
+            cityUI.SetActive(true);
+            healthCity.sizeDelta = new Vector2(((float)city.Hp / (float)city.maxHP) * 70f, healthUnit.sizeDelta.y);
+        }
         return city;
+    }
+
+    Unit GetSelectUnit(HexCell location)
+    {
+        Unit unit = client.player.GetUnit(currentCell);
+        if(unit != null)
+        {
+            unitUI.SetActive(true);
+            unitType.text = unit.TypeToStr();
+            healthUnit.sizeDelta = new Vector2(((float)unit.Hp / (float)unit.maxHP) * 70f, healthUnit.sizeDelta.y);
+        }
+        return unit;
     }
 
     bool UpdateCurrentCell()
@@ -101,19 +133,39 @@ public class HexGameUI : MonoBehaviour
         return false;
     }
 
-    void DoSelection()
+    void DoSelection(bool isSelected = true)
     {
         UpdateCurrentCell();
         if(selectedUnit != null)
             selectedUnit.HexUnit.location.DisableHighlight();
         selectedUnit = null;
         selectedCity = null;
-        barrack.GetBarrackObject.SetActive(false);
+
+        cityUI.SetActive(false);
+        unitUI.SetActive(false);
+        cityAndUnitUI.SetActive(false);
+
         if(currentCell)
         {
-            if(currentCell.Unit)
+            if(currentCell.Unit && currentCell.HasCity)
             {
-                selectedUnit = client.player.GetUnit(currentCell);
+                selectedUnit = GetSelectUnit(currentCell);
+                unitUI.SetActive(false);
+                selectedCity = GetSelectCity(currentCell);
+
+                if(selectedUnit != null && selectedCity != null)
+                {
+                    StartCoroutine(HexMapCamera.FocusSmoothTransition(currentCell.Position));
+                    cityAndUnitUI.SetActive(true);
+                    cityUI.SetActive(true);
+                    unitTypeBoth.text = selectedUnit.TypeToStr();
+                    healthUnitBoth.sizeDelta = new Vector2(((float)selectedUnit.Hp / (float)selectedUnit.maxHP) * 70f, healthUnit.sizeDelta.y);
+                    healthCity.sizeDelta = new Vector2(((float)selectedCity.Hp / (float)selectedCity.maxHP) * 70f, healthUnit.sizeDelta.y);
+                }
+            }
+            else if(currentCell.Unit)
+            {
+                selectedUnit = GetSelectUnit(currentCell);
                 if(selectedUnit != null)
                     StartCoroutine(mapCamera.FocusSmoothTransition(currentCell.Position));
             }

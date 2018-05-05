@@ -22,6 +22,7 @@ public class Unit
     protected UnitType type;
     protected int mvtSPD;
     protected int hp;
+    public int maxHP;
 
     public UnitType Type
     {
@@ -63,5 +64,19 @@ public class Unit
             return UnitType.RANGED;
         else
             return UnitType.HEAVY;
+    }
+
+    public string TypeToStr()
+    {
+        if(type == UnitType.SETTLER)
+            return "Settler";
+        else if(type == UnitType.WORKER)
+            return "Worker";
+        else if(type == UnitType.REGULAR)
+            return "Regular";
+        else if(type == UnitType.RANGED)
+            return "Ranged";
+        else
+            return "Heavy";
     }
 }

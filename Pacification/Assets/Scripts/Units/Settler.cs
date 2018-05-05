@@ -10,7 +10,7 @@ public class Settler : Unit
         type = UnitType.SETTLER;
         mvtSPD = 2;
         hp = 100;
-
+        maxHP = hp;
         // TODO : couleur du joueur
     }
 

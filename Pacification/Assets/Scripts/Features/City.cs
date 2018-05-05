@@ -15,6 +15,7 @@ public class City : Feature
 
     private CitySize size;
     private int hp;
+    public int maxHP;
     public GameObject instance;
 
     public City (Player owner, HexCell position)
@@ -24,6 +25,7 @@ public class City : Feature
         type = FeatureType.CITY;
         size = CitySize.SETTLEMENT;
         hp = 600;
+        maxHP = hp;
 
         // TODO : couleur du joueur
     }

@@ -16,14 +16,16 @@ public class HexGameUI : MonoBehaviour
     public GameObject cityUI;
     public GameObject unitUI;
     public GameObject cityAndUnitUI;
+    public GameObject ennemiCityUI;
 
-    public Text unitType;
-    public Text unitTypeBoth;
+    public Text unitTypeText;
+    public Text unitTypeBothText;
 
     public RectTransform healthUnit;
     public RectTransform healthCity;
     public RectTransform healthUnitBoth;
-    
+    public RectTransform healthEnnemiCity;
+
     bool didPathfinding;
 
     Client client;
@@ -72,6 +74,7 @@ public class HexGameUI : MonoBehaviour
                 cityAndUnitUI.SetActive(false);
                 unitUI.SetActive(false);
                 cityUI.SetActive(false);
+                ennemiCityUI.SetActive(false);
             }
             else
                 DoAction();
@@ -93,7 +96,13 @@ public class HexGameUI : MonoBehaviour
         if(city != null)
         {
             cityUI.SetActive(true);
-            healthCity.sizeDelta = new Vector2(((float)city.Hp / (float)city.maxHP) * 70f, healthUnit.sizeDelta.y);
+            healthCity.sizeDelta = new Vector2(((float)city.Hp / (float)city.maxHP) * 90f, healthCity.sizeDelta.y);
+        }
+        else if(location.HasCity)
+        {
+            City ennemiCity = (City)location.Feature;
+            ennemiCityUI.SetActive(true);
+            healthEnnemiCity.sizeDelta = new Vector2(((float)ennemiCity.Hp / (float)ennemiCity.maxHP) * 90f, healthEnnemiCity.sizeDelta.y);
         }
         return city;
     }
@@ -104,9 +113,17 @@ public class HexGameUI : MonoBehaviour
         if(unit != null)
         {
             unitUI.SetActive(true);
-            unitType.text = unit.TypeToStr();
-            healthUnit.sizeDelta = new Vector2(((float)unit.Hp / (float)unit.maxHP) * 70f, healthUnit.sizeDelta.y);
+            unitTypeText.text = unit.TypeToStr();
+            healthUnit.sizeDelta = new Vector2(((float)unit.Hp / (float)unit.maxHP) * 90f, healthUnit.sizeDelta.y);
         }
+        else if(location.Unit != null)
+        {
+            Unit ennemiUnit = location.Unit.Unit;
+            unitUI.SetActive(true);
+            unitTypeText.text = "Ennemi " + ennemiUnit.TypeToStr();
+            healthUnit.sizeDelta = new Vector2(((float)ennemiUnit.Hp / (float)ennemiUnit.maxHP) * 90f, healthUnit.sizeDelta.y);
+        }
+
         return unit;
     }
 
@@ -136,6 +153,7 @@ public class HexGameUI : MonoBehaviour
         cityUI.SetActive(false);
         unitUI.SetActive(false);
         cityAndUnitUI.SetActive(false);
+        ennemiCityUI.SetActive(false);
 
         if(currentCell)
         {
@@ -145,15 +163,26 @@ public class HexGameUI : MonoBehaviour
                 unitUI.SetActive(false);
                 selectedCity = GetSelectCity(currentCell);
 
+                StartCoroutine(mapCamera.FocusSmoothTransition(currentCell.Position));
+                cityAndUnitUI.SetActive(true);
+
+
                 if(selectedUnit != null && selectedCity != null)
                 {
-                    StartCoroutine(mapCamera.FocusSmoothTransition(currentCell.Position));
-                    cityAndUnitUI.SetActive(true);
                     cityUI.SetActive(true);
-                    unitTypeBoth.text = selectedUnit.TypeToStr();
-                    healthUnitBoth.sizeDelta = new Vector2(((float)selectedUnit.Hp / (float)selectedUnit.maxHP) * 70f, healthUnit.sizeDelta.y);
-                    healthCity.sizeDelta = new Vector2(((float)selectedCity.Hp / (float)selectedCity.maxHP) * 70f, healthUnit.sizeDelta.y);
+                    healthCity.sizeDelta = new Vector2(((float)selectedCity.Hp / (float)selectedCity.maxHP) * 90f, healthCity.sizeDelta.y);
                 }
+                else
+                {
+                    ennemiCityUI.SetActive(true);
+                    selectedCity = (City)currentCell.Feature;
+                    selectedUnit = currentCell.Unit.Unit;
+                    healthEnnemiCity.sizeDelta = new Vector2(((float)selectedCity.Hp / (float)selectedCity.maxHP) * 90f, healthEnnemiCity.sizeDelta.y);
+                }
+
+                unitTypeBothText.text = selectedUnit.TypeToStr();
+                healthUnitBoth.sizeDelta = new Vector2(((float)selectedUnit.Hp / (float)selectedUnit.maxHP) * 90f, healthUnitBoth.sizeDelta.y);
+
             }
             else if(currentCell.Unit)
             {

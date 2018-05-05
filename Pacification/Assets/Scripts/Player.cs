@@ -125,9 +125,6 @@ public class Player
         Unit unit = attackedCell.Unit.Unit;
 
         unit.Hp -= int.Parse(receivedData[2]);
-
-        attackedCell.EnableHighlight(Color.red);
-
         if(unit.Hp <= 0)
             RemoveUnit(unit);
     }
@@ -136,10 +133,9 @@ public class Player
     {
         hexGrid = Object.FindObjectOfType<HexGrid>();
 
-        unit.HexUnit.location.EnableHighlight(Color.red);
-        playerUnits[unit.Id] = null;
         hexGrid.RemoveUnit(unit.HexUnit);
-        //unit.HexUnit.location.Unit.Die();  // What purpose ?
+        playerUnits[unit.Id] = null;
+        unit = null;
     }
 
     public void MoveUnit(Unit unit, HexCell end)

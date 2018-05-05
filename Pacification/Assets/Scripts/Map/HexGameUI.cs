@@ -87,7 +87,8 @@ public class HexGameUI : MonoBehaviour
             if(currentCell)
                 currentCell.DisableHighlight();
             currentCell = cell;
-            currentCell.EnableHighlight(Color.blue);
+            if(currentCell && currentCell.IsExplored)
+                currentCell.EnableHighlight(Color.blue);
             return true;
         }
         return false;

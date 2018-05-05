@@ -155,7 +155,7 @@ public class HexGameUI : MonoBehaviour
 
                 if(selectedUnit != null && selectedCity != null)
                 {
-                    StartCoroutine(HexMapCamera.FocusSmoothTransition(currentCell.Position));
+                    StartCoroutine(mapCamera.FocusSmoothTransition(currentCell.Position));
                     cityAndUnitUI.SetActive(true);
                     cityUI.SetActive(true);
                     unitTypeBoth.text = selectedUnit.TypeToStr();

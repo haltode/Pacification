@@ -74,15 +74,7 @@ public class HexGameUI : MonoBehaviour
                 cityUI.SetActive(false);
             }
             else
-            {
-                bool unitAction = Input.GetKeyDown(controls.unitAction);
-                bool workerRoad = Input.GetKeyDown(controls.workerAddRoad);
-                // Worker has two actions (exploit resources or add road)
-                if(unitAction || workerRoad)
-                {
-                    DoAction(unitAction);
-                }
-            }
+                DoAction();
             // After pathfinding clearing
             if(selectedUnit != null && !selectedUnit.HexUnit.location.IsHighlighted())
                 selectedUnit.HexUnit.location.EnableHighlight(Color.blue);
@@ -178,19 +170,44 @@ public class HexGameUI : MonoBehaviour
         }
     }
 
-    void DoAction(bool unitAction)
+    void DoAction()
     {
-        if(selectedUnit.Type == Unit.UnitType.SETTLER && unitAction)
+        if(Input.GetKeyDown(controls.unitPrimaryAction))
         {
-            ((Settler)selectedUnit).Settle();
-            selectedUnit = null;
-            currentCell = null;
-        }
-        else if(selectedUnit.Type == Unit.UnitType.WORKER)
-        {
-            if(unitAction)
+            if(selectedUnit.Type == Unit.UnitType.SETTLER)
+            {
+                ((Settler)selectedUnit).Settle();
+                selectedUnit = null;
+                currentCell = null;
+            }
+            else if(selectedUnit.Type == Unit.UnitType.WORKER)
+            {
+                // TODO: need to implement exploit
                 ((Worker)selectedUnit).Exploit();
+            }
             else
+            {
+                attackTargetCell = GetCellUnderCursor();
+
+                Attacker attacker = (Attacker)selectedUnit;
+                if(!attackTargetCell || !(attacker.IsInRangeToAttack(attackTargetCell)))
+                    return;
+
+                if(attackTargetCell.Unit && selectedUnit.owner != attackTargetCell.Unit.Unit.owner)
+                {
+                    attackTargetCell.EnableHighlight(Color.red);
+                    attacker.Attack(attackTargetCell.Unit.Unit);
+                }
+                else if(attackTargetCell.HasCity && selectedUnit.owner != attackTargetCell.Feature.owner)
+                {
+                    attackTargetCell.EnableHighlight(Color.red);
+                    attacker.Attack((City)attackTargetCell.Feature);
+                }
+            }
+        }
+        else if(Input.GetKeyDown(controls.unitSecondaryAction))
+        {
+            if(selectedUnit.Type == Unit.UnitType.WORKER)
             {
                 HexCell roadCell = GetCellUnderCursor();
                 if(!roadCell || roadCell.IsUnderWater || !roadCell.IsExplored || roadCell.Unit)
@@ -199,26 +216,7 @@ public class HexGameUI : MonoBehaviour
                 if(roadOk)
                     currentCell = roadCell;
             }
-        }
-        else if(unitAction)
-        {
-            attackTargetCell = GetCellUnderCursor();
-
-            Attacker attacker = (Attacker)selectedUnit;
-            if(!attackTargetCell || !(attacker.IsInRangeToAttack(attackTargetCell)))
-                return;
-
-            if(attackTargetCell.Unit && selectedUnit.owner != attackTargetCell.Unit.Unit.owner)
-            {
-                attackTargetCell.EnableHighlight(Color.red);
-                attacker.Attack(attackTargetCell.Unit.Unit);
-            }
-            else if(attackTargetCell.HasCity && selectedUnit.owner != attackTargetCell.Feature.owner)
-            {
-                attackTargetCell.EnableHighlight(Color.red);
-                attacker.Attack((City)attackTargetCell.Feature);
-            }
-        }
+        }   
     }
 
     void DoPathfinding()

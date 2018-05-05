@@ -143,10 +143,11 @@ public class HexGameUI : MonoBehaviour
         else if(unitAction)
         {
             attackTargetCell = GetCellUnderCursor();
+            Attacker attacker = (Attacker)selectedUnit;
             if(attackTargetCell && attackTargetCell.Unit && selectedUnit.owner != attackTargetCell.Unit.Unit.owner &&
-                selectedUnit.HexUnit.location.coordinates.DistanceTo(attackTargetCell.coordinates) <= ((Attacker)selectedUnit).Range)
+                attacker.IsInRangeToAttack(attackTargetCell))
             {
-                ((Attacker)selectedUnit).Attack(attackTargetCell.Unit.Unit);
+                attacker.Attack(attackTargetCell.Unit.Unit);
                 attackTargetCell.EnableHighlight(Color.red);
             }
         }

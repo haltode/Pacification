@@ -60,6 +60,11 @@ public class Attacker : Unit
         return level == 20;
     }
 
+    public bool IsInRangeToAttack(HexCell target)
+    {
+        return HexUnit.location.coordinates.DistanceTo(target.coordinates) <= range;
+    }
+
     // A voir avec l'équilibrage si on veut que l'attaquant prenne des dégats ou non
     public void Attack(Unit target)
     {

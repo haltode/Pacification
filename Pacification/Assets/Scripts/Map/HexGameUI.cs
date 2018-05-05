@@ -133,7 +133,7 @@ public class HexGameUI : MonoBehaviour
         return false;
     }
 
-    void DoSelection(bool isSelected = true)
+    void DoSelection()
     {
         UpdateCurrentCell();
         if(selectedUnit != null)

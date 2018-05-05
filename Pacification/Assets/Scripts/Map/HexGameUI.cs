@@ -21,6 +21,11 @@ public class HexGameUI : MonoBehaviour
     public Text unitTypeText;
     public Text unitTypeBothText;
 
+    public Text unitHealthText;
+    public Text cityHealthText;
+    public Text unitBothHealthText;
+    public Text ennemiCityHealthText;
+
     public RectTransform healthUnit;
     public RectTransform healthCity;
     public RectTransform healthUnitBoth;
@@ -96,12 +101,14 @@ public class HexGameUI : MonoBehaviour
         if(city != null)
         {
             cityUI.SetActive(true);
+            cityHealthText.text = city.Hp + " / " + city.maxHP;
             healthCity.sizeDelta = new Vector2(((float)city.Hp / (float)city.maxHP) * 90f, healthCity.sizeDelta.y);
         }
         else if(location.HasCity)
         {
             City ennemiCity = (City)location.Feature;
             ennemiCityUI.SetActive(true);
+            ennemiCityHealthText.text = ennemiCity.Hp + " / " + ennemiCity.maxHP;
             healthEnnemiCity.sizeDelta = new Vector2(((float)ennemiCity.Hp / (float)ennemiCity.maxHP) * 90f, healthEnnemiCity.sizeDelta.y);
         }
         return city;
@@ -114,6 +121,7 @@ public class HexGameUI : MonoBehaviour
         {
             unitUI.SetActive(true);
             unitTypeText.text = unit.TypeToStr();
+            unitHealthText.text = unit.Hp + " / " + unit.maxHP;
             healthUnit.sizeDelta = new Vector2(((float)unit.Hp / (float)unit.maxHP) * 90f, healthUnit.sizeDelta.y);
         }
         else if(location.Unit != null)
@@ -121,6 +129,7 @@ public class HexGameUI : MonoBehaviour
             Unit ennemiUnit = location.Unit.Unit;
             unitUI.SetActive(true);
             unitTypeText.text = "Ennemi " + ennemiUnit.TypeToStr();
+            unitHealthText.text = ennemiUnit.Hp + " / " + ennemiUnit.maxHP;
             healthUnit.sizeDelta = new Vector2(((float)ennemiUnit.Hp / (float)ennemiUnit.maxHP) * 90f, healthUnit.sizeDelta.y);
         }
 
@@ -170,17 +179,20 @@ public class HexGameUI : MonoBehaviour
                 if(selectedUnit != null && selectedCity != null)
                 {
                     cityUI.SetActive(true);
+                    cityHealthText.text = selectedCity.Hp + " / " + selectedCity.maxHP;
                     healthCity.sizeDelta = new Vector2(((float)selectedCity.Hp / (float)selectedCity.maxHP) * 90f, healthCity.sizeDelta.y);
                 }
                 else
                 {
                     ennemiCityUI.SetActive(true);
+                    ennemiCityHealthText.text = selectedCity.Hp + " / " + selectedCity.maxHP;
                     selectedCity = (City)currentCell.Feature;
                     selectedUnit = currentCell.Unit.Unit;
                     healthEnnemiCity.sizeDelta = new Vector2(((float)selectedCity.Hp / (float)selectedCity.maxHP) * 90f, healthEnnemiCity.sizeDelta.y);
                 }
 
                 unitTypeBothText.text = selectedUnit.TypeToStr();
+                unitBothHealthText.text = selectedUnit.Hp + " / " + selectedUnit.maxHP;
                 healthUnitBoth.sizeDelta = new Vector2(((float)selectedUnit.Hp / (float)selectedUnit.maxHP) * 90f, healthUnitBoth.sizeDelta.y);
 
             }

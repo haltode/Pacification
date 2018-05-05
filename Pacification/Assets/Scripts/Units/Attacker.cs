@@ -77,7 +77,7 @@ public class Attacker : Unit
 
     public void Attack(City target)
     {
-        int damage = 100; //FIX THIS
+        int damage = (int)((float)((defaultATK - upgradeATK) + upgradeATK * level) * dmgMultCity);
 
         owner.client.Send("CUNM|CTD|" + target.position.coordinates.X + "#" + target.position.coordinates.Z + "#" + damage + "|" + target.owner.name);
     }

@@ -4,6 +4,7 @@ using UnityEngine.EventSystems;
 public class HexGameUI : MonoBehaviour
 {
     public HexGrid hexGrid;
+    HexMapCamera mapCamera;
     ControlsManager controls;
 
     HexCell currentCell;
@@ -26,6 +27,7 @@ public class HexGameUI : MonoBehaviour
 
         hexGrid = FindObjectOfType<HexGrid>();
         client = FindObjectOfType<Client>();
+        mapCamera = FindObjectOfType<HexMapCamera>();
         controls = FindObjectOfType<ControlsManager>();
         barrack = FindObjectOfType<Barrack>();
         barrack.GetBarrackObject.SetActive(false);
@@ -41,6 +43,11 @@ public class HexGameUI : MonoBehaviour
             attackTargetCell.DisableHighlight();
             attackTargetCell = null;
         }
+
+        if(Input.GetKeyDown(controls.cycleCity))
+            mapCamera.CycleBetweenCities();
+        else if(Input.GetKeyDown(controls.cycleUnit))
+            mapCamera.CycleBetweenUnits();
 
         if(Input.GetMouseButtonDown(0))
             DoSelection();
@@ -108,13 +115,13 @@ public class HexGameUI : MonoBehaviour
             {
                 selectedUnit = client.player.GetUnit(currentCell);
                 if(selectedUnit != null)
-                    StartCoroutine(HexMapCamera.FocusSmoothTransition(currentCell.Position));
+                    StartCoroutine(mapCamera.FocusSmoothTransition(currentCell.Position));
             }
             else if(currentCell.HasCity)
             {
                 selectedCity = GetSelectCity(currentCell);
                 if(selectedCity != null)
-                    StartCoroutine(HexMapCamera.FocusSmoothTransition(currentCell.Position));
+                    StartCoroutine(mapCamera.FocusSmoothTransition(currentCell.Position));
             }
         }
     }

@@ -26,9 +26,16 @@ public class HexMapCamera : MonoBehaviour
 
     public HexGrid grid;
 
+    Client client;
+    Player player;
+    int lastUnit;
+    int lastCity;
+
     void Awake()
     {
         grid = FindObjectOfType<HexGrid>();
+        client = FindObjectOfType<Client>();
+        player = client.player;
         instance = this;
         swivel = transform.GetChild(0);
         stick = swivel.GetChild(0);
@@ -38,12 +45,18 @@ public class HexMapCamera : MonoBehaviour
     {
         float zoomDelta = Input.GetAxis("Mouse ScrollWheel");
         if(zoomDelta != 0f)
+        {
             AdjustZoom(zoomDelta);
+            lastUnit = lastCity = 0;
+        }
 
         float xDelta = Input.GetAxis("Horizontal");
         float zDelta = Input.GetAxis("Vertical");
         if(xDelta != 0f || zDelta != 0f)
+        {
             AdjustPosition(xDelta, zDelta);
+            lastUnit = lastCity = 0;
+        }
     }
 
     void AdjustZoom(float delta)
@@ -89,7 +102,7 @@ public class HexMapCamera : MonoBehaviour
         instance.transform.localPosition = position;
     }
 
-    public static IEnumerator FocusSmoothTransition(Vector3 position)
+    public IEnumerator FocusSmoothTransition(Vector3 position)
     {
         Vector3 currentPos = instance.transform.position;
         float t = 0f;
@@ -99,5 +112,19 @@ public class HexMapCamera : MonoBehaviour
              instance.transform.position = Vector3.Lerp(currentPos, position, t);
              yield return null;
         }
+    }
+
+    public void CycleBetweenCities()
+    {
+        Vector3 cityPos = player.playerCities[lastCity].Position.Position;
+        StartCoroutine(FocusSmoothTransition(cityPos));
+        lastCity = (lastCity + 1) % player.playerCities.Count;
+    }
+
+    public void CycleBetweenUnits()
+    {
+        Vector3 unitPos = player.playerUnits[lastUnit].HexUnit.location.Position;
+        StartCoroutine(FocusSmoothTransition(unitPos));
+        lastUnit = (lastUnit + 1) % player.playerUnits.Count;
     }
 }

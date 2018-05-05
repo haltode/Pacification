@@ -34,8 +34,11 @@ public class HexMapCamera : MonoBehaviour
     void Awake()
     {
         grid = FindObjectOfType<HexGrid>();
-        client = FindObjectOfType<Client>();
-        player = client.player;
+        if(GameManager.Instance.gamemode != GameManager.Gamemode.EDITOR)
+        {
+            client = FindObjectOfType<Client>();
+            player = client.player;   
+        }
         instance = this;
         swivel = transform.GetChild(0);
         stick = swivel.GetChild(0);
@@ -116,15 +119,25 @@ public class HexMapCamera : MonoBehaviour
 
     public void CycleBetweenCities()
     {
+        if(player.playerCities.Count == 0)
+            return;
+        if(lastCity >= player.playerCities.Count)
+            lastCity = 0;
         Vector3 cityPos = player.playerCities[lastCity].Position.Position;
         StartCoroutine(FocusSmoothTransition(cityPos));
         lastCity = (lastCity + 1) % player.playerCities.Count;
+        lastUnit = 0;
     }
 
     public void CycleBetweenUnits()
     {
+        if(player.playerUnits.Count == 0)
+            return;
+        if(lastUnit >= player.playerUnits.Count)
+            lastUnit = 0;
         Vector3 unitPos = player.playerUnits[lastUnit].HexUnit.location.Position;
         StartCoroutine(FocusSmoothTransition(unitPos));
         lastUnit = (lastUnit + 1) % player.playerUnits.Count;
+        lastCity = 0;
     }
 }

@@ -145,7 +145,7 @@ public class Player
         int xEnd = end.coordinates.X;
         int zEnd = end.coordinates.Z;
 
-        client.Send("CMOV|" + xStart + "#" + zStart + "#" + xEnd + "#" + zEnd + "#");
+        client.Send("CMOV|" + xStart + "#" + zStart + "#" + xEnd + "#" + zEnd);
     }
 
     public void NetworkMoveUnit(string data, bool isAI=false)

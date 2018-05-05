@@ -71,14 +71,20 @@ public class Attacker : Unit
         dmgMult.TryGetValue(target.Type, out multiplier);
         int damage = (int)((float)((defaultATK - upgradeATK) + upgradeATK * level) * multiplier);
 
-        owner.client.Send("CUNM|UTD|" + target.HexUnit.location.coordinates.X + "#" + target.HexUnit.location.coordinates.Z + "#" + damage + "|" + target.owner.name);
+        if(GameManager.Instance.gamemode == GameManager.Gamemode.MULTI)
+            owner.client.Send("CUNM|UTD|" + target.HexUnit.location.coordinates.X + "#" + target.HexUnit.location.coordinates.Z + "#" + damage + "|" + target.owner.name);
+        else
+            target.owner.NetworkTakeDamageUnit(target.HexUnit.location.coordinates.X + "#" + target.HexUnit.location.coordinates.Z + "#" + damage);
     }
 
     public void Attack(City target)
     {
         int damage = (int)((float)((defaultATK - upgradeATK) + upgradeATK * level) * dmgMultCity);
 
-        owner.client.Send("CUNM|CTD|" + target.position.coordinates.X + "#" + target.position.coordinates.Z + "#" + damage + "|" + target.owner.name);
+        if(GameManager.Instance.gamemode == GameManager.Gamemode.MULTI)
+            owner.client.Send("CUNM|CTD|" + target.position.coordinates.X + "#" + target.position.coordinates.Z + "#" + damage + "|" + target.owner.name);
+        else
+            target.owner.NetworkTakeDamageCity(target.position.coordinates.X + "#" + target.position.coordinates.Z + "#" + damage);
     }
     
 }

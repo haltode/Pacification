@@ -15,8 +15,9 @@ public class HexGameUI : MonoBehaviour
 
     public GameObject cityUI;
     public GameObject unitUI;
-    public GameObject cityAndUnitUI;
+    public GameObject UnitBothUI;
     public GameObject ennemiCityUI;
+    public GameObject ennemiCityBothUI;
 
     public Text unitTypeText;
     public Text unitTypeBothText;
@@ -25,11 +26,13 @@ public class HexGameUI : MonoBehaviour
     public Text cityHealthText;
     public Text unitBothHealthText;
     public Text ennemiCityHealthText;
+    public Text ennemiCityBothHealthText;
 
     public RectTransform healthUnit;
     public RectTransform healthCity;
     public RectTransform healthUnitBoth;
     public RectTransform healthEnnemiCity;
+    public RectTransform healthEnnemiCityBoth;
 
     bool didPathfinding;
 
@@ -52,10 +55,13 @@ public class HexGameUI : MonoBehaviour
 
     void Update()
     {
+        if(EventSystem.current.IsPointerOverGameObject())
+            return;
+
         if(Input.GetMouseButtonDown(0))
             DoSelection();
 
-        if(!client.player.canPlay || EventSystem.current.IsPointerOverGameObject())
+        if(!client.player.canPlay)
             return;
 
         if(attackTargetCell)
@@ -76,10 +82,11 @@ public class HexGameUI : MonoBehaviour
             else if(Input.GetMouseButtonUp(1))
             {
                 DoMove();
-                cityAndUnitUI.SetActive(false);
+                UnitBothUI.SetActive(false);
                 unitUI.SetActive(false);
                 cityUI.SetActive(false);
                 ennemiCityUI.SetActive(false);
+                ennemiCityBothUI.SetActive(false);
             }
             else
                 DoAction();
@@ -161,39 +168,46 @@ public class HexGameUI : MonoBehaviour
 
         cityUI.SetActive(false);
         unitUI.SetActive(false);
-        cityAndUnitUI.SetActive(false);
+        UnitBothUI.SetActive(false);
         ennemiCityUI.SetActive(false);
+        ennemiCityBothUI.SetActive(false);
 
         if(currentCell)
         {
             if(currentCell.Unit && currentCell.HasCity)
             {
-                selectedUnit = GetSelectUnit(currentCell);
-                unitUI.SetActive(false);
+                selectedUnit = currentCell.Unit.Unit;
                 selectedCity = GetSelectCity(currentCell);
 
                 StartCoroutine(mapCamera.FocusSmoothTransition(currentCell.Position));
-                cityAndUnitUI.SetActive(true);
 
-
-                if(selectedUnit != null && selectedCity != null)
+                if(selectedCity != null)
                 {
-                    cityUI.SetActive(true);
-                    cityHealthText.text = selectedCity.Hp + " / " + selectedCity.maxHP;
+                    UnitBothUI.SetActive(true);
+
                     healthCity.sizeDelta = new Vector2(((float)selectedCity.Hp / (float)selectedCity.maxHP) * 90f, healthCity.sizeDelta.y);
+                    ennemiCityBothHealthText.text = selectedCity.Hp + " / " + selectedCity.maxHP;
+
+                    healthUnitBoth.sizeDelta = new Vector2(((float)selectedUnit.Hp / (float)selectedUnit.maxHP) * 90f, healthUnitBoth.sizeDelta.y);
+                    unitTypeBothText.text = (selectedUnit.owner != client.player ? "Ennemi ":"")  + selectedUnit.TypeToStr();
+                    unitBothHealthText.text = selectedUnit.Hp + " / " + selectedUnit.maxHP;
                 }
                 else
                 {
-                    ennemiCityUI.SetActive(true);
-                    ennemiCityHealthText.text = selectedCity.Hp + " / " + selectedCity.maxHP;
+                    cityUI.SetActive(false);
+                    ennemiCityUI.SetActive(false);
                     selectedCity = (City)currentCell.Feature;
-                    selectedUnit = currentCell.Unit.Unit;
-                    healthEnnemiCity.sizeDelta = new Vector2(((float)selectedCity.Hp / (float)selectedCity.maxHP) * 90f, healthEnnemiCity.sizeDelta.y);
-                }
 
-                unitTypeBothText.text = selectedUnit.TypeToStr();
-                unitBothHealthText.text = selectedUnit.Hp + " / " + selectedUnit.maxHP;
-                healthUnitBoth.sizeDelta = new Vector2(((float)selectedUnit.Hp / (float)selectedUnit.maxHP) * 90f, healthUnitBoth.sizeDelta.y);
+                    ennemiCityBothUI.SetActive(true);
+                    unitUI.SetActive(true);
+
+                    healthEnnemiCityBoth.sizeDelta = new Vector2(((float)selectedCity.Hp / (float)selectedCity.maxHP) * 90f, healthEnnemiCity.sizeDelta.y);
+                    ennemiCityBothHealthText.text = selectedCity.Hp + " / " + selectedCity.maxHP;
+
+                    healthUnit.sizeDelta = new Vector2(((float)selectedUnit.Hp / (float)selectedUnit.maxHP) * 90f, healthUnitBoth.sizeDelta.y);
+                    unitTypeText.text = (selectedUnit.owner != client.player ? "Ennemi " : "") + selectedUnit.TypeToStr();
+                    unitHealthText.text = selectedUnit.Hp + " / " + selectedUnit.maxHP;
+                }
 
             }
             else if(currentCell.Unit)

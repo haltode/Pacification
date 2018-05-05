@@ -77,14 +77,9 @@ public class Attacker : Unit
 
     public void Attack(City target)
     {
-        int damage = 100;
+        int damage = 100; //FIX THIS
 
-        target.Hp -= damage;
-
-        if (target.Hp <= 0)
-            target.Owner.RemoveCity(target);
-
-        //owner.client.Send("CUNM|CTD|" + target.HexUnit.location.coordinates.X + "#" + target.HexUnit.location.coordinates.Z + "#" + damage + "|" + target.owner.name);
+        owner.client.Send("CUNM|CTD|" + target.position.coordinates.X + "#" + target.position.coordinates.Z + "#" + damage + "|" + target.owner.name);
     }
     
 }

@@ -133,7 +133,7 @@ public class Client : MonoBehaviour
                 foreach(Player p in players)
                 {
                     if(p.name == receivedData[2])
-                        p.NetworkTakeDamage(receivedData[1]);
+                        p.NetworkTakeDamageUnit(receivedData[1]);
                 }
                 break;
 
@@ -167,11 +167,11 @@ public class Client : MonoBehaviour
                 break;
 
             //City destruction
-            case "SCID":
+            case "SCTD":
                 foreach(Player p in players)
                 {
                     if(p.name == receivedData[2])
-                        p.NetworkRemoveCity(receivedData[1]);
+                        p.NetworkTakeDamageCity(receivedData[1]);
                 }
                 break;
 

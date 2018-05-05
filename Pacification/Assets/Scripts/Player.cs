@@ -116,7 +116,7 @@ public class Player
         playerUnits.Add(unit);
     }
 
-    public void NetworkTakeDamage(string data)
+    public void NetworkTakeDamageUnit(string data)
     {
         hexGrid = Object.FindObjectOfType<HexGrid>();
 
@@ -207,19 +207,27 @@ public class Player
         playerCities.Add(city);
     }
 
-    public void RemoveCity(City city)
-    {
-        client.Send("CUNI|CID|" + city.position.coordinates.X  + "#" + city.position.coordinates.Z);
-    }
 
-    public void NetworkRemoveCity(string data)
+    public void NetworkTakeDamageCity(string data)
     {
-        string[] receivedData = data.Split('#');
         hexGrid = Object.FindObjectOfType<HexGrid>();
 
-        HexCell location = hexGrid.GetCell(new HexCoordinates(int.Parse(receivedData[0]), int.Parse(receivedData[1])));
+        string[] receivedData = data.Split('#');
+        HexCell attackedCell = hexGrid.GetCell(new HexCoordinates(int.Parse(receivedData[0]), int.Parse(receivedData[1])));
+        City city = (City)attackedCell.feature;
+
+        city.Hp -= int.Parse(receivedData[2]);
+
+        if(city.Hp <= 0)
+            RemoveCity(city);
+    }
+
+    public void RemoveCity(City city)
+    {
+        hexGrid = Object.FindObjectOfType<HexGrid>();
+
+        HexCell location = city.position;
         location.FeatureIndex = 0;
-        City city = GetCity(location);
         Object.Destroy(city.instance);
         playerCities[city.Id] = null;
         location.feature = null;

@@ -23,6 +23,7 @@ public class HexCell : MonoBehaviour
     int distance;
 
     public HexUnit Unit { get; set; }
+    public Feature feature { get; set; }
 
     public int Index { get; set; }
 

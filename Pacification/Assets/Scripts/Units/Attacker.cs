@@ -77,10 +77,14 @@ public class Attacker : Unit
 
     public void Attack(City target)
     {
-        target.Hp -= (int)((float)((defaultATK - upgradeATK) + upgradeATK * level) * dmgMultCity);
+        int damage = 100;
+
+        target.Hp -= damage;
 
         if (target.Hp <= 0)
             target.Owner.RemoveCity(target);
+
+        //owner.client.Send("CUNM|CTD|" + target.HexUnit.location.coordinates.X + "#" + target.HexUnit.location.coordinates.Z + "#" + damage + "|" + target.owner.name);
     }
     
 }

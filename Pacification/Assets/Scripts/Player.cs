@@ -125,6 +125,7 @@ public class Player
         Unit unit = attackedCell.Unit.Unit;
 
         unit.Hp -= int.Parse(receivedData[2]);
+
         if(unit.Hp <= 0)
             RemoveUnit(unit);
     }
@@ -194,6 +195,7 @@ public class Player
 
         int cityID = playerCities.Count;
         City city = new City(this, cityID, location);
+        location.feature = city;
 
         Vector3 position = location.Position;
         float hash = HexMetrics.SampleHashGrid(position);
@@ -207,7 +209,7 @@ public class Player
 
     public void RemoveCity(City city)
     {
-        client.Send("CUNI|CID|" + city.Position.Position.x  + "#" + city.Position.Position.z);
+        client.Send("CUNI|CID|" + city.position.coordinates.X  + "#" + city.position.coordinates.Z);
     }
 
     public void NetworkRemoveCity(string data)
@@ -215,11 +217,12 @@ public class Player
         string[] receivedData = data.Split('#');
         hexGrid = Object.FindObjectOfType<HexGrid>();
 
-        HexCell location = hexGrid.GetCell(new HexCoordinates(int.Parse(receivedData[1]), int.Parse(receivedData[2])));
+        HexCell location = hexGrid.GetCell(new HexCoordinates(int.Parse(receivedData[0]), int.Parse(receivedData[1])));
         location.FeatureIndex = 0;
         City city = GetCity(location);
         Object.Destroy(city.instance);
-        playerUnits[city.Id] = null;
+        playerCities[city.Id] = null;
+        location.feature = null;
         city = null;
     }
 

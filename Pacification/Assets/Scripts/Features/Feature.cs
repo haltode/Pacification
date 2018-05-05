@@ -10,8 +10,8 @@ public class Feature
         RESSOURCE
     }
 
-    protected Player owner;
-    protected HexCell position;
+    public Player owner;
+    public HexCell position;
     protected FeatureType type;
 
     public Player Owner

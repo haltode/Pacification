@@ -196,7 +196,7 @@ public class Client : MonoBehaviour
                     if(ai == null)
                     {
                         ai = new AI(player, AI.Difficulty.HARD);
-                        //players.Add(ai);
+                        players.Add(ai.aiPlayer);
                     }
                     ai.PlayTurn();
                 }

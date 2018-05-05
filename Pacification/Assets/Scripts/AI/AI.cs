@@ -11,7 +11,7 @@ public class AI
     const int MaxBarbarianUnits = 10;
     const int MovePointPerUnit = 7;
 
-    Player aiPlayer;
+    public Player aiPlayer;
     Player ennemy;
 
     Difficulty difficultyLevel;

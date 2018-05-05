@@ -67,10 +67,7 @@ public class Attacker : Unit
         dmgMult.TryGetValue(target.Type, out multiplier);
         int damage = (int)((float)((defaultATK - upgradeATK) + upgradeATK * level) * multiplier);
 
-        if(GameManager.Instance.gamemode == GameManager.Gamemode.MULTI)
-            owner.client.Send("CUNM|UTD|" + target.HexUnit.location.coordinates.X + "#" + target.HexUnit.location.coordinates.Z + "#" + damage + "|" + target.owner.name);
-        else
-            target.owner.NetworkTakeDamage(target.HexUnit.location.coordinates.X + "#" + target.HexUnit.location.coordinates.Z + "#" + damage);
+        owner.client.Send("CUNM|UTD|" + target.HexUnit.location.coordinates.X + "#" + target.HexUnit.location.coordinates.Z + "#" + damage + "|" + target.owner.name);
     }
 
     public void Attack(City target)

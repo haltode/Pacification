@@ -153,10 +153,10 @@ public class HexGameUI : MonoBehaviour
                 attackTargetCell.EnableHighlight(Color.red);
                 attacker.Attack(attackTargetCell.Unit.Unit);
             }
-            else if(attackTargetCell.FeatureIndex == 1 && selectedUnit.owner != attackTargetCell.feature.owner)
+            else if(attackTargetCell.HasCity && selectedUnit.owner != attackTargetCell.Feature.owner)
             {
                 attackTargetCell.EnableHighlight(Color.red);
-                attacker.Attack((City)attackTargetCell.feature);
+                attacker.Attack((City)attackTargetCell.Feature);
             }
         }
     }

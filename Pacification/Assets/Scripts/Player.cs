@@ -192,7 +192,7 @@ public class Player
         location.IncreaseVisibility();
 
         City city = new City(this, location);
-        location.feature = city;
+        location.Feature = city;
 
         Vector3 position = location.Position;
         float hash = HexMetrics.SampleHashGrid(position);
@@ -211,7 +211,7 @@ public class Player
 
         string[] receivedData = data.Split('#');
         HexCell attackedCell = hexGrid.GetCell(new HexCoordinates(int.Parse(receivedData[0]), int.Parse(receivedData[1])));
-        City city = (City)attackedCell.feature;
+        City city = (City)attackedCell.Feature;
 
         city.Hp -= int.Parse(receivedData[2]);
 
@@ -227,7 +227,7 @@ public class Player
         location.FeatureIndex = 0;
         Object.Destroy(city.instance);
         playerCities.Remove(city);
-        location.feature = null;
+        location.Feature = null;
         city = null;
     }
 

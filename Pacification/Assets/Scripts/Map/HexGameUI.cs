@@ -52,6 +52,9 @@ public class HexGameUI : MonoBehaviour
 
     void Update()
     {
+        if(Input.GetMouseButtonDown(0))
+            DoSelection();
+
         if(!client.player.canPlay || EventSystem.current.IsPointerOverGameObject())
             return;
 
@@ -65,9 +68,6 @@ public class HexGameUI : MonoBehaviour
             mapCamera.CycleBetweenCities();
         else if(Input.GetKeyDown(controls.cycleUnit))
             mapCamera.CycleBetweenUnits();
-
-        if(Input.GetMouseButtonDown(0))
-            DoSelection();
         
         if(selectedUnit != null)
         {

@@ -7,7 +7,7 @@ public class Heavy : Attacker
     public Heavy(Player owner)
     {
         this.owner = owner;
-        type = UnitType.REGULAR;
+        type = UnitType.HEAVY;
         this.level = owner.UnitLevel;
 
         upgradeHP = 20;

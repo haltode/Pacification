@@ -176,21 +176,23 @@ public class HexGameUI : MonoBehaviour
         {
             if(currentCell.Unit && currentCell.HasCity)
             {
-                selectedUnit = currentCell.Unit.Unit;
+                selectedUnit = GetSelectUnit(currentCell);
                 selectedCity = GetSelectCity(currentCell);
+                Unit unit = currentCell.Unit.Unit;
 
                 StartCoroutine(mapCamera.FocusSmoothTransition(currentCell.Position));
 
                 if(selectedCity != null)
                 {
                     UnitBothUI.SetActive(true);
+                    unitUI.SetActive(false);
 
                     healthCity.sizeDelta = new Vector2(((float)selectedCity.Hp / (float)selectedCity.maxHP) * 90f, healthCity.sizeDelta.y);
                     ennemiCityBothHealthText.text = selectedCity.Hp + " / " + selectedCity.maxHP;
 
-                    healthUnitBoth.sizeDelta = new Vector2(((float)selectedUnit.Hp / (float)selectedUnit.maxHP) * 90f, healthUnitBoth.sizeDelta.y);
-                    unitTypeBothText.text = (selectedUnit.owner != client.player ? "Ennemi ":"")  + selectedUnit.TypeToStr();
-                    unitBothHealthText.text = selectedUnit.Hp + " / " + selectedUnit.maxHP;
+                    healthUnitBoth.sizeDelta = new Vector2(((float)unit.Hp / (float)unit.maxHP) * 90f, healthUnitBoth.sizeDelta.y);
+                    unitTypeBothText.text = (unit.owner != client.player ? "Ennemi ":"")  + unit.TypeToStr();
+                    unitBothHealthText.text = unit.Hp + " / " + unit.maxHP;
                 }
                 else
                 {
@@ -199,16 +201,14 @@ public class HexGameUI : MonoBehaviour
                     selectedCity = (City)currentCell.Feature;
 
                     ennemiCityBothUI.SetActive(true);
-                    unitUI.SetActive(true);
 
                     healthEnnemiCityBoth.sizeDelta = new Vector2(((float)selectedCity.Hp / (float)selectedCity.maxHP) * 90f, healthEnnemiCity.sizeDelta.y);
                     ennemiCityBothHealthText.text = selectedCity.Hp + " / " + selectedCity.maxHP;
 
-                    healthUnit.sizeDelta = new Vector2(((float)selectedUnit.Hp / (float)selectedUnit.maxHP) * 90f, healthUnitBoth.sizeDelta.y);
-                    unitTypeText.text = (selectedUnit.owner != client.player ? "Ennemi " : "") + selectedUnit.TypeToStr();
-                    unitHealthText.text = selectedUnit.Hp + " / " + selectedUnit.maxHP;
+                    healthUnit.sizeDelta = new Vector2(((float)unit.Hp / (float)unit.maxHP) * 90f, healthUnitBoth.sizeDelta.y);
+                    unitTypeText.text = (unit.owner != client.player ? "Ennemi " : "") + unit.TypeToStr();
+                    unitHealthText.text = unit.Hp + " / " + unit.maxHP;
                 }
-
             }
             else if(currentCell.Unit)
             {

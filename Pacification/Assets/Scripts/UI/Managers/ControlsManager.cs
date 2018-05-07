@@ -9,6 +9,7 @@ public class ControlsManager : MonoBehaviour
 
     public KeyCode unitPrimaryAction = KeyCode.E;
     public KeyCode unitSecondaryAction = KeyCode.R;
+    public KeyCode unitEmbark = KeyCode.B;
 
     public KeyCode cycleCity = KeyCode.C;
     public KeyCode cycleUnit = KeyCode.U;

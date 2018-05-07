@@ -23,6 +23,7 @@ public class Unit
     protected int mvtSPD;
     protected int hp;
     public int maxHP;
+    public bool embark;
 
     public UnitType Type
     {

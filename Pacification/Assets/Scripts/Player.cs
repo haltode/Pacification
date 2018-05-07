@@ -113,6 +113,7 @@ public class Player
 
         float orientation = UnityEngine.Random.Range(0f, 360f);
         hexGrid.AddUnit(unit.HexUnit, location, orientation);
+        unit.embark = false;
 
         playerUnits.Add(unit);
     }

@@ -229,23 +229,8 @@ public class HexGameUI : MonoBehaviour
     {
         if(Input.GetKeyDown(controls.unitEmbark))
         {
-            HexCell start = selectedUnit.HexUnit.location;
-            HexCell end = GetCellUnderCursor();
-            // Embark on water
-            if(!start.IsUnderWater && end.IsUnderWater)
-            {
-                selectedUnit.embark = true;
-                // TODO: add actual boat prefab
-                UnitGraphics.SetGraphics(selectedUnit.hexUnitGameObect, hexGrid.unitPrefab[4]);
-                client.player.MoveUnit(selectedUnit, end);
-            }
-            // Embark on land
-            else if(start.IsUnderWater && !end.IsUnderWater)
-            {
-                selectedUnit.embark = false;
-                UnitGraphics.SetGraphics(selectedUnit.hexUnitGameObect, hexGrid.unitPrefab[(int)selectedUnit.Type]);
-                client.player.MoveUnit(selectedUnit, end);
-            }
+            HexCell dest = GetCellUnderCursor();
+            client.player.EmbarkUnit(selectedUnit, dest);
         }
 
         if(Input.GetKeyDown(controls.unitPrimaryAction))

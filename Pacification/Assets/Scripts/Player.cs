@@ -179,6 +179,28 @@ public class Player
         return null;
     }
 
+    public void EmbarkUnit(Unit unit, HexCell dest)
+    {
+        HexCell start = unit.HexUnit.location;
+        if(start.coordinates.DistanceTo(dest.coordinates) != 1)
+            return;
+        // Embark on water
+        if(!start.IsUnderWater && dest.IsUnderWater)
+        {
+            unit.embark = true;
+            // TODO: add actual boat prefab
+            UnitGraphics.SetGraphics(unit.hexUnitGameObect, hexGrid.unitPrefab[4]);
+            MoveUnit(unit, dest);
+        }
+        // Embark on land
+        else if(start.IsUnderWater && !dest.IsUnderWater)
+        {
+            unit.embark = false;
+            UnitGraphics.SetGraphics(unit.hexUnitGameObect, hexGrid.unitPrefab[(int)unit.Type]);
+            MoveUnit(unit, dest);
+        }
+    }
+
     public void AddCity(HexCell location, City.CitySize type)
     {
         client.Send("CUNI|CIC|" + (int)type + "#" + location.coordinates.X + "#" + location.coordinates.Z);

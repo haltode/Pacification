@@ -182,7 +182,7 @@ public class Player
     public void EmbarkUnit(Unit unit, HexCell dest)
     {
         HexCell start = unit.HexUnit.location;
-        if(start.coordinates.DistanceTo(dest.coordinates) != 1)
+        if(start.coordinates.DistanceTo(dest.coordinates) != 1 || !start.IsReachable(dest) || dest.Unit)
             return;
         // Embark on water
         if(!start.IsUnderWater && dest.IsUnderWater)

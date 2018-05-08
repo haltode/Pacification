@@ -134,6 +134,11 @@ public class HexCell : MonoBehaviour
         return GetElevationDifference(direction) <= HexMetrics.MaxElevationReach;
     }
 
+    public bool IsReachable(HexCell neighbor)
+    {
+        return IsReachable(GetNeighborDir(neighbor));
+    }
+
     public bool IsUnderWater
     {
         get { return isUnderWater; }

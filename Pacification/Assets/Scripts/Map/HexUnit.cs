@@ -153,6 +153,21 @@ public class HexUnit : MonoBehaviour
                 transform.localRotation = Quaternion.LookRotation(d);
                 yield return null;
             }
+
+            // Embark on water
+            if(location.IsUnderWater && !Unit.embark)
+            {
+                Unit.embark = true;
+                // TODO: add actual boat prefab
+                Unit.SetGraphics(Grid.unitPrefab[4]);
+            }
+            // Embark on land
+            else if(!location.IsUnderWater && Unit.embark)
+            {
+                Unit.embark = false;
+                Unit.SetGraphics(Grid.unitPrefab[(int)Unit.Type]);
+            }
+
             Grid.DecreaseVisibility(pathToTravel[i], VisionRange);
             t -= 1f;
         }

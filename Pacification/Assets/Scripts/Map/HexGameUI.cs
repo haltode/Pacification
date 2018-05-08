@@ -227,12 +227,6 @@ public class HexGameUI : MonoBehaviour
 
     void DoAction()
     {
-        if(Input.GetKeyDown(controls.unitEmbark))
-        {
-            HexCell dest = GetCellUnderCursor();
-            client.player.EmbarkUnit(selectedUnit, dest);
-        }
-
         if(Input.GetKeyDown(controls.unitPrimaryAction))
         {
             if(selectedUnit.Type == Unit.UnitType.SETTLER)

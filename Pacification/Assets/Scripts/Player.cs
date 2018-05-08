@@ -106,10 +106,10 @@ public class Player
             (int)type += 3;
         */
 
-        unit.hexUnitGameObect = GameObject.Instantiate(hexGrid.mainUnitPrefab);
-        unit.HexUnit = unit.hexUnitGameObect.GetComponent<HexUnit>();
+        unit.hexGameObject = GameObject.Instantiate(hexGrid.mainUnitPrefab);
+        unit.HexUnit = unit.hexGameObject.GetComponent<HexUnit>();
         unit.HexUnit.Unit = unit;
-        UnitGraphics.SetGraphics(unit.hexUnitGameObect, hexGrid.unitPrefab[(int)type]);
+        unit.SetGraphics(hexGrid.unitPrefab[(int)type]);
 
         float orientation = UnityEngine.Random.Range(0f, 360f);
         hexGrid.AddUnit(unit.HexUnit, location, orientation);
@@ -189,14 +189,14 @@ public class Player
         {
             unit.embark = true;
             // TODO: add actual boat prefab
-            UnitGraphics.SetGraphics(unit.hexUnitGameObect, hexGrid.unitPrefab[4]);
+            unit.SetGraphics(hexGrid.unitPrefab[4]);
             MoveUnit(unit, dest);
         }
         // Embark on land
         else if(start.IsUnderWater && !dest.IsUnderWater)
         {
             unit.embark = false;
-            UnitGraphics.SetGraphics(unit.hexUnitGameObect, hexGrid.unitPrefab[(int)unit.Type]);
+            unit.SetGraphics(hexGrid.unitPrefab[(int)unit.Type]);
             MoveUnit(unit, dest);
         }
     }

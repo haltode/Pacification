@@ -6,7 +6,7 @@ public class Unit
 {
 
     protected HexUnit hexUnit;
-    public GameObject hexUnitGameObect;
+    public GameObject hexGameObject;
 
     public enum UnitType
     {
@@ -79,5 +79,28 @@ public class Unit
             return "Ranged";
         else
             return "Heavy";
+    }
+
+    public void SetGraphics(GameObject prefab)
+    {
+        float prevOrientation = 0f;
+        if(hexGameObject != null)
+            prevOrientation = hexUnit.Orientation;
+
+        GameObject graphicsObject = null;
+
+        for(int i = 0; i < hexGameObject.transform.childCount; ++i)
+            if(hexGameObject.transform.GetChild(i).name == "Graphics")
+                graphicsObject = hexGameObject.transform.GetChild(i).gameObject;
+
+        if(graphicsObject != null)
+            Object.Destroy(graphicsObject);
+
+        Vector3 spawnPos = hexGameObject.transform.position + new Vector3(0, 1, 0);
+        Quaternion orientation = Quaternion.Euler(0f, prevOrientation, 0f);
+
+        GameObject instantiated = Object.Instantiate(prefab, spawnPos, orientation);
+        instantiated.name = "Graphics";
+        instantiated.transform.parent = hexGameObject.transform;
     }
 }

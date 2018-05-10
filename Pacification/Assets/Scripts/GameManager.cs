@@ -14,7 +14,6 @@ public class GameManager : MonoBehaviour
     public InputField nameInput;
     public InputField nameHostInput;
 
-    public Slider numberOfPlayerSlider;
     public HexGrid hexGrid;
     public ControlsManager controls;
 
@@ -33,19 +32,16 @@ public class GameManager : MonoBehaviour
         DontDestroyOnLoad(this);
     }
 
-    public void StartingServer(bool isAlone = false)
+    public void StartingServer()
     {
         try
         {
             Server server = Instantiate(serverPrefab).GetComponent<Server>();
             server.Init();
 
-            server.playerNumber = isAlone ? 1 : (int)numberOfPlayerSlider.value;
-
             Client client = Instantiate(clientPrefab).GetComponent<Client>();
             client.clientName = nameHostInput.text;
             
-
             client.isHost = true;
 
             if(client.clientName == "")
@@ -69,13 +65,18 @@ public class GameManager : MonoBehaviour
     public void MainMenuSoloButton()
     {
         gamemode = Gamemode.SOLO;
-        StartingServer(true);
+        StartingServer();
     }
 
     public void MainMenuStartingServerButton()
     {
         gamemode = Gamemode.MULTI;
         StartingServer();
+    }
+
+    public void StartingGame()
+    {
+        FindObjectOfType<Server>().StartingGame();
     }
 
     public void MainMenuConnectToServerButton()

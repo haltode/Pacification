@@ -24,6 +24,9 @@ public class PlayerListManager : MonoBehaviour {
 
     public void AddPlayer(string name)
     {
+        if(player1 == null)
+            return;
+
         bool done = false;
         int i = 0;
 
@@ -41,6 +44,9 @@ public class PlayerListManager : MonoBehaviour {
 
     public void RemovePlayer(string name)
     {
+        if(player1 == null)
+            return;
+
         for(int i = 0; i < 8; ++i)
         {
             if(names[i].text == name)

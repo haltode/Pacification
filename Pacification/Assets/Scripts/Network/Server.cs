@@ -74,7 +74,7 @@ public class Server : MonoBehaviour
 
     void AcceptTcpClient(IAsyncResult ia)
     {
-        if(clients.Count == playerNumber)
+        if(isGameStarted)
             return;
 
         TcpListener listener = (TcpListener) ia.AsyncState;
@@ -126,17 +126,19 @@ public class Server : MonoBehaviour
                 Debug.Log(e.Message);
             }
         }
-
-        if(!isGameStarted && clients.Count == playerNumber)
-        {
-            isGameStarted = true;
-            Broadcast("SLOD", clients);
-            Broadcast("SYGO", clients[0]);
-        }
     }
     void Broadcast(string data, ServerClient client)
     {
         Broadcast(data, new List<ServerClient> { client });
+    }
+
+    public void StartingGame()
+    {
+        isGameStarted = true;
+        playerNumber = clients.Count;
+        Debug.Log(playerNumber);
+        Broadcast("SLOD", clients);
+        Broadcast("SYGO", clients[0]);
     }
 
     void Read(ServerClient client, string data)

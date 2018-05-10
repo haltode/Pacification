@@ -19,7 +19,7 @@ public class Client : MonoBehaviour
     StreamReader reader;
 
     HexMapEditor mapEditor;
-    ChatManager chat;
+    public ChatManager chat;
     HexGameUI gameUI;
     public PlayerListManager playerListDisplay;
 

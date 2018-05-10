@@ -13,9 +13,6 @@ public class ControlsManager : MonoBehaviour
     public KeyCode cycleCity = KeyCode.C;
     public KeyCode cycleUnit = KeyCode.U;
 
-    public KeyCode uiMenu = KeyCode.Escape;
-    public KeyCode uiBack = KeyCode.Escape;
-
     void Start()
     {
         DontDestroyOnLoad(this);

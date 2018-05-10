@@ -70,6 +70,9 @@ public class HexGameUI : MonoBehaviour
             attackTargetCell = null;
         }
 
+        if(client.chat.input.isFocused)
+            return;
+
         if(Input.GetKeyDown(controls.cycleCity))
             mapCamera.CycleBetweenCities();
         else if(Input.GetKeyDown(controls.cycleUnit))
@@ -227,6 +230,9 @@ public class HexGameUI : MonoBehaviour
 
     void DoAction()
     {
+        if(client.chat.input.isFocused)
+            return;
+
         if(Input.GetKeyDown(controls.unitPrimaryAction))
         {
             if(selectedUnit.Type == Unit.UnitType.SETTLER)

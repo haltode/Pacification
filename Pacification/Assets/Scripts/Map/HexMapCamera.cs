@@ -53,6 +53,9 @@ public class HexMapCamera : MonoBehaviour
             lastUnit = lastCity = 0;
         }
 
+        if(client.chat.input.isFocused)
+            return;
+
         float xDelta = Input.GetAxis("Horizontal");
         float zDelta = Input.GetAxis("Vertical");
         if(xDelta != 0f || zDelta != 0f)

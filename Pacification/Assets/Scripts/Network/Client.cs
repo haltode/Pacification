@@ -10,25 +10,27 @@ public class Client : MonoBehaviour
     public string clientName;
 
     public bool isHost;
-    private bool isSocketStarted;
+    bool isSocketStarted;
 
-    private List<GameClient> playerClients = new List<GameClient>(); 
-    private TcpClient socket;
-    private NetworkStream stream;
-    private StreamWriter writer;
-    private StreamReader reader;
+    List<GameClient> playerClients = new List<GameClient>(); 
+    TcpClient socket;
+    NetworkStream stream;
+    StreamWriter writer;
+    StreamReader reader;
 
-    private HexMapEditor mapEditor;
-    private ChatManager chat;
-    private HexGameUI gameUI;
+    HexMapEditor mapEditor;
+    ChatManager chat;
+    HexGameUI gameUI;
+    public PlayerListManager playerListDisplay;
 
     public Player player;
-    private AI ai = null;
+    AI ai = null;
 
     public List<Player> players = new List<Player>();
 
     void Start()
     {
+        playerListDisplay = FindObjectOfType<PlayerListManager>();
         DontDestroyOnLoad(gameObject);
     }
 
@@ -211,7 +213,10 @@ public class Client : MonoBehaviour
            
             //Player : Disconnected
             case "SDEC":
-                chat.ChatMessage(receivedData[1] + " left the game.", ChatManager.MessageType.ALERT);
+                if(chat != null)
+                    chat.ChatMessage(receivedData[1] + " left the game.", ChatManager.MessageType.ALERT);
+                else
+                    playerListDisplay.RemovePlayer(receivedData[1]);
                 break;
 
             /////// CHAT : Global Message
@@ -254,6 +259,7 @@ public class Client : MonoBehaviour
             case "SCNN":
                 string[] clientStatus = receivedData[1].Split('#');
                 UserConnected(clientStatus[0], (clientStatus[1]) == "1");
+                playerListDisplay.AddPlayer(clientStatus[0]);
                 break;
 
             case "SLOD":

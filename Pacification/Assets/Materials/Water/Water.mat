@@ -8,7 +8,7 @@ Material:
   m_PrefabInternal: {fileID: 0}
   m_Name: Water
   m_Shader: {fileID: 4800000, guid: 88db74803a080d646b1ebf1501b2f753, type: 3}
-  m_ShaderKeywords: 
+  m_ShaderKeywords: ETC1_EXTERNAL_ALPHA
   m_LightmapFlags: 4
   m_EnableInstancingVariants: 0
   m_DoubleSidedGI: 0
@@ -27,3 +27,4 @@ Material:
     - _Metallic: 0
     m_Colors:
     - _Color: {r: 0.19117647, g: 0.25064865, b: 1, a: 0.2901961}
+    - _Specular: {r: 0.2, g: 0.2, b: 0.2, a: 1}

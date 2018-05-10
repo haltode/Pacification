@@ -125,7 +125,10 @@ public class GameManager : MonoBehaviour
 
         Client client = FindObjectOfType<Client>();
         if(client != null)
-            Destroy(client.gameObject);  
+        {
+            client.playerListDisplay.Clear();
+            Destroy(client.gameObject);
+        }
     }
 
     public void MainMenuExitButton()

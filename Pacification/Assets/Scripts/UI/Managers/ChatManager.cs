@@ -165,7 +165,7 @@ public class ChatManager : MonoBehaviour
                     if(kickedPlayer == "")
                         ChatMessage("You didn't specified the player to kick", MessageType.ALERT);
                     string kickMessage = ExtractMessage(++index, input.text);
-                    client.Send("CKIK|" + kickedPlayer + "|" + kickMessage == "" ? "NO_REASON_GIVEN": kickMessage);
+                    client.Send("CKIK|" + kickedPlayer + "|" + (kickMessage == "" ? "NO_REASON_GIVEN": kickMessage));
                     break;
 
                 case "code":

@@ -259,7 +259,8 @@ public class Client : MonoBehaviour
             case "SCNN":
                 string[] clientStatus = receivedData[1].Split('#');
                 UserConnected(clientStatus[0], (clientStatus[1]) == "1");
-                playerListDisplay.AddPlayer(clientStatus[0]);
+
+                playerListDisplay.SetHost(isHost);
                 break;
 
             case "SLOD":
@@ -296,6 +297,8 @@ public class Client : MonoBehaviour
             Player newPlayer = new Player(name);
             players.Add(newPlayer);
         }
+
+        playerListDisplay.AddPlayer(name);
     }
 
     void OnApplicationQuit()

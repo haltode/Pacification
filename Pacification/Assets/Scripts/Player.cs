@@ -28,7 +28,6 @@ public class Player
 
     public Player(string name)
     {
-        Debug.Log("Player spawned: " + name);
         this.name = name;
         unitLevel = 1;
 

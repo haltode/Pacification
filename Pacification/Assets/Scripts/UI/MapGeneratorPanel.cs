@@ -5,6 +5,8 @@ using UnityEngine.UI;
 
 public class MapGeneratorPanel : MonoBehaviour {
 
+    public GameObject warningMessage;
+
     public Text Textseed;
     public Slider SlidermapSize;
     public Slider SliderjitterProbability;
@@ -15,4 +17,9 @@ public class MapGeneratorPanel : MonoBehaviour {
     public Slider SliderregionBorder;
     public Slider SliderregionCount;
     public Slider SlidererosionPercentage;
+
+    private void Update()
+    {
+        warningMessage.SetActive(SlidermapSize.value >= 3);
+    }
 }

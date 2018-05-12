@@ -279,6 +279,7 @@ public class Client : MonoBehaviour
                 player.UpdateScienceDisplay();
                 chat = FindObjectOfType<ChatManager>();
                 gameUI = FindObjectOfType<HexGameUI>();
+                player.displayer.KillLoading();
                 break;
         }
     }

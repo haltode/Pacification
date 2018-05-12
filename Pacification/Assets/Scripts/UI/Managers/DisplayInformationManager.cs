@@ -12,12 +12,13 @@ public class DisplayInformationManager : MonoBehaviour {
     public Text happiness;
     public Text nbRound;
 
-    public Transform downPannel;
-    public Transform upEditPannel;
-    public Transform upGamePannel;
+    public Transform downPanel;
+    public Transform upEditPanel;
+    public Transform upGamePanel;
 
-    public GameObject editorPannel1;
-    public GameObject editorPannel2;
+    public GameObject editorLeftPanel;
+    public GameObject editorRightPanel;
+    public GameObject loadingPanel;
 
     void Start()
     {
@@ -28,27 +29,32 @@ public class DisplayInformationManager : MonoBehaviour {
 
         if(GameManager.Instance.gamemode == GameManager.Gamemode.EDITOR)
         {
-            foreach(Transform t in downPannel)
+            foreach(Transform t in downPanel)
                 t.gameObject.SetActive(false);
 
-            foreach(Transform t in upGamePannel)
+            foreach(Transform t in upGamePanel)
                 t.gameObject.SetActive(false);
 
-            editorPannel1.SetActive(true);
-            editorPannel2.SetActive(true);
+            editorLeftPanel.SetActive(true);
+            editorRightPanel.SetActive(true);
 
             Shader.EnableKeyword("HEX_MAP_EDITOR");
         }
         else
         {
-            foreach(Transform t in upEditPannel)
+            foreach(Transform t in upEditPanel)
                 t.gameObject.SetActive(false);
 
-            editorPannel1.SetActive(false);
-            editorPannel2.SetActive(false);
+            editorLeftPanel.SetActive(false);
+            editorRightPanel.SetActive(false);
 
             Shader.DisableKeyword("HEX_MAP_EDITOR");
         }
+    }
+
+    public void KillLoading()
+    {
+        loadingPanel.SetActive(false);
     }
 
     public void UpdateMoneyDisplay(int value)

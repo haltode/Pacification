@@ -136,8 +136,8 @@ public class Server : MonoBehaviour
     {
         isGameStarted = true;
         playerNumber = clients.Count;
-        Debug.Log(playerNumber);
         Broadcast("SLOD", clients);
+
         Broadcast("SYGO", clients[0]);
     }
 

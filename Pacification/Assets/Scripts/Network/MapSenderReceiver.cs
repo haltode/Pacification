@@ -1,7 +1,5 @@
-﻿using System.Collections.Generic;
-using System.IO;
+﻿using System.IO;
 using UnityEngine;
-using UnityEngine.SceneManagement;
 
 public class MapSenderReceiver : MonoBehaviour {
 
@@ -14,17 +12,22 @@ public class MapSenderReceiver : MonoBehaviour {
     {
         Server server = FindObjectOfType<Server>();
         saveAndLoad = Instantiate(SaveAndLoadPrefab);
-        path = Path.Combine(Application.persistentDataPath, "temp");
 
         if(!server)
             return;
 
-        HexMapGenerator generator = FindObjectOfType<HexMapGenerator>();
-        generator.GenerateMap();
-
-        saveAndLoad.Save(path);
-        string map = File.ReadAllText(path);
-        File.Delete(path);
+        string map;
+        if(path == "")
+        {
+            path = Path.Combine(Application.persistentDataPath, "31uikx83y54gnt661zf651_646a89knz7984dt13a");
+            HexMapGenerator generator = FindObjectOfType<HexMapGenerator>();
+            generator.GenerateMap();
+            saveAndLoad.Save(path);
+            map = File.ReadAllText(path);
+            File.Delete(path);
+        }
+        else
+            map = File.ReadAllText(FindObjectOfType<MapGeneratorPanel>().path);
 
         StartGame(map);
 
@@ -33,6 +36,7 @@ public class MapSenderReceiver : MonoBehaviour {
 
     public void StartGame(string map)
     {
+        path = Path.Combine(Application.persistentDataPath, "31uikx83y54gnt661zf651_646a89knz7984dt13a");
         File.WriteAllText(path, map);
         saveAndLoad.Load(path);
         File.Delete(path);

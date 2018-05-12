@@ -18,8 +18,30 @@ public class MapGeneratorPanel : MonoBehaviour {
     public Slider SliderregionCount;
     public Slider SlidererosionPercentage;
 
+    public GameObject randomPanel;
+    public GameObject loadPanel;
+    public Text button;
+
+    public string path = "";
+    bool modeRandom = true;
+
     private void Update()
     {
         warningMessage.SetActive(SlidermapSize.value >= 3);
+    }
+
+    public void ChangeGenMode()
+    {
+        loadPanel.SetActive(modeRandom);
+        modeRandom = !modeRandom;
+        randomPanel.SetActive(modeRandom);
+
+        if(modeRandom)
+        {
+            button.text = "RANDOM";
+            path = "";
+        }
+        else
+            button.text = "LOAD";
     }
 }

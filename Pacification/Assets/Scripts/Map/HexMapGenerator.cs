@@ -1,46 +1,105 @@
 ﻿using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class HexMapGenerator : MonoBehaviour
 {
     const int MaxIteration = 10000;
 
     public HexGrid grid;
-    public int seed;
-    public bool useFixedSeed;
     int cellCount;
+    int seed = 0;
     
     struct MapRegion {
         public int xMin, xMax, zMin, zMax;
     }
 
+    enum MapSize
+    {
+        TINY,
+        SMALL, 
+        NORMAL, 
+        HUGE, 
+        GIGANTIC
+    }
+
     List<MapRegion> regions;
 
-    [Range(0f, 0.5f)]
-    public float jitterProbability = 0.2f;
-    [Range(20, 200)]
-    public int chunkSizeMin = 70;
-    [Range(20, 200)]
-    public int chunkSizeMax = 150;
-    [Range(5, 95)]
-    public int landPercentage = 80;
-    [Range(6, 10)]
-    public int elevationMaximum = 8;
-    [Range(0, 10)]
-    public int mapBorderX = 5;
-    [Range(0, 10)]
-    public int mapBorderZ = 5;
-    [Range(0, 10)]
-    public int regionBorder = 5;
-    [Range(1, 4)]
-    public int regionCount = 1;
-    [Range(0, 100)]
-    public int erosionPercentage = 50;
+    float jitterProbability;
+    int chunkSizeMin;
+    int chunkSizeMax;
+    int landPercentage;
+    int elevationMaximum;
+    int regionBorder;
+    int regionCount;
+    float erosionPercentage;
+    int mapBorderX = 5;
+    int mapBorderZ = 5;
+    MapSize mapsize;
 
-    public void GenerateMap(int sizeX, int sizeZ)
+    void Start()
+    {
+        DontDestroyOnLoad(this);
+    }
+
+    public void Save()
+    {
+        MapGeneratorPanel generatorPanel = FindObjectOfType<MapGeneratorPanel>();
+
+        mapsize = (MapSize)generatorPanel.SlidermapSize.value;
+        jitterProbability = generatorPanel.SliderjitterProbability.value;
+        erosionPercentage = generatorPanel.SlidererosionPercentage.value;
+        chunkSizeMax = (int)generatorPanel.SliderchunkSizeMax.value;
+        chunkSizeMin = (int)generatorPanel.SliderchunkSizeMin.value;
+        landPercentage = (int)generatorPanel.SliderlandPercentage.value;
+        elevationMaximum = (int)generatorPanel.SliderelevationMaximum.value;
+        regionBorder = (int)generatorPanel.SliderregionBorder.value;
+        regionCount = (int)generatorPanel.SliderregionCount.value;
+
+        if(generatorPanel.Textseed.text != "")
+            seed = int.Parse(generatorPanel.Textseed.text);
+    }
+
+    public void GenerateMap()
+    {
+        int sizeX = 0;
+        int sizeZ = 0;
+        switch(mapsize)
+        {
+            case MapSize.TINY:
+                sizeX = 30;
+                sizeZ = 30;
+                break;
+
+            case MapSize.SMALL:
+                sizeX = 50;
+                sizeZ = 50;
+                break;
+
+            case MapSize.NORMAL:
+                sizeX = 90;
+                sizeZ = 90;
+                break;
+
+            case MapSize.HUGE:
+                sizeX = 160;
+                sizeZ = 160;
+                break;
+
+            case MapSize.GIGANTIC:
+                sizeX = 180;
+                sizeZ = 180;
+                break;
+        }
+
+        GenerateMap(sizeX, sizeZ, seed);
+    }
+
+    public void GenerateMap(int sizeX, int sizeZ, int seed)
     {
         Random.State originalRandomState = Random.state;
-        if(!useFixedSeed)
+        grid = FindObjectOfType<HexGrid>();
+        if(seed == 0)
         {
             seed = Random.Range(0, int.MaxValue);
             seed ^= (int)System.DateTime.Now.Ticks;

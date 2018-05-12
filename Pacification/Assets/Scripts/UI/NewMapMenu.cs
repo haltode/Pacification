@@ -29,7 +29,7 @@ public class NewMapMenu : MonoBehaviour
         if(generateMaps)
         {
             mapGenerator = FindObjectOfType<HexMapGenerator>();
-            mapGenerator.GenerateMap(sizeX, sizeZ);
+            mapGenerator.GenerateMap(sizeX, sizeZ, 0);
         }
         else
         {
@@ -42,16 +42,16 @@ public class NewMapMenu : MonoBehaviour
 
     public void CreateSmallMap()
     {
-        CreateMap(20, 15);
+        CreateMap(20, 20);
     }
 
     public void CreateMediumMap()
     {
-        CreateMap(40, 30);
+        CreateMap(40, 40);
     }
 
     public void CreateLargeMap()
     {
-        CreateMap(80, 60);
+        CreateMap(80, 80);
     }
 }

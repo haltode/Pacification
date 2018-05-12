@@ -18,15 +18,13 @@ public class Client : MonoBehaviour
     StreamWriter writer;
     StreamReader reader;
 
-    HexMapEditor mapEditor;
-    public ChatManager chat;
     HexGameUI gameUI;
+    public ChatManager chat;
     public PlayerListManager playerListDisplay;
 
     public Player player;
-    AI ai = null;
-
     public List<Player> players = new List<Player>();
+    AI ai = null;
 
     void Start()
     {

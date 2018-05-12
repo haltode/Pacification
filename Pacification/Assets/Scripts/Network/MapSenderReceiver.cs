@@ -1,4 +1,5 @@
-﻿using System.IO;
+﻿using System.Collections.Generic;
+using System.IO;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
@@ -9,7 +10,7 @@ public class MapSenderReceiver : MonoBehaviour {
     public SaveLoadMapMenu SaveAndLoadPrefab;
     public SaveLoadMapMenu saveAndLoad;
 
-    void Start ()
+    void Start()
     {
         Server server = FindObjectOfType<Server>();
         saveAndLoad = Instantiate(SaveAndLoadPrefab);
@@ -19,14 +20,14 @@ public class MapSenderReceiver : MonoBehaviour {
             return;
 
         HexMapGenerator generator = FindObjectOfType<HexMapGenerator>();
-        generator.GenerateMap(50, 50);
+        generator.GenerateMap();
 
         saveAndLoad.Save(path);
         string map = File.ReadAllText(path);
-
         File.Delete(path);
 
         StartGame(map);
+
         server.Broadcast("SMAP|" + map, server.clients);
     }
 

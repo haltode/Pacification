@@ -76,6 +76,7 @@ public class GameManager : MonoBehaviour
 
     public void StartingGame()
     {
+        FindObjectOfType<HexMapGenerator>().Save();
         FindObjectOfType<Server>().StartingGame();
     }
 

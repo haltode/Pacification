@@ -18,6 +18,8 @@ public class HexMapEditor : MonoBehaviour
     void Start()
     {
         hexGrid = FindObjectOfType<HexGrid>();
+        if(GameManager.Instance.gamemode == GameManager.Gamemode.EDITOR)
+            FindObjectOfType<DisplayInformationManager>().KillLoading();
     }
 
     void Update()

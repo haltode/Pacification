@@ -81,10 +81,10 @@ public class Client : MonoBehaviour
          * CIT
          * CLS
          * CNN
+         * CTD 
          * DEC
          * DED
          * 
-         * EXP
          * KIK
          * KIL
          * LOD
@@ -93,7 +93,6 @@ public class Client : MonoBehaviour
          * MSE
          * MSG
          * MOV
-         * ROD
          * 
          * UAA
          * UNC
@@ -101,8 +100,10 @@ public class Client : MonoBehaviour
          * UNL
          * 
          * YGO
-         * YOP
+         * YOP 
+         * WEX
          * WHO
+         * WRD
          */
         string[] receivedData = data.Split('|');
         switch(receivedData[0])
@@ -176,7 +177,7 @@ public class Client : MonoBehaviour
                 break;
 
             ///// WORKER : Build.Destroy road
-            case "SROD":
+            case "SWRD":
                 gameUI.NetworkRoad(receivedData[1]);
 
                 string[] roadData = receivedData[1].Split('#');
@@ -186,7 +187,7 @@ public class Client : MonoBehaviour
                 break;
 
             //Worker : Exploit ressources
-            case "SEXP":
+            case "SWEX":
                 break;
 
             /////PLAYER : Take turn
@@ -237,7 +238,7 @@ public class Client : MonoBehaviour
                 player.hexGrid.ClearUnits();
                 break;
 
-            //Chat : Kill player
+            //Chat : You've been killed
             case "SKIL":
                 break;
 

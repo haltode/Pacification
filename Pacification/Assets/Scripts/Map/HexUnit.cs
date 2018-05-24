@@ -159,7 +159,7 @@ public class HexUnit : MonoBehaviour
             {
                 Unit.embark = true;
                 // TODO: add actual boat prefab
-                Unit.SetGraphics(Grid.unitPrefab[4]);
+                Unit.SetGraphics(Grid.unitPrefab[5]);
             }
             // Embark on land
             else if(!location.IsUnderWater && Unit.embark)

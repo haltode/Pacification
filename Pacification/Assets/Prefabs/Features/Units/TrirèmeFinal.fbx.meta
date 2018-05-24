@@ -1,51 +1,46 @@
 fileFormatVersion: 2
-guid: f771e85daebd35e49beaf5bd5eb8d31e
-timeCreated: 1527160587
+guid: 60dd8b367673bc742a81f067c5170501
+timeCreated: 1527193927
 licenseType: Free
 ModelImporter:
   serializedVersion: 22
   fileIDToRecycleName:
-    100000: Circle
-    100002: Cube
-    100004: Cube.001
-    100006: Cube.002
-    100008: Cube.003
-    100010: Cube.004
-    100012: Cube.005
-    100014: //RootNode
-    400000: Circle
-    400002: Cube
-    400004: Cube.001
-    400006: Cube.002
-    400008: Cube.003
-    400010: Cube.004
-    400012: Cube.005
-    400014: //RootNode
+    100000: Cube
+    100002: Cube.001
+    100004: Cube.002
+    100006: Cube.003
+    100008: Cube.004
+    100010: Cube.005
+    100012: //RootNode
+    400000: Cube
+    400002: Cube.001
+    400004: Cube.002
+    400006: Cube.003
+    400008: Cube.004
+    400010: Cube.005
+    400012: //RootNode
     2100000: Bronze
     2100002: WoodPillar
     2100004: Sail
     2100006: WoodenHull
-    2300000: Circle
-    2300002: Cube
-    2300004: Cube.001
-    2300006: Cube.002
-    2300008: Cube.003
-    2300010: Cube.004
-    2300012: Cube.005
-    3300000: Circle
-    3300002: Cube
-    3300004: Cube.001
-    3300006: Cube.002
-    3300008: Cube.003
-    3300010: Cube.004
-    3300012: Cube.005
+    2300000: Cube
+    2300002: Cube.001
+    2300004: Cube.002
+    2300006: Cube.003
+    2300008: Cube.004
+    2300010: Cube.005
+    3300000: Cube
+    3300002: Cube.001
+    3300004: Cube.002
+    3300006: Cube.003
+    3300008: Cube.004
+    3300010: Cube.005
     4300000: Cube.005
     4300002: Cube.004
     4300004: Cube.003
     4300006: Cube.002
     4300008: Cube.001
     4300010: Cube
-    4300012: Circle
   externalObjects:
   - first:
       type: UnityEngine:Material

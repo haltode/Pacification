@@ -5,6 +5,8 @@
 \usepackage{amsmath}
 \usepackage{amsfonts}
 \usepackage{amssymb}
+\usepackage{color}
+\usepackage{ulem}
 \usepackage{graphicx}
 \usepackage{titlesec}
 \usepackage{caption}
@@ -29,7 +31,7 @@
 
 \title{
 	{\vspace{3em}\protect\centering\protect\includegraphics[width=0.9\textwidth]{Pacification_logo}}\\
-	{\vspace{4em}\Huge Rapport de soutenance}\\
+	{\vspace{4em}\Huge Rapport de projet}\\
 	{\large Brainless Devs}
 }
 \author{
@@ -63,33 +65,48 @@ Delebecque, Kenny Lorin et bien d'autres !
 
 \chapter{Introduction}
 
-TODO: 
+C’est 5 mois après le début de son développement que nous concluons la création
+de Pacification, notre jeu vidéo de stratégie se basant sur l’univers des jeux
+Civilization. Acceptant jusqu'à 8 joueurs simultanément, Pacification mettra vos
+stratégies à l’épreuve pour combattre tant d’ennemis. Un mode solo vous
+permettra aussi d’apprendre à maîtriser le jeu, et un éditeur vous offrira la
+possibilité de personnaliser votre expérience de jeu en créant vos propres
+territoires de batailles.
+
+Il s’agit d’un projet ambitieux que nous avons pu mener à terme, mêlant nos
+compétences et nos expériences. Ayant réalisé par nous même l’intégralité des
+modèles 3D et textures du jeu, nous sommes fiers du rendu final de ce projet
+auquel nous avons dédié beaucoup de temps.
+
+Ce rapport aura pour objectif de vous présenter un compte-rendu de tout ce
+semestre, avec les évolutions au cours du temps et l'accomplissement des
+objectifs, de même que la répartition des tâches au sein du groupe.
 
 \chapter{Généralités}
 
 \section{Inspiration}
 
-TODO: pas de c/c du cahier des charges please
+Dans un premier temps, nous hésitions entre réaliser un jeu de stratégie ou de
+plateforme-réflexion. Après discussions et quelques consommations de pizza nous
+avons opté pour le jeu de stratégie. Plusieurs réunions nous ont permis de fixer
+les prémices du jeu, ainsi que les fonctionnalités voulues.
 
-À l’origine, nous hésitions avec un jeu de plateforme-réflexion. Quelques pizzas
-plus tard, et devant le magnifique let’s play Civilization du Joueur du Grenier,
-le choix n’était plus. Cela sera un jeu de stratégie tour par tour ou rien.
-Plusieurs réunions nous ont permis de fixer les prémices du jeu, ainsi que les
-fonctionnalités voulues. Pacification prend son inspiration dans divers jeux
-stratégiques cultes tels que Age of Empire mais aussi particulièrement
-Civilization. En effet, notre jeu ressemble aux jeux type 4X (eXplore, eXpand,
-eXploit, eXterminate) dont le premier représentant a été Empire (1977) et dont
-d’autres exemples sont très connus (la série Civilization, Master of Orion). Ces
-jeux ont des codes spécifiques comme la construction d’un empire, un gameplay au
-tour par tour, la gestion de leur économie, des améliorations technologiques,
-une vue de haut et globale sur la carte du monde. Avec cet objectif en tête, il
-s’agissait alors de déterminer le nom, premièrement de notre équipe, mais aussi
-et surtout du jeu auquel nous allions donner vie. Cette partie fut sans conteste
-la plus longue de notre première réunion. L’objectif étant de combiner une
-appellation à la fois humoristique et originale, d’où l’ironie de Pacification
-puisque l’une des occupations principales du jeu est de « pacifier les tribus
-barbares », car comme disait Montaigne, « chacun appelle barbarie ce qui n’est
-pas de son usage ».
+Pacification prend son inspiration dans divers jeux stratégiques cultes tels que
+Age of Empire mais aussi particulièrement Civilization. En effet, notre jeu
+ressemble aux jeux type 4X (eXplore, eXpand, eXploit, eXterminate) dont le
+premier représentant a été Empire (1977) et dont d’autres exemples sont très
+connus (la série Civilization, Master of Orion). Ces jeux ont des codes
+spécifiques comme la construction d’un empire, un gameplay au tour par tour, la
+gestion de leur économie, des améliorations technologiques, une vue de haut et
+globale sur la carte du monde. 
+
+Avec cet objectif en tête, il s’agissait alors de déterminer le nom  du jeu
+auquel nous allions donner vie. Cette partie fut sans conteste la plus longue de
+notre première réunion. L’objectif étant de combiner une appellation à la fois
+humoristique et originale, d’où l’ironie de “Pacification” puisque l’une des
+occupations principales du jeu est de « pacifier les tribus barbares », car
+comme disait Montaigne, « chacun appelle barbarie ce qui n’est pas de son usage
+».
 
 \section{Déroulement d’une partie}
 
@@ -99,32 +116,16 @@ Le colon va lui permettre de construire sa première ville, tandis que le
 fantassin va pouvoir entamer l’exploration des environs et défendre le colon. Le
 joueur va devoir mettre au point une stratégie et apprendre à gérer ses
 ressources afin de réagir à l’évolution de la partie et remporter la victoire
-face à ses adversaire. Il lui faudra explorer la carte, développer son armée,
+face à ses adversaires. Il lui faudra explorer la carte, développer son armée,
 exploiter les ressources disponibles et utiliser le terrain à son avantage pour
 en ressortir vainqueur.
 
-En solo, le joueur devra faire face à une IA redoutable et résister aux assauts
-fréquents des barbares afin d’atteindre le dernier niveau de développement des
-unités pour remporter la partie.
+En solo, le joueur devra faire face à une IA et résister aux assauts fréquents
+des barbares afin d’atteindre le dernier niveau technologique pour réaliser une
+victoire scientifique.
 
-En multijoueur, les joueurs s’affronteront jusqu’à ce qu’il n’en reste qu’un. Un
-joueur a perdu lorsqu’il ne possède plus aucune cité ni aucune unité. La partie
-se termine lorsqu’il ne reste qu’un seul joueur.
-
-\section{Éditeur}
-
-TODO: qu'est-ce que ça vient foutre ici ?
-
-L’éditeur de map est un plus dans ce jeu, car il permet, comme son nom l’indique
-d’éditer, et donc par conséquent de créer des maps pour pouvoir y jouer dans les
-parties solo et multi.
-
-Il permet de modifier des maps existante, des maps plates et des maps générés
-procéduralement sur demande, de taille choisie.
-
-Tous les éléments présent de base dans une map y sont ajoutable et modifiable,
-cela comprenant les modifications du terrain, mais aussi l’ajout de ressources
-inexploitées.
+En multijoueur, les joueurs s’affronteront jusqu’à ce qu’il n’en reste qu’un,
+plus aucunes unités ou villes ennemies ne doit rester debout.
 
 \section{Logiciels utilisés}
 
@@ -137,9 +138,9 @@ projet. Le paradigme orienté objet est un choix indispensable pour maintenir un
 projet aussi conséquent, afin de profiter des avantages de l’encapsulation, de
 l’héritage, ainsi que du polymorphisme.
 
-Le second logiciel qui a été nécessaire à la réalisation de nos assets
-particulièrement, est Blender. Un logiciel de modélisation, d’animation et de
-rendu 3D très populaire et gratuit.
+Le second logiciel qui a été nécessaire à la réalisation de nos assets, est
+Blender. Un logiciel de modélisation, d’animation et de rendu 3D très populaire
+et gratuit.
 
 Enfin, nous n’aurions pu mener ce projet à bien sans Git, un gestionnaire de
 version, ainsi que GitHub pour l'hébergement du dépôt du projet.
@@ -177,7 +178,12 @@ version, ainsi que GitHub pour l'hébergement du dépôt du projet.
 
 \section{Répartition des tâches}
 
-TODO: faire modifs soutenances
+Seulement deux changements mineurs pour les rôles, après la première soutenance
+nous nous sommes rendu compte que les assets demanderaient énormément de temps
+et que l'interface serait une partie importante du jeu, Antoine et Valérian sont
+donc passés suppléants UI afin d'aider Cédric.
+
+\vspace{0.5cm}
 
 \begin{center}
     \begin{tabular}{@{} l *4c @{}}
@@ -188,7 +194,7 @@ TODO: faire modifs soutenances
         IA & R & & & \\
         Réseau & & S & S & R \\
         Graphisme & & & R & \\
-        UI & & & R & \\
+        UI & & \underline{\textbf S} & R & \underline{\textbf S} \\
         Site web & & & & R \\
         Gameplay & S & R & & S\\
         \bottomrule
@@ -196,10 +202,10 @@ TODO: faire modifs soutenances
     \end{tabular}
 \end{center}
 
-
 \section{Objectifs des soutenances}
 
-TODO: faire modifs soutenances
+Plannifier autant de tâches à l'avance n'était pas évident, cependant nos
+estimations étaient plutôt bonnes et nous avons su nous y tenir jusqu'au bout.
 
 \begin{center}
     \begin{tabular}{@{} l *4c @{}}
@@ -207,11 +213,11 @@ TODO: faire modifs soutenances
         \multicolumn{1}{c}{}    & \textbf{Soutenance 1}  & \textbf{Soutenance 2}  & \textbf{Soutenance 3} \\ 
         \midrule
         Map & 65\% & 100\% & 100\% \\
-        IA & 30\% & 70\% & 100\% \\
-        Réseau & 30\% & 75\% & 100\% \\
-        Assets & 50\% & 100\% & 100\% \\
-        Interface & 10\% & 80\% & 100\% \\
-        Site & 10\% & 95\% & 100\% \\
+        IA & \sout{30} {\color{red} 20}\% & 70\% & 100\% \\
+        Réseau & \sout{30} {\color{green} 50}\% & \sout{75} {\color{green} 85}\% & 100\% \\
+        Assets & \sout{50} {\color{red} 40}\% & 100\% & 100\% \\
+        Interface & 10\% & \sout{80} {\color{red} 70}\% & 100\% \\
+        Site & \sout{10} {\color{green} 60}\% & 95\% & 100\% \\
         Gameplay & 40\% & 80\% & 100\% \\
         Budget pizza & 100\% & 60\% & null\\
         \midrule
@@ -219,6 +225,20 @@ TODO: faire modifs soutenances
         \bottomrule
     \end{tabular}
 \end{center}
+
+Avec un jeu qui a rapidement pris forme, cela nous a motivé à travailler
+davantage dessus et à rajouter plusieurs composantes en plus de celles déjà
+présentes :
+
+\begin{itemize}
+    \item Un tchat en multijoueur pour communiquer avec les autres
+    \item Un éditeur de carte
+    \item La possibilité d'embarquer sur l'eau et se déplacer sur les océans
+    \item Une gestion du son avec des musiques d'ambiancce ainsi que quelques
+        bruitages
+    \item Différentes animations (mouvement, attaque, mort)
+    \item Quelques effets de particules
+\end{itemize}
 
 \chapter{Le jeu}
 
@@ -231,7 +251,11 @@ Ceci nécessitait une certaine réflexion pour anticiper différents aspects com
 le rendu graphique, le pavage, les relations entre les multiples voisins, ou
 encore le système de coordonnées des cases.
 
-img coordonnées rapport S1
+\begin{figure}
+    \centering
+    \includegraphics[width=0.5\textwidth]{../report_1/img/cubic_coordinates}
+    \caption*{Système de coordonées et axes}
+\end{figure}
 
 Pour supporter de grandes tailles de carte ainsi qu’un mode multijoueur
 accueillant jusqu’à 8 joueurs, il fallait découper la carte en chunks pour
@@ -249,7 +273,11 @@ Plusieurs modifications sont possibles sur la carte :
         constructions (ferme, exploitation arboricole, ville, etc.)
 \end{itemize}
 
-img map avec tout ce que j’ai cité au dessus
+\begin{figure}
+    \centering
+    \includegraphics[width=0.9\textwidth]{map_example}
+    \caption*{Exemple de carte de jeu dans l'éditeur}
+\end{figure}
 
 \subsection{Brouillard de guerre}
 
@@ -261,11 +289,18 @@ en compte l’environnement ainsi que les caractéristiques de l’unité en que
 
 On distingue deux types de brouillard :
 
-\begin{itemize} \item Les cases totalement inexplorées par le joueur qui sont
-entièrement grisées \item Les cases précédemment explorées, mais hors de vision
-des unités/villes du joueur, qui sont légèrement noircies.  \end{itemize}
+\begin{itemize}
+    \item Les cases totalement inexplorées par le joueur qui sont entièrement
+        grisées
+    \item Les cases précédemment explorées, mais hors de vision des
+        unités/villes du joueur, qui sont légèrement noircies.
+\end{itemize}
 
-img brouillard de guerre rapport S2
+\begin{figure}
+    \centering
+    \includegraphics[width=0.8\textwidth]{../report_2/img/FogOfWar}
+    \caption*{Brouillard de guerre}
+\end{figure}
 
 \subsection{Génération procédurale}
 
@@ -289,9 +324,21 @@ exemple le terrain de très basse altitude sera une plaine ou un désert, mais u
 terrain en hauteur sera soit une simple montagne rocheuse, soit une montagne
 enneigée).
 
-img carte générée rapport S2
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.8\textwidth]{../report_2/img/MapGen1}
+    \caption*{Génération de carte 1}
+\end{figure}
 
-TODO: placer les ressources + point de spawn
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.8\textwidth]{../report_2/img/MapGen2}
+    \caption*{Génération de carte 2}
+\end{figure}
+
+Les ressources sont placées aléatoirement autour des points de départ des
+joueurs à la fin de la génération, et sont dispersés sur le reste de la carte
+en fonction notamment des biomes.
 
 \subsection{Interactions}
 
@@ -301,9 +348,15 @@ Côté utilisateur, il était nécessaire d’avoir une gestion correcte de la c
 ainsi que des contrôles (comme le clic ou les raccourcis clavier). Il y a donc
 une possibilité de déplacer, zoomer avec la caméra, de sélectionner une
 case/unité/ville, de faire des actions à l’aide de touches (attaquer, créer une
-route, fonder une ville). La caméra supporte aussi l’action de se focaliser sur
-un endroit précis de la carte, permettant au joueur de passer rapidement d’une
-unité à une autre, ou d’une ville à une autre avec des raccourcis.
+route, fonder une ville). La caméra peut aussi se focaliser sur un endroit
+précis de la carte, permettant au joueur de passer rapidement d’une unité à une
+autre, ou d’une ville à une autre avec des raccourcis.
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.8\textwidth]{game_ui}
+    \caption*{L'interface utilisateur}
+\end{figure}
 
 \subsubsection{Unités}
 
@@ -313,31 +366,46 @@ carte à l’aide de l’algorithme A*, prenant en compte de nombreuses
 caractéristiques comme la vitesse de déplacement des unités, les obstacles, ou
 encore les spécificités des biomes.
 
-img pathfinding rapport S1 (ou refaire avec les unités en plus ça serait bien)
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.3\textwidth]{pathfinding1}
+    \includegraphics[width=0.3\textwidth]{pathfinding2}
+    \includegraphics[width=0.3\textwidth]{pathfinding3}
+    \caption*{Déplacement d'une unité}
+\end{figure}
 
 De plus, l’affichage du chemin est primordial pour le joueur, ainsi que les
 animations de mouvement. Des courbes de Bézier sont utilisées pour simuler des
 déplacements fluides et plus naturels, ainsi que l’orientation des unités durant
 leurs déplacements d’une case à une autre.
 
-img déplacement unité
-
 Chaque unité possède une action principale :
 
-\begin{itemize} \item Pour le colon : fonder une ville \item Pour l’ouvrier :
-exploiter une case \item Pour l’attaquant : attaquer une unité/ville
+\begin{itemize}
+    \item Pour le colon : fonder une ville
+    \item Pour l’ouvrier : exploiter une case
+    \item Pour l’attaquant : attaquer une unité/ville
 \end{itemize}
-
-Ces actions peuvent modifier la carte en elle même TODO: finir cette partie
-
-img actions colon/ouvrier/attaquant
 
 L’ouvrier possède une deuxième action qui est de construire une route entre deux
 cases. Cette partie fût relativement compliquée à mettre en place, pour gérer
 correctement les multiples voisins d’un hexagone, ainsi que la triangulation
 pour l’aspect graphique.
 
-img route avec ouvrier
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.8\textwidth]{worker_road}
+    \caption*{Une construction de route par l'ouvrier}
+\end{figure}
+
+À partir d'un certain niveau technologique, toutes les unités ont la
+possibilité d'embarquer sur l'eau pour traverser les océans.
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.8\textwidth]{boat}
+    \caption*{Une unité embarquée}
+\end{figure}
 
 \subsection{Sauvegarder/Charger une carte}
 
@@ -351,59 +419,63 @@ reprendre plus tard.
 \subsection{Construction}
 
 Le multijoueur étant le mode de jeu principal de notre projet, son
-implémentation était essentielle. Il était prioritaire de le rendre fonctionnel
-rapidement. Pour cette raison, il a été le point de concentration principal aux
-débuts de développement de ce projet.
+implémentation a été prioritaire. Pour cette raison, nous nous sommes concentrés
+dessus dès le début du projet, et avons travaillé sur ce dernier tout au long
+des soutenances.
 
-Pour le rendre fonctionnel, il était necessaire de posseder une couche réseau
-solide afin de relier les différents joueurs ensembles. Si il a premièrement été
+Pour le rendre fonctionnel, il était nécessaire de posséder une couche réseau
+solide afin de relier les différents joueurs ensembles. S’il a d’abord été
 envisagé d’utiliser le module réseau proposé par Unity, U-net, nous nous sommes
-rapidement rendu compte qu’il ne répondait pas à nos attentes. Ce module ne nous
-permettait en effet pas d’avoir un contrôl total sur le réseau du jeu et ne
-respectait pas non plus notre envie de faire le plus d’éléments de ce jeu par
-nous.
+rapidement rendus compte qu’il ne répondait pas à nos attentes. Ce module ne
+nous permettait pas d’avoir un contrôle total sur le réseau du jeu et ne
+respectait pas notre envie de fabriquer un maximum d’éléments du jeu par nos
+propres moyens. 
 
-C’est pourquoi nous avons développé notre propre infrastructure réseau, la
-perspective d’apprentissage étant en plus bien plus intéressante.
+C’est pourquoi nous avons développé notre propre infrastructure réseau,
+modulable selon nos besoins, et la perspective d’apprentissage étant davantage
+intéressante ainsi.
 
-Codé à l’aide des Sockets présentes en C\#, notre couche réseau s’est révélée
-fonctionnelle et pratique pour le reste du jeu. 
+Codé à l’aide des Sockets du C\#, notre couche réseau s’est révélée
+fonctionnelle et pratique pour le reste du jeu.
 
 \subsection{Fonctionnement}
 
 Concernant le fonctionnement de ce système, il se base sur un serveur et des
-clients qui s’y connectent. Si les clients sont activés sur tous les ordinateurs
-lorsque ceux-ci tentent de rejoindre une partie, seul l’hôte de partie dispose
-du serveur. 
+clients qui s’y connectent. Les clients sont activés sur tous les ordinateurs
+lorsque ceux-ci tentent de rejoindre une partie. Seul l’hôte de partie dispose
+du serveur.
 
-Lorsque le serveur est démarré, il commence à écouter dans l’attente de
-tentatives de connexions. Cette écoute est disponible tant que le lobby de la
-partie n’est pas remplis (8 joueurs) ou que la partie n’est pas démarrée. Les
+Lorsque le serveur est démarré, il écoute en attendant des connexions de
+clients. L’attente dure tant que le lobby de la partie n’est pas rempli (jusqu’à
+8 joueurs) ou que la partie n’est pas démarrée manuellement par l’hôte. Les
 clients se connectent à ce serveur à l’aide de l’adresse IP de l’hôte. À chaque
-tentative de connexion d’un client, le serveur lui demande de s’identifier, en
-lui envoyant en même temps la liste des identifiants des clients déjà connectés.
-Une fois l’identifiant obtenu, il est transmis aux autres clients. Si l’un des
-clients se déconnecte, le serveur transmet cette information aux clients encore
-en ligne. Ce processus permet à tous les joueurs de savoir à tout moment qui est
-connecté dans la partie.
+tentative de connexion le serveur demande au client de s’identifier, une fois
+l’identification terminée, cette dernière est transmise aux autres clients. En
+cas de déconnexion, l’information est partagée aux clients encore en ligne. Ce
+processus permet à tous les joueurs de savoir à tout moment qui est connecté
+dans la partie.
 
-img fonctionnement réseau
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.8\textwidth]{../report_1/img/multiplayer}
+    \caption*{Schéma fonctionnel du réseau}
+\end{figure}
 
-Il est possible pour l’hôte de décider de démarrer la partie à partir du moment
-où 2 joueurs sont connectés au lobby. Quand la partie est démarré, le serveur
-n’accepte plus de connexion et transmet aux clients un message annonçant le
-début de la partie. A la réception de ce message, les clients lancent le jeu sur
-les ordinateurs des joueurs. C’est ensuite à la carte de jeu d’être transmise,
-suivant le processus détaillé ci-dessous.
+Il est possible pour l’hôte de démarrer la partie à partir du moment où 2
+joueurs ou plus sont connectés au lobby. Quand la partie est démarrée, le
+serveur n’accepte plus de connexion et transmet aux clients un message annonçant
+le début de la partie, ce qui lance le jeu sur les ordinateurs de tous les
+joueurs. C’est ensuite à la carte de jeu d’être transmise, suivant le processus
+détaillé ci-dessus.
 
 \subsection{Principe}
 
 Pendant le jeu, les échanges sont effectués via un processus de sérialisation.
 Lorsqu’un joueur effectue une action, celle-ci est sérialisée sous forme de
-string puis envoyé au serveur qui se charge de dispatcher correctement le-dit
-message aux autres joueurs. À la réception d’un message, le client va reproduire
-l’action que ce message décrit. Le type d’action est défini par les quatres
-premiers caractères du message transmis : 
+chaîne de caractères, puis envoyée au serveur qui se charge de dispatcher
+correctement le-dit message aux autres joueurs. À la réception d’un message, le
+client va reproduire l’action que ce message décrit. Le type d’action est défini
+par les quatres premiers caractères du message transmis : 
 
 \begin{itemize}
     \item Le premier caractère indique le type de l’expéditeur (S pour le
@@ -411,6 +483,8 @@ premiers caractères du message transmis :
     \item Les 3 suivants indiquent le type d’action, suivant le tableau
         ci-dessous.
 \end{itemize}
+
+\vspace{0.5cm}
 
 \begin{center}
 	\begin{tabular}{c|c}
@@ -454,7 +528,7 @@ premiers caractères du message transmis :
 
 Ce système a ainsi permis la mise en place d’un suivi de l’état des clients
 (connecté / déconnecté) synchronisé sur tous les appareils, ainsi qu’un système
-de chat entre les joueurs (public et privé) mais aussi plus particulièrement la
+de tchat entre les joueurs (public et privé) mais aussi plus particulièrement la
 synchronisation du jeu pour les joueurs.
 
 Toute latence de quelques millisecondes qui pourrait survenir avec ce système
@@ -467,10 +541,10 @@ Un exemple du processus de synchronisation pouvant être celui-ci :
 \begin{itemize}
     \item Le joueur player\_A déplace une unité de la case $(5; 3)$ vers la case
         $(5; 5)$
-    \item Le client envoie le message “CMOV|5.3\#5.5”
-    \item Le serveur reçoit et renvoie aux clients “SMOV|player\_A\#5.3\#5.5”
-    \item Les clients reçoivent le message et le décryptent pour déplacer
-        correctement  l’unité du player\_A
+    \item Le client envoie le message « CMOV|5.3\#5.5 »
+    \item Le serveur reçoit et renvoie aux clients « SMOV|player\_A\#5.3\#5.5 »
+    \item Les clients reçoivent le message et le déchiffrent pour déplacer
+        correctement l’unité du player\_A
 \end{itemize}
 
 \subsection{Suivre l’avancement des autres parties}
@@ -482,15 +556,17 @@ nouvelles telles qu’un tchat et le principe du tour par tour, sur lequel se ba
 le jeu.
 
 Concernant le gameplay, il a fallu prendre en compte l’implémentation des
-différentes unités ainsi que des villes. La difficulté qui s’est présentée à été
+différentes unités ainsi que des villes. La difficulté qui s’est présentée a été
 de devoir synchroniser tous ces éléments, en gardant les liens d’appartenance de
 chaque unité. Il a donc été nécessaire de recréer chez tous les clients, une
 copie minimale des autres joueurs. Ainsi, chacun possède une liste des autres
 joueurs présents, permettant d’identifier facilement l’appartenance des unités,
-et des bâtiments sur la map.  Pour la map, l’objectif était de transmettre en
-début de partie une carte de jeu générée aléatoirement ou chargée à partir d’une
-carte déjà existante sur l’ordinateur de l’hôte. Cela nécessitant de réduire la
-map au strict minimum pour ensuite l’envoyer sous forme de string via le système
+et des bâtiments sur la map.
+
+Pour la carte du jeu, l’objectif était de la transmettre en début de partie
+après la génération procédurale (ou après le chargement dans le cas d'une carte
+créée depuis l'éditeur). Cela nécessitait de réduire la map au strict minimum
+pour ensuite l’envoyer sous forme de chaîne de caractères via le système
 Serveur/Client. Pour cela, nous avons utilisé le système de sauvegarde qui
 permet d’enregistrer la carte sous une forme condensée. 
 
@@ -500,82 +576,73 @@ notamment lors de transfert de cartes de taille très importante.
 
 Du côté de l’IA, il a fallu adapter la gestion du tour par tour sur lequel nous
 reviendrons dans quelques lignes, afin d’avoir un joueur machine dans la partie.
-L’IA n’étant présente qu’en solo, nous avons préféré contourner le système
-réseau pour éviter des transferts d’octets inutiles, ce qui a nécessité
-l’adaptation des fonctionnement de base du jeu, comme les déplacements ou les
-créations d’unités.
 
 \subsection{Tchat}
 
 S’intégrant parfaitement dans un jeu de stratégie où des alliances peuvent
-retourner la partie, nous avons décidé d’ajouter un tchat pour “pimenter la
-partie”. Le tchat comprend en effet plusieurs fonctions utiles tel que les
-messages globaux, permettant de communiquer avec tous les autres joueurs, mais
-aussi des messages privés pour ne partager ses stratégies qu’avec les joueurs
-que vous souhaitez.
+retourner la partie, nous avons décidé d’ajouter un tchat. Ce dernier comprend
+en effet plusieurs fonctions utiles telles que les messages globaux, permettant
+de communiquer avec tous les autres joueurs, mais aussi des messages privés.
 
-L’implémentation du tchat à ouvert la porte à l’implémentation d’une console de
-débogage pour nous faciliter les phases de test durant le développement de
-nouvelles fonctionnalités. On compte dans cette console les commandes suivantes
-:
+L’implémentation du tchat à ouvert la porte à l’ajout d’une console de débogage
+pour nous faciliter les phases de test durant le développement de nouvelles
+fonctionnalités. On compte dans cette console les commandes suivantes :
 
-/help : Commande qui suivit d’une autre, permet d’obtenir la documentation
-nécessaire au fonctionnement de cette dernière.
+/help : Donne la documentation d’une commande.
 
-/op : Commande permettant d’obtenir les permissions ou d’attribuer l’obtention
-de permissions à un autre joueur.
+/op : Ajoute des permissions à un joueur.
 
-/deop : Commande permettant de retirer les permissions de soit même ou d’un
-autre joueur.
+/deop : Retire les permissions d’un joueur.
 
-/kick : Commande permettant d’éjecter un joueur de la partie en cas de nécessité
-(en dehors de l’Hôte).
+/kick : Éjecte un joueur de la partie.
 
-/kill : Commande permettant d’éliminer un joueur du jeu.
+/kill : Élimine un joueur du jeu.
 
-/clear : Commande permettant de nettoyer de l’écran soit tous les messages du
-tchat (clear msg) ou les unités présentes sur la map (clear unit).
+/clear msg : Nettoie les messages du tchat.
 
-/fog : Commande permettant d’activer ou désactiver le brouillard de guerre.
+/clear unit : Enlève toutes les unités présentes.
 
-/code : Commande permettant d’accéder à des actions peu légitimes lors d’une
-vraie partie, mais pouvant donner un coup de boost si vous êtes dans le besoin.
+/code : Code de triche (pour gagner de l’argent, productivité, désactiver le
+brouillard de guerre, etc.)
 
 \subsection{Tour par tour}
 
-Finalement, la dernière fonctionnalité mise en place à été le tour par tour,
+Finalement, la dernière fonctionnalité mise en place a été le tour par tour,
 principe même du jeu. Il s’agissait pour cette tâche de lier à la fois le
-gameplay (en empêchant les joueurs de jouer si ce n’est pas leur tour),
-l’interface (en affichant différents éléments en fonction de la possibilité du
-joueur à bouger où non), et finalement le réseau (en évitant que plusieurs
-joueurs puisse jouer en même temps).
+gameplay (en empêchant les joueurs de déplacer leurs unités en dehors de leurs
+tours), l’interface (avec le bouton pour passer au tour suivant), et finalement
+le réseau (en évitant que plusieurs joueurs puisse jouer en même temps).
 
-\subsection{Globalement}
+\subsection{Pour conclure}
 
-En conclusion, le développement des parties réseau et multijoueur s’est déroulée
-dans les temps, avec même de l’avance sur les prévisions. Cela parce que, ne
-connaissant pas ce domaine, nous avons souhaité le prioriser pour pouvoir faire
-face aux problèmes. En effet, le développement ne s’est pas déroulé sans accroc,
-il a été nécessaire de revenir en arrière plusieurs fois et repenser des parties
-tant pour s’accorder avec les autres éléments du projet que pour optimiser au
-mieux la synchronisation du jeu. C’est finalement beaucoup d’expérience et de
+Le développement des parties réseau et multijoueur s’est déroulé dans les temps,
+avec même de l’avance sur les prévisions. Cela parce que, ne connaissant pas ce
+domaine, nous avons souhaité le prioriser pour pouvoir faire face aux problèmes
+éventuels. La création de ce réseau ne s’est pas déroulé sans accroc, il a été
+nécessaire de revenir en arrière plusieurs fois et repenser des parties tant
+pour s’accorder avec les autres éléments du projet que pour optimiser au mieux
+la synchronisation du jeu. C’est finalement beaucoup d’expérience et de
 connaissances nouvelles que nous avons pu retirer de cette partie.
 
 \section{Gameplay (Antoine \& Thibault)}
 
-Le but de cette partie est non seulement de s’assurer que le jeu possède une
-partie “jeu”, mais aussi et surtout de faire cohabiter les différents systèmes.
-Au cours de ce projet, il a donc été nécessaire dans un premier temps de
-planifier clairement ce qui était attendu pour cette partie, de prédéfinir les
-différentes classes et de les organiser en hiérarchie, et enfin de garder en
-tête les différents systèmes liés aux parties des autres membres durant tout le
+Le but de cette partie est non seulement d’assurer une profondeur au jeu, mais
+aussi et surtout de faire cohabiter les différents systèmes entre eux. Au cours
+de ce projet, il a donc été nécessaire dans un premier temps de planifier
+clairement ce qui était attendu pour cette partie, de prédéfinir les différentes
+classes et de les organiser en hiérarchie. Enfin, il a fallu garder en tête les
+différents systèmes liés aux parties des autres membres durant tout le
 développement du jeu.
 
-image class hierarchy (je vais le ressortir à chaque fois celui là mdr)
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=1\textwidth]{../report_1/img/class_hierarchy}
+    \caption*{Hiérarchie des classes}
+\end{figure}
 
 \subsection{Joueurs}
 
-La classe Player est la classe la plus importante du jeu à proprement parler.
+La classe Player est une classe majeure pour le bon déroulement d’une partie.
 C’est la classe qui est directement lié au joueur et qui va contenir toutes les
 informations qui lui sont propres. Ces informations sont notamment:
 
@@ -583,7 +650,7 @@ informations qui lui sont propres. Ces informations sont notamment:
     \item Un lien vers chaque ville et chaque unité que le joueur possède,
         possédant tous un identifiant unique
     \item Les quantités de chaque ressource possédées par le joueur
-    \item L’état du joueur (en jeu, spectateur, victorieux…)
+    \item L’état du joueur (en jeu, spectateur, vainqueur)
 \end{itemize}
 
 Cette classe permet aussi de faire le lien entre les différents systèmes,
@@ -595,7 +662,7 @@ former ou déplacer des troupes sans limite par tour.
 
 Les unités sont réparties en plusieurs catégories, chacune avec un but précis et
 des caractéristiques adaptées. Les unités à but offensif possèdent également une
-version “améliorée” au niveau 11 (avec des caractéristiques améliorées et une
+version évoluée au niveau 11 (avec des caractéristiques améliorées et une
 apparence différente) et ont la possibilité de gagner des niveaux, de 1 à 20,
 durant la partie (chaque niveau augmente leur attaque et leurs points de vie).
 Voici les unités présentes dans le jeu:
@@ -608,67 +675,62 @@ afin de la rendre équilibrée, c’est aussi une unité qui nécessite beaucoup
 ressources, et qui peut être éliminée très facilement (ne possédant pas
 d’amélioration, elle possède le même nombre de points de vie, peu importe la
 progression du joueur, là où les unités d’attaque deviennent plus puissantes).
-Le joueur commence la partie avec un colon.
 
 \subsubsection{L'ouvrier (unité pacifique)}
 
 Le travailleur est une unité indispensable au joueur, car c’est elle qui permet
-d’exploiter les différentes ressources de la map. Ces ressources permettent
-ensuite d'entraîner d’autres unités et de rechercher des améliorations.
-Autrement dit, sans travailleur, la durée de vie du joueur sera très limitée. Il
-s’agit donc d’une unité peu coûteuse à former, mais tout de même relativement
-fragile. Un bon joueur devra donc apprendre à organiser ses formations d’unités
-et dépenses afin de ne pas se retrouver sans ressource ni travailleur.
+d’exploiter les différentes ressources de la map. Les ressources stratégiques et
+de luxe sont indispensables au fonctionnement interne de l’empire, tant pour les
+unités, que l'économie ainsi que pour la population. Autrement dit, sans
+travailleur, la durée de vie du joueur sera très limitée. Il s’agit donc d’une
+unité peu coûteuse à former, mais tout de même relativement fragile. De plus, à
+l’instar du colon, cette unité n’est pas améliorable.
 
 \subsubsection{Le fantassin (unité offensive standard)}
 
-Le fantassin est l’unité offensive par défaut. Ses caractéristiques de combat
-sont moyennes, ce qui fait qu’il ne sera jamais très efficace contre quoi que ce
-soit, à l’exception des unités dites “lourdes”. Son intérêt peut alors sembler
-limité, mais pour compenser ces caractéristiques qui ne sortent pas de
-l’ordinaire, le fantassin reste également une unité peu coûteuse, et peut ainsi
-être recruté assez tôt dans la partie sans mettre le joueur en difficulté au
-niveau des ressources. Le fantassin, une fois amélioré, devient un cavalier, qui
-dispose d’une vitesse de déplacement accrue, faisant ainsi de cette unité
-“standard” l’unité de choix pour l’exploration et les offensives rapides, ou
-pour réagir rapidement à une offensive ennemie. Le joueur commence la partie
-avec un fantassin.
+Le fantassin est l’unité offensive par défaut. Ses caractéristiques de combat ne
+sont pas les plus puissantes. Son intérêt peut alors sembler limité, mais pour
+compenser ces caractéristiques qui ne sortent pas de l’ordinaire, le fantassin
+reste également une unité peu coûteuse, et peut ainsi être recruté assez tôt
+dans la partie sans mettre le joueur en difficulté au niveau des ressources. Le
+fantassin, une fois amélioré, devient un cavalier, qui dispose d’une vitesse de
+déplacement accrue, faisant ainsi de cette unité “standard” l’unité de choix
+pour l’exploration et les offensives rapides, ou pour réagir rapidement à une
+invasion ennemie. Cette unité est aussi la plus efficace contre les unités
+lourdes.
 
 \subsubsection{L'archer (unité offensive longue portée)}
 
 L’archer est une unité offensive spécialisée dans l’attaque d’autres unités
-humaines, mais extrêmement désavantagée face aux unités lourdes et aux villes,
-qui recevront beaucoup moins de dégâts. La caractéristique principale de ce type
-d’unité est sa portée d’attaque, plus élevée que les autres unités. Cette portée
-lui permet ainsi d’être le premier à attaquer, et de rester hors d’atteinte
-d’une contre-attaque ennemie. En revanche, cette unité est la plus fragile des
-unités offensives, ce qui signifie que sa puissance importante contre les autres
-unités perd tout son intérêt en combat rapproché ou en infériorité numérique, où
-l’ennemi pourra riposter. L’archer, dans sa forme améliorée, gagne énormément de
-puissance via ses multiplicateurs de dégâts, ce qui accentue davantage sa
-fonction de “chasseur de troupes”.
+humaines, mais extrêmement désavantagée face aux unités lourdes et aux villes.
+La caractéristique principale de l’archer est sa portée d’attaque qui lui permet
+d’être le premier à attaquer, et de rester hors d’atteinte d’une contre-attaque
+ennemie. En revanche, l’archer est la plus fragile des unités offensives, ce qui
+signifie que sa puissance importante contre les autres unités perd tout son
+intérêt en combat rapproché ou en infériorité numérique, où l’ennemi pourra
+riposter. L’archer, dans sa forme améliorée, gagne en puissance, ce qui accentue
+davantage sa fonction de “chasseur de troupes”.
 
 \subsubsection{La catapulte (unité offensive lourde)}
 
 La catapulte est une unité très spéciale. Plus lente que les autres, mais très
-résistante aux archers, ce type d’unité brille notamment contre les structures
-ennemies. En effet, il s’agit de l’unité la plus puissante contre les villes et
-exploitations de ressources ennemies. Il est alors évident qu’il s’agit de
-l’unité la plus dangereuse du jeu, car elle permet de détruire une cité
-adversaire en seulement deux à cinq tours, là où une unité humaine prendrait
-plus de deux fois cette durée. Pour équilibrer cela, la catapulte est l’unité la
-plus chère après le colon, et la moins efficace contre les autres unités. Il
-faut donc toujours veiller à l’accompagner d’autres unités pour la défendre. La
+résistante face aux archers, elle brille notamment contre les villes et
+ressources ennemies. C’est évidemment l’unité la plus dangereuse du jeu, car
+elle permet de détruire une cité adversaire en seulement deux à cinq tours, là
+où un soldat prendrait plus de deux fois cette durée. Pour équilibrer cela, la
+catapulte a un coût de production très onéreux, proche de celui du colon, et
+sera bien moins efficace contre les autres unités offensives. Il faut donc
+toujours veiller à l’accompagner d’autres troupes pour la défendre. La
 catapulte, une fois améliorée, devient un canon. Sa puissance de destruction
 contre les villes est alors augmenté, ainsi que sa portée, la rendant plus
 dangereuse que jamais, et en faisant donc une cible prioritaire, car élément clé
 à la victoire.
 
-Comme vous pouvez donc le voir, la notion de stratégie est très présente dans le
-jeu. Le joueur va devoir apprendre à gérer les différentes unités, leurs
-améliorations, les ressources, et s’adapter au jeu. Il est impossible de gagner
-la partie en se contentant d’un unique type d’unité produite en masse, car
-chacune possède des points faibles facilement exploitables par l’adversaire.
+La notion de stratégie est donc très présente dans le jeu. Le joueur va devoir
+apprendre à gérer les différentes unités, leurs améliorations, les ressources,
+et s’adapter au jeu. Il est impossible de gagner la partie en se contentant d’un
+unique type d’unité produite en masse, car chacune possède des points faibles
+facilement exploitables par l’adversaire.
 
 \subsection{Villes}
 
@@ -678,17 +740,17 @@ que toutes les villes d’un joueur sont détruites, il ne lui restera en géné
 que peu de tours de survie avant que toutes ses unitées restantes ne soient à
 leur tour détruite, terminant ainsi sa partie.
 
-Chaque ville possède trois niveau, et évolue d’elle même en fonction du nombre
+Chaque ville possède trois niveaux, et évolue d’elle même en fonction du nombre
 d’habitant. Chaque niveau débloque de nouvelles unités et de nouveaux bâtiments
 pour cette ville :
 
 \begin{itemize}
-    \item Colonie (à partir de 0 habitant): Le statut de base, permet de
-        construire les bâtiments de rang 1, et permet la formation du
+    \item Colonie (à partir de 0 habitant) : Le statut de base, permet de
+        construire les bâtiments de rang 1, ainsi que la formation du
         travailleur et du fantassin.
-    \item Ville (à partir de 1 000 habitants): Permet de construire des
+    \item Ville (à partir de 1 000 habitants) : Débloque la construction des
         bâtiments de rang 2, et la formation du colon et de l’archer.
-    \item Mégapole (à partir de 5 000 habitants): Permet de construire des
+    \item Mégapole (à partir de 5 000 habitants) : Permet de construire des
         bâtiments de rang 3, et de former des catapultes
 \end{itemize}
 
@@ -697,40 +759,31 @@ chaque ville possède son propre avancement. Ainsi vous ne pouvez pas fonder une
 nouvelle ville près de l’adversaire et directement commencer à entraîner des
 unités lourdes. La population augmente petit à petit à chaque tour, mais sa
 croissance peut être favorisée par des bâtiments dans les villes. Ces bâtiments,
-qui ne sont pas représentés visuellement, donnent ds bonus dans les domaines
+qui ne sont pas représentés visuellement, donnent des bonus dans les domaines
 suivant:
 
 \begin{itemize}
-    \item Science (Permet d’augmenter le niveau des troupes. Il s’agit d’une
-        ressource globale liée au joueur)
-    \item Monnaie (Permet d’acheter des unités. Il s’agit d’une ressource
-        globale liée au joueur)
-    \item Production (Influe sur la vitesse de formation d’unités ou de création
-        de bâtiments. Il s’agit d’une valeur propre à chaque ville)
-    \item Joie (Influe sur la croissance de la population. Une joie trop faible
+    \item Science : augmente le niveau des troupes, il s’agit d’une ressource
+        globale liée au joueur.
+    \item Monnaie : permet d’acheter des unités dans une ville du joueur.
+    \item Production : influe sur la vitesse de formation d’unités ou de
+        création de bâtiments. Chaque ville a son propre niveau de production.
+    \item Joie : influe sur la croissance de la population. Une joie trop faible
         conduira à des malus pour les domaines précédents. Il s’agit d’une
-        valeur propre à chaque ville.)
+        valeur propre à chaque ville.
 \end{itemize}
 
-Ces quatre caractéristiques propres aux villes sont en lien direct avec le
-nombre d’habitants. Il est donc intéressant de continuer de développer une ville
-après avoir atteint le statut de mégapole, même si cela devient plus
-négligeable.
+Ces quatre domaines sont en lien direct avec le nombre d’habitants. Il est donc
+intéressant de continuer de développer une ville après avoir atteint le statut
+de mégapole, même si cela devient plus négligeable.
 
 \subsection{Économie}
 
-L’économie ne s’arrête pas qu’aux quelques ressources vues ci-dessus. En effet,
-il existe encore quelques ressources disponibles sur la map, divisées en deux
-groupes: ressources stratégiques (qui permettent de produire ou rechercher des
-unités), et ressources de luxe, aussi appelées ressources de divertissement (qui
-permettent de construire les bâtiments liés à la joie).
-
-Elles sont toutes liées au joueur et peuvent être obtenues en exploitant des
-cases ressources grâce aux travailleurs. Ces cases produisent alors une certaine
-quantité de leur ressource à chaque tour. attention toutefois: ces exploitations
-sont des structures pouvant être détruites.
-
-Voici ces ressources:
+L’économie ne s’arrête pas qu’aux quelques éléments vus ci-dessus. En effet, il
+existe encore des ressources disponibles sur la carte, divisées en deux groupes
+: ressources stratégiques (qui permettent de produire ou améliorer des unités),
+et ressources de luxe (qui permettent de construire les bâtiments liés à la
+joie).
 
 \begin{itemize}
     \item Bois (stratégique)
@@ -741,48 +794,25 @@ Voici ces ressources:
     \item Nourriture (de luxe)
 \end{itemize}
 
+Elles sont toutes spécifiques au joueur et peuvent être obtenues en exploitant
+des cases grâce aux travailleurs. Une certaine quantité de ressource est alors
+produite à chaque tour sur ces cases. Attention toutefois car ces exploitations
+sont des structures pouvant être détruites.
+
 Il est donc important de posséder le plus d’exploitations possible. En effet, un
-plus grand nombre implique une plus grande quantité de ressources chaque tour,
-et ainsi un développement plus rapide. De plus, ces ressources n’ont pas de
-limites de stockage, ce qui signifie que faire des réserves représente un
-avantage en cas d’attaque adversaire.
-
-\subsection{Interactions}
-
-Ces différents systèmes interagissent entre eux et, bien évidemment, avec le
-joueur. 
-
-Chaque unité possédant une seule application réelle (fonder une ville, exploiter
-une ressource et attaquer ; respectivement pour le colon, le travailleur, et les
-unité d’attaque), il n’a pas été nécessaire de compliquer les contrôles: les
-unités disposent d’une unique touche “action” (la touche ‘E’ par défaut) qui
-active cette capacité (là où vise la souris pour l’attaque, sur l’unité
-elle-même pour le colon et le travailleur). De plus, les unités peuvent se
-déplacer, en sélectionnant cette dernière, puis en effectuant un clic gauche sur
-la case souhaitée. Afin de permettre au joueur de réagir constamment à
-l’évolution du jeu, le déplacement s’effectue uniquement sur un tour, le joueur
-ne peut ainsi pas “planifier” de mouvements étendus sur plusieurs tours. Les
-déplacements utilisent l’algorithme A* pour la recherche de chemin, et il est
-possible de voir visuellement le chemin que va prendre l’unité. Enfin, dans le
-but de pallier aux scénarios dans lesquels la carte prendrait la forme d’une
-multitude de petites îles, il est également possible aux unités d’embarquer afin
-de traverser les étendues d’eau.
-
-Les villes quant à elles, une fois sélectionnées, activent une interface simple,
-qui permet de former des unités ou de construire des bâtiments. Il est également
-possible d’activer une fenêtre d’information permettant de voir l’état des bonus
-apportés par les bâtiments construits et les ressources produites chaque
-tour.[Est-ce qu’on compte faire ça ou pas ?]
+plus grand nombre implique une plus grande quantité de ressources produites à
+chaque tour, et ainsi un développement plus rapide. De plus, ces ressources
+n’ont pas de limites de stockage, ce qui signifie que faire des réserves
+représente un avantage en cas d’attaque adversaire.
 
 \subsection{Biomes}
 
 Un dernier élément du gameplay qui semblait important pour ce type de jeu était
-l’impact des différents types de terrain sur les unités. En effet, chaque
-“biome” a un effet sur le déplacement des unités, leur portée de vue, et dans
-certains cas sur leur vitesse de déplacement. Cela a pour but de favoriser
-certains chemins selon l’action souhaitée (une attaque rapide via une plaine, ou
-camouflée via une forêt, de l'exploration grâce à la hauteur d’une montagne,
-etc…).
+l’impact des différents types de terrain sur les unités. En effet, chaque biome
+a un effet sur le déplacement des unités, leurs vitesses, ainsi que leurs
+portées de vue. Cela a pour but de favoriser certains chemins selon l’action
+souhaitée : une attaque rapide via une plaine, camouflée via une forêt, ou
+encore l'exploration à l’aide de la hauteur d’une montagne.
 
 \section{IA (Thibault)}
 
@@ -827,69 +857,48 @@ carte)
 
 \subsection{Menu principal}
 
-Notre menu principal à beaucoup évolué lui aussi. Parti de quelques boutons
-ayant pour unique but de tester rapidement les fonctionnalités implémentées,
-faisant fi de l’esthétique, nous avons évolués vers une interface ergonomique,
-visuellement agréable et pratique. Nous avons utilisé un asset créé et mis à
-disposition gratuitement par Michsky. Utiliser un menu existant nous permettait
-de nous concentrer sur d’autres aspects graphiques du jeu nécessitant une réelle
-customisation pour suivre le thème de Pacification comme le menu in-game.
+Notre menu principal à beaucoup évolué au fil du projet. Parti de quelques
+boutons ayant pour unique but de tester rapidement les fonctionnalités
+implémentées, faisant fi de l’esthétique, nous avons évolués vers une interface
+ergonomique, visuellement agréable et pratique. Nous avons utilisé un asset créé
+et mis à disposition gratuitement par Michsky. Reprendre un menu existant nous
+permettait de nous concentrer sur d’autres aspects graphiques du jeu nécessitant
+une réelle customisation pour suivre le thème de Pacification comme l’interface
+de jeu ou les modèles 3D des unités.
 
-Nous avons toutefois personnalisé cet asset afin de le faire rentrer dans notre
-thème, modifications détaillées ci-dessous.
+Nous avons toutefois personnalisé cet asset afin de le faire rentrer dans
+l'ambiance du jeu. Le menu principal se compose de 4 boutons majeurs :
 
-Le menu principal se compose de 4 boutons majeurs (PLAY, EDITOR, SETTINGS, EXIT)
-ainsi que d’un bouton d’informations. 
+\begin{itemize}
+    \item Bouton Play : permet de lancer une partie en solo ou en multijoueur
+    \item Bouton Editor : démarre l'éditeur de carte
+    \item Bouton Settings : accède aux paramètres du jeu comme le volume, la
+        langue ou encore la luminosité
+    \item Bouton Exit : quitte le jeu
+\end{itemize}
 
-Le bouton PLAY donne accès au menu PLAY, qui regroupe les fonctionnalités de jeu
-en solo et multi permettant donc de démarrer la partie en solo, ou d'héberger ou
-rejoindre une partie pour le multi. Nous reviendrons sur ces lobbys de jeu dans
-quelques lignes. Le bouton EDITOR lance le jeu en mode éditeur (voir
-Map/Editeur). Le bouton SETTINGS donne accès au réglage du volume, de la
-luminosité ainsi que des controls et de la langue du jeu. Le bouton EXIT permet
-simplement de quitter le jeu, avec confirmation. Pour finir le bouton
-d’information affiche le nom des développeurs. On navigue de menu en menu grâce
-à des déplacements de caméras qui nous amènent sur des nouveaux canvas et des
-boutons de retour en arrière ont été ajoutés sur chaque panel pour simplifier
-cette navigation.
+La naviguation entre les menus se fait grâce à des déplacements de caméras sur
+différents canvas, ainsi que de boutons pour revenir en arrière sur chaque
+panel.
 
-\subsubsection{Play : Lobbys}
+\subsubsection{Lobbys de jeu}
 
 Au démarrage de chaque partie solo, un menu permet au joueur de définir les
-options de génération de la map en fonction de ce qu’il souhaite, ou de charger
-une map déjà préparée et sauvegardé sur son ordinateur.
+options de génération de la carte en fonction de ce qu’il souhaite, ou de
+charger une map déjà préparée et sauvegardée sur son ordinateur.
 
-En ce qui concerne les parties multijoueur, chaque joueur voit premièrement
-s’afficher un champ d’entrée de son pseudo (qui sera généré aléatoirement si
-laissé vide) et un champ d’entrée de l’IP du serveur pour les joueurs dans le
-menu JOIN (permettant de rejoindre un serveur ouvert). Après connexions, ils
-voient s’afficher sur leur écran un tableau avec les différents joueurs
-connectés, qui est mis à jour dès que l’un d’eux se déconnecte ou qu’un nouveau
-rejoint le lobby. L’hôte de la partie dispose quant à lui aussi d’un menu
-semblable à celui du solo, permettant de définir les options de génération ou de
-charger une map préparée.
+En ce qui concerne les parties multijoueur, chaque joueur voit un premier menu
+où il renseigne son speudo, ainsi que l'IP du serveur. Après connexion, les
+clients passent sur un second menu listant les différents joueurs actuellement
+connectés. L'hôte de la partie décidera des options de génération de la carte,
+ou encore de charger une sauvegarde depuis un fichier.
 
-\subsubsection{Settings: Controls manager}
+\subsubsection{Contrôles}
 
-Dans les options du menu principal, il est possible d’afficher les contrôles du
-jeu, mais aussi de les modifier afin qu’ils correspondent au mieux à la
-jouabilité souhaitée.
+Dans les options du menu principal, il est possible d’afficher et de modifier
+les différents contrôles du jeu : son, langue, luminosité, etc
 
-\subsubsection{Settings : Langues}
-
-Dans les options du menu principal, un élément “Language” par défaut permet de
-changer la langue du jeu, avec comme disponibilités Français, Anglais, Espagnol,
-Allemand.
-
-Les traductions des éléments du jeu ont été faites grâce à nos expériences
-personnelles ainsi que des outils de traductions en ligne afin de s’assurer de
-la conformité des traductions.
-
-\subsubsection{Settings : Le son}
-
-Dans les options du menu principal un slider permet de modifier le son du jeu.
-
-\subsection{Ingame}
+\subsection{Interface de jeu}
 
 En ce qui concerne les interfaces dans le jeu, nous sommes restés simple sur le
 design, parce que beaucoup de complexité était déjà présente au niveau de la
@@ -1134,7 +1143,6 @@ je suis content d’avoir fait ce projet et surtout je suis fier de ce que j’a
 accomplir avec mes camarades. Je n’hésiterai certainement pas à refaire un tel
 projet si l’occasion se représentait. 
 
-
 \section{Antoine}
 
 Pour ma part, ce projet a été une expérience très enrichissante. Cela m’a permi
@@ -1154,6 +1162,12 @@ ordinateurs à vocation de bureautique. Et son design cartoonesque en fait un je
 attractif et non-violent visuellement, qui peut alors convenir à des joueurs de
 tout âge.  Nous espérons que vous prendrez autant de plaisir à y jouer que nous
 en avons pris à le développer.
+
+\begin{figure}
+    \centering
+    \includegraphics[width=0.8\textwidth]{project_mood}
+    \caption*{\textit{Calvin and Hobbes}, Bill Watterson}
+\end{figure}
 
 \chapter{Ressources}
 

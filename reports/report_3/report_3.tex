@@ -900,201 +900,193 @@ les différents contrôles du jeu : son, langue, luminosité, etc
 
 \subsection{Interface de jeu}
 
-En ce qui concerne les interfaces dans le jeu, nous sommes restés simple sur le
-design, parce que beaucoup de complexité était déjà présente au niveau de la
-gestion de chaque panel pour conserver une bonne ergonomie.
+En ce qui concerne l’interface dans le jeu, nous sommes restés sur un design simple, 
+car la gestion de chaque panel était déjà assez complexe, notamment afin de conserver 
+une bonne ergonomie.
 
-Sélectionner une unité ou une construction dans le jeu fait apparaître un menu
-correspondant à cette object. Une selection de ville fera par exemple apparaître
-l’interface de la caserne permettant de développer des unités. Dans les menus de
-chaque objet apparaît aussi sa vie restante, son appartenance (quel joueur
-détient cet objet) et quelques statistiques à son sujet.
+Sélectionner une unité ou une construction dans le jeu fait apparaître un menu correspondant 
+à cet objet. Une selection de ville fera par exemple apparaître l’interface de la caserne permettant 
+de développer des unités. Dans les menus de chaque objet apparaît aussi sa vie restante, 
+son propriétaire et quelques statistiques à son sujet.
 
-En jeu comme en mode éditeur un bandeau d’information est disponible en haut de
-l’écran. Il affiche en jeu des informations sur le joueur et son empire (argent,
-productivité, science, bonheur de la population) ainsi que le nombre de tours
-qui est passé et un accès au menu pour se déconnecter.
+\textit{image menus ville/unité...}
 
-Enfin, un tchat est disponible pour s’envoyer des messages ou utiliser des
-commandes spéciales. Son développement a représenté un certain challenge vis à
-vis de l’interface, mais aussi du déroulement du jeu, pour que son utilisation
-n’interfère pas avec le jeu même, mais représente un élément important notamment
-pour l’aspect multijoueur.
+En jeu comme en mode éditeur, un bandeau d’information est disponible en haut de l’écran. En partie, 
+il affiche des informations sur le joueur et son empire (argent, science, ressources...), ainsi que le 
+nombre de tours écoulés, et un accès au menu pour se déconnecter.
+
+Enfin, un tchat est disponible pour envoyer et recevoir des messages, recevoir des notifications du jeu, 
+ou utiliser des commandes spéciales. Son développement a représenté un certain challenge vis à vis de 
+l’interface, mais aussi du déroulement du jeu, afin que son utilisation n’interfère pas avec le jeu même. 
+Malgré tout, il représente un élément important, notamment pour l’aspect multijoueur.
 
 \subsection{Éditeur}
 
-L’interface de l’éditeur de map reste simple et se compose d’un bandeau qui
-contient des boutons permettants de sauvegarder, charger ou générer une carte
-facilement et rapidement.
-
-Sur les bords droit et gauche de l’écran, des panels permettent de changer ce
-qui sera modifier le terrain (biome, eau, élévation) mais aussi ce qui est
-présent sur ce terrain comme les ressources inexploitées (minerais, forêts,
-champs, …) 
+L’interface de l’éditeur de map reste simple. On retrouve en haut de l’écran un bandeau qui contient des 
+boutons permettant de sauvegarder, charger ou générer une carte facilement et rapidement. Sur les bords 
+droit et gauche de l’écran, des panels permettent de modifier le terrain (biome, eau, élévation) mais aussi ce 
+qui est présent dessus, comme les ressources inexploitées (minerais, forêts, champs, etc.).
 
 \section{Site web (Valérian)}
 
 \subsection{Développement}
 
-En ce qui concerne le développement du site, celui ci est composé d’HTML, de CSS
+En ce qui concerne le développement du site, celui-ci est composé d’HTML, de CSS
 ainsi que de PHP.
 
-Pensé pour être pratique au niveau de la navigation, le site reste simple dans
-son design, et clair, en ne surchargeant pas le visiteur d’informations. 
+Pensé pour être pratique au niveau de la navigation, le site reste simple et clair dans
+son design, en ne surbmergeant pas le visiteur d’informations. 
 
-Son développement s’est déroulé sans accrocs et en avance sur le planning
-défini.
+Son développement s’est déroulé sans accrocs et en avance sur le planning défini.
 
 \subsection{Hébergement}
 
-Si dans un premier temps notre site était hébergé grâce à GitPages, il à été
+Si dans un premier temps notre site était hébergé grâce à GitPages, il a été
 nécessaire de changer d’hébergement à mesure que son développement avançait. En
-effet, avec l’arrivée de PHP dans le site, il était impossible de rester sur
+effet, avec l’arrivée de PHP dans le code du site, il était impossible de rester sur
 notre premier choix d'hébergement qui ne le supportait pas.
 
 Nous avons donc migré le site vers un hébergement fourni par Lixia, un groupe
-qui propose beaucoup de services de ce type gratuitement.
-
-Cela nous a permis d’obtenir un nom de domaine \url{pacification.lxa.li}, ainsi
-que des adresses mails pour proposer un support technique du jeu. 
+qui propose beaucoup de services de ce type, et ce gratuitement. Cela nous a permis 
+d’obtenir un nom de domaine, \url{pacification.lxa.li}, ainsi que des adresses mail pour 
+proposer un support technique du jeu. 
 
 \subsection{Fonctionnalités}
 
 Notre site web se compose de 6 onglets permettant d'accéder à toutes les
 informations pour suivre le développement.
 
-L’onglet “Accueil” permet de suivre l’avancée du jeu grâce à un listing des
-mises à jour et un détail de ce qui à été ajouté.
+\begin{itemize}
+	\item L’onglet “Accueil” permet de suivre l’avancée du jeu grâce à un listing 
+	des mises à jour et un détail de ce qui à été ajouté.
+	\item L’onglet “Comment jouer ?” permet aux joueurs d’apprendre à prendre en main 
+	notre jeu, en détaillant le déroulement d’une partie et quelques stratégies pour bien 
+	commencer.
+	\item L’onglet “L’équipe” présente les personnes ayant développé ce jeu, en offrant quelques 
+	anecdotes sur elles.
+	\item L’onglet “Ressource” crédite les créateurs des différents éléments que nous avons pu 
+	utiliser lors le développement du jeu, comme  les musiques, ou l’asset du menu.
+	\item L’onglet “Contenu supplémentaire” offre quant à lui la possibilité aux joueurs de télécharger 
+	et/ou proposer des maps créées dans l’éditeur du jeu. Cela permet de proposer une dimension 
+	communautaire au jeu, avec donc la possibilité de créer des scénarios et de les partager avec 
+	d'autres joueurs.
+	\item L’onglet “Téléchargement” permet pour sa part de télécharger la dernière version du jeu.
+\end{itemize}
 
-L’onglet “Comment jouer ?” permet aux joueurs d’apprendre à prendre en main
-notre jeu, en détaillant le déroulement d’une partie et quelques stratégies pour
-bien commencer.
-
-L’onglet “L’équipe” présente les membres de l’équipe qui à développé ce jeu, en
-offrant quelques anecdotes sur eux.
-
-L’onglet “Ressource” donne crédits aux différents éléments de créateurs que nous
-avons pu utiliser dans le développement du jeu, tel que les musiques, ou l’asset
-du menu.
-
-L’onglet “Contenu supplémentaire” offre quant à lui la possibilité aux joueurs
-de télécharger et/ou proposer des maps de jeu créé dans l’éditeur du jeu. Cela
-permet de proposer une dimension de jouabilité plus grande avec donc la
-possibilité de créer des scénarios de jeux et les partager avec la communauté de
-joueurs.
-
-L’onglet “Téléchargement” permet pour sa part de télécharger la dernière version
-du jeu.
-
-Egalement disponible sur toutes les pages, sont présentes les archives de notre
-développement, comprenant les version du jeu à chaque soutenance, ainsi que les
+Sur toutes les pages, on retrouve également un lien vers les archives de notre
+développement, comprenant les versions du jeu pour chaque soutenance, ainsi que les
 divers documents à rendre tel que le cahier des charges et les rapports de
 soutenances.
 
 Diverses images et captures du jeu sont disponibles sur le site afin de
-permettre aux visiteurs d’avoir une idée de celui-ci.
+permettre aux visiteurs d’avoir un exemple visuel de celui-ci.
 
 \section{Assets (Cédric)}
 
 \subsection{Design}
 
-Pour l’aspect général du jeu nous avons opté pour un style cartoon low poly afin
-d’obtenir un rendu visuel agréable mais également pour éviter que les modèles ne
-soient trop complexes à créer.
+Pour l’aspect général du jeu, nous avons opté pour un style cartoon avec peu de 
+polygones, afin d’obtenir un rendu visuel agréable, mais également pour éviter 
+que les modèles ne soient trop complexes à créer. 
 
 \subsection{Création}
 
-Créer les objets 3D se déroule en plusieurs étapes et les méthodes ont été
-différentes en fonction du type d’objet à concevoir. Pour les unités, il fallait
-un modèle original sur lequel se baser afin de faire toutes les unités humaines.
-Pour sa conception, un dessin est utilisé comme référence, puis différentes
-modifications sont appliquées à un cube (extrusion, rotation, élargissement,...)
-afin de faire correspondre la forme que créé à partir avec le dessin. Blender
-possède des options fortement utiles comme l’option miroir qui permet de n’avoir
-qu’à créer qu’un seul côté d’un objet tandis que l’autre se crée automatiquement
-par symétrie. Une fois le personnage créé, une autre fonctionnalité de Blender
-appelée “subdivision surface” permet de diviser les polygones constituant le
-personnage en d’autres plus petits, permettant ainsi d’arrondir les parties
-visuelles trop angulaires et disgracieuses du modèle. Une fois ce modèle
-humanoïde créé, pour fabriquer les morceaux d’armures et et de vêtements, il a
-suffit d’extruder et d’élargir certaines parties et de séparer des morceaux de
-l’objet afin de pouvoir leur attribuer à chacun une texture différente. Les
-armes ont quant à elles été conçu en se basant sur des images, de la même
-manière que le modèle humain.
+Pour la conception des unités et des armes, un dessin est utilisé comme référence: 
+différentes modifications sont appliquées à un cube (extrusion, rotation, élargissement, 
+etc.) afin de faire correspondre sa forme avec celle du dessin. Blender possède des 
+options fortement utiles comme l’option miroir, qui permet de n’avoir à créer qu’un seul 
+côté d’un objet tandis que l’autre se complète automatiquement par symétrie.
 
-Concernant les différents bâtiments, il a fallu créer les différentes parties
-(piliers de bois, toit, rempart et tour du château,...), ensuite les assembler
-de diverse manière pour obtenir différentes formes tout en gardant un aspect
-esthétique cohérent. Le procédé fut le même pour l’environnement naturel des
-bâtiments de ressources : De nombreuses formes de rochers et d’arbres ont été
-fabriqués puis dupliqués afin de créer les mines et les forêts.
+Une fois le personnage modélisé, une autre fonctionnalité de Blender appelée 
+\textit{“subdivision surface”} permet de diviser les polygones constituant le personnage 
+en d’autres plus petits. Cela permet ainsi d’arrondir les parties visuelles trop angulaires 
+et disgracieuses du modèle.
 
-Toutes les textures ont été créées par notre équipe grâce aux fonctionnalités
-proposé par Blender et au logiciel de dessin Krita. Pour les appliquer sur les
-modèles 3D, nous utilisons une méthode appelée “UV Mapping”. Il faut pour cela
-“découper” notre objet 3D afin d’obtenir l’équivalent d’un patron qui sera
-déplacé et modifié sur l’image qui servira de texture à l’objet. Pour d’autres
-parties commes les armures des unités nous n’avons pas utilisé cette technique
-et nous nous sommes contenté de créer un nouveau matériau en lui donnant une
-couleur spécifique et en modifiant certaines propriétés pour qu’il reflète la
-lumière plus ou moins bien.
+\textit{image modèle humanoïde de base}
 
-Une fois les modèles créés, ils sont importés sur Unity. Pour cela il a fallu
-exporter les modèles 3D sous le format FBX avec les matériaux et les textures
-utilisés. Il suffit alors ensuite d’assigner les bonnes textures aux bons
-matériaux et les bons matériaux aux modèles 3D.
+Une fois ce modèle humanoïde créé, pour fabriquer les morceaux d’armures et de 
+vêtements, il a suffit d’extruder et élargir certaines parties puis de séparer des 
+morceaux de l’objet afin de pouvoir leur attribuer à chacun une texture différente. 
 
-Les textures utilisées pour les différents biomes présents sur la carte du jeu
-ont été créées de manière procédurale grâce à un plug-in de Unity appelé “Number
-Flow”.
+Concernant les différents bâtiments, il a fallu créer les différentes parties (piliers 
+de bois, toit, rempart et tour de château,...), avant de les assembler de diverses 
+manières pour obtenir différentes formes, tout en gardant un aspect esthétique 
+cohérent. Le procédé fut le même pour l’environnement naturel des bâtiments de 
+ressources: de nombreuses formes de rochers et d’arbres ont été modélisées puis 
+dupliquées afin de créer les mines et les forêts.
+
+Toutes les textures ont été créées par nos soins grâce aux fonctionnalités proposé par 
+Blender, ainsi qu’au logiciel de dessin Krita. 
+
+\textit{images textures StrawRoof, WoodPillar, DarkStoneWall}
+
+Pour les appliquer sur les modèles 3D, nous utilisons une méthode appelée l’UV Mapping. 
+Il faut pour cela découper notre objet 3D afin d’obtenir l’équivalent d’un patron qui sera 
+ensuite déplacé puis modifié sur l’image qui servira de texture à l’objet. Pour d’autres 
+parties commes les armures, c’est une autre méthode qui  été utilisé. Nous nous sommes 
+contentés de créer un nouveau matériau en lui donnant une couleur spécifique et en 
+modifiant certaines de ses propriétés, afin qu’il reflète plus ou moins bien la lumière. Une 
+fois les modèles terminés, ils sont importés sur Unity. Cela passe par l’exportation des 
+modèles 3D sous le format FBX avec les matériaux et les textures utilisés, puis par l’assignation 
+des textures aux matériaux, puis des matériaux aux modèles 3D.
+
+Les textures utilisées pour les différents biomes présents sur la carte du jeu ont été créées de 
+manière procédurale à l’aide d’un plug-in de Unity, nommé \textit{"Number Flow"}.
+
+\textit{images textures Plain, Snow, etc.}
 
 \subsection{Animations}
 
-Pour animer les unités il fallait tout d’abord des armatures. Un premier
-squelette avait été construit sur le modèle humanoïde de référence cependant,
-l’animation manuelle des différentes parties du corps étaient extrêmement
-difficile à maîtriser et le résultat obtenu était très loin d’être convenable.
-Par conséquent pour les unités humanoïdes, nous avons exporté nos unités sur le
-site Mixamo qui permet de créer une armature automatiquement sur nos personnages
-en se basant sur des points de repères (menton, coudes, genoux,...) que nous
-plaçons sur eux. De plus le site possède une bibliothèque très complète de
-diverses animations de personnages. Nous avons donc utilisé des animations
-adaptés à nos unités comme pour les soldats d’infanterie pour lesquels nous
-avons choisi des animations de personnages maniant l’épée et le bouclier.
+Les unités disposent de 3 types d’animations: l’attaque, le déplacement et la mort.
 
-Cependant ce site ne s’occupe que des modèles humanoïdes. Pour animer d’autres
-unités comme la catapulte il a fallu recourir aux armatures créées dans blender.
-Pour ce modèle cela ne fut pas très compliqué car les différents os n’étaient
-pas relié entre eux.  Un os pour bouger le “bras” de la catapulte, et 4 os pour
-faire tourner les roues. Pour créer l’animation il faut utiliser l’armature pour
-faire bouger le modèle 3D et enregistrer les positions de l’objet pour une
-image. Par exemple en enregistrant les positions du “bras” de la catapulte à sa
-position de base à l’image 0 puis à l’image 10, Blender va créer lui même
-l’animation grâce aux positions de références.
+\textit{images d'animations. MDR, ça choque personne ce magnifique pléonasme ?}
 
-Pour les unités il y a 3 types d’animations : Une d’attaque, une de déplacement
-et une animation de mort.
+L’animation des unités passe d’abord par la création d’un squelette. Un premier avait été 
+construit sur le modèle humanoïde de référence. Cependant, l’animation manuelle des 
+différentes parties du corps était très difficile à maîtriser et le résultat obtenu loin d’être 
+convenable.
+
+\textit{image modèle humanoïde avec armature}
+
+Par conséquent, pour les unités humanoïdes, nous avons exporté nos modèles sur le site 
+\textit{Mixamo} qui permet de créer une armature automatiquement sur nos personnages 
+en se basant sur des points de repères (menton, coudes, genoux,...). De plus le site possède 
+une bibliothèque très complète d’animations diverses, offrant une grande variété de choix afin 
+de trouver l’animation qui correspond le mieux à nos situations.
+
+\textit{screenshot Mixamo}
+
+Cependant ce site ne s’occupe que des modèles humanoïdes. Pour animer d’autres unités comme 
+la catapulte ou le canon, il a été nécessaire de recourir aux armatures créées dans \textit{Blender}. 
+Ces modèles furent moins complexes à animer, car les différents os n’avaient pas à être reliés entre 
+eux: un os pour bouger le “bras” de la catapulte, et 4 os pour faire tourner les roues.
+
+Pour créer l’animation, il faut utiliser l’armature pour faire bouger le modèle 3D, et enregistrer chaque 
+position de l’objet dans une image. \textit{Blender} va créer lui même l’animation grâce aux positions 
+enregistrées.
+
+\textit{screenshot de la catapulte dans blender}
 
 \subsection{Son}
 
-Différentes musiques se lancent pendant le déroulement du jeu, permettant
-d’ajouter une ambiance sonore agréable favorisant l’immersion du joueur.
+Différentes musiques se lancent lors du déroulement du jeu, permettant d’ajouter une 
+ambiance sonore agréable favorisant l’immersion du joueur.
 
-Plusieurs effets sonores sont aussi présents comme la notification de message
-dans le tchat, ou l’apparition d’une tribu barbare dans les environs.
+Plusieurs effets sonores sont aussi présents, comme la notification de message dans le 
+tchat, ou le son d’apparition d’une tribu barbare dans les environs.
 
 \section{Logos (Valérian)}
 
 \subsection{Création}
 
-En ce qui concerne le logo PACIFICATION, il a été réalisé en se basant sur une
-police d’écriture nommée Cubix, qui a ensuite été modifiée par nos soins sur le
-site FontStruct.
+En ce qui concerne le logo \textit{Pacification}, il a été réalisé en se basant sur une 
+police d’écriture nommée \textit{Cubix}, qui a ensuite été modifiée par nos soins sur 
+le site \textit{FontStruct}.
 
-Le logo de Brainless Devs’, nom de notre groupe, à été plus complexe à réaliser.
-Il a fallu dans un premier temps définir tous ensemble le caractère de notre
-logo, avant de se lancer dans sa construction. Nous sommes parti vers quelque
-chose de simple et clair, en noir et blanc.
+Le logo de \textit{Brainless Devs}, nom de notre groupe, à été plus complexe à réaliser.
+Il a fallu dans un premier temps définir tous ensemble le caractère de notre logo, 
+avant de se lancer dans sa construction. Nous sommes parti vers quelque chose 
+de simple et clair, en noir et blanc.
 
 Souhaitant avoir autre chose que du texte dans ce logo, nous avons représenté un
 Stickman assis, adossé aux initiales du nom du groupe. Afin qu’il corresponde au
@@ -1108,60 +1100,83 @@ d’une tablette graphique.
 
 L’inspiration du Stickman provient des animations d’Alan Becker, sur Youtube,
 qui représente les aventures de Stickmen s’agitant dans un écran d’ordinateur
-ainsi que des webcomics xkcd (xkcd.com). 
+ainsi que des webcomics xkcd (\textit{xkcd.com}). 
 
 \chapter{Expériences personnelles}
 
 \section{Thibault}
 
+\textit{PARTIE A VERIFIER!}
+
+%Ce projet a été un gros investissement, tant au niveau du code que du groupe. En effet, étant chef de projet, il m’a fallu diriger efficacement le groupe pour s’assurer de la réussite des objectifs. C’est une tâche importante que je suis ravi d’avoir réalisé, car elle m’a appris à mieux me débrouiller pour des projets de groupes. 
+%Ensuite, au niveau du projet en lui même, j’ai adoré pouvoir découvrir et exploiter un outil comme ♡Unity♡. Cela à aussi été l’occasion de développer mes compétences en C\#. 
+E%n conclusion, voir progresser ce projet de semaines en semaines est une sensation formidable, et le voir terminé me rempli de joie.
+
 \section{Valérian}
 
-Au cours des mois qui ont suivi le début du projet,j’ai pu apprendre beaucoup,
-et je retire de cette expérience de bon souvenirs. Si dans un premier temps, je
-me suis principalement concentré sur le réseau du jeu, et donc du code pur, j’ai
-pu ensuite découvrir d’autres aspects du projet en travaillant sur l’interface
-de jeu. Cela m’a appris à mieux utiliser et maîtriser Unity. 
+Au cours des mois qui ont suivi le début du projet,j’ai pu apprendre beaucoup, 
+et je retire de cette expérience de bons souvenirs. Si dans un premier temps,
+ je me suis principalement concentré sur le réseau du jeu, et donc du code pur, 
+j’ai pu ensuite découvrir d’autres aspects du projet en travaillant sur 
+l’interface de jeu. Cela m’a appris à mieux utiliser et maîtriser Unity.
 
 C’est aussi avec l’outil de collaboration Git que mon expérience grandit.
-L’ayant en effet utilisé pour le développement du projet, j’ai pu en apprendre
-plus à son sujet et à sa manipulation. 
+ L’ayant en effet utilisé pour le développement du projet, j’ai pu en 
+apprendre plus à son sujet, notamment sur sa manipulation. 
 
-C’est au final beaucoup de compétences nouvelle que j’ai pu acquérir durant ces
-derniers mois, et c’est avec beaucoup de joie que je conclue ce projet, heureux
-et fier d’avoir, avec mon équipe, mené à bien son développement.
+Au final, j’ai pu acquérir beaucoup de compétences nouvelles durant ces derniers
+ mois, et c’est avec beaucoup de joie que je conclus ce projet, heureux et fier
+ d’avoir, avec mon équipe, mené à bien son développement.
 
 \section{Cédric}
 
-Ce projet m’aura appris l’importance du travail de groupe dans de telles
-travaux. Ce fut une expérience enrichissante car j’ai pu améliorer mes
-compétences sur des logiciels que j’utilisais déjà auparavant comme Blender mais
-j’ai aussi pu apprendre à utiliser Unity que je compte bien continuer à
-exploiter pour des projets personnels. 
+Ce projet m’aura appris l’importance du travail de groupe dans de tels travaux. 
+Ce fut une expérience enrichissante, car j’ai pu améliorer mes compétences sur 
+des logiciels que j’utilisais déjà auparavant comme Blender. Mais j’ai aussi pu 
+apprendre à en utiliser d’autres comme Git et Unity, que je compte bien 
+continuer à exploiter pour des projets personnels.
 
-Il y a eu des moments stressants d’autres plus agréables, mais dans l’ensemble
-je suis content d’avoir fait ce projet et surtout je suis fier de ce que j’ai pu
-accomplir avec mes camarades. Je n’hésiterai certainement pas à refaire un tel
-projet si l’occasion se représentait. 
+Il y a eu des moments stressants, d’autres plus agréables, mais dans l’ensemble 
+je suis content d’avoir fait ce projet, et je suis fier de ce que j’ai pu accomplir
+ avec mes camarades. Je n’hésiterai pas à le refaire si l’occasion se représentait. 
 
 \section{Antoine}
 
-Pour ma part, ce projet a été une expérience très enrichissante. Cela m’a permi
-de découvrir et d’apprendre à me servir du moteur de jeu Unity3D, de m'entraîner
-davantage avec le langage C\#. Mais cela m’a surtout donné une petite idée du
-fonctionnement des projets de groupe, et des difficultés qui y sont liées.
+Pour ma part, ce projet a été une expérience très enrichissante. Cela m’a permi 
+de découvrir et d’apprendre à me servir du moteur de jeu Unity3D, de m'entraîner 
+davantage avec le langage C\#. Mais cela m’a surtout donné une petite idée du 
+fonctionnement des projets de groupe, et des difficultés qui y sont liées,
+ notamment s’entendre sur la manière de travailler et sur nos différentes idées 
+pour le projet. 
+
+De plus, j’ai découvert l'intérêt de Git, et même si je ne maîtrise pas encore 
+totalement cet outil, j’ai pu en découvrir les bases et je comprend à quel point il 
+me sera utile par la suite. 
+
+Au final, c’est un projet que j’ai énormément apprécié, et je suis fier du résultat 
+obtenu.
 
 \chapter{Conclusion}
 
-Pour conclure, Pacification est un jeu de stratégie en tour par tour. La
-diversité de ses unités, la génération aléatoire de la carte, ses systèmes
-complet et sa prise en main facile en font un jeu complexe mais accessible
-cependant au experts comme au novices. Il s’agit d’un jeu auquel on peut jouer
-et rejouer, seul ou à plusieurs, en se perfectionnant au fil du temps et en
-changeant ses stratégies. Sa légèreté le rend même utilisable sur des
-ordinateurs à vocation de bureautique. Et son design cartoonesque en fait un jeu
-attractif et non-violent visuellement, qui peut alors convenir à des joueurs de
-tout âge.  Nous espérons que vous prendrez autant de plaisir à y jouer que nous
-en avons pris à le développer.
+Pour conclure, Pacification est un jeu de stratégie en tour par tour. La diversité 
+de ses unités, la génération aléatoire de la carte, ses systèmes complet et sa prise
+ en main facile en font un jeu complexe mais accessible cependant au experts
+ comme au novices. Il s’agit d’un jeu auquel on peut jouer et rejouer, seul ou à
+ plusieurs, en se perfectionnant au fil du temps et en changeant ses stratégies. 
+Sa légèreté le rend même utilisable sur des ordinateurs à vocation de bureautique, 
+et son design cartoonesque en fait un jeu attractif et non-violent visuellement,
+ qui peut alors convenir à des joueurs de tout âge.
+
+Il aura fallu des mois de développement pour arriver à ce résultat. En commençant
+ par un éditeur de map et d’un réseau “fait-maison”, autour desquels l’équipe a
+ construit le jeu que nous pouvons désormais présenter fièrement. En y ajoutant 
+petit à petit toutes les fonctionnalités essentielles telles que le brouillard de guerre
+ ou le support des entités sur la carte, et en le perfectionnant afin d’obtenir une
+ expérience amusante pour le joueur, afin de lui donner envie de continuer à jouer.
+
+Nous espérons que vous prendrez autant de plaisir à y jouer que nous en avons pris 
+à le développer.
+
 
 \begin{figure}
     \centering
@@ -1173,18 +1188,33 @@ en avons pris à le développer.
 
 Assets 3D
 pour le canon
-\url{https://www.youtube.com/watch?v=5ivs_jSWraM&t=2050s}
+\url{https://youtu.be/5ivs_jSWraM}
 
 château
-\url{https://www.youtube.com/watch?v=HIy1YHC9aes&t=874s}
+\url{https://youtu.be/HIy1YHC9aes}
 
 modèle humanoïde de base
-\url{https://www.youtube.com/watch?v=92IdzxwYEWY}
+\url{https://youtu.be/92IdzxwYEWY}
 
 interface du menu principal
-\url{https://www.youtube.com/watch?v=nxLc-BaqZag}
+\url{https://youtu.be/nxLc-BaqZag}
 
 Réseau
-\url{https://www.youtube.com/watch?v=-nLP0Qz81fE&list=PLLH3mUGkfFCVXrGLRxfhst7pffE9o2SQO}
+\url{https://goo.gl/wX3a96}
+
+Documentation officielle de unity
+\url{https://docs.unity3d.com/Manual/index.html}
+
+Génération procédurale:
+\url{http://forums.conifergames.com/index.php?topic=158}
+
+Carte d’Hexagones:
+\url{https://www.redblobgames.com/grids/hexagons/}
+\url{https://catlikecoding.com/unity/tutorials/hex-map/part-1/}
+
+Police d’écriture;
+\url{https://fontstruct.com/}
+\url{https://www.dafont.com/fr/}
+
 
 \end{document}

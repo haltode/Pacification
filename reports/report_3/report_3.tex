@@ -22,6 +22,7 @@
 \usepackage{wrapfig}
 \usepackage{calc}
 \usepackage{float}
+\usepackage{verbatim}
 
 \graphicspath{ {../../static/} {img/} }
 \setlength{\droptitle}{-10em}
@@ -52,10 +53,10 @@
 
 \chapter{Remerciements}
 
-Nous souhaiterions remercier Jasper Flick pour ses articles C\#/Unity d'une
-excellente qualité (\url{https://catlikecoding.com/}), Michsky pour son asset de
-menu mis à notre disposition, ainsi que le site \url{www.mixamo.com} qui nous a
-permi d’obtenir des animations pour nos personnages.
+Nous souhaiterions remercier Jasper Flick pour ses articles C\#/\textsc{Unity}
+d'une excellente qualité (\url{https://catlikecoding.com/}), Michsky pour son
+asset de menu mis à notre disposition, ainsi que le site \url{www.mixamo.com}
+qui nous a permis d’obtenir des animations pour nos personnages.
 
 Enfin nous voudrions remercier profondément toutes les personnes qui nous ont
 aidés au cours du développement de notre jeu, que ce soit au niveau de conseils
@@ -74,13 +75,19 @@ possibilité de personnaliser votre expérience de jeu en créant vos propres
 territoires de batailles.
 
 Il s’agit d’un projet ambitieux que nous avons pu mener à terme, mêlant nos
-compétences et nos expériences. Ayant réalisé par nous même l’intégralité des
-modèles 3D et textures du jeu, nous sommes fiers du rendu final de ce projet
-auquel nous avons dédié beaucoup de temps.
+compétences et nos expériences, et en y dédiant beaucoup de temps. Ayant réalisé
+par nous-même l’intégralité des modèles 3D et textures du jeu, nous sommes fiers
+du rendu visuel ainsi que des différentes mécaniques de jeu implémentées.
 
-Ce rapport aura pour objectif de vous présenter un compte-rendu de tout ce
-semestre, avec les évolutions au cours du temps et l'accomplissement des
-objectifs, de même que la répartition des tâches au sein du groupe.
+Ce document est le compte-rendu final de notre projet. Celui-ci fera le bilan de
+l'intégralité du travail en détaillant les fonctionnalités apportées pour chacun
+des éléments qui composent Pacification.
+
+De plus, ce rapport vous renseignera aussi sur nos attentes, sur les difficultés
+qui ont été rencontrées et sur les solutions que nous avons apportées, tout en
+se référant à notre cahier des charges initial. Vous trouverez des informations
+sur la redistribution des tâches, leur planning de réalisation, ainsi que nos
+ressentis personnels après ces cinq mois de travail sur ce projet.
 
 \chapter{Généralités}
 
@@ -92,7 +99,7 @@ avons opté pour le jeu de stratégie. Plusieurs réunions nous ont permis de fi
 les prémices du jeu, ainsi que les fonctionnalités voulues.
 
 Pacification prend son inspiration dans divers jeux stratégiques cultes tels que
-Age of Empire mais aussi particulièrement Civilization. En effet, notre jeu
+Age of Empire, mais aussi particulièrement Civilization. En effet, notre jeu
 ressemble aux jeux type 4X (eXplore, eXpand, eXploit, eXterminate) dont le
 premier représentant a été Empire (1977) et dont d’autres exemples sont très
 connus (la série Civilization, Master of Orion). Ces jeux ont des codes
@@ -103,7 +110,7 @@ globale sur la carte du monde.
 Avec cet objectif en tête, il s’agissait alors de déterminer le nom  du jeu
 auquel nous allions donner vie. Cette partie fut sans conteste la plus longue de
 notre première réunion. L’objectif étant de combiner une appellation à la fois
-humoristique et originale, d’où l’ironie de “Pacification” puisque l’une des
+humoristique et originale, d’où l’ironie de Pacification puisque l’une des
 occupations principales du jeu est de « pacifier les tribus barbares », car
 comme disait Montaigne, « chacun appelle barbarie ce qui n’est pas de son usage
 ».
@@ -129,18 +136,18 @@ plus aucunes unités ou villes ennemies ne doit rester debout.
 
 \section{Logiciels utilisés}
 
-Pour réaliser ce projet nous avons utilisé le moteur de jeu Unity, l’avantage
-étant qu’il s’agit d’un moteur puissant, complet et grandement documenté. Ceci
-nous a permi de réaliser un jeu en 3D stable avec un multijoueur en un temps
-raisonnable. Unity supporte le scripting en C\#, un langage de programmation
-orienté objet développé par Microsoft, que nous avons utilisé tout au long du
-projet. Le paradigme orienté objet est un choix indispensable pour maintenir un
-projet aussi conséquent, afin de profiter des avantages de l’encapsulation, de
-l’héritage, ainsi que du polymorphisme.
+Pour réaliser ce projet nous avons utilisé le moteur de jeu \textsc{Unity},
+l’avantage étant qu’il s’agit d’un moteur puissant, complet et grandement
+documenté. Ceci nous a permis de réaliser un jeu en 3D stable avec un
+multijoueur en un temps raisonnable. \textsc{Unity} supporte le scripting en
+C\#, un langage de programmation orienté objet développé par Microsoft, que nous
+avons utilisé tout au long du projet. Le paradigme orienté objet est un choix
+indispensable pour maintenir un projet aussi conséquent, afin de profiter des
+avantages de l’encapsulation, de l’héritage, ainsi que du polymorphisme.
 
 Le second logiciel qui a été nécessaire à la réalisation de nos assets, est
-Blender. Un logiciel de modélisation, d’animation et de rendu 3D très populaire
-et gratuit.
+\textsc{Blender}. Un logiciel de modélisation, d’animation et de rendu 3D très
+populaire et gratuit.
 
 Enfin, nous n’aurions pu mener ce projet à bien sans Git, un gestionnaire de
 version, ainsi que GitHub pour l'hébergement du dépôt du projet.
@@ -178,12 +185,20 @@ version, ainsi que GitHub pour l'hébergement du dépôt du projet.
 
 \section{Répartition des tâches}
 
-Seulement deux changements mineurs pour les rôles, après la première soutenance
-nous nous sommes rendu compte que les assets demanderaient énormément de temps
-et que l'interface serait une partie importante du jeu, Antoine et Valérian sont
-donc passés suppléants UI afin d'aider Cédric.
+Les rôles des membres ont été répartis selon les souhaits de chacun. Cédric, qui
+a toujours été intéressé par le design et la 3D a donc naturellement choisi de
+s'occuper des assets et de l'interface. Thibault a préféré s'occuper de la map
+et de l'IA. Valérian, quant à lui, était plus intéressé pour apprendre à
+manipuler un réseau et un site web. Enfin, Antoine a choisi de s'occuper des
+différentes mécaniques du jeu à proprement parler.
 
-\vspace{0.5cm}
+Tout le monde a été satisfait de son rôle. Cependant, arrivé à la première
+soutenance, nous nous sommes rendu compte que les assets prenaient beaucoup de
+temps à être créées, ce qui diminuait le temps que Cédric pouvait consacrer à
+l'interface. Il a donc été décidé que Valérian et Antoine deviendront suppléants
+UI afin de l'assister.
+
+\vspace{1cm}
 
 \begin{center}
     \begin{tabular}{@{} l *4c @{}}
@@ -202,10 +217,16 @@ donc passés suppléants UI afin d'aider Cédric.
     \end{tabular}
 \end{center}
 
+\newpage
+
 \section{Objectifs des soutenances}
 
-Plannifier autant de tâches à l'avance n'était pas évident, cependant nos
-estimations étaient plutôt bonnes et nous avons su nous y tenir jusqu'au bout.
+Au début du projet, nous avons estimé l'avancement de chaque partie de notre
+jeu, afin de le réaliser dans les temps. Plannifier autant de tâches à l'avance
+n'était pas évident, cependant nos estimations étaient plutôt bonnes et nous
+avons su nous y tenir jusqu'au bout.
+
+\vspace{0.5cm}
 
 \begin{center}
     \begin{tabular}{@{} l *4c @{}}
@@ -226,41 +247,70 @@ estimations étaient plutôt bonnes et nous avons su nous y tenir jusqu'au bout.
     \end{tabular}
 \end{center}
 
+\vspace{0.5cm}
+
+Pour la première soutenance, les points prioritaires étaient la création de la
+carte de jeu, et l'établissement d'une passerelle réseau pour lier les joueurs.
+En effet, la carte de jeu était essentielle à la suite du développement, car il
+s'agit du support sur lequel le jeu se base, et pour ce qui est du réseau, il
+fallait le prendre en compte rapidement dans le code pour éviter de se retrouver
+bloqué quelques mois plus tard. De plus, le réseau était un élément alors
+totalement nouveau pour chacun d'entre nous, cela signifiant que tout était à
+apprendre.
+
+Pour la seconde soutenance, c'est le gameplay qui était au cœur des
+préoccupations. Possédant une carte et un réseau fonctionnel, il fallait
+désormais lier le tout et implémenter les premières interactions entre le joueur
+et son jeu. La génération procédurale ainsi que le brouillard de guerre ont été
+rajoutés à la carte, et le réseau a dû suivre les différents avancements des
+autres parties. Les modèles 3D ont pu être terminé dans les temps pour cette
+soutenance.
+
+\newpage
+
+Enfin, pour la troisième et dernière soutenance, c'est l'interface qui se devait
+d'être améliorée. Si elle a longtemps été temporaire, pratique pour tester les
+éléments qui étaient ajoutés au jeu rapidement, notre interface s'est vu
+renouvelée et améliorée pour cette dernière soutenance. Toute l'économie du jeu
+fut implémentée, pour suivre nos attentes initiales d'un point de vue
+stratégique. Nous avons aussi eu le temps de rajouter des éléments à notre jeu,
+une fois l'ensemble de nos objectifs remplis.
+
+\section{Réalisations supplémentaires}
+
 Avec un jeu qui a rapidement pris forme, cela nous a motivé à travailler
 davantage dessus et à rajouter plusieurs composantes en plus de celles déjà
 présentes :
 
 \begin{itemize}
-    \item Un tchat en multijoueur pour communiquer avec les autres
-    \item Un éditeur de carte
-    \item La possibilité d'embarquer sur l'eau et se déplacer sur les océans
-    \item Une gestion du son avec des musiques d'ambiancce ainsi que quelques
-        bruitages
-    \item Différentes animations (mouvement, attaque, mort)
-    \item Quelques effets de particules
+    \item Un tchat en multijoueur pour communiquer avec les autres.
+    \item Un éditeur de carte.
+    \item La possibilité d'embarquer sur l'eau et se déplacer sur les océans.
+    \item Une gestion du son avec des musiques d'ambiance ainsi que quelques
+        bruitages.
+    \item Différentes animations (mouvement, attaque, mort).
+    \item Quelques effets de particules.
 \end{itemize}
 
-\chapter{Le jeu}
+\chapter{Map (Thibault)}
 
-\section{Map (Thibault)}
-
-\subsection{Construction}
+\section{Construction}
 
 La particularité de la carte est qu’elle est entièrement constituée d’hexagones.
 Ceci nécessitait une certaine réflexion pour anticiper différents aspects comme
 le rendu graphique, le pavage, les relations entre les multiples voisins, ou
 encore le système de coordonnées des cases.
 
-\begin{figure}
+\begin{figure}[H]
     \centering
     \includegraphics[width=0.5\textwidth]{../report_1/img/cubic_coordinates}
     \caption*{Système de coordonées et axes}
 \end{figure}
 
 Pour supporter de grandes tailles de carte ainsi qu’un mode multijoueur
-accueillant jusqu’à 8 joueurs, il fallait découper la carte en chunks pour
-éviter d’avoir un unique mesh gigantesque à actualiser constamment. Le rendu
-graphique est alors considérablement allégé.
+accueillant jusqu’à 8 joueurs, il fallait découper la carte en \textit{chunks}
+pour éviter d’avoir un unique \textit{mesh} gigantesque à actualiser
+constamment. Le rendu graphique est alors considérablement allégé.
 
 Plusieurs modifications sont possibles sur la carte :
 
@@ -273,19 +323,21 @@ Plusieurs modifications sont possibles sur la carte :
         constructions (ferme, exploitation arboricole, ville, etc.)
 \end{itemize}
 
-\begin{figure}
+\begin{figure}[H]
     \centering
-    \includegraphics[width=0.9\textwidth]{map_example}
+    \includegraphics[width=0.7\textwidth]{map_example}
     \caption*{Exemple de carte de jeu dans l'éditeur}
 \end{figure}
 
-\subsection{Brouillard de guerre}
+\section{Brouillard de guerre}
 
 Un élément fondamental pour un jeu de stratégie était un système de brouillard
-de guerre. Le mettre en place fût plus compliqué que prévu, car une gestion
+de guerre. Le mettre en place fut plus compliqué que prévu, car une gestion
 précise des shaders ainsi que des textures n’est pas une tâche facile à
-accomplir. De plus il a fallu ajouter aux unités un système de vision qui prend
+accomplir. De plus, il a fallu ajouter aux unités un système de vision qui prend
 en compte l’environnement ainsi que les caractéristiques de l’unité en question.
+
+\newpage
 
 On distingue deux types de brouillard :
 
@@ -296,13 +348,13 @@ On distingue deux types de brouillard :
         unités/villes du joueur, qui sont légèrement noircies.
 \end{itemize}
 
-\begin{figure}
+\begin{figure}[H]
     \centering
-    \includegraphics[width=0.8\textwidth]{../report_2/img/FogOfWar}
+    \includegraphics[width=0.7\textwidth]{../report_2/img/FogOfWar}
     \caption*{Brouillard de guerre}
 \end{figure}
 
-\subsection{Génération procédurale}
+\section{Génération procédurale}
 
 Après la première soutenance où nous montrions les différentes modifications
 possibles de la carte, nous avons décidé de transformer cette partie du code
@@ -315,24 +367,23 @@ pourcentage de terre, le niveau d’érosion des terrains, le nombre/taille des
 régions, l’élévation maximale des montagnes, etc. Pour créer une nouvelle carte,
 il faut décider des parties du terrain qui vont être surélevées (toute la carte
 est à la base un océan géant entièrement plat). Une gestion de l’aléatoire était
-fondamentale pour cette partie de la carte, et le joueur peut utiliser des
-“seed” afin d’initialiser ce générateur pseudo-aléatoire. Une fois la case (qui
-servira de point de départ d’une région) choisie, un parcours en largeur permet
-de surélever les environs en conserver cet aspect de région. Les biomes des
-cases sont attribuées à la fin, en fonction de l’élévation du terrain (par
-exemple le terrain de très basse altitude sera une plaine ou un désert, mais un
-terrain en hauteur sera soit une simple montagne rocheuse, soit une montagne
-enneigée).
+fondamentale pour cette partie de la carte, et le joueur peut utiliser des seed
+afin d’initialiser ce générateur pseudo-aléatoire. Une fois la case (qui servira
+de point de départ d’une région) choisie, un parcours en largeur permet de
+surélever les environs en conserver cet aspect de région. Les biomes des cases
+sont attribuées à la fin, en fonction de l’élévation du terrain (par exemple le
+terrain de très basse altitude sera une plaine ou un désert, mais un terrain en
+hauteur sera soit une simple montagne rocheuse, soit une montagne enneigée).
 
 \begin{figure}[H]
     \centering
-    \includegraphics[width=0.8\textwidth]{../report_2/img/MapGen1}
+    \includegraphics[width=0.65\textwidth]{../report_2/img/MapGen1}
     \caption*{Génération de carte 1}
 \end{figure}
 
 \begin{figure}[H]
     \centering
-    \includegraphics[width=0.8\textwidth]{../report_2/img/MapGen2}
+    \includegraphics[width=0.65\textwidth]{../report_2/img/MapGen2}
     \caption*{Génération de carte 2}
 \end{figure}
 
@@ -340,9 +391,9 @@ Les ressources sont placées aléatoirement autour des points de départ des
 joueurs à la fin de la génération, et sont dispersés sur le reste de la carte
 en fonction notamment des biomes.
 
-\subsection{Interactions}
+\section{Interactions}
 
-\subsubsection{Utilisateur}
+\subsection{Utilisateur}
 
 Côté utilisateur, il était nécessaire d’avoir une gestion correcte de la caméra
 ainsi que des contrôles (comme le clic ou les raccourcis clavier). Il y a donc
@@ -352,13 +403,7 @@ route, fonder une ville). La caméra peut aussi se focaliser sur un endroit
 précis de la carte, permettant au joueur de passer rapidement d’une unité à une
 autre, ou d’une ville à une autre avec des raccourcis.
 
-\begin{figure}[H]
-    \centering
-    \includegraphics[width=0.8\textwidth]{game_ui}
-    \caption*{L'interface utilisateur}
-\end{figure}
-
-\subsubsection{Unités}
+\subsection{Unités}
 
 L’interaction la plus importante concernant la carte est celle du déplacement
 des unités. Il faut gérer d’une part la recherche du plus court chemin sur la
@@ -379,6 +424,8 @@ animations de mouvement. Des courbes de Bézier sont utilisées pour simuler des
 déplacements fluides et plus naturels, ainsi que l’orientation des unités durant
 leurs déplacements d’une case à une autre.
 
+\newpage
+
 Chaque unité possède une action principale :
 
 \begin{itemize}
@@ -388,9 +435,11 @@ Chaque unité possède une action principale :
 \end{itemize}
 
 L’ouvrier possède une deuxième action qui est de construire une route entre deux
-cases. Cette partie fût relativement compliquée à mettre en place, pour gérer
+cases. Cette partie fut relativement compliquée à mettre en place, pour gérer
 correctement les multiples voisins d’un hexagone, ainsi que la triangulation
 pour l’aspect graphique.
+
+\vspace{1cm}
 
 \begin{figure}[H]
     \centering
@@ -398,8 +447,12 @@ pour l’aspect graphique.
     \caption*{Une construction de route par l'ouvrier}
 \end{figure}
 
+\newpage
+
 À partir d'un certain niveau technologique, toutes les unités ont la
 possibilité d'embarquer sur l'eau pour traverser les océans.
+
+\vspace{0.5cm}
 
 \begin{figure}[H]
     \centering
@@ -407,16 +460,20 @@ possibilité d'embarquer sur l'eau pour traverser les océans.
     \caption*{Une unité embarquée}
 \end{figure}
 
-\subsection{Sauvegarder/Charger une carte}
+\section{Sauvegarder/Charger une carte}
 
 Sauvegarder et charger des cartes étaient évidemment une nécessité, d’une part
 pour l’éditeur de carte afin de jouer avec ses propres créations, mais aussi
 pour sauvegarder une partie en cours pour le mode solo afin de pouvoir la
-reprendre plus tard.
+reprendre plus tard. En multijoueur, la sauvegarde sert à transmettre la carte
+sous une forme condensée après sa génération ou son chargement depuis un
+fichier. Plusieurs techniques sont utilisées pour réduire la taille de la
+sauvegarde, comme écrire sur de simples octets non signés les informations, ou
+encore utiliser des masques binaires pour stocker des données booléennes.
 
-\section{Réseau et multijoueur (Valérian)}
+\chapter{Réseau et multijoueur \\ (Valérian)}
 
-\subsection{Construction}
+\section{Construction}
 
 Le multijoueur étant le mode de jeu principal de notre projet, son
 implémentation a été prioritaire. Pour cette raison, nous nous sommes concentrés
@@ -425,10 +482,10 @@ des soutenances.
 
 Pour le rendre fonctionnel, il était nécessaire de posséder une couche réseau
 solide afin de relier les différents joueurs ensembles. S’il a d’abord été
-envisagé d’utiliser le module réseau proposé par Unity, U-net, nous nous sommes
-rapidement rendus compte qu’il ne répondait pas à nos attentes. Ce module ne
-nous permettait pas d’avoir un contrôle total sur le réseau du jeu et ne
-respectait pas notre envie de fabriquer un maximum d’éléments du jeu par nos
+envisagé d’utiliser le module réseau proposé par \textsc{Unity}, U-net, nous
+nous sommes rapidement rendu compte qu’il ne répondait pas à nos attentes. Ce
+module ne nous permettait pas d’avoir un contrôle total sur le réseau du jeu et
+ne respectait pas notre envie de fabriquer un maximum d’éléments du jeu par nos
 propres moyens. 
 
 C’est pourquoi nous avons développé notre propre infrastructure réseau,
@@ -438,7 +495,7 @@ intéressante ainsi.
 Codé à l’aide des Sockets du C\#, notre couche réseau s’est révélée
 fonctionnelle et pratique pour le reste du jeu.
 
-\subsection{Fonctionnement}
+\section{Fonctionnement}
 
 Concernant le fonctionnement de ce système, il se base sur un serveur et des
 clients qui s’y connectent. Les clients sont activés sur tous les ordinateurs
@@ -461,6 +518,8 @@ dans la partie.
     \caption*{Schéma fonctionnel du réseau}
 \end{figure}
 
+\newpage
+
 Il est possible pour l’hôte de démarrer la partie à partir du moment où 2
 joueurs ou plus sont connectés au lobby. Quand la partie est démarrée, le
 serveur n’accepte plus de connexion et transmet aux clients un message annonçant
@@ -468,14 +527,14 @@ le début de la partie, ce qui lance le jeu sur les ordinateurs de tous les
 joueurs. C’est ensuite à la carte de jeu d’être transmise, suivant le processus
 détaillé ci-dessus.
 
-\subsection{Principe}
+\section{Principe}
 
 Pendant le jeu, les échanges sont effectués via un processus de sérialisation.
 Lorsqu’un joueur effectue une action, celle-ci est sérialisée sous forme de
 chaîne de caractères, puis envoyée au serveur qui se charge de dispatcher
-correctement le-dit message aux autres joueurs. À la réception d’un message, le
+correctement ledit message aux autres joueurs. À la réception d’un message, le
 client va reproduire l’action que ce message décrit. Le type d’action est défini
-par les quatres premiers caractères du message transmis : 
+par les quatre premiers caractères du message transmis : 
 
 \begin{itemize}
     \item Le premier caractère indique le type de l’expéditeur (S pour le
@@ -483,8 +542,6 @@ par les quatres premiers caractères du message transmis :
     \item Les 3 suivants indiquent le type d’action, suivant le tableau
         ci-dessous.
 \end{itemize}
-
-\vspace{0.5cm}
 
 \begin{center}
 	\begin{tabular}{c|c}
@@ -526,6 +583,8 @@ par les quatres premiers caractères du message transmis :
 	\end{tabular}
 \end{center}
 
+\newpage
+
 Ce système a ainsi permis la mise en place d’un suivi de l’état des clients
 (connecté / déconnecté) synchronisé sur tous les appareils, ainsi qu’un système
 de tchat entre les joueurs (public et privé) mais aussi plus particulièrement la
@@ -547,7 +606,7 @@ Un exemple du processus de synchronisation pouvant être celui-ci :
         correctement l’unité du player\_A
 \end{itemize}
 
-\subsection{Suivre l’avancement des autres parties}
+\section{Suivre l’avancement des autres parties}
 
 Ce système réseau ayant été mis en place rapidement, les objectifs pour la suite
 consistaient majoritairement à adapter les nouvelles fonctionnalités apportées
@@ -570,61 +629,61 @@ pour ensuite l’envoyer sous forme de chaîne de caractères via le système
 Serveur/Client. Pour cela, nous avons utilisé le système de sauvegarde qui
 permet d’enregistrer la carte sous une forme condensée. 
 
-Réaliser cet objectif n’a pas été une difficulté en soit mais nous a permis de
+Réaliser cet objectif n’a pas été une difficulté en soi, mais nous a permis de
 nous rendre compte de certaines limites de vitesses de notre système réseau,
 notamment lors de transfert de cartes de taille très importante.
 
 Du côté de l’IA, il a fallu adapter la gestion du tour par tour sur lequel nous
 reviendrons dans quelques lignes, afin d’avoir un joueur machine dans la partie.
 
-\subsection{Tchat}
+\section{Tchat}
 
 S’intégrant parfaitement dans un jeu de stratégie où des alliances peuvent
 retourner la partie, nous avons décidé d’ajouter un tchat. Ce dernier comprend
 en effet plusieurs fonctions utiles telles que les messages globaux, permettant
 de communiquer avec tous les autres joueurs, mais aussi des messages privés.
 
-L’implémentation du tchat à ouvert la porte à l’ajout d’une console de débogage
+L’implémentation du tchat a ouvert la porte à l’ajout d’une console de débogage
 pour nous faciliter les phases de test durant le développement de nouvelles
 fonctionnalités. On compte dans cette console les commandes suivantes :
 
-/help : Donne la documentation d’une commande.
+\verb|/help| : Donne la documentation d’une commande.
 
-/op : Ajoute des permissions à un joueur.
+\verb|/op| : Ajoute des permissions à un joueur.
 
-/deop : Retire les permissions d’un joueur.
+\verb|/deop| : Retire les permissions d’un joueur.
 
-/kick : Éjecte un joueur de la partie.
+\verb|/kick| : Éjecte un joueur de la partie.
 
-/kill : Élimine un joueur du jeu.
+\verb|/kill| : Élimine un joueur du jeu.
 
-/clear msg : Nettoie les messages du tchat.
+\verb|/clear msg| : Nettoie les messages du tchat.
 
-/clear unit : Enlève toutes les unités présentes.
+\verb|/clear unit| : Enlève toutes les unités présentes.
 
-/code : Code de triche (pour gagner de l’argent, productivité, désactiver le
+\verb|/code| : Code de triche (pour gagner de l’argent, productivité, désactiver le
 brouillard de guerre, etc.)
 
-\subsection{Tour par tour}
+\section{Tour par tour}
 
 Finalement, la dernière fonctionnalité mise en place a été le tour par tour,
 principe même du jeu. Il s’agissait pour cette tâche de lier à la fois le
 gameplay (en empêchant les joueurs de déplacer leurs unités en dehors de leurs
 tours), l’interface (avec le bouton pour passer au tour suivant), et finalement
-le réseau (en évitant que plusieurs joueurs puisse jouer en même temps).
+le réseau (en évitant que plusieurs joueurs puissent jouer en même temps).
 
-\subsection{Pour conclure}
+\section{Conclusion sur le réseau}
 
 Le développement des parties réseau et multijoueur s’est déroulé dans les temps,
 avec même de l’avance sur les prévisions. Cela parce que, ne connaissant pas ce
 domaine, nous avons souhaité le prioriser pour pouvoir faire face aux problèmes
-éventuels. La création de ce réseau ne s’est pas déroulé sans accroc, il a été
+éventuels. La création de ce réseau ne s’est pas déroulée sans accroc, il a été
 nécessaire de revenir en arrière plusieurs fois et repenser des parties tant
 pour s’accorder avec les autres éléments du projet que pour optimiser au mieux
 la synchronisation du jeu. C’est finalement beaucoup d’expérience et de
 connaissances nouvelles que nous avons pu retirer de cette partie.
 
-\section{Gameplay (Antoine \& Thibault)}
+\chapter{Gameplay (Antoine \& Thibault)}
 
 Le but de cette partie est non seulement d’assurer une profondeur au jeu, mais
 aussi et surtout de faire cohabiter les différents systèmes entre eux. Au cours
@@ -636,14 +695,13 @@ développement du jeu.
 
 \begin{figure}[H]
     \centering
-    \includegraphics[width=1\textwidth]{../report_1/img/class_hierarchy}
-    \caption*{Hiérarchie des classes}
+    \includegraphics[width=0.8\textwidth]{../report_1/img/class_hierarchy}
 \end{figure}
 
-\subsection{Joueurs}
+\section{Joueurs}
 
 La classe Player est une classe majeure pour le bon déroulement d’une partie.
-C’est la classe qui est directement lié au joueur et qui va contenir toutes les
+C’est la classe qui est directement liée au joueur et qui va contenir toutes les
 informations qui lui sont propres. Ces informations sont notamment:
 
 \begin{itemize}
@@ -658,7 +716,7 @@ notamment la création et l’attribution de villes et d’unités, mais aussi l
 avec le réseau, et les éléments de sécurité pour éviter qu’un joueur ne puisse
 former ou déplacer des troupes sans limite par tour.
 
-\subsection{Unités}
+\section{Unités}
 
 Les unités sont réparties en plusieurs catégories, chacune avec un but précis et
 des caractéristiques adaptées. Les unités à but offensif possèdent également une
@@ -667,7 +725,7 @@ apparence différente) et ont la possibilité de gagner des niveaux, de 1 à 20,
 durant la partie (chaque niveau augmente leur attaque et leurs points de vie).
 Voici les unités présentes dans le jeu:
 
-\subsubsection{Le colon (unité pacifique)}
+\subsection{Le colon (unité pacifique)}
 
 Le colon est une unité extrêmement importante. Elle permet de fonder une ville,
 et donc joue un rôle crucial dans l’expansion de l’empire du joueur. Toutefois,
@@ -676,7 +734,7 @@ ressources, et qui peut être éliminée très facilement (ne possédant pas
 d’amélioration, elle possède le même nombre de points de vie, peu importe la
 progression du joueur, là où les unités d’attaque deviennent plus puissantes).
 
-\subsubsection{L'ouvrier (unité pacifique)}
+\subsection{L'ouvrier (unité pacifique)}
 
 Le travailleur est une unité indispensable au joueur, car c’est elle qui permet
 d’exploiter les différentes ressources de la map. Les ressources stratégiques et
@@ -686,7 +744,7 @@ travailleur, la durée de vie du joueur sera très limitée. Il s’agit donc d�
 unité peu coûteuse à former, mais tout de même relativement fragile. De plus, à
 l’instar du colon, cette unité n’est pas améliorable.
 
-\subsubsection{Le fantassin (unité offensive standard)}
+\subsection{Le fantassin (unité offensive standard)}
 
 Le fantassin est l’unité offensive par défaut. Ses caractéristiques de combat ne
 sont pas les plus puissantes. Son intérêt peut alors sembler limité, mais pour
@@ -694,12 +752,12 @@ compenser ces caractéristiques qui ne sortent pas de l’ordinaire, le fantassi
 reste également une unité peu coûteuse, et peut ainsi être recruté assez tôt
 dans la partie sans mettre le joueur en difficulté au niveau des ressources. Le
 fantassin, une fois amélioré, devient un cavalier, qui dispose d’une vitesse de
-déplacement accrue, faisant ainsi de cette unité “standard” l’unité de choix
+déplacement accrue, faisant ainsi de cette unité standard l’unité de choix
 pour l’exploration et les offensives rapides, ou pour réagir rapidement à une
 invasion ennemie. Cette unité est aussi la plus efficace contre les unités
 lourdes.
 
-\subsubsection{L'archer (unité offensive longue portée)}
+\subsection{L'archer (unité offensive longue portée)}
 
 L’archer est une unité offensive spécialisée dans l’attaque d’autres unités
 humaines, mais extrêmement désavantagée face aux unités lourdes et aux villes.
@@ -709,14 +767,14 @@ ennemie. En revanche, l’archer est la plus fragile des unités offensives, ce 
 signifie que sa puissance importante contre les autres unités perd tout son
 intérêt en combat rapproché ou en infériorité numérique, où l’ennemi pourra
 riposter. L’archer, dans sa forme améliorée, gagne en puissance, ce qui accentue
-davantage sa fonction de “chasseur de troupes”.
+davantage sa fonction de chasseur de troupes.
 
-\subsubsection{La catapulte (unité offensive lourde)}
+\subsection{La catapulte (unité offensive lourde)}
 
 La catapulte est une unité très spéciale. Plus lente que les autres, mais très
 résistante face aux archers, elle brille notamment contre les villes et
 ressources ennemies. C’est évidemment l’unité la plus dangereuse du jeu, car
-elle permet de détruire une cité adversaire en seulement deux à cinq tours, là
+elle permet de détruire une citée adversaire en seulement deux à cinq tours, là
 où un soldat prendrait plus de deux fois cette durée. Pour équilibrer cela, la
 catapulte a un coût de production très onéreux, proche de celui du colon, et
 sera bien moins efficace contre les autres unités offensives. Il faut donc
@@ -732,16 +790,16 @@ et s’adapter au jeu. Il est impossible de gagner la partie en se contentant d�
 unique type d’unité produite en masse, car chacune possède des points faibles
 facilement exploitables par l’adversaire.
 
-\subsection{Villes}
+\section{Villes}
 
 Les villes représentent la base de l’empire du joueur: sans ville, il lui est
 impossible de former de nouvelles unités ou de récolter de ressources. Une fois
 que toutes les villes d’un joueur sont détruites, il ne lui restera en général
-que peu de tours de survie avant que toutes ses unitées restantes ne soient à
-leur tour détruite, terminant ainsi sa partie.
+que peu de tours de survie avant que toutes ses unités restantes ne soient
+détruites, terminant ainsi sa partie.
 
-Chaque ville possède trois niveaux, et évolue d’elle même en fonction du nombre
-d’habitant. Chaque niveau débloque de nouvelles unités et de nouveaux bâtiments
+Chaque ville possède trois niveaux, et évolue d’elle-même en fonction du nombre
+d’habitants. Chaque niveau débloque de nouvelles unités et de nouveaux bâtiments
 pour cette ville :
 
 \begin{itemize}
@@ -755,12 +813,12 @@ pour cette ville :
 \end{itemize}
 
 Notez que, à l’inverse des unités qui possèdent un niveau global lié au joueur,
-chaque ville possède son propre avancement. Ainsi vous ne pouvez pas fonder une
+chaque ville possède son propre avancement. Ainsi, vous ne pouvez pas fonder une
 nouvelle ville près de l’adversaire et directement commencer à entraîner des
 unités lourdes. La population augmente petit à petit à chaque tour, mais sa
 croissance peut être favorisée par des bâtiments dans les villes. Ces bâtiments,
 qui ne sont pas représentés visuellement, donnent des bonus dans les domaines
-suivant:
+suivant :
 
 \begin{itemize}
     \item Science : augmente le niveau des troupes, il s’agit d’une ressource
@@ -777,7 +835,7 @@ Ces quatre domaines sont en lien direct avec le nombre d’habitants. Il est don
 intéressant de continuer de développer une ville après avoir atteint le statut
 de mégapole, même si cela devient plus négligeable.
 
-\subsection{Économie}
+\section{Économie}
 
 L’économie ne s’arrête pas qu’aux quelques éléments vus ci-dessus. En effet, il
 existe encore des ressources disponibles sur la carte, divisées en deux groupes
@@ -796,7 +854,7 @@ joie).
 
 Elles sont toutes spécifiques au joueur et peuvent être obtenues en exploitant
 des cases grâce aux travailleurs. Une certaine quantité de ressource est alors
-produite à chaque tour sur ces cases. Attention toutefois car ces exploitations
+produite à chaque tour sur ces cases. Attention toutefois, car ces exploitations
 sont des structures pouvant être détruites.
 
 Il est donc important de posséder le plus d’exploitations possible. En effet, un
@@ -805,7 +863,7 @@ chaque tour, et ainsi un développement plus rapide. De plus, ces ressources
 n’ont pas de limites de stockage, ce qui signifie que faire des réserves
 représente un avantage en cas d’attaque adversaire.
 
-\subsection{Biomes}
+\section{Biomes}
 
 Un dernier élément du gameplay qui semblait important pour ce type de jeu était
 l’impact des différents types de terrain sur les unités. En effet, chaque biome
@@ -814,9 +872,9 @@ portées de vue. Cela a pour but de favoriser certains chemins selon l’action
 souhaitée : une attaque rapide via une plaine, camouflée via une forêt, ou
 encore l'exploration à l’aide de la hauteur d’une montagne.
 
-\section{IA (Thibault)}
+\chapter{IA (Thibault)}
 
-\subsection{Fonctionnement}
+\section{Fonctionnement}
 
 L’intelligence artificielle du mode solo est constituée de plusieurs
 composantes. Des unités barbares vont apparaître sur la carte, proche des villes
@@ -841,7 +899,7 @@ régulées par un niveau de difficulté choisi par le joueur en début de partie
         de -12\%, tandis que celui scientifique de -9.
 \end{itemize}
 
-\subsection{Construction}
+\section{Construction}
 
 À chaque fois qu’une tribu barbare apparaît (dans un rayon proche d’une ville),
 les unités vont se déplacer vers la ville la plus proche encore debout afin de
@@ -853,11 +911,19 @@ Pour gérer les malus internes du joueur, nous avions déjà en place un systèm
 permettant de différencier les différents modes de jeu (solo, multi, éditeur de
 carte)
 
-\section{Interface (Valérian \& Cédric)}
+\vspace{1cm}
 
-\subsection{Menu principal}
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.8\textwidth]{ai}
+    \caption*{L'intelligence artificielle qui attaque une ville}
+\end{figure}
 
-Notre menu principal à beaucoup évolué au fil du projet. Parti de quelques
+\chapter{Interface (Valérian \& Cédric)}
+
+\section{Menu principal}
+
+Notre menu principal a beaucoup évolué au fil du projet. Parti de quelques
 boutons ayant pour unique but de tester rapidement les fonctionnalités
 implémentées, faisant fi de l’esthétique, nous avons évolués vers une interface
 ergonomique, visuellement agréable et pratique. Nous avons utilisé un asset créé
@@ -865,6 +931,16 @@ et mis à disposition gratuitement par Michsky. Reprendre un menu existant nous
 permettait de nous concentrer sur d’autres aspects graphiques du jeu nécessitant
 une réelle customisation pour suivre le thème de Pacification comme l’interface
 de jeu ou les modèles 3D des unités.
+
+\vspace{0.5cm}
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.7\textwidth]{../report_2/img/MainMenuScreen}
+    \caption*{Menu principal du jeu}
+\end{figure}
+
+\newpage
 
 Nous avons toutefois personnalisé cet asset afin de le faire rentrer dans
 l'ambiance du jeu. Le menu principal se compose de 4 boutons majeurs :
@@ -881,302 +957,373 @@ La naviguation entre les menus se fait grâce à des déplacements de caméras s
 différents canvas, ainsi que de boutons pour revenir en arrière sur chaque
 panel.
 
-\subsubsection{Lobbys de jeu}
+\subsection{Lobbys de jeu}
 
 Au démarrage de chaque partie solo, un menu permet au joueur de définir les
 options de génération de la carte en fonction de ce qu’il souhaite, ou de
 charger une map déjà préparée et sauvegardée sur son ordinateur.
 
-En ce qui concerne les parties multijoueur, chaque joueur voit un premier menu
-où il renseigne son speudo, ainsi que l'IP du serveur. Après connexion, les
+En ce qui concerne les parties multijoueurs, chaque joueur voit un premier menu
+où il renseigne son pseudo, ainsi que l'IP du serveur. Après connexion, les
 clients passent sur un second menu listant les différents joueurs actuellement
 connectés. L'hôte de la partie décidera des options de génération de la carte,
 ou encore de charger une sauvegarde depuis un fichier.
 
-\subsubsection{Contrôles}
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.75\textwidth]{multiplayer_lobby}
+\end{figure}
+
+\subsection{Contrôles}
 
 Dans les options du menu principal, il est possible d’afficher et de modifier
-les différents contrôles du jeu : son, langue, luminosité, etc
+les différents contrôles du jeu : touches, son, langue, luminosité, etc.
 
-\subsection{Interface de jeu}
+\section{Interface de jeu}
 
-En ce qui concerne l’interface dans le jeu, nous sommes restés sur un design simple, 
-car la gestion de chaque panel était déjà assez complexe, notamment afin de conserver 
-une bonne ergonomie.
+En ce qui concerne l’interface dans le jeu, nous sommes restés sur un design
+simple, car la gestion de chaque panel était déjà assez complexe, notamment afin
+de conserver une bonne ergonomie.
 
-Sélectionner une unité ou une construction dans le jeu fait apparaître un menu correspondant 
-à cet objet. Une selection de ville fera par exemple apparaître l’interface de la caserne permettant 
-de développer des unités. Dans les menus de chaque objet apparaît aussi sa vie restante, 
-son propriétaire et quelques statistiques à son sujet.
+Sélectionner une unité ou une construction dans le jeu fait apparaître un menu
+correspondant à cet objet. Une selection de ville fera par exemple apparaître
+l’interface de la caserne permettant de développer des unités. Dans les menus de
+chaque objet apparaît aussi sa vie restante, son propriétaire et quelques
+statistiques à son sujet.
 
-\textit{image menus ville/unité...}
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.8\textwidth]{game_ui}
+    \caption*{L'interface utilisateur}
+\end{figure}
 
-En jeu comme en mode éditeur, un bandeau d’information est disponible en haut de l’écran. En partie, 
-il affiche des informations sur le joueur et son empire (argent, science, ressources...), ainsi que le 
-nombre de tours écoulés, et un accès au menu pour se déconnecter.
+En jeu comme en mode éditeur, un bandeau d’information est disponible en haut de
+l’écran. En partie, il affiche des informations sur le joueur et son empire
+(argent, science, ressources...), ainsi que le nombre de tours écoulés, et un
+accès au menu pour se déconnecter.
 
-Enfin, un tchat est disponible pour envoyer et recevoir des messages, recevoir des notifications du jeu, 
-ou utiliser des commandes spéciales. Son développement a représenté un certain challenge vis à vis de 
-l’interface, mais aussi du déroulement du jeu, afin que son utilisation n’interfère pas avec le jeu même. 
-Malgré tout, il représente un élément important, notamment pour l’aspect multijoueur.
+Enfin, un tchat est disponible pour envoyer et recevoir des messages, recevoir
+des notifications du jeu, ou utiliser des commandes spéciales. Son développement
+a représenté un certain challenge vis-à-vis de l’interface, mais aussi du
+déroulement du jeu, afin que son utilisation n’interfère pas avec le jeu même.
+Malgré tout, il représente un élément important, notamment pour l’aspect
+multijoueur.
 
-\subsection{Éditeur}
+\section{Éditeur}
 
-L’interface de l’éditeur de map reste simple. On retrouve en haut de l’écran un bandeau qui contient des 
-boutons permettant de sauvegarder, charger ou générer une carte facilement et rapidement. Sur les bords 
-droit et gauche de l’écran, des panels permettent de modifier le terrain (biome, eau, élévation) mais aussi ce 
-qui est présent dessus, comme les ressources inexploitées (minerais, forêts, champs, etc.).
+L’interface de l’éditeur de map reste simple. On retrouve en haut de l’écran un
+bandeau qui contient des boutons permettant de sauvegarder, charger ou générer
+une carte facilement et rapidement. Sur les bords droit et gauche de l’écran,
+des panels permettent de modifier le terrain (biome, eau, élévation) mais aussi
+ce qui est présent dessus, comme les ressources inexploitées (minerais, forêts,
+champs, etc.).
 
-\section{Site web (Valérian)}
+\chapter{Site web (Valérian)}
 
-\subsection{Développement}
+\section{Développement}
 
 En ce qui concerne le développement du site, celui-ci est composé d’HTML, de CSS
 ainsi que de PHP.
 
-Pensé pour être pratique au niveau de la navigation, le site reste simple et clair dans
-son design, en ne surbmergeant pas le visiteur d’informations. 
+Pensé pour être pratique au niveau de la navigation, le site reste simple et
+clair dans son design, en ne submergeant pas le visiteur d’informations. 
 
-Son développement s’est déroulé sans accrocs et en avance sur le planning défini.
+Son développement s’est déroulé sans accrocs et en avance sur le planning
+défini.
 
-\subsection{Hébergement}
+\section{Hébergement}
 
-Si dans un premier temps notre site était hébergé grâce à GitPages, il a été
+Si dans un premier temps notre site était hébergé grâce à GitHubPages, il a été
 nécessaire de changer d’hébergement à mesure que son développement avançait. En
-effet, avec l’arrivée de PHP dans le code du site, il était impossible de rester sur
-notre premier choix d'hébergement qui ne le supportait pas.
+effet, avec l’arrivée de PHP dans le code du site, il était impossible de rester
+sur notre premier choix d'hébergement qui ne le supportait pas.
 
 Nous avons donc migré le site vers un hébergement fourni par Lixia, un groupe
-qui propose beaucoup de services de ce type, et ce gratuitement. Cela nous a permis 
-d’obtenir un nom de domaine, \url{pacification.lxa.li}, ainsi que des adresses mail pour 
-proposer un support technique du jeu. 
+qui propose beaucoup de services de ce type gratuitement. Cela nous a permis
+d’obtenir un nom de domaine, \url{pacification.lxa.li}, ainsi que des adresses
+mail pour proposer un support technique du jeu. 
 
-\subsection{Fonctionnalités}
+\section{Fonctionnalités}
 
 Notre site web se compose de 6 onglets permettant d'accéder à toutes les
 informations pour suivre le développement.
 
 \begin{itemize}
-	\item L’onglet “Accueil” permet de suivre l’avancée du jeu grâce à un listing 
-	des mises à jour et un détail de ce qui à été ajouté.
-	\item L’onglet “Comment jouer ?” permet aux joueurs d’apprendre à prendre en main 
-	notre jeu, en détaillant le déroulement d’une partie et quelques stratégies pour bien 
-	commencer.
-	\item L’onglet “L’équipe” présente les personnes ayant développé ce jeu, en offrant quelques 
-	anecdotes sur elles.
-	\item L’onglet “Ressource” crédite les créateurs des différents éléments que nous avons pu 
-	utiliser lors le développement du jeu, comme  les musiques, ou l’asset du menu.
-	\item L’onglet “Contenu supplémentaire” offre quant à lui la possibilité aux joueurs de télécharger 
-	et/ou proposer des maps créées dans l’éditeur du jeu. Cela permet de proposer une dimension 
-	communautaire au jeu, avec donc la possibilité de créer des scénarios et de les partager avec 
-	d'autres joueurs.
-	\item L’onglet “Téléchargement” permet pour sa part de télécharger la dernière version du jeu.
+    \item L’onglet « Accueil » permet de suivre l’avancée du jeu grâce à un listing
+        des mises à jour et un détail de ce qui a été ajouté.
+    \item L’onglet « Comment jouer ? » permet aux joueurs d’apprendre à prendre
+        en main notre jeu, en détaillant le déroulement d’une partie et quelques
+        stratégies pour bien commencer.
+    \item L’onglet « L’équipe » présente les personnes ayant développé ce jeu,
+        en offrant quelques anecdotes sur elles.
+    \item L’onglet « Ressource » crédite les créateurs des différents éléments
+        que nous avons pu utiliser lors le développement du jeu, comme  les
+        musiques, ou l’asset du menu.
+    \item L’onglet « Contenu supplémentaire » offre quant à lui la possibilité
+        aux joueurs de télécharger et/ou proposer des maps créées dans l’éditeur
+        du jeu. Cela permet de proposer une dimension communautaire au jeu, avec
+        donc la possibilité de créer des scénarios et de les partager avec
+        d'autres joueurs.
+    \item L’onglet « Téléchargement » permet pour sa part de télécharger la
+        dernière version du jeu.
 \end{itemize}
 
 Sur toutes les pages, on retrouve également un lien vers les archives de notre
-développement, comprenant les versions du jeu pour chaque soutenance, ainsi que les
-divers documents à rendre tel que le cahier des charges et les rapports de
+développement, comprenant les versions du jeu pour chaque soutenance, ainsi que
+les divers documents à rendre tel que le cahier des charges et les rapports de
 soutenances.
 
 Diverses images et captures du jeu sont disponibles sur le site afin de
 permettre aux visiteurs d’avoir un exemple visuel de celui-ci.
 
-\section{Assets (Cédric)}
+\chapter{Assets (Cédric)}
 
-\subsection{Design}
+\section{Design}
 
-Pour l’aspect général du jeu, nous avons opté pour un style cartoon avec peu de 
-polygones, afin d’obtenir un rendu visuel agréable, mais également pour éviter 
-que les modèles ne soient trop complexes à créer. 
+Pour l’aspect général du jeu, nous avons opté pour un style cartoonesque avec
+peu de polygones, afin d’obtenir un rendu visuel agréable, mais également pour
+éviter que les modèles ne soient trop complexes à créer. 
 
-\subsection{Création}
+\section{Création}
 
-Pour la conception des unités et des armes, un dessin est utilisé comme référence: 
-différentes modifications sont appliquées à un cube (extrusion, rotation, élargissement, 
-etc.) afin de faire correspondre sa forme avec celle du dessin. Blender possède des 
-options fortement utiles comme l’option miroir, qui permet de n’avoir à créer qu’un seul 
-côté d’un objet tandis que l’autre se complète automatiquement par symétrie.
+Pour la conception des unités et des armes, un dessin est utilisé comme
+référence : différentes modifications sont appliquées à un cube (extrusion,
+rotation, élargissement, etc.) afin de faire correspondre sa forme avec celle du
+dessin. \textsc{Blender} possède des options fortement utiles comme l’option
+miroir, qui permet de n’avoir à créer qu’un seul côté d’un objet tandis que
+l’autre se complète automatiquement par symétrie.
 
-Une fois le personnage modélisé, une autre fonctionnalité de Blender appelée 
-\textit{“subdivision surface”} permet de diviser les polygones constituant le personnage 
-en d’autres plus petits. Cela permet ainsi d’arrondir les parties visuelles trop angulaires 
-et disgracieuses du modèle.
+Une fois le personnage modélisé, une autre fonctionnalité de \textsc{Blender}
+appelée \textit{subdivision surface} permet de diviser les polygones constituant
+le personnage en d’autres plus petits. Cela permet ainsi d’arrondir les parties
+visuelles trop angulaires et disgracieuses du modèle.
 
-\textit{image modèle humanoïde de base}
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.25\textwidth]{../report_1/img/unit_armature}
+    \includegraphics[width=0.65\textwidth]{blender}
+    \caption*{Travail réalisé dans \textsc{Blender}}
+\end{figure}
 
-Une fois ce modèle humanoïde créé, pour fabriquer les morceaux d’armures et de 
-vêtements, il a suffit d’extruder et élargir certaines parties puis de séparer des 
-morceaux de l’objet afin de pouvoir leur attribuer à chacun une texture différente. 
+Une fois ce modèle humanoïde créé, pour fabriquer les morceaux d’armures et de
+vêtements, il a suffi d’extruder et élargir certaines parties puis de séparer
+des morceaux de l’objet afin de pouvoir leur attribuer à chacun une texture
+différente. 
 
-Concernant les différents bâtiments, il a fallu créer les différentes parties (piliers 
-de bois, toit, rempart et tour de château,...), avant de les assembler de diverses 
-manières pour obtenir différentes formes, tout en gardant un aspect esthétique 
-cohérent. Le procédé fut le même pour l’environnement naturel des bâtiments de 
-ressources: de nombreuses formes de rochers et d’arbres ont été modélisées puis 
+Concernant les bâtiments, il a fallu créer les diverses parties (piliers de
+bois, toit, rempart et tour de château ...), avant de les assembler de plusieurs
+manières pour obtenir différentes formes, tout en gardant un aspect esthétique
+cohérent. Le procédé fut le même pour l’environnement naturel des bâtiments de
+ressources: de nombreuses formes de rochers et d’arbres ont été modélisées puis
 dupliquées afin de créer les mines et les forêts.
 
-Toutes les textures ont été créées par nos soins grâce aux fonctionnalités proposé par 
-Blender, ainsi qu’au logiciel de dessin Krita. 
+Toutes les textures ont été créées par nos soins grâce aux fonctionnalités
+proposées par \textsc{Blender}, ainsi qu’au logiciel de dessin Krita. 
 
-\textit{images textures StrawRoof, WoodPillar, DarkStoneWall}
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.3\textwidth]{../report_1/img/straw_roof}
+    \includegraphics[width=0.3\textwidth]{../report_1/img/wood}
+    \includegraphics[width=0.3\textwidth]{../report_2/img/DarkStoneWall}
+    \caption*{StrawRoof, WoodPillar, DarkStoneWall}
+\end{figure}
 
-Pour les appliquer sur les modèles 3D, nous utilisons une méthode appelée l’UV Mapping. 
-Il faut pour cela découper notre objet 3D afin d’obtenir l’équivalent d’un patron qui sera 
-ensuite déplacé puis modifié sur l’image qui servira de texture à l’objet. Pour d’autres 
-parties commes les armures, c’est une autre méthode qui  été utilisé. Nous nous sommes 
-contentés de créer un nouveau matériau en lui donnant une couleur spécifique et en 
-modifiant certaines de ses propriétés, afin qu’il reflète plus ou moins bien la lumière. Une 
-fois les modèles terminés, ils sont importés sur Unity. Cela passe par l’exportation des 
-modèles 3D sous le format FBX avec les matériaux et les textures utilisés, puis par l’assignation 
-des textures aux matériaux, puis des matériaux aux modèles 3D.
+Pour les appliquer sur les modèles 3D, nous utilisons une méthode appelée l’UV
+Mapping. Il faut pour cela découper notre objet 3D afin d’obtenir l’équivalent
+d’un patron qui sera ensuite déplacé puis modifié sur l’image qui servira de
+texture à l’objet. Pour d’autres parties comme les armures, c’est une autre
+méthode qui a été utilisée. Nous nous sommes contentés de créer un nouveau
+matériau en lui donnant une couleur spécifique et en modifiant certaines de ses
+propriétés, afin qu’il reflète plus ou moins bien la lumière. Une fois les
+modèles terminés, ils sont importés sur \textsc{Unity}. Cela passe par
+l’exportation des modèles 3D sous le format FBX avec les matériaux et les
+textures utilisées, puis par l’assignation des textures aux matériaux, puis des
+matériaux aux modèles 3D.
 
-Les textures utilisées pour les différents biomes présents sur la carte du jeu ont été créées de 
-manière procédurale à l’aide d’un plug-in de Unity, nommé \textit{"Number Flow"}.
+Les textures utilisées pour les différents biomes présents sur la carte du jeu
+ont été créées de manière procédurale à l’aide d’un plug-in d'\textsc{Unity},
+nommé Number Flow.
 
-\textit{images textures Plain, Snow, etc.}
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.2\textwidth]{../report_1/img/plain}
+    \includegraphics[width=0.2\textwidth]{../report_1/img/sand}
+    \includegraphics[width=0.2\textwidth]{snow}
+    \includegraphics[width=0.2\textwidth]{mountain}
+    \caption*{Textures des biomes}
+\end{figure}
 
-\subsection{Animations}
+\section{Animations}
 
-Les unités disposent de 3 types d’animations: l’attaque, le déplacement et la mort.
+Les unités disposent de 3 types d’animations: l’attaque, le déplacement et la
+mort.
 
-\textit{images d'animations. MDR, ça choque personne ce magnifique pléonasme ?}
+L’animation des unités passe d’abord par la création d’un squelette. Un premier
+avait été construit sur le modèle humanoïde de référence. Cependant, l’animation
+manuelle des différentes parties du corps était très difficile à maîtriser et le
+résultat obtenu loin d’être convenable.
 
-L’animation des unités passe d’abord par la création d’un squelette. Un premier avait été 
-construit sur le modèle humanoïde de référence. Cependant, l’animation manuelle des 
-différentes parties du corps était très difficile à maîtriser et le résultat obtenu loin d’être 
-convenable.
+Par conséquent, pour les unités humanoïdes, nous avons exporté nos modèles sur
+le site Mixamo qui permet de créer une armature automatiquement sur nos
+personnages en se basant sur des points de repères (menton, coudes, genoux ...).
+De plus, le site possède une bibliothèque très complète d’animations diverses,
+offrant une grande variété de choix afin de trouver l’animation qui correspond
+le mieux à nos situations.
 
-\textit{image modèle humanoïde avec armature}
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.8\textwidth]{mixamo}
+    \caption*{Bibliothèque d'animations de \url{mixamo.com}}
+\end{figure}
 
-Par conséquent, pour les unités humanoïdes, nous avons exporté nos modèles sur le site 
-\textit{Mixamo} qui permet de créer une armature automatiquement sur nos personnages 
-en se basant sur des points de repères (menton, coudes, genoux,...). De plus le site possède 
-une bibliothèque très complète d’animations diverses, offrant une grande variété de choix afin 
-de trouver l’animation qui correspond le mieux à nos situations.
+Cependant ce site ne s’occupe que des modèles humanoïdes. Pour animer d’autres
+unités comme la catapulte ou le canon, il a été nécessaire de recourir aux
+armatures créées dans \textsc{Blender}. Ces modèles furent moins complexes à
+animer, car les différents os n’avaient pas à être reliés entre eux: un os pour
+bouger le bras de la catapulte, et quatre os pour faire tourner les roues.
 
-\textit{screenshot Mixamo}
+Pour créer l’animation, il faut utiliser l’armature pour faire bouger le modèle
+3D, et enregistrer chaque position de l’objet dans une image. \textsc{Blender}
+va créer lui-même l’animation grâce aux positions enregistrées.
 
-Cependant ce site ne s’occupe que des modèles humanoïdes. Pour animer d’autres unités comme 
-la catapulte ou le canon, il a été nécessaire de recourir aux armatures créées dans \textit{Blender}. 
-Ces modèles furent moins complexes à animer, car les différents os n’avaient pas à être reliés entre 
-eux: un os pour bouger le “bras” de la catapulte, et 4 os pour faire tourner les roues.
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.7\textwidth]{catapult}
+\end{figure}
 
-Pour créer l’animation, il faut utiliser l’armature pour faire bouger le modèle 3D, et enregistrer chaque 
-position de l’objet dans une image. \textit{Blender} va créer lui même l’animation grâce aux positions 
-enregistrées.
+\section{Son}
 
-\textit{screenshot de la catapulte dans blender}
+Différentes musiques se lancent lors du déroulement du jeu, permettant d’ajouter
+une ambiance sonore agréable favorisant l’immersion du joueur.
 
-\subsection{Son}
+Plusieurs effets sonores sont aussi présents, comme l’apparition d’une tribu
+barbare dans les environs, la création d'une ville, l'exploitation de
+ressources, etc.
 
-Différentes musiques se lancent lors du déroulement du jeu, permettant d’ajouter une 
-ambiance sonore agréable favorisant l’immersion du joueur.
-
-Plusieurs effets sonores sont aussi présents, comme la notification de message dans le 
-tchat, ou le son d’apparition d’une tribu barbare dans les environs.
-
-\section{Logos (Valérian)}
+\section{Logos}
 
 \subsection{Création}
 
-En ce qui concerne le logo \textit{Pacification}, il a été réalisé en se basant sur une 
-police d’écriture nommée \textit{Cubix}, qui a ensuite été modifiée par nos soins sur 
-le site \textit{FontStruct}.
+En ce qui concerne le logo Pacification, il a été réalisé en se basant sur une
+police d’écriture nommée Cubix, qui a ensuite été modifiée par nos soins sur le
+site FontStruct.
 
-Le logo de \textit{Brainless Devs}, nom de notre groupe, à été plus complexe à réaliser.
-Il a fallu dans un premier temps définir tous ensemble le caractère de notre logo, 
-avant de se lancer dans sa construction. Nous sommes parti vers quelque chose 
-de simple et clair, en noir et blanc.
+Le logo de Brainless Devs, nom de notre groupe, a été plus complexe à réaliser.
+Il a fallu dans un premier temps définir tous ensemble le caractère de notre
+logo, avant de se lancer dans sa construction. Nous sommes partis vers quelque
+chose de simple et clair, en noir et blanc.
 
 Souhaitant avoir autre chose que du texte dans ce logo, nous avons représenté un
 Stickman assis, adossé aux initiales du nom du groupe. Afin qu’il corresponde au
 nom, il a été représenté avec un ordinateur sur les genoux, codant. Sa tête est
-quant à elle une bulle vide, évidente référence au “Brainless”.
+quant à elle une bulle vide, évidente référence au Brainless.
 
-La réalisation même du logo à été faite par notre équipe à l’aide d’un stylet et
+La réalisation même du logo a été faite par notre équipe à l’aide d’un stylet et
 d’une tablette graphique.
+
+\newpage
 
 \subsection{Inspiration}
 
-L’inspiration du Stickman provient des animations d’Alan Becker, sur Youtube,
-qui représente les aventures de Stickmen s’agitant dans un écran d’ordinateur
-ainsi que des webcomics xkcd (\textit{xkcd.com}). 
+L’inspiration du Stickman provient des webcomics xkcd, ainsi que des animations
+d’Alan Becker sur Youtube représentant les aventures de Stickmen s’agitant dans
+un écran d’ordinateur.
+
+\vspace{1cm}
+
+\begin{figure}[h]
+    \centering
+    \includegraphics{brainless_devs.pdf}
+\end{figure}
 
 \chapter{Expériences personnelles}
 
 \section{Thibault}
 
-\textit{PARTIE A VERIFIER!}
+Ce projet a été un gros investissement, tant au niveau du code que du groupe.
+En effet, en tant que chef de projet, il m’a fallu diriger efficacement le
+groupe pour s’assurer de la réussite des objectifs ambitieux de Pacification.
+C'était une tâche importante, mais en voyant le résultat final du jeu, elle a
+été réalisée avec succès.
 
-%Ce projet a été un gros investissement, tant au niveau du code que du groupe. En effet, étant chef de projet, il m’a fallu diriger efficacement le groupe pour s’assurer de la réussite des objectifs. C’est une tâche importante que je suis ravi d’avoir réalisé, car elle m’a appris à mieux me débrouiller pour des projets de groupes. 
-%Ensuite, au niveau du projet en lui même, j’ai adoré pouvoir découvrir et exploiter un outil comme ♡Unity♡. Cela à aussi été l’occasion de développer mes compétences en C\#. 
-E%n conclusion, voir progresser ce projet de semaines en semaines est une sensation formidable, et le voir terminé me rempli de joie.
+Développer l'ensemble de la carte fut une expérience très intéressante et a
+représenté un gros challenge sur de nombreux aspects : triangulation des
+hexagones, montagnes et routes, brouillard de guerre, génération procédurale,
+etc.
+
+L'intelligence artificielle et le gameplay suivaient logiquement dans l'avancée
+du jeu, et toucher à ces différents domaines m'a permis d'expérimenter une
+nouvelle approche au paradigme orienté objet.
 
 \section{Valérian}
 
-Au cours des mois qui ont suivi le début du projet,j’ai pu apprendre beaucoup, 
-et je retire de cette expérience de bons souvenirs. Si dans un premier temps,
- je me suis principalement concentré sur le réseau du jeu, et donc du code pur, 
-j’ai pu ensuite découvrir d’autres aspects du projet en travaillant sur 
-l’interface de jeu. Cela m’a appris à mieux utiliser et maîtriser Unity.
+Au cours des mois qui ont suivi le début du projet, j’ai pu apprendre beaucoup,
+et je retire de cette expérience de bons souvenirs. Si dans un premier temps, je
+me suis principalement concentré sur le réseau du jeu, et donc du code pur, j’ai
+pu ensuite découvrir d’autres aspects du projet en travaillant sur l’interface
+de jeu. Cela m’a appris à mieux utiliser et maîtriser \textsc{Unity}.
+
+\newpage
 
 C’est aussi avec l’outil de collaboration Git que mon expérience grandit.
- L’ayant en effet utilisé pour le développement du projet, j’ai pu en 
-apprendre plus à son sujet, notamment sur sa manipulation. 
+L’ayant en effet utilisé pour le développement du projet, j’ai pu en apprendre
+plus à son sujet, notamment sur sa manipulation. 
 
-Au final, j’ai pu acquérir beaucoup de compétences nouvelles durant ces derniers
- mois, et c’est avec beaucoup de joie que je conclus ce projet, heureux et fier
- d’avoir, avec mon équipe, mené à bien son développement.
+Finalement, j’ai pu acquérir beaucoup de compétences nouvelles durant ces
+derniers mois, et c’est avec beaucoup de joie que je conclus ce projet, heureux
+et fier d’avoir, avec mon équipe, mené à bien son développement.
 
 \section{Cédric}
 
-Ce projet m’aura appris l’importance du travail de groupe dans de tels travaux. 
-Ce fut une expérience enrichissante, car j’ai pu améliorer mes compétences sur 
-des logiciels que j’utilisais déjà auparavant comme Blender. Mais j’ai aussi pu 
-apprendre à en utiliser d’autres comme Git et Unity, que je compte bien 
-continuer à exploiter pour des projets personnels.
+Ce projet m’aura appris l’importance du travail de groupe dans de tels travaux.
+Ce fut une expérience enrichissante, car j’ai pu améliorer mes compétences sur
+des logiciels que j’utilisais déjà auparavant comme \textsc{Blender}. Mais j’ai
+aussi pu apprendre à en utiliser d’autres comme Git et \textsc{Unity}, que je
+compte bien continuer à exploiter pour des projets personnels.
 
-Il y a eu des moments stressants, d’autres plus agréables, mais dans l’ensemble 
-je suis content d’avoir fait ce projet, et je suis fier de ce que j’ai pu accomplir
- avec mes camarades. Je n’hésiterai pas à le refaire si l’occasion se représentait. 
+Il y a eu des moments stressants, d’autres plus agréables, mais dans l’ensemble
+je suis content d’avoir fait ce projet, et je suis fier de ce que j’ai pu
+accomplir avec mes camarades. Je n’hésiterai pas à le refaire si l’occasion se
+représentait. 
 
 \section{Antoine}
 
-Pour ma part, ce projet a été une expérience très enrichissante. Cela m’a permi 
-de découvrir et d’apprendre à me servir du moteur de jeu Unity3D, de m'entraîner 
-davantage avec le langage C\#. Mais cela m’a surtout donné une petite idée du 
-fonctionnement des projets de groupe, et des difficultés qui y sont liées,
- notamment s’entendre sur la manière de travailler et sur nos différentes idées 
-pour le projet. 
+Pour ma part, ce projet a été une expérience très enrichissante. Cela m’a permis
+de découvrir et d’apprendre à me servir du moteur de jeu \textsc{Unity}, de
+m'entraîner davantage avec le langage C\#. Mais cela m’a surtout donné une
+petite idée du fonctionnement des projets de groupe, et des difficultés qui y
+sont liées, notamment s’entendre sur la manière de travailler et sur nos
+différentes idées pour le projet. 
 
-De plus, j’ai découvert l'intérêt de Git, et même si je ne maîtrise pas encore 
-totalement cet outil, j’ai pu en découvrir les bases et je comprend à quel point il 
-me sera utile par la suite. 
+De plus, j’ai découvert l'intérêt de Git, et même si je ne maîtrise pas encore
+totalement cet outil, j’ai pu en découvrir les bases et je comprends à quel point
+il me sera utile par la suite. 
 
-Au final, c’est un projet que j’ai énormément apprécié, et je suis fier du résultat 
-obtenu.
+Finalement, c’est un projet que j’ai énormément apprécié, et je suis fier du
+résultat obtenu.
 
 \chapter{Conclusion}
 
-Pour conclure, Pacification est un jeu de stratégie en tour par tour. La diversité 
-de ses unités, la génération aléatoire de la carte, ses systèmes complet et sa prise
- en main facile en font un jeu complexe mais accessible cependant au experts
- comme au novices. Il s’agit d’un jeu auquel on peut jouer et rejouer, seul ou à
- plusieurs, en se perfectionnant au fil du temps et en changeant ses stratégies. 
-Sa légèreté le rend même utilisable sur des ordinateurs à vocation de bureautique, 
-et son design cartoonesque en fait un jeu attractif et non-violent visuellement,
- qui peut alors convenir à des joueurs de tout âge.
+Pour conclure, Pacification est un jeu de stratégie en tour par tour. La
+diversité de ses unités, la génération aléatoire de la carte, ses systèmes
+complets et sa prise en main facile en font un jeu complexe mais accessible
+cependant aux experts comme aux novices. Il s’agit d’un jeu auquel on peut jouer
+et rejouer, seul ou à plusieurs, en se perfectionnant au fil du temps et en
+changeant ses stratégies.  Sa légèreté le rend même utilisable sur des
+ordinateurs à vocation de bureautique, et son design cartoonesque en fait un jeu
+attractif et non-violent visuellement, qui peut alors convenir à des joueurs de
+tout âge.
 
-Il aura fallu des mois de développement pour arriver à ce résultat. En commençant
- par un éditeur de map et d’un réseau “fait-maison”, autour desquels l’équipe a
- construit le jeu que nous pouvons désormais présenter fièrement. En y ajoutant 
-petit à petit toutes les fonctionnalités essentielles telles que le brouillard de guerre
- ou le support des entités sur la carte, et en le perfectionnant afin d’obtenir une
- expérience amusante pour le joueur, afin de lui donner envie de continuer à jouer.
+Il aura fallu des mois de développement pour arriver à ce résultat. En
+commençant par un éditeur de map et d’un réseau fait-maison, autour desquels
+l’équipe a construit le jeu que nous pouvons désormais présenter fièrement. En y
+ajoutant petit à petit toutes les fonctionnalités essentielles telles que le
+brouillard de guerre ou le support des entités sur la carte, et en le
+perfectionnant afin d’obtenir une expérience amusante pour le joueur, afin de
+lui donner envie de continuer à jouer.
 
-Nous espérons que vous prendrez autant de plaisir à y jouer que nous en avons pris 
-à le développer.
-
+Nous espérons que vous prendrez autant de plaisir à y jouer que nous en avons
+pris à le développer.
 
 \begin{figure}
     \centering
@@ -1186,35 +1333,42 @@ Nous espérons que vous prendrez autant de plaisir à y jouer que nous en avons 
 
 \chapter{Ressources}
 
-Assets 3D
-pour le canon
-\url{https://youtu.be/5ivs_jSWraM}
+\subsection*{Map}
 
-château
-\url{https://youtu.be/HIy1YHC9aes}
+Carte hexagonale
+\begin{itemize}
+    \item \url{https://catlikecoding.com/unity/tutorials/hex-map/part-1/}
+    \item \url{https://www.redblobgames.com/grids/hexagons/}
+\end{itemize}
 
-modèle humanoïde de base
-\url{https://youtu.be/92IdzxwYEWY}
+\subsection*{Réseau}
 
-interface du menu principal
-\url{https://youtu.be/nxLc-BaqZag}
-
-Réseau
+An introduction to multiplayer using TCP protocol
 \url{https://goo.gl/wX3a96}
 
-Documentation officielle de unity
+Documentation officielle d'\textsc{Unity}
 \url{https://docs.unity3d.com/Manual/index.html}
 
-Génération procédurale:
-\url{http://forums.conifergames.com/index.php?topic=158}
+\subsection*{Assets}
 
-Carte d’Hexagones:
-\url{https://www.redblobgames.com/grids/hexagons/}
-\url{https://catlikecoding.com/unity/tutorials/hex-map/part-1/}
+Canon
+\url{https://youtu.be/5ivs_jSWraM}
 
-Police d’écriture;
-\url{https://fontstruct.com/}
-\url{https://www.dafont.com/fr/}
+Château
+\url{https://youtu.be/HIy1YHC9aes}
 
+Modèle humanoïde de base
+\url{https://youtu.be/92IdzxwYEWY}
+
+Interface du menu principal
+\url{https://youtu.be/nxLc-BaqZag}
+
+Police d’écriture
+\begin{itemize}
+    \item \url{https://fontstruct.com/}
+    \item \url{https://www.dafont.com/fr/}
+\end{itemize}
+
+Textures \url{https://catlikecoding.com/numberflow/docs/}
 
 \end{document}

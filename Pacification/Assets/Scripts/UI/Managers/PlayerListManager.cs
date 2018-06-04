@@ -24,6 +24,7 @@ public class PlayerListManager : MonoBehaviour {
     public GameObject hostButton;
     public GameObject cantStart;
     public GameObject canStart;
+    public GameObject mapGeneratorOption;
 
     private void Start()
     {
@@ -35,6 +36,7 @@ public class PlayerListManager : MonoBehaviour {
         isHost = host;
         joinButton.SetActive(!host);
         hostButton.SetActive(host);
+        mapGeneratorOption.SetActive(host);
         CheckCanStart();
     }
 

@@ -126,7 +126,7 @@ public class HexMapCamera : MonoBehaviour
             return;
         if(lastCity >= player.playerCities.Count)
             lastCity = 0;
-        Vector3 cityPos = player.playerCities[lastCity].Position.Position;
+        Vector3 cityPos = player.playerCities[lastCity].Location.Position;
         StartCoroutine(FocusSmoothTransition(cityPos));
         lastCity = (lastCity + 1) % player.playerCities.Count;
         lastUnit = 0;

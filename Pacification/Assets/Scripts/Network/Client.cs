@@ -275,8 +275,8 @@ public class Client : MonoBehaviour
                 }
                 player.InitialSpawnUnit();
                 player.UpdateMoneyDisplay();
-                player.UpdateHappinessDisplay();
-                player.UpdateProductionDisplay();
+                //player.UpdateHappinessDisplay();
+                //player.UpdateProductionDisplay();
                 player.UpdateScienceDisplay();
                 chat = FindObjectOfType<ChatManager>();
                 gameUI = FindObjectOfType<HexGameUI>();

@@ -83,9 +83,9 @@ public class Attacker : Unit
         target.happiness *= 0.9f;
 
         if(GameManager.Instance.gamemode == GameManager.Gamemode.MULTI)
-            owner.client.Send("CUNM|CTD|" + target.position.coordinates.X + "#" + target.position.coordinates.Z + "#" + damage + "|" + target.owner.name);
+            owner.client.Send("CUNM|CTD|" + target.location.coordinates.X + "#" + target.location.coordinates.Z + "#" + damage + "|" + target.owner.name);
         else
-            target.owner.NetworkTakeDamageCity(target.position.coordinates.X + "#" + target.position.coordinates.Z + "#" + damage);
+            target.owner.NetworkTakeDamageCity(target.location.coordinates.X + "#" + target.location.coordinates.Z + "#" + damage);
     }
     
 }

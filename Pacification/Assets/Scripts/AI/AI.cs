@@ -71,7 +71,7 @@ public class AI
         int nbCities = ennemy.playerCities.Count;
         System.Random rnd = ennemy.hexGrid.rnd;
         int choosenCity = rnd.Next(nbCities);
-        HexCell location = ennemy.playerCities[choosenCity].Position;
+        HexCell location = ennemy.playerCities[choosenCity].Location;
 
         for(int i = 0; i < aiPlayer.hexGrid.cells.Length; ++i)
         {
@@ -122,7 +122,7 @@ public class AI
         int bestDist = Int32.MaxValue;
         foreach(City city in ennemy.playerCities)
         {
-            int dist = unit.HexUnit.location.coordinates.DistanceTo(city.Position.coordinates);
+            int dist = unit.HexUnit.location.coordinates.DistanceTo(city.Location.coordinates);
             if(dist < bestDist)
             {
                 bestDist = dist;
@@ -164,7 +164,7 @@ public class AI
         City target = FindClosestPlayerCity(unit);
         if(target == null)
             return;
-        MovePathfinding(unit, target.Position);
+        MovePathfinding(unit, target.Location);
     }
 
     bool TryAttackCity(Attacker unit)
@@ -172,7 +172,7 @@ public class AI
         City target = FindClosestPlayerCity(unit);
         if(target == null)
             return false;
-        if(!unit.IsInRangeToAttack(target.Position))
+        if(!unit.IsInRangeToAttack(target.Location))
             return false;
         unit.Attack(target);
         return true;

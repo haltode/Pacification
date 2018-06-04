@@ -63,7 +63,7 @@ public class HexMapGenerator : MonoBehaviour
             if(generatorPanel.TextseedS.text != "")
                 seed = int.Parse(generatorPanel.TextseedS.text);
         }
-        else
+        else if (GameManager.Instance.gamemode == GameManager.Gamemode.MULTI)
         {
             mapsize = (MapSize)generatorPanel.SlidermapSizeM.value;
             jitterProbability = generatorPanel.SliderjitterProbabilityM.value;
@@ -78,6 +78,19 @@ public class HexMapGenerator : MonoBehaviour
 
             if(generatorPanel.TextseedM.text != "")
                 seed = int.Parse(generatorPanel.TextseedM.text);
+        }
+        else
+        {
+            mapsize = (MapSize)2;
+            jitterProbability = 0.2f;
+            erosionPercentage = 50;
+            chunkSizeMax = 150;
+            chunkSizeMin = 70;
+            landPercentage = 80;
+            elevationMaximum = 8;
+            regionBorder = 5;
+            regionCount = 1;
+            resourcesPercentage = 50;
         }
     }
 

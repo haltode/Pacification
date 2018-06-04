@@ -20,11 +20,10 @@ public class Worker : Unit
         HexCell cell = hexUnit.location;
         if(cell.FeatureIndex <= 3)
             return;
-        if(cell.FeatureIndex + 6 < 16)
-        {
-            cell.FeatureIndex += 6;
-            cell.featureOwner = owner;
-        }
+
+        const int amelioration = 6;
+        if(cell.FeatureIndex + amelioration < 16)
+            owner.client.Send("CUNI|WEX|" + cell.Position.x + "#" + cell.Position.z + "#" + amelioration + "|");
     }
 
     public bool AddRoad(HexCell roadCell)

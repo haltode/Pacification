@@ -33,7 +33,7 @@ public class Player
 
         money = 1000;
         science = 0;
-        ressources = new int[6]; // Iron, gold, Diamond, Horses, Wood, Food
+        resources = new int[6]; // Iron, gold, Diamond, Horses, Wood, Food
 
         roundNb = 0;
 
@@ -187,12 +187,13 @@ public class Player
         string[] receivedData = data.Split('#');
         hexGrid = Object.FindObjectOfType<HexGrid>();
 
-        City.CitySize type = (City.CitySize)int.Parse(receivedData[0]);
+        City.CitySize size = (City.CitySize)int.Parse(receivedData[0]);
         HexCell location = hexGrid.GetCell(new HexCoordinates(int.Parse(receivedData[1]), int.Parse(receivedData[2])));
         location.FeatureIndex = 1;
         location.IncreaseVisibility();
 
         City city = new City(this, location);
+        city.Size = size;
         location.Feature = city;
 
         playerCities.Add(city);

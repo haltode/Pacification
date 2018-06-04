@@ -20,7 +20,7 @@ public class Worker : Unit
         HexCell cell = hexUnit.location;
         if(cell.FeatureIndex <= 3)
             return;
-        if(cell.FeatureIndex + 6 < 16) // lol much constant don't care
+        if(cell.FeatureIndex + 6 < 16)
         {
             cell.FeatureIndex += 6;
             cell.featureOwner = owner;

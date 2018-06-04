@@ -4,8 +4,6 @@ using UnityEngine;
 
 public class City : Feature
 {
-    // TODO : add on-map representation (conflicts with ressources to be expected considering their current implementation)
-
     public enum CitySize
     {
         SETTLEMENT,
@@ -44,7 +42,7 @@ public class City : Feature
         maxHP = hp;
         pop = 100;
 
-        perTurnScience = 0.3f;
+        perTurnScience = 0.2f;
         perTurnMoney = 0.1f;
         prodRate = 1f;
         happiness = 1f;

@@ -12,15 +12,11 @@ public class Player
 
     public int money;
     public int science;
-    public int steel;
-    public int gold;
-    public int diamond;
-    public int wood;
-    public int food;
-    public int horses;
+    public int[] resources;
 
     public List<Unit> playerUnits;
     public List<City> playerCities;
+    public List<Resource> playerResources;
 
     // TODO : couleur du joueur
 
@@ -37,17 +33,13 @@ public class Player
 
         money = 1000;
         science = 0;
-        steel = 0;
-        gold = 0;
-        diamond = 0;
-        food = 0;
-        wood = 0;
-        horses = 0;
+        ressources = new int[6]; // Iron, gold, Diamond, Horses, Wood, Food
 
         roundNb = 0;
 
         playerUnits = new List<Unit>();
         playerCities = new List<City>();
+        playerResources = new List<Resource>();
 
         canPlay = false;
         client = Object.FindObjectOfType<Client>();
@@ -239,6 +231,8 @@ public class Player
                 return playerCities[i];
         return null;
     }
+
+    // TODO : faire la même chose que pour les city mais avec les ressources (add, take damage, remove, network, etc...)
     
     public void LevelUp()
     {

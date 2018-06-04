@@ -7,7 +7,7 @@ public class Feature
     public enum FeatureType
     {
         CITY,
-        RESSOURCE
+        RESOURCE
     }
 
     public Player owner;

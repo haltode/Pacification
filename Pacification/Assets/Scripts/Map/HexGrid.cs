@@ -267,9 +267,6 @@ public class HexGrid : MonoBehaviour
                 if(moveCost == -1)
                     continue;
                 int newDist = current.Distance + moveCost;
-                int turn = (newDist - 1) / speed;
-                if(turn > currentTurn)
-                    newDist = turn * speed + moveCost;
 
                 neighbor.Distance = newDist;
                 neighbor.PathFrom = current;
@@ -288,8 +285,7 @@ public class HexGrid : MonoBehaviour
             HexCell current = currentPathEnd;
             while(current != currentPathStart)
             {
-                int turn = (current.Distance - 1) / speed;
-                current.SetLabel(turn.ToString());
+                current.SetLabel(current.Distance.ToString());
                 current.EnableHighlight(Color.white);
                 current = current.PathFrom;
             }

@@ -108,12 +108,16 @@ public class HexUnit : MonoBehaviour
 
         // Road and flat terrains are faster than cliffs
         int moveCost;
+        if(current.GetElevationDifference(dir) == 0)
+            moveCost = 1;
+        else
+            moveCost = 2;
+
         if(current.HasRoadThroughEdge(dir))
             moveCost = 1;
-        else if(current.GetElevationDifference(dir) == 0)
+        if(current.TerrainBiomeIndex == (int)HexCell.BiomeType.ROCKY ||
+            current.FeatureIndex == (int)HexCell.FeatureType.FOREST)
             moveCost = 2;
-        else
-            moveCost = 3;
         return moveCost;
     }
 

@@ -17,7 +17,7 @@ public class Barrack : MonoBehaviour
     public void CreateUnitButton(string type)
     {
         City city = gameUI.selectedCity;
-        if(city != null)
+        if(city != null && !city.Position.HasUnit)
             city.Owner.AddUnit(Unit.StrToType(type), city.Position);
     }
 

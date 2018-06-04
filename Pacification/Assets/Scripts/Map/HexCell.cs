@@ -170,6 +170,11 @@ public class HexCell : MonoBehaviour
         get { return featureIndex > 0; }
     }
 
+    public bool HasUnit
+    {
+        get { return Unit != null; }
+    }
+
     public bool HasCity
     {
         get { return featureIndex == 1 || featureIndex == 2 || featureIndex == 3; }

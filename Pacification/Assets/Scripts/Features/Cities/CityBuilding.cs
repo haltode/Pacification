@@ -13,7 +13,7 @@ public static class CityBuilding
     }
 
     public static int[] price = new int[] {500, 500, 500, 500, 2000, 3000, 2000, 1500, 5000, 8000, 4000, 4000};
-    public static float[] multiplier = new float[] {0.05f, 0.01f, 0.01f, 0.01f, 0.1f, 0.08f, 0.05f, 0.05f, 0.2f, 0.15f, 0.1f, 0.1f};
+    public static float[] multiplier = new float[] {0.02f, 0.01f, 0.01f, 0.01f, 0.08f, 0.08f, 0.05f, 0.05f, 0.15f, 0.15f, 0.1f, 0.1f};
 
     public static void Build(BuildingType type, City city)
     {

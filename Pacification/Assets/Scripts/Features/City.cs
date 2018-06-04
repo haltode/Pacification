@@ -44,7 +44,7 @@ public class City : Feature
         maxHP = hp;
         pop = 100;
 
-        perTurnScience = 0.5f;
+        perTurnScience = 0.3f;
         perTurnMoney = 0.1f;
         prodRate = 1f;
         happiness = 1f;
@@ -55,7 +55,7 @@ public class City : Feature
 
     public void Update()
     {
-        pop = (int)(pop * happiness * happinessMalus * 1.1f);
+        pop = (int)(pop * happiness * happinessMalus * 3f); //For testing purposes. Change back to 1.1f for normal play
 
         owner.money += (int)(pop * perTurnMoney * ((happiness * happinessMalus < 1) ? (happiness * happinessMalus) : 1f));
         owner.science += (int)(pop * perTurnScience * ((happiness * happinessMalus < 1) ? (happiness * happinessMalus) : 1f));
@@ -65,12 +65,14 @@ public class City : Feature
             size = CitySize.CITY;
             hp = 900;
             maxHP = hp;
+            location.FeatureIndex = 2;
         }
         else if (size == CitySize.CITY && pop >= 5000)
         {
             size = CitySize.MEGALOPOLIS;
             hp = 1300;
             maxHP = hp;
+            location.FeatureIndex = 3;
         }
 
         happinessMalus = (float)(hp / maxHP); //damaged cities get a happiness malus, for obvious reasons people are not happy to be on fire

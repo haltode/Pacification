@@ -108,11 +108,9 @@ public class Player
             unit = new Heavy(this);
         else
             Debug.Log("Unknown unit type");
-
-        /* for upgraded model
+        
         if (Unit.CanAttack(unit) && unitLevel > 10)
-            (int)type += 3;
-        */
+            type = (Unit.UnitType)((int)type + 3);
 
         unit.hexGameObject = GameObject.Instantiate(hexGrid.mainUnitPrefab);
         unit.HexUnit = unit.hexGameObject.GetComponent<HexUnit>();
@@ -288,12 +286,6 @@ public class Player
 
     // TODO : mettre les bons displays (ajouter fer/or/diamant/nourriture/bois/chevaux
 
-    public void UpdateRoundDisplay()
-    {
-        ++roundNb;
-        displayer.UpdateRoundDisplay(roundNb);
-    }
-
     public int UnitLevel
     {
         get { return unitLevel; }
@@ -304,8 +296,12 @@ public class Player
         foreach (City c in playerCities)
             c.Update();
 
-        UpdateRoundDisplay();
+        ++roundNb;
+        displayer.UpdateRoundDisplay(roundNb);
         displayer.UpdateMoneyDisplay(money);
         displayer.UpdateScienceDisplay(science);
+
+        // For testing only
+        LevelUp();
     }
 }

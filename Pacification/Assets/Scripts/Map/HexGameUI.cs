@@ -70,7 +70,7 @@ public class HexGameUI : MonoBehaviour
             attackTargetCell = null;
         }
 
-        if(client.chat.input.isFocused)
+        if(client.chat == null || client.chat.input.isFocused)
             return;
 
         if(Input.GetKeyDown(controls.cycleCity))

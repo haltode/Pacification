@@ -243,7 +243,6 @@ public class HexGameUI : MonoBehaviour
             }
             else if(selectedUnit.Type == Unit.UnitType.WORKER)
             {
-                // TODO: need to implement exploit
                 ((Worker)selectedUnit).Exploit();
             }
             else

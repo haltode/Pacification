@@ -17,7 +17,14 @@ public class Worker : Unit
 
     public void Exploit()
     {
-        // TODO quand les ressources seront gérées
+        HexCell cell = hexUnit.location;
+        if(cell.FeatureIndex <= 3)
+            return;
+        if(cell.FeatureIndex + 6 < 16) // lol much constant don't care
+        {
+            cell.FeatureIndex += 6;
+            cell.featureOwner = owner;
+        }
     }
 
     public bool AddRoad(HexCell roadCell)

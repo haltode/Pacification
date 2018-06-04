@@ -34,8 +34,6 @@ public class City : Feature
     //for info panels
     public int[,] buildings = new int[4,3]; // [(int)BuildingType, level] - amount of buildings per type per level
 
-    public GameObject instance;
-
     public City (Player owner, HexCell location)
     {
         this.owner = owner;

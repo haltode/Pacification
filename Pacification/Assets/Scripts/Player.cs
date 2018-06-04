@@ -205,13 +205,6 @@ public class Player
         City city = new City(this, location);
         location.Feature = city;
 
-        Vector3 position = location.Position;
-        float hash = HexMetrics.SampleHashGrid(position);
-        city.instance = GameObject.Instantiate(
-            hexGrid.cityPrefab[(int)type],
-            position,
-            Quaternion.Euler(0f, 360f * hash, 0f));
-
         playerCities.Add(city);
     }
 
@@ -236,7 +229,6 @@ public class Player
 
         HexCell location = city.Location;
         location.FeatureIndex = 0;
-        Object.Destroy(city.instance);
         playerCities.Remove(city);
         location.Feature = null;
         city = null;

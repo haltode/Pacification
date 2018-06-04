@@ -138,7 +138,7 @@ public class HexGameUI : MonoBehaviour
         {
             Unit ennemiUnit = location.Unit.Unit;
             unitUI.SetActive(true);
-            unitTypeText.text = "Ennemi " + ennemiUnit.TypeToStr();
+            unitTypeText.text = "Enemy " + ennemiUnit.TypeToStr();
             unitHealthText.text = ennemiUnit.Hp + " / " + ennemiUnit.maxHP;
             healthUnit.sizeDelta = new Vector2(((float)ennemiUnit.Hp / (float)ennemiUnit.maxHP) * 90f, healthUnit.sizeDelta.y);
         }
@@ -194,7 +194,7 @@ public class HexGameUI : MonoBehaviour
                     ennemiCityBothHealthText.text = selectedCity.Hp + " / " + selectedCity.maxHP;
 
                     healthUnitBoth.sizeDelta = new Vector2(((float)unit.Hp / (float)unit.maxHP) * 90f, healthUnitBoth.sizeDelta.y);
-                    unitTypeBothText.text = (unit.owner != client.player ? "Ennemi ":"")  + unit.TypeToStr();
+                    unitTypeBothText.text = (unit.owner != client.player ? "Enemy ":"")  + unit.TypeToStr();
                     unitBothHealthText.text = unit.Hp + " / " + unit.maxHP;
                 }
                 else
@@ -209,7 +209,7 @@ public class HexGameUI : MonoBehaviour
                     ennemiCityBothHealthText.text = selectedCity.Hp + " / " + selectedCity.maxHP;
 
                     healthUnit.sizeDelta = new Vector2(((float)unit.Hp / (float)unit.maxHP) * 90f, healthUnitBoth.sizeDelta.y);
-                    unitTypeText.text = (unit.owner != client.player ? "Ennemi " : "") + unit.TypeToStr();
+                    unitTypeText.text = (unit.owner != client.player ? "Enemy " : "") + unit.TypeToStr();
                     unitHealthText.text = unit.Hp + " / " + unit.maxHP;
                 }
             }

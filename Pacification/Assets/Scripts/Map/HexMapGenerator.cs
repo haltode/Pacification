@@ -29,6 +29,7 @@ public class HexMapGenerator : MonoBehaviour
     int chunkSizeMin;
     int chunkSizeMax;
     int landPercentage;
+    int resourcesPercentage;
     int elevationMaximum;
     int regionBorder;
     int regionCount;
@@ -46,18 +47,41 @@ public class HexMapGenerator : MonoBehaviour
     {
         MapGeneratorPanel generatorPanel = FindObjectOfType<MapGeneratorPanel>();
 
-        mapsize = (MapSize)generatorPanel.SlidermapSize.value;
-        jitterProbability = generatorPanel.SliderjitterProbability.value;
-        erosionPercentage = generatorPanel.SlidererosionPercentage.value;
-        chunkSizeMax = (int)generatorPanel.SliderchunkSizeMax.value;
-        chunkSizeMin = (int)generatorPanel.SliderchunkSizeMin.value;
-        landPercentage = (int)generatorPanel.SliderlandPercentage.value;
-        elevationMaximum = (int)generatorPanel.SliderelevationMaximum.value;
-        regionBorder = (int)generatorPanel.SliderregionBorder.value;
-        regionCount = (int)generatorPanel.SliderregionCount.value;
 
-        if(generatorPanel.Textseed.text != "")
-            seed = int.Parse(generatorPanel.Textseed.text);
+        if(GameManager.Instance.gamemode == GameManager.Gamemode.SOLO)
+        {
+            mapsize = (MapSize)generatorPanel.SlidermapSizeS.value;
+            jitterProbability = generatorPanel.SliderjitterProbabilityS.value;
+            erosionPercentage = generatorPanel.SlidererosionPercentageS.value;
+            chunkSizeMax = (int)generatorPanel.SliderchunkSizeMaxS.value;
+            chunkSizeMin = (int)generatorPanel.SliderchunkSizeMinS.value;
+            landPercentage = (int)generatorPanel.SliderlandPercentageS.value;
+            elevationMaximum = (int)generatorPanel.SliderelevationMaximumS.value;
+            regionBorder = (int)generatorPanel.SliderregionBorderS.value;
+            regionCount = (int)generatorPanel.SliderregionCountS.value;
+            resourcesPercentage = (int)generatorPanel.SliderResourcesS.value;
+
+            if(generatorPanel.TextseedS.text != "")
+                seed = int.Parse(generatorPanel.TextseedS.text);
+        }
+        else
+        {
+            mapsize = (MapSize)generatorPanel.SlidermapSizeM.value;
+            jitterProbability = generatorPanel.SliderjitterProbabilityM.value;
+            erosionPercentage = generatorPanel.SlidererosionPercentageM.value;
+            chunkSizeMax = (int)generatorPanel.SliderchunkSizeMaxM.value;
+            chunkSizeMin = (int)generatorPanel.SliderchunkSizeMinM.value;
+            landPercentage = (int)generatorPanel.SliderlandPercentageM.value;
+            elevationMaximum = (int)generatorPanel.SliderelevationMaximumM.value;
+            regionBorder = (int)generatorPanel.SliderregionBorderM.value;
+            regionCount = (int)generatorPanel.SliderregionCountM.value;
+            resourcesPercentage = (int)generatorPanel.SliderResourcesM.value;
+
+            if(generatorPanel.TextseedM.text != "")
+                seed = int.Parse(generatorPanel.TextseedM.text);
+        }
+
+
     }
 
     public void GenerateMap()

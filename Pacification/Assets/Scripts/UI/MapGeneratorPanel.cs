@@ -5,18 +5,32 @@ using UnityEngine.UI;
 
 public class MapGeneratorPanel : MonoBehaviour {
 
-    public GameObject warningMessage;
+    public GameObject warningMessageS;
+    public GameObject warningMessageM;
 
-    public Text Textseed;
-    public Slider SlidermapSize;
-    public Slider SliderjitterProbability;
-    public Slider SliderchunkSizeMin;
-    public Slider SliderchunkSizeMax;
-    public Slider SliderlandPercentage;
-    public Slider SliderelevationMaximum;
-    public Slider SliderregionBorder;
-    public Slider SliderregionCount;
-    public Slider SlidererosionPercentage;
+    public Text TextseedS;
+    public Slider SlidermapSizeS;
+    public Slider SliderResourcesS;
+    public Slider SliderjitterProbabilityS;
+    public Slider SliderchunkSizeMinS;
+    public Slider SliderchunkSizeMaxS;
+    public Slider SliderlandPercentageS;
+    public Slider SliderelevationMaximumS;
+    public Slider SliderregionBorderS;
+    public Slider SliderregionCountS;
+    public Slider SlidererosionPercentageS;
+
+    public Text TextseedM;
+    public Slider SlidermapSizeM;
+    public Slider SliderResourcesM;
+    public Slider SliderjitterProbabilityM;
+    public Slider SliderchunkSizeMinM;
+    public Slider SliderchunkSizeMaxM;
+    public Slider SliderlandPercentageM;
+    public Slider SliderelevationMaximumM;
+    public Slider SliderregionBorderM;
+    public Slider SliderregionCountM;
+    public Slider SlidererosionPercentageM;
 
     public GameObject randomPanel;
     public GameObject loadPanel;
@@ -27,7 +41,8 @@ public class MapGeneratorPanel : MonoBehaviour {
 
     private void Update()
     {
-        warningMessage.SetActive(SlidermapSize.value >= 3);
+        warningMessageS.SetActive(SlidermapSizeS.value >= 3);
+        warningMessageM.SetActive(SlidermapSizeM.value >= 3);
     }
 
     public void ChangeGenMode()

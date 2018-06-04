@@ -47,7 +47,8 @@ public class HexMapEditor : MonoBehaviour
 
     public void EditCell(HexCell cell)
     {
-        cell.TerrainBiomeIndex = activeTerrainBiomeIndex;
+        if (activeTerrainBiomeIndex >= 0)
+            cell.TerrainBiomeIndex = activeTerrainBiomeIndex;
         cell.FeatureIndex = activeFeature;
         if(applyElevation)
             cell.Elevation = activeElevation;

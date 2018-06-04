@@ -77,7 +77,8 @@ public class HexGrid : MonoBehaviour
         for(HexDirection dir = HexDirection.NE; dir <= HexDirection.NW; ++dir)
         {
             HexCell neighbor = location.GetNeighbor(dir);
-            if(neighbor && !neighbor.IsUnderWater && !neighbor.Unit && !IsBorder(neighbor))
+            if(neighbor && !neighbor.IsUnderWater && !neighbor.Unit &&
+                !IsBorder(neighbor) && neighbor.Elevation <= 4)
                 possibleLocation.Add(neighbor);
         }
 

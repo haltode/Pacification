@@ -47,7 +47,6 @@ public class HexMapGenerator : MonoBehaviour
     {
         MapGeneratorPanel generatorPanel = FindObjectOfType<MapGeneratorPanel>();
 
-
         if(GameManager.Instance.gamemode == GameManager.Gamemode.SOLO)
         {
             mapsize = (MapSize)generatorPanel.SlidermapSizeS.value;
@@ -80,8 +79,6 @@ public class HexMapGenerator : MonoBehaviour
             if(generatorPanel.TextseedM.text != "")
                 seed = int.Parse(generatorPanel.TextseedM.text);
         }
-
-
     }
 
     public void GenerateMap()
@@ -141,6 +138,7 @@ public class HexMapGenerator : MonoBehaviour
         ErodeLand();
         SetTerrainType();
         AddOcean();
+        AddResources();
 
         grid.ResetDistances();
 
@@ -377,9 +375,47 @@ public class HexMapGenerator : MonoBehaviour
         }
     }
 
+    void AddResources()
+    {
+        int nbValidCell = 0;
+        for (int i = 0; i < cellCount; ++i)
+            if (!grid.GetCell(i).IsUnderWater)
+                nbValidCell++;
+        int resourcesBudget = Mathf.RoundToInt(nbValidCell * resourcesPercentage * 0.01f);
+        int guard = 0;
+        while (resourcesBudget > 0 && guard < MaxIteration)
+        {
+            HexCell cell = GetRandomValidCell();
+            if ((cell.TerrainBiomeIndex == (int)HexCell.BiomeType.DESERT && cell.IsHill) ||
+                cell.TerrainBiomeIndex == (int)HexCell.BiomeType.ROCKY)
+            {
+                cell.FeatureIndex = Random.Range((int)HexCell.FeatureType.IRON, (int)HexCell.FeatureType.DIAMOND + 1);
+                resourcesBudget--;
+            }
+            else if (cell.TerrainBiomeIndex == (int)HexCell.BiomeType.PLAIN)
+            {
+                cell.FeatureIndex = Random.Range((int)HexCell.FeatureType.HORSE, (int)HexCell.FeatureType.FOOD + 1);
+                resourcesBudget--;
+            }
+            guard++;
+        }
+    }
+
     HexCell GetRandomCell(MapRegion region)
     {
         return grid.GetCell(Random.Range(region.xMin, region.xMax), 
                             Random.Range(region.zMin, region.zMax));
+    }
+
+    HexCell GetRandomValidCell()
+    {
+        HexCell cell;
+        do
+        {
+            cell = grid.GetCell(Random.Range(0, cellCount));
+        } while (cell.IsUnderWater || cell.HasFeature ||
+                 cell.TerrainBiomeIndex == (int)HexCell.BiomeType.SNOW ||
+                 cell.CountNeighborsFeatures >= 2);
+        return cell;
     }
 }

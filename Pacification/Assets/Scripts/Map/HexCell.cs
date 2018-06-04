@@ -5,6 +5,28 @@ using System;
 
 public class HexCell : MonoBehaviour
 {
+    public enum BiomeType
+    {
+        DESERT,
+        PLAIN,
+        ROCKY,
+        SNOW
+    };
+
+    public enum FeatureType
+    {
+        NONE,
+        CITY1,
+        CITY2,
+        CITY3,
+        IRON,
+        GOLD,
+        DIAMOND,
+        HORSE,
+        FOREST,
+        FOOD
+    }
+
     public HexCoordinates coordinates;
     public HexGridChunk chunk;
     public RectTransform uiRect;
@@ -123,6 +145,11 @@ public class HexCell : MonoBehaviour
         }
     }
 
+    public bool IsHill
+    {
+        get { return elevation % 2 != 0; }
+    }
+
     public int GetElevationDifference(HexDirection direction)
     {
         int difference = Math.Abs(elevation - GetNeighbor(direction).elevation);
@@ -178,6 +205,18 @@ public class HexCell : MonoBehaviour
     public bool HasCity
     {
         get { return featureIndex == 1 || featureIndex == 2 || featureIndex == 3; }
+    }
+
+    public int CountNeighborsFeatures
+    {
+        get
+        {
+            int nbFeatures = 0;
+            for(HexDirection dir = HexDirection.NE; dir <= HexDirection.NW; ++dir)
+                if(GetNeighbor(dir).HasFeature)
+                    nbFeatures++;
+            return nbFeatures;
+        }
     }
 
     public bool Explorable { get; set; }

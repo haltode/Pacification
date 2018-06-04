@@ -80,6 +80,7 @@ public class Attacker : Unit
     public void Attack(City target)
     {
         int damage = (int)((float)((defaultATK - upgradeATK) + upgradeATK * level) * dmgMultCity);
+        target.happiness *= 0.9f;
 
         if(GameManager.Instance.gamemode == GameManager.Gamemode.MULTI)
             owner.client.Send("CUNM|CTD|" + target.position.coordinates.X + "#" + target.position.coordinates.Z + "#" + damage + "|" + target.owner.name);

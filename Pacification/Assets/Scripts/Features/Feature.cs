@@ -11,7 +11,7 @@ public class Feature
     }
 
     public Player owner;
-    public HexCell position;
+    public HexCell location;
     protected FeatureType type;
 
     public Player Owner
@@ -25,9 +25,9 @@ public class Feature
         get { return type; }
     }
 
-    public HexCell Position
+    public HexCell Location
     {
-        get { return position; }
-        set { position = value; }
+        get { return location; }
+        set { location = value; }
     }
 }

@@ -12,8 +12,12 @@ public class Player
 
     public int money;
     public int science;
-    public int production;
-    public int happiness;
+    public int steel;
+    public int gold;
+    public int diamond;
+    public int wood;
+    public int food;
+    public int horses;
 
     public List<Unit> playerUnits;
     public List<City> playerCities;
@@ -33,8 +37,13 @@ public class Player
 
         money = 1000;
         science = 0;
-        production = 0;
-        happiness = 5;
+        steel = 0;
+        gold = 0;
+        diamond = 0;
+        food = 0;
+        wood = 0;
+        horses = 0;
+
         roundNb = 0;
 
         playerUnits = new List<Unit>();
@@ -225,7 +234,7 @@ public class Player
     {
         hexGrid = Object.FindObjectOfType<HexGrid>();
 
-        HexCell location = city.position;
+        HexCell location = city.Location;
         location.FeatureIndex = 0;
         Object.Destroy(city.instance);
         playerCities.Remove(city);
@@ -236,7 +245,7 @@ public class Player
     public City GetCity(HexCell location)
     {
         for(int i = 0; i < playerCities.Count; ++i)
-            if(playerCities[i].Position == location)
+            if(playerCities[i].Location == location)
                 return playerCities[i];
         return null;
     }
@@ -285,15 +294,7 @@ public class Player
         displayer.UpdateScienceDisplay(science);
     }
 
-    public void UpdateProductionDisplay()
-    {
-        displayer.UpdateProductionDisplay(production);
-    }
-
-    public void UpdateHappinessDisplay()
-    {
-        displayer.UpdateHappinessDisplay(happiness);
-    }
+    // TODO : mettre les bons displays (ajouter fer/or/diamant/nourriture/bois/chevaux
 
     public void UpdateRoundDisplay()
     {
@@ -304,5 +305,11 @@ public class Player
     public int UnitLevel
     {
         get { return unitLevel; }
+    }
+
+    public void Newturn()
+    {
+        foreach (City c in playerCities)
+            c.Update();
     }
 }

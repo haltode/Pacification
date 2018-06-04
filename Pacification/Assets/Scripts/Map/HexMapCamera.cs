@@ -53,7 +53,8 @@ public class HexMapCamera : MonoBehaviour
             lastUnit = lastCity = 0;
         }
 
-        if(GameManager.Instance.gamemode != GameManager.Gamemode.EDITOR && client.chat == null || client.chat.input.isFocused)
+        if(GameManager.Instance.gamemode != GameManager.Gamemode.EDITOR &&
+            (client.chat == null || client.chat.input.isFocused))
             return;
 
         float xDelta = Input.GetAxis("Horizontal");

@@ -111,8 +111,12 @@ public class HexMapGenerator : MonoBehaviour
                 sizeX = 180;
                 sizeZ = 180;
                 break;
-        }
 
+            default:
+                sizeX = 5;
+                sizeZ = 5;
+                break;
+        }
         GenerateMap(sizeX, sizeZ, seed);
     }
 

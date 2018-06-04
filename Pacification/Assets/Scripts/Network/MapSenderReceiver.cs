@@ -3,8 +3,8 @@ using UnityEngine;
 
 public class MapSenderReceiver : MonoBehaviour {
 
-    public string path;
-
+    public string path = "";
+    
     public SaveLoadMapMenu SaveAndLoadPrefab;
     public SaveLoadMapMenu saveAndLoad;
 
@@ -27,9 +27,10 @@ public class MapSenderReceiver : MonoBehaviour {
             File.Delete(path);
         }
         else
+        {
             map = File.ReadAllText(FindObjectOfType<MapGeneratorPanel>().path);
-
-        StartGame(map);
+            saveAndLoad.Load(path);
+        }
 
         server.Broadcast("SMAP|" + map, server.clients);
     }

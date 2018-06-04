@@ -42,16 +42,16 @@ public class NewMapMenu : MonoBehaviour
 
     public void CreateSmallMap()
     {
-        CreateMap(20, 20);
+        CreateMap(30, 30);
     }
 
     public void CreateMediumMap()
     {
-        CreateMap(40, 40);
+        CreateMap(90, 90);
     }
 
     public void CreateLargeMap()
     {
-        CreateMap(80, 80);
+        CreateMap(180, 180);
     }
 }

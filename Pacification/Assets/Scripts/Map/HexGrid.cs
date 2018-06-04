@@ -99,8 +99,6 @@ public class HexGrid : MonoBehaviour
 
     public bool CreateMap(int sizeX, int sizeZ)
     {
-        Debug.Log(sizeX + " " + sizeZ);
-
         if( sizeX <= 0 || sizeX % HexMetrics.ChunkSizeX != 0 ||
             sizeZ <= 0 || sizeZ % HexMetrics.ChunkSizeZ != 0)
         {
@@ -429,7 +427,6 @@ public class HexGrid : MonoBehaviour
 
     public void Load(BinaryReader reader)
     {
-        Debug.Log("wtf");
         int sizeX = reader.ReadInt32();
         int sizeZ = reader.ReadInt32();
         if(sizeX != cellCountX || sizeZ != cellCountZ)

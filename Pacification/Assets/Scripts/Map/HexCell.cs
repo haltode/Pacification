@@ -213,8 +213,11 @@ public class HexCell : MonoBehaviour
         {
             int nbFeatures = 0;
             for(HexDirection dir = HexDirection.NE; dir <= HexDirection.NW; ++dir)
-                if(GetNeighbor(dir).HasFeature)
+            {
+                HexCell neighbor = GetNeighbor(dir);
+                if(neighbor && neighbor.HasFeature)
                     nbFeatures++;
+            }
             return nbFeatures;
         }
     }

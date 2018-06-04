@@ -75,7 +75,7 @@ public class City : Feature
             maxHP = hp;
         }
 
-        happinessMalus = (hp / maxHP); //damaged cities get a happiness malus, for obvious reasons people are not happy to be on fire
+        happinessMalus = (float)(hp / maxHP); //damaged cities get a happiness malus, for obvious reasons people are not happy to be on fire
     }
 
     public void LevelupBuilding(int type)

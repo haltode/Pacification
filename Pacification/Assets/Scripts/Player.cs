@@ -311,5 +311,9 @@ public class Player
     {
         foreach (City c in playerCities)
             c.Update();
+
+        UpdateRoundDisplay();
+        displayer.UpdateMoneyDisplay(money);
+        displayer.UpdateScienceDisplay(science);
     }
 }

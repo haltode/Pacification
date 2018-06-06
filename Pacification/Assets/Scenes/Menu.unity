@@ -6905,8 +6905,8 @@ MonoBehaviour:
   hexGrid: {fileID: 0}
   controls: {fileID: 0}
   errorMount: {fileID: 1680565459}
-  waitingPannel: {fileID: 0}
-  errorLog: {fileID: 0}
+  waitingPannel: {fileID: 2146455715}
+  errorLog: {fileID: 1352368940}
   gamemode: 0
 --- !u!1 &315658928
 GameObject:

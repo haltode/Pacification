@@ -36,12 +36,10 @@ public class Server : MonoBehaviour
         catch(Exception e)
         {
             Debug.Log(e.Message);
-            Destroy(this.gameObject);
+            Destroy(gameObject);
             FindObjectOfType<LUI_MenuCamControl>().setMount(GameManager.Instance.errorMount);
             GameManager.Instance.errorLog.text = "ERR_PORT_ALREADY_USED";
         }
-
-        
     }
 
     public void Update()
@@ -197,8 +195,15 @@ public class Server : MonoBehaviour
                 string[] clientStatus = receivedData[1].Split('#');
                 client.clientName = clientStatus[0];
                 client.isHost = (clientStatus[1] == "1");
+                
+                if(client.isHost && clients.Count > 1)
+                {
+                    client.tcp.Close();
+                    clients.Remove(client);
+                }
+                else
+                    Broadcast("SCNN|" + receivedData[1], clients);
 
-                Broadcast("SCNN|" + receivedData[1], clients);
                 break;
 
             case "CKIK":

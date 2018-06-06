@@ -11,11 +11,11 @@ public class Heavy : Attacker
         this.level = owner.UnitLevel[2];
 
         upgradeHP = 20;
-        hp = (isUpgraded() ? 350 : 120) - upgradeHP + (level * upgradeHP);
+        hp = (isUpgraded() ? 350 : 120) - upgradeHP + ((level - (isUpgraded() ? 10 : 0)) * upgradeHP);
         maxHP = hp;
 
         upgradeATK = 10;
-        defaultATK = (isUpgraded() ? 210 : 100) - upgradeATK + (level * upgradeATK);
+        defaultATK = (isUpgraded() ? 210 : 100) - upgradeATK + ((level - (isUpgraded() ? 10 : 0)) * upgradeATK);
 
         range = (isUpgraded() ? 3 : 2);
         mvtSPD = 1;
@@ -35,7 +35,7 @@ public class Heavy : Attacker
     {
         if (isMaxed())
             return;
-        else if (level == 10)
+        /*else if (level == 10)
         {
             this.SetGraphics(hexUnit.Grid.unitPrefab[(int)type + 4]);
             range = 2;
@@ -45,7 +45,7 @@ public class Heavy : Attacker
             defaultATK = 210;
 
             dmgMultCity = 2f;
-        }
+        }*/
         else
         {
             maxHP += upgradeHP;

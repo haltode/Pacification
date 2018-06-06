@@ -11,11 +11,11 @@ public class Regular : Attacker
         this.level = owner.UnitLevel[0];
 
         upgradeHP = 20;
-        hp = (isUpgraded() ? 420 : 150) - upgradeHP + (level * upgradeHP);
+        hp = (isUpgraded() ? 420 : 150) - upgradeHP + ((level - (isUpgraded() ? 10 : 0)) * upgradeHP);
         maxHP = hp;
 
         upgradeATK = 25;
-        defaultATK = (isUpgraded() ? 375 : 100) - upgradeATK + (level * upgradeATK);
+        defaultATK = (isUpgraded() ? 375 : 100) - upgradeATK + ((level - (isUpgraded() ? 10 : 0)) * upgradeATK);
 
         range = 1;
         mvtSPD = (isUpgraded() ? 3 : 2);
@@ -35,7 +35,7 @@ public class Regular : Attacker
     {
         if (isMaxed())
             return;
-        else if (level == 10)
+        /*else if (level == 10)
         {
             this.SetGraphics(hexUnit.Grid.unitPrefab[(int)type + 4]);
             mvtSPD = 3;
@@ -53,7 +53,7 @@ public class Regular : Attacker
                 { UnitType.RANGED, 1.125f },
                 { UnitType.HEAVY, 1.5f },
             };
-        }
+        }*/
         else
         {
             maxHP += upgradeHP;

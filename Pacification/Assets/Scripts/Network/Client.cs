@@ -142,15 +142,6 @@ public class Client : MonoBehaviour
             case "SMOV":
                 player.NetworkMoveUnit(receivedData[1]);
                 break;
-
-            //Unit LevelUp
-            case "SUNL":
-                foreach(Player p in players)
-                {
-                    if(p.name == receivedData[2])
-                        p.NetworkLevelUp();
-                }
-                break;
                 
             ////// SETTLER : City creation
             case "SCIT":

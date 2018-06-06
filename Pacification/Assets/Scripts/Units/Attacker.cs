@@ -56,15 +56,14 @@ public class Attacker : Unit
 
     public bool isMaxed()
     {
-        return level == 20;
+        return level == (isUpgraded() ? 20 : 10);
     }
 
     public bool IsInRangeToAttack(HexCell target)
     {
         return HexUnit.location.coordinates.DistanceTo(target.coordinates) <= range;
     }
-
-    // A voir avec l'équilibrage si on veut que l'attaquant prenne des dégats ou non
+    
     public void Attack(Unit target)
     {
         float multiplier = 1f;

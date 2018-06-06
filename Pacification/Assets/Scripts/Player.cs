@@ -251,13 +251,13 @@ public class Player
 
     // TODO : faire la même chose que pour les city mais avec les ressources (add, take damage, remove, network, etc...)
     
-    public void LevelUp()
+    public void LevelUp(string typestr) //To call this function using buttons, make them add as parameter the type of the unite in lowercase (cf Unit.StrToType for exact strings to send)
     {
-        client.Send("CUNI|UNL|0");
-    }
+        Unit.UnitType type = Unit.StrToType(typestr);
 
-    public void NetworkLevelUp(Unit.UnitType type)
-    {
+        if (!Unit.CanAttack(type))
+            return;
+
         if (unitLevel[(int)type - 2] < 20)
         {
             unitLevel[(int)type - 2]++;
@@ -274,11 +274,13 @@ public class Player
         }
     }
 
+    /*
     public void IncreaseUnitLevel(int target)
     {
         while(unitLevel < target)
             LevelUp();
     }
+    */
 
     public void SetDisplayer()
     {
@@ -313,6 +315,8 @@ public class Player
         displayer.UpdateScienceDisplay(science);
 
         // For testing only
-        LevelUp();
+        LevelUp("regular");
+        LevelUp("ranged");
+        LevelUp("heavy");
     }
 }

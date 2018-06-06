@@ -6904,6 +6904,9 @@ MonoBehaviour:
   nameHostInput: {fileID: 344644952}
   hexGrid: {fileID: 0}
   controls: {fileID: 0}
+  errorMount: {fileID: 1680565459}
+  waitingPannel: {fileID: 0}
+  errorLog: {fileID: 0}
   gamemode: 0
 --- !u!1 &315658928
 GameObject:
@@ -28799,17 +28802,6 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
-      - m_Target: {fileID: 1102464996}
-        m_MethodName: setMount
-        m_Mode: 2
-        m_Arguments:
-          m_ObjectArgument: {fileID: 2146455715}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Transform, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
     m_TypeName: UnityEngine.UI.Button+ButtonClickedEvent, UnityEngine.UI, Version=1.0.0.0,
       Culture=neutral, PublicKeyToken=null
 --- !u!114 &1173428468
@@ -37747,7 +37739,7 @@ GameObject:
   - component: {fileID: 1374627619}
   - component: {fileID: 1374627618}
   m_Layer: 5
-  m_Name: Lost Connexion Panel
+  m_Name: Error Panel
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -41663,7 +41655,7 @@ GameObject:
   - component: {fileID: 1680565459}
   - component: {fileID: 1680565460}
   m_Layer: 0
-  m_Name: Lost Connexion Mount
+  m_Name: Error Mount
   m_TagString: Untagged
   m_Icon: {fileID: 5721338939258241955, guid: 0000000000000000d000000000000000, type: 0}
   m_NavMeshLayer: 0

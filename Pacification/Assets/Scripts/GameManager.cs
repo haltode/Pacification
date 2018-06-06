@@ -17,6 +17,10 @@ public class GameManager : MonoBehaviour
     public HexGrid hexGrid;
     public ControlsManager controls;
 
+    public Transform errorMount;
+    public Transform waitingPannel;
+    public Text errorLog;
+
 
     public enum Gamemode
     {
@@ -34,26 +38,37 @@ public class GameManager : MonoBehaviour
 
     public void StartingServer()
     {
+        bool isConnected = false;
+        Server server = Instantiate(serverPrefab).GetComponent<Server>();
+        Client client = Instantiate(clientPrefab).GetComponent<Client>();
+
         try
         {
-            Server server = Instantiate(serverPrefab).GetComponent<Server>();
             server.Init();
-
-            Client client = Instantiate(clientPrefab).GetComponent<Client>();
-            client.clientName = nameHostInput.text;
             
+            client.clientName = nameHostInput.text;
             client.isHost = true;
 
             if(client.clientName == "")
                 client.clientName = "Host";
             client.player = new Player(client.clientName);
 
-            client.ConnectToServer(Server.Localhost, Server.Port);
+            isConnected = client.ConnectToServer(Server.Localhost, Server.Port);
         }
         catch(Exception e)
         {
             Debug.Log(e.Message);
         }
+
+        if(!isConnected)
+        {
+            Destroy(server.gameObject);
+            Destroy(client.gameObject);
+            FindObjectOfType<LUI_MenuCamControl>().setMount(errorMount);
+            errorLog.text = "ERR_SERVER_SLOT_UNAVAILABLE";
+        }
+        else if(gamemode == Gamemode.MULTI)
+            FindObjectOfType<LUI_MenuCamControl>().setMount(waitingPannel);
     }
 
     public void MainMenuEditorButton()
@@ -113,7 +128,13 @@ public class GameManager : MonoBehaviour
         }
 
         if(!isConnected)
+        {
             Destroy(client.gameObject);
+            FindObjectOfType<LUI_MenuCamControl>().setMount(errorMount);
+            errorLog.text = "ERR_SERVER_UNREACHABLE";
+        }
+        else
+            FindObjectOfType<LUI_MenuCamControl>().setMount(waitingPannel);
     }
 
     public void MainMenuBackButton()

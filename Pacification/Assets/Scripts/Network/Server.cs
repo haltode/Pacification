@@ -36,7 +36,12 @@ public class Server : MonoBehaviour
         catch(Exception e)
         {
             Debug.Log(e.Message);
+            Destroy(this.gameObject);
+            FindObjectOfType<LUI_MenuCamControl>().setMount(GameManager.Instance.errorMount);
+            GameManager.Instance.errorLog.text = "ERR_PORT_ALREADY_USED";
         }
+
+        
     }
 
     public void Update()

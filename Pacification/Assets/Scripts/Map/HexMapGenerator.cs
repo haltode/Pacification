@@ -25,18 +25,18 @@ public class HexMapGenerator : MonoBehaviour
 
     List<MapRegion> regions;
 
-    float jitterProbability;
-    int chunkSizeMin;
-    int chunkSizeMax;
-    int landPercentage;
-    int resourcesPercentage;
-    int elevationMaximum;
-    int regionBorder;
-    int regionCount;
-    float erosionPercentage;
+    float jitterProbability = 0.2f;
+    int chunkSizeMin = 70;
+    int chunkSizeMax = 150;
+    int landPercentage = 80;
+    int resourcesPercentage = 5;
+    int elevationMaximum = 8;
+    int regionBorder = 5;
+    int regionCount = 1;
+    float erosionPercentage = 50;
     int mapBorderX = 5;
     int mapBorderZ = 5;
-    MapSize mapsize;
+    MapSize mapsize = MapSize.NORMAL;
 
     void Start()
     {

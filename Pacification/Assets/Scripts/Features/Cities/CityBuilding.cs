@@ -44,7 +44,7 @@ public static class CityBuilding
                 break;
 
             default:
-                Debug.Log("REEEEEEEEEEEE");
+                Debug.Log("Unknown building type");
                 break;
         }
 
@@ -53,12 +53,12 @@ public static class CityBuilding
 
     public static bool RessourceCheck(int type, int level, City city)
     {
-        if (city.owner.wood >= price[(level * ((int)type + 1)) - 1] / 10)
+        if (city.owner.resources[4] >= price[(level * ((int)type + 1)) - 1] / 10)
         {
             if (city.owner.money >= price[(level * ((int)type + 1)) - 1])
             {
                 city.owner.money -= price[(level * ((int)type + 1)) - 1];
-                city.owner.wood -= price[(level * ((int)type + 1)) - 1] / 10;
+                city.owner.resources[4] -= price[(level * ((int)type + 1)) - 1] / 10;
                 return true;
             }
         }

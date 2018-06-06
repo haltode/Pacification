@@ -23,7 +23,7 @@ public class Worker : Unit
 
         const int amelioration = 6;
         if(cell.FeatureIndex + amelioration < 16)
-            owner.client.Send("CUNI|WEX|" + cell.Position.x + "#" + cell.Position.z + "#" + amelioration + "|");
+            owner.client.Send("CUNI|WEX|" + cell.coordinates.X + "#" + cell.coordinates.Z + "#" + amelioration);
     }
 
     public bool AddRoad(HexCell roadCell)

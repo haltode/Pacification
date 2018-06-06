@@ -25,6 +25,7 @@ public class Unit
     public int maxHP;
     public bool embark;
     public bool hasMadeAction;
+    public int currMVT;
 
     public UnitType Type
     {
@@ -113,5 +114,6 @@ public class Unit
     public void Update()
     {
         hasMadeAction = false;
+        currMVT = 0;
     }
 }

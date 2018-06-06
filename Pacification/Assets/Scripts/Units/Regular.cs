@@ -20,6 +20,7 @@ public class Regular : Attacker
 
         range = 1;
         mvtSPD = (isUpgraded() ? 3 : 2);
+        currMVT = 0;
 
         dmgMultCity = (isUpgraded() ? 0.75f : 0.5f);
         dmgMult = new Dictionary<UnitType, float>()

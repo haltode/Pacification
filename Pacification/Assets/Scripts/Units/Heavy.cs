@@ -20,6 +20,7 @@ public class Heavy : Attacker
 
         range = (isUpgraded() ? 3 : 2);
         mvtSPD = 1;
+        currMVT = 0;
 
         dmgMultCity = (isUpgraded() ? 2f : 1.75f);
         dmgMult = new Dictionary<UnitType, float>()

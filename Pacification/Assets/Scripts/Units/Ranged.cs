@@ -20,6 +20,7 @@ public class Ranged : Attacker
 
         range = 2;
         mvtSPD = 2;
+        currMVT = 0;
 
         dmgMultCity = (isUpgraded() ? 0.5f : 0.25f);
         dmgMult = new Dictionary<UnitType, float>()

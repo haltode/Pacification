@@ -309,6 +309,9 @@ public class Player
         foreach (City c in playerCities)
             c.Update();
 
+        foreach (Unit u in playerUnits)
+            u.Update();
+
         ++roundNb;
         displayer.UpdateRoundDisplay(roundNb);
         displayer.UpdateMoneyDisplay(money);

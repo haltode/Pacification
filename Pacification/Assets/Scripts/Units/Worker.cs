@@ -8,6 +8,7 @@ public class Worker : Unit
     {
         this.owner = owner;
         type = UnitType.WORKER;
+        hasMadeAction = false;
         mvtSPD = 2;
         hp = 300;
         maxHP = hp;
@@ -17,6 +18,9 @@ public class Worker : Unit
 
     public void Exploit()
     {
+        if (hasMadeAction)
+            return;
+
         HexCell cell = hexUnit.location;
         if(cell.FeatureIndex <= 3)
             return;
@@ -24,6 +28,7 @@ public class Worker : Unit
         const int amelioration = 6;
         if(cell.FeatureIndex + amelioration < 16)
             owner.client.Send("CUNI|WEX|" + cell.coordinates.X + "#" + cell.coordinates.Z + "#" + amelioration);
+        hasMadeAction = true;
     }
 
     public bool AddRoad(HexCell roadCell)

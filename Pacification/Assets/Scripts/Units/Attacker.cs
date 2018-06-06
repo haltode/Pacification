@@ -66,6 +66,9 @@ public class Attacker : Unit
     
     public void Attack(Unit target)
     {
+        if (hasMadeAction)
+            return;
+
         float multiplier = 1f;
         dmgMult.TryGetValue(target.Type, out multiplier);
         int damage = (int)((float)((defaultATK - upgradeATK) + upgradeATK * level) * multiplier);
@@ -74,10 +77,14 @@ public class Attacker : Unit
             owner.client.Send("CUNM|UTD|" + target.HexUnit.location.coordinates.X + "#" + target.HexUnit.location.coordinates.Z + "#" + damage + "|" + target.owner.name);
         else
             target.owner.NetworkTakeDamageUnit(target.HexUnit.location.coordinates.X + "#" + target.HexUnit.location.coordinates.Z + "#" + damage);
+        hasMadeAction = true;
     }
 
     public void Attack(City target)
     {
+        if (hasMadeAction)
+            return;
+
         int damage = (int)((float)((defaultATK - upgradeATK) + upgradeATK * level) * dmgMultCity);
         target.happiness *= 0.9f;
 
@@ -85,6 +92,7 @@ public class Attacker : Unit
             owner.client.Send("CUNM|CTD|" + target.location.coordinates.X + "#" + target.location.coordinates.Z + "#" + damage + "|" + target.owner.name);
         else
             target.owner.NetworkTakeDamageCity(target.location.coordinates.X + "#" + target.location.coordinates.Z + "#" + damage);
+        hasMadeAction = true;
     }
     
 }

@@ -24,6 +24,7 @@ public class Unit
     protected int hp;
     public int maxHP;
     public bool embark;
+    public bool hasMadeAction;
 
     public UnitType Type
     {
@@ -107,5 +108,10 @@ public class Unit
         GameObject instantiated = Object.Instantiate(prefab, spawnPos, orientation);
         instantiated.name = "Graphics";
         instantiated.transform.parent = hexGameObject.transform;
+    }
+
+    public void Update()
+    {
+        hasMadeAction = false;
     }
 }

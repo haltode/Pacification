@@ -8,6 +8,7 @@ public class Settler : Unit
     {
         this.owner = owner;
         type = UnitType.SETTLER;
+        hasMadeAction = false;
         mvtSPD = 2;
         hp = 100;
         maxHP = hp;
@@ -16,6 +17,10 @@ public class Settler : Unit
 
     public void Settle()
     {
+        if (hasMadeAction)
+            return;
+
         owner.client.Send("CUNM|CIT|" + (int)type + "#" + hexUnit.location.coordinates.X + "#" + hexUnit.location.coordinates.Z + "|" + this.HexUnit.location.coordinates.X + "#" + this.HexUnit.location.coordinates.Z);
+        hasMadeAction = true;
     }
 }

@@ -397,6 +397,35 @@ public class HexGrid : MonoBehaviour
         unit.Die();
     }
 
+    public bool OtherUnitInRadius(HexCell start, int radius)
+    {
+        ResetDistances();
+
+        PriorityQueue<HexCell> searchQueue = new PriorityQueue<HexCell>(HexCell.CompareCells);
+        start.Distance = 0;
+        searchQueue.Enqueue(start);
+        while(!searchQueue.IsEmpty())
+        {
+            HexCell current = searchQueue.Dequeue();
+            if(current.Distance > radius)
+                continue;
+            if(current.HasUnit)
+                return true;
+
+            for(HexDirection dir = HexDirection.NE; dir <= HexDirection.NW; ++dir)
+            {
+                HexCell neighbor = current.GetNeighbor(dir);
+                if(neighbor == null || neighbor.Distance != int.MaxValue)
+                    continue;
+                neighbor.Distance = current.Distance + 1;
+                neighbor.SearchHeuristic = 0;
+                searchQueue.Enqueue(neighbor);
+            }
+        }
+
+        return false;
+    }
+
     public void ClearUnits()
     {
         for(int i = 0; i < units.Count; i++)

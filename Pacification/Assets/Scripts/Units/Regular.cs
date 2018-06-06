@@ -8,7 +8,7 @@ public class Regular : Attacker
     {
         this.owner = owner;
         type = UnitType.REGULAR;
-        this.level = owner.UnitLevel;
+        this.level = owner.UnitLevel[0];
 
         upgradeHP = 20;
         hp = (isUpgraded() ? 420 : 150) - upgradeHP + (level * upgradeHP);
@@ -37,6 +37,7 @@ public class Regular : Attacker
             return;
         else if (level == 10)
         {
+            this.SetGraphics(hexUnit.Grid.unitPrefab[(int)type + 4]);
             mvtSPD = 3;
             hp = 420;
             maxHP = 420;

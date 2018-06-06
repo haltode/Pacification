@@ -11,7 +11,7 @@ public class Player
     const int MaxIterationGen = 1000;
     const int MaxUnitInitSpawnRadius = 10;
 
-    private int unitLevel;
+    private int[] unitLevel;
 
     public int money;
     public int science;
@@ -32,7 +32,7 @@ public class Player
     public Player(string name)
     {
         this.name = name;
-        unitLevel = 1;
+        unitLevel = new int[] {1, 1, 1};
 
         money = 1000;
         science = 0;
@@ -117,8 +117,8 @@ public class Player
         else
             Debug.Log("Unknown unit type");
         
-        if (Unit.CanAttack(unit) && unitLevel > 10)
-            type = (Unit.UnitType)((int)type + 3);
+        if (Unit.CanAttack(unit) && unitLevel[(int)type - 2] > 10)
+            type = (Unit.UnitType)((int)type + 4);
 
         unit.hexGameObject = GameObject.Instantiate(hexGrid.mainUnitPrefab);
         unit.HexUnit = unit.hexGameObject.GetComponent<HexUnit>();
@@ -256,19 +256,19 @@ public class Player
         client.Send("CUNI|UNL|0");
     }
 
-    public void NetworkLevelUp()
+    public void NetworkLevelUp(Unit.UnitType type)
     {
-        if (unitLevel < 20)
+        if (unitLevel[(int)type - 2] < 20)
         {
-            unitLevel++;
+            unitLevel[(int)type - 2]++;
 
             foreach (Unit u in playerUnits)
             {
-                if (u.Type == Unit.UnitType.REGULAR)
+                if (type == Unit.UnitType.REGULAR && u.Type == Unit.UnitType.REGULAR)
                     ((Regular)u).LevelUp();
-                if (u.Type == Unit.UnitType.RANGED)
+                if (type == Unit.UnitType.RANGED && u.Type == Unit.UnitType.RANGED)
                     ((Ranged)u).LevelUp();
-                if (u.Type == Unit.UnitType.HEAVY)
+                if (type == Unit.UnitType.HEAVY && u.Type == Unit.UnitType.HEAVY)
                     ((Heavy)u).LevelUp();
             }
         }
@@ -297,7 +297,7 @@ public class Player
 
     // TODO : mettre les bons displays (ajouter fer/or/diamant/nourriture/bois/chevaux
 
-    public int UnitLevel
+    public int[] UnitLevel
     {
         get { return unitLevel; }
     }

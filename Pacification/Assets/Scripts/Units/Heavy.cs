@@ -8,7 +8,7 @@ public class Heavy : Attacker
     {
         this.owner = owner;
         type = UnitType.HEAVY;
-        this.level = owner.UnitLevel;
+        this.level = owner.UnitLevel[2];
 
         upgradeHP = 20;
         hp = (isUpgraded() ? 350 : 120) - upgradeHP + (level * upgradeHP);
@@ -37,6 +37,7 @@ public class Heavy : Attacker
             return;
         else if (level == 10)
         {
+            this.SetGraphics(hexUnit.Grid.unitPrefab[(int)type + 4]);
             range = 2;
             hp = 350;
             maxHP = 350;

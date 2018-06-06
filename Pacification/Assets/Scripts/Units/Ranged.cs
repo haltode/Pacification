@@ -8,7 +8,7 @@ public class Ranged : Attacker
     {
         this.owner = owner;
         type = UnitType.RANGED;
-        this.level = owner.UnitLevel;
+        this.level = owner.UnitLevel[1];
 
         upgradeHP = 25;
         hp = (isUpgraded() ? 400 : 100) - upgradeHP + (level * upgradeHP);
@@ -37,6 +37,7 @@ public class Ranged : Attacker
             return;
         else if (level == 10)
         {
+            this.SetGraphics(hexUnit.Grid.unitPrefab[(int)type + 4]);
             hp = 400;
             maxHP = 400;
 

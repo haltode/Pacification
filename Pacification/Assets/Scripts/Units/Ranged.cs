@@ -10,6 +10,7 @@ public class Ranged : Attacker
         type = UnitType.RANGED;
         hasMadeAction = false;
         this.level = owner.UnitLevel[1];
+        maxLevel = 20;
 
         upgradeHP = 25;
         hp = (IsUpgraded() ? 400 : 100) - upgradeHP + ((level - (IsUpgraded() ? 10 : 0)) * upgradeHP);

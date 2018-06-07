@@ -7450,7 +7450,7 @@ GameObject:
   - component: {fileID: 603338137}
   - component: {fileID: 603338136}
   m_Layer: 5
-  m_Name: CanMoveButton
+  m_Name: CanMove
   m_TagString: Player
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -9288,8 +9288,23 @@ MonoBehaviour:
   heavyUpgrade: {fileID: 255073789}
   openInformationPannel: {fileID: 920431378}
   closeInformationPannel: {fileID: 1682857608}
+  infoIsActive: {fileID: 1573511663}
+  infoIsEnemy: {fileID: 1157054828}
+  infoType: {fileID: 337956556}
+  infoLevel: {fileID: 1190317628}
+  infoOwner: {fileID: 1515950812}
+  infoHealth: {fileID: 928515262}
+  healthUnit: {fileID: 1522013047}
+  canAct: {fileID: 1519449722}
+  canMove: {fileID: 603338134}
   openInformation2Pannel: {fileID: 50641249}
   closeInformation2Pannel: {fileID: 2041844097}
+  info2IsActive: {fileID: 1446263025}
+  info2IsEnemy: {fileID: 1675781566}
+  info2Type: {fileID: 1105805882}
+  info2Owner: {fileID: 1722108565}
+  info2Health: {fileID: 1862652215}
+  healthCity: {fileID: 681067888}
 --- !u!1 &747132088
 GameObject:
   m_ObjectHideFlags: 0

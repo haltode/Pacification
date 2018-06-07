@@ -8,7 +8,6 @@ public class Attacker : Unit
     protected int defaultATK;
     protected int upgradeATK;
     protected int range;
-    protected int level;
 
     protected Dictionary<Unit.UnitType, float> dmgMult;
     protected float dmgMultCity;
@@ -41,12 +40,6 @@ public class Attacker : Unit
     {
         get { return range; }
         set { range = value; }
-    }
-
-    public int Level
-    {
-        get { return level; }
-        set { level = value; }
     }
 
     public bool IsUpgraded()

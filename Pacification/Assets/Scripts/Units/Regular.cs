@@ -10,6 +10,7 @@ public class Regular : Attacker
         type = UnitType.REGULAR;
         hasMadeAction = false;
         this.level = owner.UnitLevel[0];
+        maxLevel = 20;
 
         upgradeHP = 20;
         hp = (IsUpgraded() ? 420 : 150) - upgradeHP + ((level - (IsUpgraded() ? 10 : 0)) * upgradeHP);

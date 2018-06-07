@@ -8,6 +8,8 @@ public class Unit
 
     protected HexUnit hexUnit;
     public GameObject hexGameObject;
+    protected int level = 1;
+    public int maxLevel = 1;
 
     public enum UnitType
     {
@@ -43,6 +45,12 @@ public class Unit
     {
         get { return hp; }
         set { hp = value; }
+    }
+
+    public int Level
+    {
+        get { return level; }
+        set { level = value; }
     }
 
     public HexUnit HexUnit

@@ -60,6 +60,17 @@ public class DisplayInformationManager : MonoBehaviour {
     public GameObject heavyUpgrade;
     //////////////////////
 
+
+    //INFORMATION
+    //////////////////////
+    public GameObject openInformationPannel;
+    public GameObject closeInformationPannel;
+
+    public GameObject openInformation2Pannel;
+    public GameObject closeInformation2Pannel;
+
+    //////////////////////
+
     public Player player;
 
     void Start()
@@ -191,5 +202,38 @@ public class DisplayInformationManager : MonoBehaviour {
         heavyRes3.text = "";//Diams
         heavyUpgrade.SetActive(player.science < 0); //Change the 0 (condition must be false in order to buy)
     }
+
+
+
+    //INFORMATION PANNEL
+    ////////////////////
+    public void OpenInformationPannel()
+    {
+        closeInformationPannel.SetActive(false);
+        openInformationPannel.SetActive(true);
+    }
+    public void CloseInformationPannel()
+    {
+        openInformationPannel.SetActive(false);
+        closeInformationPannel.SetActive(true);
+    }
+    public void OpenInformation2Pannel()
+    {
+        closeInformation2Pannel.SetActive(false);
+        openInformation2Pannel.SetActive(true);
+    }
+    public void CloseInformation2Pannel()
+    {
+        openInformation2Pannel.SetActive(false);
+        closeInformation2Pannel.SetActive(true);
+    }
+
+
+    public void UpdateInformationPannels()
+    {
+        //You're fucked
+    }
+
+
 
 }

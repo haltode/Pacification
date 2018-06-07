@@ -207,13 +207,14 @@ public class Client : MonoBehaviour
                 {
                     if(p.name == receivedData[2])
                     {
-                        exploit.Feature.Owner = p;
                         Resource resource = (Resource)exploit.Feature;
+                        exploit.Feature = resource;
+                        exploit.Feature.Owner = p;
+                        exploit.Feature.Type = Feature.FeatureType.RESOURCE;
+                        exploit.FeatureIndex += 6;
                         p.playerResources.Add(resource);
                     }
                 }
-
-                exploit.FeatureIndex += int.Parse(exploitData[2]);
                 break;
 
             /////PLAYER : Take turn

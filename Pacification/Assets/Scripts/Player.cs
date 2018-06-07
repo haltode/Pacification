@@ -257,6 +257,7 @@ public class Player
         City city = new City(this, location);
         city.Size = size;
         location.Feature = city;
+        location.Feature.Type = Feature.FeatureType.CITY;
 
         playerCities.Add(city);
     }

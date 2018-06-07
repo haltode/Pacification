@@ -26,9 +26,8 @@ public class Worker : Unit
         if(cell.FeatureIndex <= 3)
             return;
 
-        const int amelioration = 6;
-        if(cell.FeatureIndex + amelioration < 16)
-            owner.client.Send("CUNI|WEX|" + cell.coordinates.X + "#" + cell.coordinates.Z + "#" + amelioration);
+        if(cell.FeatureIndex + 6 < 16)
+            owner.client.Send("CUNI|WEX|" + cell.coordinates.X + "#" + cell.coordinates.Z);
         hasMadeAction = true;
     }
 

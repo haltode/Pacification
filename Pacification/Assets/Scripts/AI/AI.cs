@@ -27,9 +27,16 @@ public class AI
         lastSpawnRound = 0;
     }
 
+    public void NewTurn()
+    {
+        foreach(Attacker unit in aiPlayer.playerUnits)
+            if(unit != null)
+                unit.Update();
+        ++currentRound;
+    }
+
     public void PlayTurn()
     {
-        ++currentRound;
         if(IsSpawningTime())
             SpawnBarbarianUnits();
         else

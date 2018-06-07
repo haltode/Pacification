@@ -253,18 +253,18 @@ public class HexGameUI : MonoBehaviour
 
                 if(attackTargetCell.Unit && selectedUnit.owner != attackTargetCell.Unit.Unit.owner)
                 {
-                    attackTargetCell.EnableHighlight(Color.red);
-                    attacker.Attack(attackTargetCell.Unit.Unit);
+                    if (attacker.Attack(attackTargetCell.Unit.Unit))
+                        attackTargetCell.EnableHighlight(Color.red);
                 }
                 else if(attackTargetCell.HasCity && selectedUnit.owner != attackTargetCell.Feature.Owner)
                 {
-                    attackTargetCell.EnableHighlight(Color.red);
-                    attacker.Attack((City)attackTargetCell.Feature);
+                    if (attacker.Attack((City)attackTargetCell.Feature))
+                        attackTargetCell.EnableHighlight(Color.red);
                 }
                 else if(attackTargetCell.HasResource && attackTargetCell.FeatureIndex > 9 && selectedUnit.owner != attackTargetCell.Feature.Owner)
                 {
-                    attackTargetCell.EnableHighlight(Color.red);
-                    attacker.Attack((Resource)attackTargetCell.Feature);
+                    if (attacker.Attack((Resource)attackTargetCell.Feature))
+                        attackTargetCell.EnableHighlight(Color.red);
                 }
             }
         }

@@ -64,10 +64,10 @@ public class Attacker : Unit
         return HexUnit.location.coordinates.DistanceTo(target.coordinates) <= range;
     }
     
-    public void Attack(Unit target)
+    public bool Attack(Unit target)
     {
         if (hasMadeAction)
-            return;
+            return false;
 
         float multiplier = 1f;
         dmgMult.TryGetValue(target.Type, out multiplier);
@@ -78,12 +78,13 @@ public class Attacker : Unit
         else
             target.owner.NetworkTakeDamageUnit(target.HexUnit.location.coordinates.X + "#" + target.HexUnit.location.coordinates.Z + "#" + damage);
         hasMadeAction = true;
+        return true;
     }
 
-    public void Attack(City target)
+    public bool Attack(City target)
     {
         if (hasMadeAction)
-            return;
+            return false;
 
         int damage = (int)((float)((defaultATK - upgradeATK) + upgradeATK * level) * dmgMultCity);
 
@@ -92,17 +93,19 @@ public class Attacker : Unit
         else
             target.Owner.NetworkTakeDamageCity(target.Location.coordinates.X + "#" + target.Location.coordinates.Z + "#" + damage);
         hasMadeAction = true;
+        return true;
     }
 
-    public void Attack(Resource target)
+    public bool Attack(Resource target)
     {
         if(hasMadeAction)
-            return;
+            return false;
 
         int damage = (int)((float)((defaultATK - upgradeATK) + upgradeATK * level) * dmgMultCity);
 
         owner.client.Send("CUNI|RTD|" + target.Location.coordinates.X + "#" + target.Location.coordinates.Z + "#" + damage + "|" + target.Owner.name);
         hasMadeAction = true;
+        return true;
     }
 
 }

@@ -22,10 +22,10 @@ public class DisplayInformationManager : MonoBehaviour {
 
     void Start()
     {
-        money.text = "Money: 0";
-        science.text = "Science: 0";
-        production.text = "Production: 0";
-        happiness.text = "Happiness: 0";
+        money.text = "00000000000";
+        //science.text = "Science: 0";
+        //production.text = "Production: 0";
+        //happiness.text = "Happiness: 0";
 
         if(GameManager.Instance.gamemode == GameManager.Gamemode.EDITOR)
         {
@@ -59,22 +59,22 @@ public class DisplayInformationManager : MonoBehaviour {
 
     public void UpdateMoneyDisplay(int value)
     {
-        money.text = "Money: " + value;
+        //money.text = "Money: " + value;
     }
 
     public void UpdateScienceDisplay(int value)
     {
-        science.text = "Science: " + value;
+        //science.text = "Science: " + value;
     }
 
     public void UpdateProductionDisplay(int value)
     {
-        production.text = "Production: " + value;
+        //production.text = "Production: " + value;
     }
 
     public void UpdateHappinessDisplay(int value)
     {
-        happiness.text = "Happiness: " + value;
+        //happiness.text = "Happiness: " + value;
     }
 
     public void UpdateRoundDisplay(int value)

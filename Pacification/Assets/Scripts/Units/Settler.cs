@@ -18,7 +18,7 @@ public class Settler : Unit
 
     public void Settle()
     {
-        if (hasMadeAction) //Pointless since he dies, but copypasting anyway "just in case"
+        if (hasMadeAction)
             return;
 
         owner.client.Send("CUNM|CIT|" + (int)type + "#" + hexUnit.location.coordinates.X + "#" + hexUnit.location.coordinates.Z + "|" + this.HexUnit.location.coordinates.X + "#" + this.HexUnit.location.coordinates.Z);

@@ -87,12 +87,12 @@ public class Player
 
     public void AddUnit(Unit.UnitType type, HexCell location)
     {
-        client.Send("CUNI|UNC|" + (int)type + "#" + location.coordinates.X + "#" + location.coordinates.Z);
+        client.Send("CUNI|UNC|" + (int)type + "#" + location.coordinates.X + "#" + location.coordinates.Z + "#" + GetUnitLevel(type));
     }
 
     public void AddUnits(Unit.UnitType type, HexCell location, Unit.UnitType type2, HexCell location2)
     {
-        client.Send("CUNM|UAA|" + (int)type + "#" + location.coordinates.X + "#" + location.coordinates.Z + "|" + (int)type2 + "#" + location2.coordinates.X + "#" + location2.coordinates.Z);
+        client.Send("CUNM|UAA|" + (int)type + "#" + location.coordinates.X + "#" + location.coordinates.Z + "#" + GetUnitLevel(type) + "|" + (int)type2 + "#" + location2.coordinates.X + "#" + location2.coordinates.Z + "#" + GetUnitLevel(type2));
     }
 
     public void NetworkAddUnit(string data)
@@ -109,15 +109,27 @@ public class Player
         else if(type == Unit.UnitType.WORKER)
             unit = new Worker(this);
         else if(type == Unit.UnitType.REGULAR)
-            unit = new Regular(this);
+        {
+            Regular regular = new Regular(this);
+            regular.Level = int.Parse(receivedData[3]);
+            unit = regular;
+        }
         else if(type == Unit.UnitType.RANGED)
-            unit = new Ranged(this);
+        {
+            Ranged ranged = new Ranged(this);
+            ranged.Level = int.Parse(receivedData[3]);
+            unit = ranged;
+        }
         else if(type == Unit.UnitType.HEAVY)
-            unit = new Heavy(this);
+        {
+            Heavy heavy = new Heavy(this);
+            heavy.Level = int.Parse(receivedData[3]);
+            unit = heavy;
+        }
         else
             Debug.Log("Unknown unit type");
         
-        if (Unit.CanAttack(unit) && unitLevel[(int)type - 2] > 10)
+        if (Unit.CanAttack(unit.Type) && unitLevel[(int)type - 2] > 10)
             type = (Unit.UnitType)((int)type + 4);
 
         unit.hexGameObject = GameObject.Instantiate(hexGrid.mainUnitPrefab);
@@ -251,10 +263,8 @@ public class Player
 
     // TODO : faire la même chose que pour les city mais avec les ressources (add, take damage, remove, network, etc...)
     
-    public void LevelUp(string typestr) //To call this function using buttons, make them add as parameter the type of the unite in lowercase (cf Unit.StrToType for exact strings to send)
+    public void LevelUp(Unit.UnitType type) //To call this function using buttons, make them add as parameter the type of the unite in lowercase (cf Unit.StrToType for exact strings to send)
     {
-        Unit.UnitType type = Unit.StrToType(typestr);
-
         if (!Unit.CanAttack(type))
             return;
 
@@ -266,9 +276,9 @@ public class Player
             {
                 if (type == Unit.UnitType.REGULAR && u.Type == Unit.UnitType.REGULAR)
                     ((Regular)u).LevelUp();
-                if (type == Unit.UnitType.RANGED && u.Type == Unit.UnitType.RANGED)
+                else if (type == Unit.UnitType.RANGED && u.Type == Unit.UnitType.RANGED)
                     ((Ranged)u).LevelUp();
-                if (type == Unit.UnitType.HEAVY && u.Type == Unit.UnitType.HEAVY)
+                else if (type == Unit.UnitType.HEAVY && u.Type == Unit.UnitType.HEAVY)
                     ((Heavy)u).LevelUp();
             }
         }
@@ -304,6 +314,24 @@ public class Player
         get { return unitLevel; }
     }
 
+    public int GetUnitLevel(Unit.UnitType type)
+    {
+        switch(type)
+        {
+            case Unit.UnitType.HEAVY:
+                return UnitLevel[2];
+
+            case Unit.UnitType.RANGED:
+                return UnitLevel[1];
+
+            case Unit.UnitType.REGULAR:
+                return UnitLevel[0];
+
+            default:
+                return 0;
+        }
+    }
+
     public void Newturn()
     {
         foreach (City c in playerCities)
@@ -317,9 +345,9 @@ public class Player
         displayer.UpdateMoneyDisplay(money);
         displayer.UpdateScienceDisplay(science);
 
-        // For testing only
-        LevelUp("regular");
-        LevelUp("ranged");
-        LevelUp("heavy");
+        Debug.Log("NextTurn");
+        LevelUp(Unit.UnitType.HEAVY);
+        LevelUp(Unit.UnitType.RANGED);
+        LevelUp(Unit.UnitType.REGULAR);
     }
 }

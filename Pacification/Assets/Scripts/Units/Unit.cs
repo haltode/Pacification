@@ -50,11 +50,6 @@ public class Unit
         set { hexUnit = value; }
     }
 
-    public static bool CanAttack(Unit unit)
-    {
-        return (unit.Type == UnitType.REGULAR || unit.Type == UnitType.RANGED || unit.Type == UnitType.HEAVY);
-    }
-
     public static bool CanAttack(UnitType type)
     {
         return (type == UnitType.REGULAR || type == UnitType.RANGED || type == UnitType.HEAVY);

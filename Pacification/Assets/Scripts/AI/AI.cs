@@ -54,13 +54,13 @@ public class AI
             aiPlayer.IncreaseUnitLevel(currentPlayerLvl + 3);*/
 
         HexCell location = GetSpawningLocation();
-        string cmd = (int)Unit.UnitType.REGULAR + "#" + location.coordinates.X + "#" + location.coordinates.Z;
+        string cmd = (int)Unit.UnitType.REGULAR + "#" + location.coordinates.X + "#" + location.coordinates.Z + "#" + aiPlayer.GetUnitLevel(Unit.UnitType.REGULAR);
         aiPlayer.NetworkAddUnit(cmd);
 
         if(difficultyLevel == Difficulty.NORMAL || difficultyLevel == Difficulty.HARD)
         {
             HexCell location2 = aiPlayer.hexGrid.GetNearFreeCell(location);
-            string cmd2 = (int)Unit.UnitType.HEAVY + "#" + location2.coordinates.X + "#" + location2.coordinates.Z;
+            string cmd2 = (int)Unit.UnitType.HEAVY + "#" + location2.coordinates.X + "#" + location2.coordinates.Z + "#" + aiPlayer.GetUnitLevel(Unit.UnitType.HEAVY);
             aiPlayer.NetworkAddUnit(cmd2);
         }
     }

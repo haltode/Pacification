@@ -207,7 +207,7 @@ public class Client : MonoBehaviour
                 {
                     if(p.name == receivedData[2])
                     {
-                        exploit.featureOwner = p;
+                        exploit.Feature.Owner = p;
                         Resource resource = (Resource)exploit.Feature;
                         p.playerResources.Add(resource);
                     }

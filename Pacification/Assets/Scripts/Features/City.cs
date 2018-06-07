@@ -11,7 +11,6 @@ public class City : Feature
         MEGALOPOLIS
     }
 
-    private int hp;
     public int maxHP; //La ville est réparée lorsqu'elle évolue.
     public int pop;
 
@@ -33,12 +32,12 @@ public class City : Feature
 
     public City (Player owner, HexCell location)
     {
-        this.owner = owner;
-        this.location = location;
-        type = FeatureType.CITY;
+        Owner = owner;
+        Location = location;
+        Type = FeatureType.CITY;
         Size = CitySize.SETTLEMENT;
-        hp = 600;
-        maxHP = hp;
+        Hp = 600;
+        maxHP = Hp;
         pop = 100;
 
         perTurnScience = 0.2f;
@@ -54,15 +53,15 @@ public class City : Feature
     {
         pop = (int)(pop * happiness * happinessMalus * 3f); //For testing purposes. Change back to 1.1f for normal play
 
-        owner.money += (int)(pop * perTurnMoney * ((happiness * happinessMalus < 1) ? (happiness * happinessMalus) : 1f));
-        owner.science += (int)(pop * perTurnScience * ((happiness * happinessMalus < 1) ? (happiness * happinessMalus) : 1f));
+        Owner.money += (int)(pop * perTurnMoney * ((happiness * happinessMalus < 1) ? (happiness * happinessMalus) : 1f));
+        Owner.science += (int)(pop * perTurnScience * ((happiness * happinessMalus < 1) ? (happiness * happinessMalus) : 1f));
 
-        happinessMalus = (float)(hp / maxHP); //damaged cities get a happiness malus, for obvious reasons people are not happy to be on fire
+        happinessMalus = (float)(Hp / maxHP); //damaged cities get a happiness malus, for obvious reasons people are not happy to be on fire
 
         if(Size == CitySize.SETTLEMENT && pop >= 1000)
-            return "|" + location.coordinates.X + "#" + location.coordinates.Z + "#1";
+            return "|" + Location.coordinates.X + "#" + Location.coordinates.Z + "#1";
         else if(Size == CitySize.CITY && pop >= 5000)
-            return "|" + location.coordinates.X + "#" + location.coordinates.Z + "#2";
+            return "|" + Location.coordinates.X + "#" + Location.coordinates.Z + "#2";
         else
             return "";
     }
@@ -72,16 +71,16 @@ public class City : Feature
         if(upgrade == "1")
         {
             Size = CitySize.CITY;
-            hp = 900;
-            maxHP = hp;
-            location.FeatureIndex = 2;
+            Hp = 900;
+            maxHP = Hp;
+            Location.FeatureIndex = 2;
         }
         else if(upgrade == "2")
         {
             Size = CitySize.MEGALOPOLIS;
-            hp = 1300;
-            maxHP = hp;
-            location.FeatureIndex = 3;
+            Hp = 1300;
+            maxHP = Hp;
+            Location.FeatureIndex = 3;
         }
     }
 
@@ -125,12 +124,6 @@ public class City : Feature
             CityBuilding.Build(CityBuilding.BuildingType.PROD, this);
         if (buildingType == "Happiness")
             CityBuilding.Build(CityBuilding.BuildingType.HAPPINESS, this);
-    }
-
-    public int Hp
-    {
-        get { return hp; }
-        set { hp = value; }
     }
 
     public CitySize Size { get; set; }

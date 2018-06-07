@@ -256,14 +256,12 @@ public class HexGameUI : MonoBehaviour
                     attackTargetCell.EnableHighlight(Color.red);
                     attacker.Attack(attackTargetCell.Unit.Unit);
                 }
-                else if(attackTargetCell.HasCity && selectedUnit.owner != attackTargetCell.Feature.owner)
+                else if(attackTargetCell.HasCity && selectedUnit.owner != attackTargetCell.Feature.Owner)
                 {
                     attackTargetCell.EnableHighlight(Color.red);
                     attacker.Attack((City)attackTargetCell.Feature);
                 }
-                else if(attackTargetCell.HasResource && 
-                    ((Resource)attackTargetCell.Feature).Exploited && 
-                    selectedUnit.owner != attackTargetCell.featureOwner)
+                else if(attackTargetCell.HasResource && ((Resource)attackTargetCell.Feature).Exploited && selectedUnit.owner != attackTargetCell.Feature.Owner)
                 {
                     attackTargetCell.EnableHighlight(Color.red);
                     attacker.Attack((Resource)attackTargetCell.Feature);

@@ -88,9 +88,9 @@ public class Attacker : Unit
         int damage = (int)((float)((defaultATK - upgradeATK) + upgradeATK * level) * dmgMultCity);
 
         if(GameManager.Instance.gamemode == GameManager.Gamemode.MULTI)
-            owner.client.Send("CUNI|CTD|" + target.location.coordinates.X + "#" + target.location.coordinates.Z + "#" + damage + "|" + target.owner.name);
+            owner.client.Send("CUNI|CTD|" + target.Location.coordinates.X + "#" + target.Location.coordinates.Z + "#" + damage + "|" + target.Owner.name);
         else
-            target.owner.NetworkTakeDamageCity(target.location.coordinates.X + "#" + target.location.coordinates.Z + "#" + damage);
+            target.Owner.NetworkTakeDamageCity(target.Location.coordinates.X + "#" + target.Location.coordinates.Z + "#" + damage);
         hasMadeAction = true;
     }
 
@@ -101,7 +101,7 @@ public class Attacker : Unit
 
         int damage = (int)((float)((defaultATK - upgradeATK) + upgradeATK * level) * dmgMultCity);
 
-        owner.client.Send("CUNI|RTD|" + target.location.coordinates.X + "#" + target.location.coordinates.Z + "#" + damage + "|" + target.owner.name);
+        owner.client.Send("CUNI|RTD|" + target.Location.coordinates.X + "#" + target.Location.coordinates.Z + "#" + damage + "|" + target.Owner.name);
         hasMadeAction = true;
     }
 

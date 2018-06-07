@@ -38,7 +38,6 @@ public class HexCell : MonoBehaviour
     int elevation = int.MinValue;
     bool isUnderWater;
     int featureIndex;
-    public Player featureOwner;
 
     int visibility;
     bool explored;

@@ -10,24 +10,11 @@ public class Feature
         RESOURCE
     }
 
-    public Player owner;
-    public HexCell location;
-    protected FeatureType type;
+    public Player Owner { get; set; }
 
-    public Player Owner
-    {
-        get { return owner; }
-        set { owner = value; }
-    }
+    public FeatureType Type { get; protected set; }
 
-    public FeatureType Type
-    {
-        get { return type; }
-    }
+    public HexCell Location { get; set; }
 
-    public HexCell Location
-    {
-        get { return location; }
-        set { location = value; }
-    }
+    public int Hp { get; set; }
 }

@@ -330,8 +330,6 @@ public class Player
         displayer = Object.FindObjectOfType<DisplayInformationManager>();
     }
 
-    // TODO : mettre les bons displays (ajouter fer/or/diamant/nourriture/bois/chevaux
-
     public int[] UnitLevel
     {
         get { return unitLevel; }

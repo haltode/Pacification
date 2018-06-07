@@ -29,6 +29,11 @@ public class DisplayInformationManager : MonoBehaviour {
     public GameObject editorLeftPanel;
     public GameObject editorRightPanel;
     public GameObject loadingPanel;
+    public GameObject rightGamePanel;
+
+    public GameObject upgradePannel;
+    public GameObject upgradePannelClose;
+
 
     public Player player;
 
@@ -46,6 +51,7 @@ public class DisplayInformationManager : MonoBehaviour {
 
             editorLeftPanel.SetActive(true);
             editorRightPanel.SetActive(true);
+            rightGamePanel.SetActive(false);
 
             Shader.EnableKeyword("HEX_MAP_EDITOR");
         }
@@ -56,6 +62,7 @@ public class DisplayInformationManager : MonoBehaviour {
 
             editorLeftPanel.SetActive(false);
             editorRightPanel.SetActive(false);
+            rightGamePanel.SetActive(true);
 
             Shader.DisableKeyword("HEX_MAP_EDITOR");
         }
@@ -118,4 +125,28 @@ public class DisplayInformationManager : MonoBehaviour {
     {
         loadingPanel.SetActive(false);
     }
+
+    public void LevelUp(string type)
+    {
+        player.LevelUp(Unit.StrToType(type));
+    }
+
+    //Upgrade pannel
+    public void OpenUpgradePannel()
+    {
+        upgradePannelClose.SetActive(false);
+        UpdateUpgradePannel();
+        upgradePannel.SetActive(true);
+    }
+    public void CloseUpgradePannel()
+    {
+        upgradePannel.SetActive(false);
+        upgradePannelClose.SetActive(true);
+    }
+    public void UpdateUpgradePannel()
+    {
+        //You do the stuff Antoine
+        // Price, science, ability to buy
+    }
+
 }

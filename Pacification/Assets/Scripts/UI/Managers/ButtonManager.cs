@@ -58,9 +58,4 @@ public class ButtonManager : MonoBehaviour {
 
         SceneManager.LoadScene("Menu");
     }
-
-    public void LevelUp(string type)
-    {
-        client.player.LevelUp(Unit.StrToType(type));
-    }
 }

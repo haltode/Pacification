@@ -12,6 +12,7 @@ public class City : Feature
     }
 
     public int pop;
+    public int spawncount;
 
     //economy
     public float perTurnMoney;
@@ -45,11 +46,14 @@ public class City : Feature
         happiness = 1f;
         happinessMalus = 1f;
 
+        spawncount = 0;
+
         // TODO : couleur du joueur
     }
 
     public string Update()
     {
+        spawncount = 0;
         pop = (int)(pop * happiness * happinessMalus * 3f); //For testing purposes. Change back to 1.1f for normal play
 
         Owner.money += (int)(pop * perTurnMoney * ((happiness * happinessMalus < 1) ? (happiness * happinessMalus) : 1f));

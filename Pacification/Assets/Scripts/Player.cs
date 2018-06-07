@@ -108,6 +108,9 @@ public class Player
         HexCell location = hexGrid.GetCell(new HexCoordinates(int.Parse(receivedData[1]), int.Parse(receivedData[2])));
         Unit unit = null;
 
+        if (location.HasCity && (float)((City)(location.Feature)).spawncount >= ((City)(location.Feature)).prodRate)
+            return;
+
         if(type == Unit.UnitType.SETTLER)
             unit = new Settler(this);
         else if(type == Unit.UnitType.WORKER)
@@ -149,6 +152,8 @@ public class Player
         unit.embark = false;
 
         playerUnits.Add(unit);
+        if (location.HasCity)
+            ((City)(location.Feature)).spawncount++;
     }
 
     public void NetworkTakeDamageUnit(string data)

@@ -198,25 +198,25 @@ public class DisplayInformationManager : MonoBehaviour {
     public void UpdateUpgradePannel()
     {
         regularLvl.text = "" + player.GetUnitLevel(Unit.UnitType.REGULAR) + "/20";
-        regularScience.text = "";
-        regularRes1.text = ""; //Food
-        regularRes2.text = "";//Iron
-        regularRes3.text = "";//Horse
-        regularUpgrade.SetActive(player.science < 0); //Change the 0 (condition must be false in order to buy)
+        regularScience.text = "" + (PlayerEconomy.upgradeCosts[0])[player.GetUnitLevel(Unit.UnitType.REGULAR) - 1, 0];
+        regularRes1.text = "" + (PlayerEconomy.upgradeCosts[0])[player.GetUnitLevel(Unit.UnitType.REGULAR) - 1, 1]; //Food
+        regularRes2.text = "" + (PlayerEconomy.upgradeCosts[0])[player.GetUnitLevel(Unit.UnitType.REGULAR) - 1, 2]; //Iron
+        regularRes3.text = "" + (PlayerEconomy.upgradeCosts[0])[player.GetUnitLevel(Unit.UnitType.REGULAR) - 1, 3]; //Horse
+        regularUpgrade.SetActive(player.science < int.Parse(regularScience.text)); //Change the 0 (condition must be false in order to buy)
 
         rangedLvl.text = "" + player.GetUnitLevel(Unit.UnitType.RANGED) + "/20";
-        rangedScience.text = "";
-        rangedRes1.text = "";//Wood
-        rangedRes2.text = "";//Iron
-        rangedRes3.text = "";//Gold
-        rangedUpgrade.SetActive(player.science < 0); //Change the 0 (condition must be false in order to buy)
+        rangedScience.text = "" + (PlayerEconomy.upgradeCosts[1])[player.GetUnitLevel(Unit.UnitType.REGULAR) - 1, 0];
+        rangedRes1.text = "" + (PlayerEconomy.upgradeCosts[1])[player.GetUnitLevel(Unit.UnitType.REGULAR) - 1, 1]; //Wood
+        rangedRes2.text = "" + (PlayerEconomy.upgradeCosts[1])[player.GetUnitLevel(Unit.UnitType.REGULAR) - 1, 2]; //Iron
+        rangedRes3.text = "" + (PlayerEconomy.upgradeCosts[1])[player.GetUnitLevel(Unit.UnitType.REGULAR) - 1, 3]; //Gold
+        rangedUpgrade.SetActive(player.science < int.Parse(regularScience.text)); //Change the 0 (condition must be false in order to buy)
 
         heavyLvl.text = "" + player.GetUnitLevel(Unit.UnitType.HEAVY) + "/20";
-        heavyScience.text = "";
-        heavyRes1.text = ""; //Wood
-        heavyRes2.text = "";//Iron
-        heavyRes3.text = "";//Diams
-        heavyUpgrade.SetActive(player.science < 0); //Change the 0 (condition must be false in order to buy)
+        heavyScience.text = "" + (PlayerEconomy.upgradeCosts[2])[player.GetUnitLevel(Unit.UnitType.REGULAR) - 1, 0];
+        heavyRes1.text = "" + (PlayerEconomy.upgradeCosts[2])[player.GetUnitLevel(Unit.UnitType.REGULAR) - 1, 1]; //Wood
+        heavyRes2.text = "" + (PlayerEconomy.upgradeCosts[2])[player.GetUnitLevel(Unit.UnitType.REGULAR) - 1, 2]; //Iron
+        heavyRes3.text = "" + (PlayerEconomy.upgradeCosts[2])[player.GetUnitLevel(Unit.UnitType.REGULAR) - 1, 3]; //Diams
+        heavyUpgrade.SetActive(player.science < int.Parse(regularScience.text)); //Change the 0 (condition must be false in order to buy)
     }
 
 

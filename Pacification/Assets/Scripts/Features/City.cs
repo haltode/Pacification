@@ -43,7 +43,7 @@ public class City : Feature
 
         perTurnScience = 0.0075f;
         perTurnMoney = 0.025f;
-        perTurnPop = 0.05f;
+        perTurnPop = 1.05f;
         prodRate = 1f;
         happiness = 1f;
         happinessMalus = 1f;

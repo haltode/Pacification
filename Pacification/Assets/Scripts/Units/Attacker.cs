@@ -86,7 +86,6 @@ public class Attacker : Unit
             return;
 
         int damage = (int)((float)((defaultATK - upgradeATK) + upgradeATK * level) * dmgMultCity);
-        target.happiness *= 0.9f;
 
         if(GameManager.Instance.gamemode == GameManager.Gamemode.MULTI)
             owner.client.Send("CUNI|CTD|" + target.location.coordinates.X + "#" + target.location.coordinates.Z + "#" + damage + "|" + target.owner.name);
@@ -94,5 +93,5 @@ public class Attacker : Unit
             target.owner.NetworkTakeDamageCity(target.location.coordinates.X + "#" + target.location.coordinates.Z + "#" + damage);
         hasMadeAction = true;
     }
-    
+
 }

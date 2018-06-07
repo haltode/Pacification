@@ -31,9 +31,34 @@ public class DisplayInformationManager : MonoBehaviour {
     public GameObject loadingPanel;
     public GameObject rightGamePanel;
 
+
+
+    //UPGRADE
+    //////////////////////
     public GameObject upgradePannel;
     public GameObject upgradePannelClose;
 
+    public Text regularLvl;
+    public Text regularScience;
+    public Text regularRes1;
+    public Text regularRes2;
+    public Text regularRes3;
+    public GameObject regularUpgrade;
+
+    public Text rangedLvl;
+    public Text rangedScience;
+    public Text rangedRes1;
+    public Text rangedRes2;
+    public Text rangedRes3;
+    public GameObject rangedUpgrade;
+
+    public Text heavyLvl;
+    public Text heavyScience;
+    public Text heavyRes1;
+    public Text heavyRes2;
+    public Text heavyRes3;
+    public GameObject heavyUpgrade;
+    //////////////////////
 
     public Player player;
 
@@ -145,8 +170,26 @@ public class DisplayInformationManager : MonoBehaviour {
     }
     public void UpdateUpgradePannel()
     {
-        //You do the stuff Antoine
-        // Price, science, ability to buy
+        regularLvl.text = "" + player.GetUnitLevel(Unit.UnitType.REGULAR) + "/20";
+        regularScience.text = "";
+        regularRes1.text = ""; //Food
+        regularRes2.text = "";//Iron
+        regularRes3.text = "";//Horse
+        regularUpgrade.SetActive(player.science < 0); //Change the 0 (condition must be false in order to buy)
+
+        rangedLvl.text = "" + player.GetUnitLevel(Unit.UnitType.RANGED) + "/20";
+        rangedScience.text = "";
+        rangedRes1.text = "";//Wood
+        rangedRes2.text = "";//Iron
+        rangedRes3.text = "";//Gold
+        rangedUpgrade.SetActive(player.science < 0); //Change the 0 (condition must be false in order to buy)
+
+        heavyLvl.text = "" + player.GetUnitLevel(Unit.UnitType.HEAVY) + "/20";
+        heavyScience.text = "";
+        heavyRes1.text = ""; //Wood
+        heavyRes2.text = "";//Iron
+        heavyRes3.text = "";//Diams
+        heavyUpgrade.SetActive(player.science < 0); //Change the 0 (condition must be false in order to buy)
     }
 
 }

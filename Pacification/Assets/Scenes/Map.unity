@@ -4810,7 +4810,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 0, y: -0.000033267606}
+  m_AnchoredPosition: {x: 0, y: 0.00002892272}
   m_SizeDelta: {x: 400, y: 0}
   m_Pivot: {x: 0, y: 1}
 --- !u!114 &430921716
@@ -8599,6 +8599,24 @@ MonoBehaviour:
   rightGamePanel: {fileID: 1468501261}
   upgradePannel: {fileID: 1125871414}
   upgradePannelClose: {fileID: 1093610715}
+  regularLvl: {fileID: 1314780239}
+  regularScience: {fileID: 1995687979}
+  regularRes1: {fileID: 624927264}
+  regularRes2: {fileID: 111522267}
+  regularRes3: {fileID: 121907136}
+  regularUpgrade: {fileID: 1442238172}
+  rangedLvl: {fileID: 1008189179}
+  rangedScience: {fileID: 2055494768}
+  rangedRes1: {fileID: 1546664056}
+  rangedRes2: {fileID: 259176816}
+  rangedRes3: {fileID: 761975051}
+  rangedUpgrade: {fileID: 323366797}
+  heavyLvl: {fileID: 1320549837}
+  heavyScience: {fileID: 562801740}
+  heavyRes1: {fileID: 1275638299}
+  heavyRes2: {fileID: 856016040}
+  heavyRes3: {fileID: 477231394}
+  heavyUpgrade: {fileID: 255073789}
 --- !u!1 &747132088
 GameObject:
   m_ObjectHideFlags: 0
@@ -8756,7 +8774,7 @@ GameObject:
   - component: {fileID: 761975052}
   - component: {fileID: 761975051}
   m_Layer: 5
-  m_Name: Horse
+  m_Name: Gold
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -17174,7 +17192,7 @@ GameObject:
   - component: {fileID: 1546664057}
   - component: {fileID: 1546664056}
   m_Layer: 5
-  m_Name: Food
+  m_Name: Wood
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

@@ -9,7 +9,6 @@ public class AI
     const int SpawnRadiusMin = 10;
     const int SpawnRadiusMax = 15;
     const int MaxBarbarianUnits = 10;
-    const int MovePointPerUnit = 7;
 
     public Player aiPlayer;
     Player ennemy;
@@ -139,39 +138,16 @@ public class AI
         return target;
     }
 
-    void MovePathfinding(Attacker unit, HexCell end)
-    {
-        HexCell start = unit.HexUnit.location;
-        aiPlayer.hexGrid.FindPath(start, end, unit.HexUnit, isAI:true);
-        if(!aiPlayer.hexGrid.currentPathExists)
-        {
-            aiPlayer.hexGrid.ClearPath();
-            return;
-        }
-        List<HexCell> pathToCity = aiPlayer.hexGrid.GetPath();
-        HexCell targetCell = start;
-        int movePoints = 0;
-        int index = 1;
-        while(movePoints < MovePointPerUnit && index < pathToCity.Count)
-        {
-            if(targetCell.coordinates.DistanceTo(end.coordinates) <= unit.Range)
-                break;
-            movePoints += unit.HexUnit.GetMoveCost(targetCell, pathToCity[index]);
-            targetCell = pathToCity[index];
-            ++index;
-        }
-        aiPlayer.hexGrid.ClearPath();
-        string cmd = start.coordinates.X + "#" + start.coordinates.Z + "#" +
-                     targetCell.coordinates.X + "#" + targetCell.coordinates.Z;
-        aiPlayer.NetworkMoveUnit(cmd, isAI: true);
-    }
-
     void MoveBarbarianUnit(Attacker unit)
     {
         City target = FindClosestPlayerCity(unit);
         if(target == null)
             return;
-        MovePathfinding(unit, target.Location);
+        HexCell start = unit.HexUnit.location;
+        HexCell end = target.Location;
+        string cmd = start.coordinates.X + "#" + start.coordinates.Z + "#" +
+                     end.coordinates.X + "#" + end.coordinates.Z;
+        aiPlayer.NetworkMoveUnit(cmd, isAI: true);
     }
 
     bool TryAttackCity(Attacker unit)

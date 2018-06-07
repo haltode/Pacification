@@ -21,7 +21,8 @@ public class GameManager : MonoBehaviour
     public Transform waitingPannel;
     public Text errorLog;
 
-
+    public Slider AILevel;
+    
     public enum Gamemode
     {
         SOLO,

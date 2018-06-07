@@ -222,7 +222,7 @@ public class Client : MonoBehaviour
                 {
                     if(ai == null)
                     {
-                        ai = new AI(player, AI.Difficulty.HARD);
+                        ai = new AI(player, (AI.Difficulty)GameManager.Instance.AILevel.value);
                         players.Add(ai.aiPlayer);
                     }
                     ai.NewTurn();

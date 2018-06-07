@@ -27,6 +27,8 @@ public class Player
     public string name;
     private int roundNb;
 
+    public float economyMalus;
+
     public DisplayInformationManager displayer;
 
     public Player(string name)
@@ -47,6 +49,8 @@ public class Player
         canPlay = false;
         client = Object.FindObjectOfType<Client>();
         hexGrid = Object.FindObjectOfType<HexGrid>();
+
+        economyMalus = (GameManager.Instance.gamemode == GameManager.Gamemode.SOLO ? 0.8f : 1f); //High level "malus" for solo mode ;))))
     }
 
 

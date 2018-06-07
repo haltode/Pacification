@@ -29,7 +29,7 @@ public class Resource : Feature
 
     public void Update()
     {
-        Owner.resources[(int)RessourceType] += resourceProd[(int)RessourceType];
+        Owner.resources[(int)RessourceType] += (int)(Owner.economyMalus * (float)resourceProd[(int)RessourceType]);
     }
 
     public bool Exploited

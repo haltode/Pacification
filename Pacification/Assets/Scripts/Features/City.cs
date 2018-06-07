@@ -54,10 +54,10 @@ public class City : Feature
     public string Update()
     {
         spawncount = 0;
-        pop = (int)(pop * happiness * happinessMalus * 3f); //For testing purposes. Change back to 1.1f for normal play
+        pop = (int)(pop * happiness * happinessMalus * 1.1f);
 
-        Owner.money += (int)(pop * perTurnMoney * ((happiness * happinessMalus < 1) ? (happiness * happinessMalus) : 1f));
-        Owner.science += (int)(pop * perTurnScience * ((happiness * happinessMalus < 1) ? (happiness * happinessMalus) : 1f));
+        Owner.money += (int)(Owner.economyMalus * pop * perTurnMoney * ((happiness * happinessMalus < 1) ? (happiness * happinessMalus) : 1f));
+        Owner.science += (int)(Owner.economyMalus * pop * perTurnScience * ((happiness * happinessMalus < 1) ? (happiness * happinessMalus) : 1f));
 
         happinessMalus = (float)(Hp / MaxHp); //damaged cities get a happiness malus, for obvious reasons people are not happy to be on fire
 

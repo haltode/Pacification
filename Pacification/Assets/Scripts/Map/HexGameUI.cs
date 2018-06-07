@@ -242,9 +242,7 @@ public class HexGameUI : MonoBehaviour
                 currentCell = null;
             }
             else if(selectedUnit.Type == Unit.UnitType.WORKER)
-            {
                 ((Worker)selectedUnit).Exploit();
-            }
             else
             {
                 attackTargetCell = GetCellUnderCursor();
@@ -262,6 +260,13 @@ public class HexGameUI : MonoBehaviour
                 {
                     attackTargetCell.EnableHighlight(Color.red);
                     attacker.Attack((City)attackTargetCell.Feature);
+                }
+                else if(attackTargetCell.HasResource && 
+                    ((Resource)attackTargetCell.Feature).Exploited && 
+                    selectedUnit.owner != attackTargetCell.featureOwner)
+                {
+                    attackTargetCell.EnableHighlight(Color.red);
+                    attacker.Attack((Resource)attackTargetCell.Feature);
                 }
             }
         }

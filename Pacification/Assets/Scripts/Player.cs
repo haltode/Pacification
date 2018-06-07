@@ -49,10 +49,14 @@ public class Player
         hexGrid = Object.FindObjectOfType<HexGrid>();
     }
 
+
+    //UNIT
+    ///////////////////////
     public void InitialSpawnUnit()
     {
-        displayer = Object.FindObjectOfType<DisplayInformationManager>();
         hexGrid = Object.FindObjectOfType<HexGrid>();
+
+        displayer = Object.FindObjectOfType<DisplayInformationManager>();
 
         List<HexCell> possibleLocation = new List<HexCell>();
         for(int i = 0; i < hexGrid.cells.Length; ++i)
@@ -149,8 +153,6 @@ public class Player
 
     public void NetworkTakeDamageUnit(string data)
     {
-        hexGrid = Object.FindObjectOfType<HexGrid>();
-
         string[] receivedData = data.Split('#');
         HexCell attackedCell = hexGrid.GetCell(new HexCoordinates(int.Parse(receivedData[0]), int.Parse(receivedData[1])));
         Unit unit = attackedCell.Unit.Unit;
@@ -163,8 +165,6 @@ public class Player
 
     public void RemoveUnit(Unit unit)
     {
-        hexGrid = Object.FindObjectOfType<HexGrid>();
-
         hexGrid.RemoveUnit(unit.HexUnit);
         playerUnits.Remove(unit);
         unit = null;
@@ -200,6 +200,35 @@ public class Player
         hexGrid.ClearPath();
     }
 
+    public void LevelUp(Unit.UnitType type)
+    {
+        if(!Unit.CanAttack(type))
+            return;
+
+        if(unitLevel[(int)type - 2] < 20)
+        {
+            unitLevel[(int)type - 2]++;
+
+            foreach(Unit u in playerUnits)
+            {
+                if(type == Unit.UnitType.REGULAR && u.Type == Unit.UnitType.REGULAR)
+                    ((Regular)u).LevelUp();
+                else if(type == Unit.UnitType.RANGED && u.Type == Unit.UnitType.RANGED)
+                    ((Ranged)u).LevelUp();
+                else if(type == Unit.UnitType.HEAVY && u.Type == Unit.UnitType.HEAVY)
+                    ((Heavy)u).LevelUp();
+            }
+        }
+    }
+
+    /*
+    public void IncreaseUnitLevel(int target)
+    {
+        while(unitLevel < target)
+            LevelUp();
+    }
+    */
+
     public Unit GetUnit(HexCell location)
     {
         for(int i = 0; i < playerUnits.Count; ++i)
@@ -208,6 +237,9 @@ public class Player
         return null;
     }
 
+
+    //CITY
+    ///////////////////////
     public void AddCity(HexCell location, City.CitySize type)
     {
         client.Send("CUNI|CIC|" + (int)type + "#" + location.coordinates.X + "#" + location.coordinates.Z);
@@ -216,7 +248,6 @@ public class Player
     public void NetworkAddCity(string data)
     {
         string[] receivedData = data.Split('#');
-        hexGrid = Object.FindObjectOfType<HexGrid>();
 
         City.CitySize size = (City.CitySize)int.Parse(receivedData[0]);
         HexCell location = hexGrid.GetCell(new HexCoordinates(int.Parse(receivedData[1]), int.Parse(receivedData[2])));
@@ -233,8 +264,6 @@ public class Player
 
     public void NetworkTakeDamageCity(string data)
     {
-        hexGrid = Object.FindObjectOfType<HexGrid>();
-
         string[] receivedData = data.Split('#');
         HexCell attackedCell = hexGrid.GetCell(new HexCoordinates(int.Parse(receivedData[0]), int.Parse(receivedData[1])));
         City city = (City)attackedCell.Feature;
@@ -247,8 +276,6 @@ public class Player
 
     public void RemoveCity(City city)
     {
-        hexGrid = Object.FindObjectOfType<HexGrid>();
-
         HexCell location = city.Location;
         location.FeatureIndex = 0;
         playerCities.Remove(city);
@@ -264,36 +291,29 @@ public class Player
         return null;
     }
 
-    // TODO : faire la même chose que pour les city mais avec les ressources (add, take damage, remove, network, etc...)
-    
-    public void LevelUp(Unit.UnitType type) //To call this function using buttons, make them add as parameter the type of the unite in lowercase (cf Unit.StrToType for exact strings to send)
+
+    //RESOURCES
+    ///////////////////////
+    public void NetworkTakeDamageResource(string data)
     {
-        if (!Unit.CanAttack(type))
-            return;
+        string[] receivedData = data.Split('#');
+        HexCell attackedCell = hexGrid.GetCell(new HexCoordinates(int.Parse(receivedData[0]), int.Parse(receivedData[1])));
+        Resource resource = (Resource)attackedCell.Feature;
+        resource.Hp -= int.Parse(receivedData[2]);
 
-        if (unitLevel[(int)type - 2] < 20)
-        {
-            unitLevel[(int)type - 2]++;
-
-            foreach (Unit u in playerUnits)
-            {
-                if (type == Unit.UnitType.REGULAR && u.Type == Unit.UnitType.REGULAR)
-                    ((Regular)u).LevelUp();
-                else if (type == Unit.UnitType.RANGED && u.Type == Unit.UnitType.RANGED)
-                    ((Ranged)u).LevelUp();
-                else if (type == Unit.UnitType.HEAVY && u.Type == Unit.UnitType.HEAVY)
-                    ((Heavy)u).LevelUp();
-            }
-        }
+        if(resource.Hp <= 0)
+            ResetResource(resource);
     }
 
-    /*
-    public void IncreaseUnitLevel(int target)
+    public void ResetResource(Resource resource)
     {
-        while(unitLevel < target)
-            LevelUp();
+        HexCell location = resource.Location;
+        resource.owner = null;
+
+        location.FeatureIndex -= 6;
+        playerResources.Remove(resource);
     }
-    */
+
 
     public void SetDisplayer()
     {

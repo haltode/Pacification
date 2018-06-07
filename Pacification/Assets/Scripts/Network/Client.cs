@@ -121,11 +121,11 @@ public class Client : MonoBehaviour
 
             //Unit TakeDamage
             case "SUTD":
-                for(int i = 1; i < receivedData.Length - 1; i++)
+                for(int i = 1; i < receivedData.Length - 2; i++)
                 {
                     foreach(Player p in players)
                     {
-                        if(p.name == receivedData[receivedData.Length - 1])
+                        if(p.name == receivedData[receivedData.Length - 2])
                             p.NetworkTakeDamageUnit(receivedData[i]);
                     }
                 }
@@ -136,7 +136,7 @@ public class Client : MonoBehaviour
                 player.NetworkMoveUnit(receivedData[1]);
                 break;
                 
-            ////// SETTLER : City creation
+            ////// CITY : City Creation
             case "SCIT":
                 for(int i = 1; i < receivedData.Length - 1; i++)
                 {
@@ -154,13 +154,13 @@ public class Client : MonoBehaviour
                 }
                 break;
 
-            //City destruction
+            //City Take Damage
             case "SCTD":
-                for(int i = 1; i < receivedData.Length - 1; i++)
+                for(int i = 1; i < receivedData.Length - 2; i++)
                 {
                     foreach(Player p in players)
                     {
-                        if(p.name == receivedData[receivedData.Length - 1])
+                        if(p.name == receivedData[receivedData.Length - 2])
                             p.NetworkTakeDamageCity(receivedData[i]);
                     }
                 }
@@ -173,6 +173,18 @@ public class Client : MonoBehaviour
                     string[] cityData = receivedData[i].Split('#');
                     City city = (City)player.hexGrid.GetCell(new HexCoordinates(int.Parse(cityData[0]), int.Parse(cityData[1]))).Feature;
                     city.LevelUp(cityData[2]);
+                }
+                break;
+
+            //Resources TakeDamage
+            case "SRTD":
+                for(int i = 1; i < receivedData.Length - 1; i++)
+                {
+                    foreach(Player p in players)
+                    {
+                        if(p.name == receivedData[receivedData.Length - 1])
+                            p.NetworkTakeDamageResource(receivedData[i]);
+                    }
                 }
                 break;
 
@@ -194,7 +206,11 @@ public class Client : MonoBehaviour
                 foreach(Player p in players)
                 {
                     if(p.name == receivedData[2])
+                    {
                         exploit.featureOwner = p;
+                        Resource resource = (Resource)exploit.Feature;
+                        p.playerResources.Add(resource);
+                    }
                 }
 
                 exploit.FeatureIndex += int.Parse(exploitData[2]);

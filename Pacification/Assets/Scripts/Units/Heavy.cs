@@ -12,17 +12,17 @@ public class Heavy : Attacker
         this.level = owner.UnitLevel[2];
 
         upgradeHP = 20;
-        hp = (isUpgraded() ? 350 : 120) - upgradeHP + ((level - (isUpgraded() ? 10 : 0)) * upgradeHP);
+        hp = (IsUpgraded() ? 350 : 120) - upgradeHP + ((level - (IsUpgraded() ? 10 : 0)) * upgradeHP);
         maxHP = hp;
 
         upgradeATK = 10;
-        defaultATK = (isUpgraded() ? 210 : 100) - upgradeATK + ((level - (isUpgraded() ? 10 : 0)) * upgradeATK);
+        defaultATK = (IsUpgraded() ? 210 : 100) - upgradeATK + ((level - (IsUpgraded() ? 10 : 0)) * upgradeATK);
 
-        range = (isUpgraded() ? 3 : 2);
+        range = (IsUpgraded() ? 3 : 2);
         mvtSPD = 1;
         currMVT = 0;
 
-        dmgMultCity = (isUpgraded() ? 2f : 1.75f);
+        dmgMultCity = (IsUpgraded() ? 2f : 1.75f);
         dmgMult = new Dictionary<UnitType, float>()
         {
             { UnitType.SETTLER, 0.5f },
@@ -35,7 +35,7 @@ public class Heavy : Attacker
 
     public void LevelUp()
     {
-        if (isMaxed())
+        if (IsMaxed())
             return;
         /*else if (level == 10)
         {

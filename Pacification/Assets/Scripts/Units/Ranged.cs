@@ -12,30 +12,30 @@ public class Ranged : Attacker
         this.level = owner.UnitLevel[1];
 
         upgradeHP = 25;
-        hp = (isUpgraded() ? 400 : 100) - upgradeHP + ((level - (isUpgraded() ? 10 : 0)) * upgradeHP);
+        hp = (IsUpgraded() ? 400 : 100) - upgradeHP + ((level - (IsUpgraded() ? 10 : 0)) * upgradeHP);
         maxHP = hp;
 
         upgradeATK = 20;
-        defaultATK = (isUpgraded() ? 300 : 80) - upgradeATK + ((level - (isUpgraded() ? 10 : 0)) * upgradeATK);
+        defaultATK = (IsUpgraded() ? 300 : 80) - upgradeATK + ((level - (IsUpgraded() ? 10 : 0)) * upgradeATK);
 
         range = 2;
         mvtSPD = 2;
         currMVT = 0;
 
-        dmgMultCity = (isUpgraded() ? 0.5f : 0.25f);
+        dmgMultCity = (IsUpgraded() ? 0.5f : 0.25f);
         dmgMult = new Dictionary<UnitType, float>()
         {
-            { UnitType.SETTLER, (isUpgraded() ? 2f : 1.5f) },
-            { UnitType.WORKER, (isUpgraded() ? 2f : 1.5f) },
-            { UnitType.REGULAR, (isUpgraded() ? 2f : 1.5f) },
-            { UnitType.RANGED, (isUpgraded() ? 2f : 1.5f) },
-            { UnitType.HEAVY, (isUpgraded() ? 0.5f : 0.25f) },
+            { UnitType.SETTLER, (IsUpgraded() ? 2f : 1.5f) },
+            { UnitType.WORKER, (IsUpgraded() ? 2f : 1.5f) },
+            { UnitType.REGULAR, (IsUpgraded() ? 2f : 1.5f) },
+            { UnitType.RANGED, (IsUpgraded() ? 2f : 1.5f) },
+            { UnitType.HEAVY, (IsUpgraded() ? 0.5f : 0.25f) },
         };
     }
 
     public void LevelUp()
     {
-        if (isMaxed())
+        if (IsMaxed())
             return;
         /*else if (level == 10)
         {

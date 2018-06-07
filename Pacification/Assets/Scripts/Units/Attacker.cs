@@ -49,14 +49,14 @@ public class Attacker : Unit
         set { level = value; }
     }
 
-    public bool isUpgraded()
+    public bool IsUpgraded()
     {
         return level > 10;
     }
 
-    public bool isMaxed()
+    public bool IsMaxed()
     {
-        return level == (isUpgraded() ? 20 : 10);
+        return level == (IsUpgraded() ? 20 : 10);
     }
 
     public bool IsInRangeToAttack(HexCell target)
@@ -91,6 +91,17 @@ public class Attacker : Unit
             owner.client.Send("CUNI|CTD|" + target.location.coordinates.X + "#" + target.location.coordinates.Z + "#" + damage + "|" + target.owner.name);
         else
             target.owner.NetworkTakeDamageCity(target.location.coordinates.X + "#" + target.location.coordinates.Z + "#" + damage);
+        hasMadeAction = true;
+    }
+
+    public void Attack(Resource target)
+    {
+        if(hasMadeAction)
+            return;
+
+        int damage = (int)((float)((defaultATK - upgradeATK) + upgradeATK * level) * dmgMultCity);
+
+        owner.client.Send("CUNI|RTD|" + target.location.coordinates.X + "#" + target.location.coordinates.Z + "#" + damage + "|" + target.owner.name);
         hasMadeAction = true;
     }
 

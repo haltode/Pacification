@@ -12,30 +12,30 @@ public class Regular : Attacker
         this.level = owner.UnitLevel[0];
 
         upgradeHP = 20;
-        hp = (isUpgraded() ? 420 : 150) - upgradeHP + ((level - (isUpgraded() ? 10 : 0)) * upgradeHP);
+        hp = (IsUpgraded() ? 420 : 150) - upgradeHP + ((level - (IsUpgraded() ? 10 : 0)) * upgradeHP);
         maxHP = hp;
 
         upgradeATK = 25;
-        defaultATK = (isUpgraded() ? 375 : 100) - upgradeATK + ((level - (isUpgraded() ? 10 : 0)) * upgradeATK);
+        defaultATK = (IsUpgraded() ? 375 : 100) - upgradeATK + ((level - (IsUpgraded() ? 10 : 0)) * upgradeATK);
 
         range = 1;
-        mvtSPD = (isUpgraded() ? 3 : 2);
+        mvtSPD = (IsUpgraded() ? 3 : 2);
         currMVT = 0;
 
-        dmgMultCity = (isUpgraded() ? 0.75f : 0.5f);
+        dmgMultCity = (IsUpgraded() ? 0.75f : 0.5f);
         dmgMult = new Dictionary<UnitType, float>()
         {
             { UnitType.SETTLER, 1f },
             { UnitType.WORKER, 1f },
             { UnitType.REGULAR, 1f },
-            { UnitType.RANGED, (isUpgraded() ? 1.125f : 1.12f) },
-            { UnitType.HEAVY, (isUpgraded() ? 1.5f : 1.25f) },
+            { UnitType.RANGED, (IsUpgraded() ? 1.125f : 1.12f) },
+            { UnitType.HEAVY, (IsUpgraded() ? 1.5f : 1.25f) },
         };
     }
 
     public void LevelUp()
     {
-        if (isMaxed())
+        if (IsMaxed())
             return;
         /*else if (level == 10)
         {

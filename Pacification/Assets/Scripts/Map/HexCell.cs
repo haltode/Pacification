@@ -208,6 +208,11 @@ public class HexCell : MonoBehaviour
         get { return featureIndex == 1 || featureIndex == 2 || featureIndex == 3; }
     }
 
+    public bool HasResource
+    {
+        get { return featureIndex > 3; }
+    }
+
     public int CountNeighborsFeatures
     {
         get

@@ -14,23 +14,28 @@ public class Resource : Feature
         FOOD
     }
 
-    private ResourceType resourceType;
-    private int hp;
-    private int featureIndexOffset;
-    private int[] resourceProd = new int[] {75, 50, 25, 1, 250, 100};
+    readonly ResourceType RessourceType;
+    public int Hp;
+    int featureIndexOffset;
+    int[] resourceProd = new int[] {75, 50, 25, 1, 250, 100};
 
-    public Resource (Player owner, HexCell location, ResourceType resourceType)
+    public Resource(Player owner, HexCell location, ResourceType RessourceType)
     {
         this.owner = owner;
         this.location = location;
-        this.resourceType = resourceType;
+        this.RessourceType = RessourceType;
         type = FeatureType.RESOURCE;
-        hp = 700;
-        featureIndexOffset = 4 + (int)resourceType;
+        Hp = 700;
+        featureIndexOffset = 4 + (int)RessourceType;
     }
 
     public void Update()
     {
-        owner.resources[(int)resourceType] += resourceProd[(int)resourceType];
+        owner.resources[(int)RessourceType] += resourceProd[(int)RessourceType];
+    }
+
+    public bool Exploited
+    {
+        get { return location.FeatureIndex > 10; }
     }
 }

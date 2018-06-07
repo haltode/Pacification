@@ -65,13 +65,28 @@ public class DisplayInformationManager : MonoBehaviour {
     //////////////////////
     public GameObject openInformationPannel;
     public GameObject closeInformationPannel;
+    public GameObject infoIsActive;
+    public Text infoIsEnemy;
+    public Text infoType;
+    public Text infoLevel;
+    public Text infoOwner;
+    public Text infoHealth;
+    public RectTransform healthUnit;
+    public GameObject canAct;
+    public GameObject canMove;
 
     public GameObject openInformation2Pannel;
     public GameObject closeInformation2Pannel;
-
+    public GameObject info2IsActive;
+    public Text info2IsEnemy;
+    public Text info2Type;
+    public Text info2Owner;
+    public Text info2Health;
+    public RectTransform healthCity;
     //////////////////////
 
     public Player player;
+    HexCell currentcell;
 
     void Start()
     {
@@ -168,6 +183,7 @@ public class DisplayInformationManager : MonoBehaviour {
     }
 
     //Upgrade pannel
+    ////////////////////
     public void OpenUpgradePannel()
     {
         upgradePannelClose.SetActive(false);
@@ -204,7 +220,6 @@ public class DisplayInformationManager : MonoBehaviour {
     }
 
 
-
     //INFORMATION PANNEL
     ////////////////////
     public void OpenInformationPannel()
@@ -228,12 +243,64 @@ public class DisplayInformationManager : MonoBehaviour {
         closeInformation2Pannel.SetActive(true);
     }
 
-
     public void UpdateInformationPannels()
     {
-        //You're fucked
+        UpdateInformationPannels(currentcell);
     }
 
+    public void UpdateInformationPannels(HexCell cell)
+    {
+        currentcell = cell;
 
+        if(cell == null)
+            return;
 
+        if(cell.HasUnit)
+        {
+            Unit unit = cell.Unit.Unit;
+            infoIsActive.SetActive(true);
+            if(unit.owner == player)
+            {
+                infoIsEnemy.text = "";
+                infoLevel.text = unit.Level + "/" + unit.maxLevel;
+            }
+            else
+            {
+                infoIsEnemy.text = "Enemy";
+                infoLevel.text = "??/??";
+            }
+            
+            infoType.text = unit.TypeToStr();
+            infoOwner.text = unit.owner.name;
+            infoHealth.text = unit.Hp + " / " + unit.maxHP;
+            //healthUnit;
+            canAct.SetActive(!unit.hasMadeAction);
+            //canMove;
+
+}
+        else
+            infoIsActive.SetActive(false);
+
+        if(cell.HasCity || cell.FeatureIndex > 9)
+        {
+            Feature feature = cell.Feature;
+            info2IsActive.SetActive(true);
+            if(feature.Owner == player)
+            {
+                info2IsEnemy.text = "";
+                info2Owner.text = player.name;
+            }
+            else
+            {
+                info2IsEnemy.text = "Enemy";
+                info2Owner.text = feature.Owner.name;
+            }
+
+            info2Type.text = feature.TypeToStr();
+            infoHealth.text = feature.Hp + " / " + feature.MaxHp;
+            //healthCity;
+        }
+        else
+            info2IsActive.SetActive(false);
+    }
 }

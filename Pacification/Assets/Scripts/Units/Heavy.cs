@@ -10,6 +10,7 @@ public class Heavy : Attacker
         type = UnitType.HEAVY;
         hasMadeAction = false;
         this.level = owner.UnitLevel[2];
+        maxLevel = 20;
 
         upgradeHP = 20;
         hp = (IsUpgraded() ? 350 : 120) - upgradeHP + ((level - (IsUpgraded() ? 10 : 0)) * upgradeHP);

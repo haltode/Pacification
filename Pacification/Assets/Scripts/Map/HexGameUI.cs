@@ -177,8 +177,11 @@ public class HexGameUI : MonoBehaviour
 
         if(currentCell)
         {
+            client.player.displayer.UpdateInformationPannels(currentCell);
+
             if(currentCell.Unit && currentCell.HasCity)
             {
+                
                 selectedUnit = GetSelectUnit(currentCell);
                 selectedCity = GetSelectCity(currentCell);
                 Unit unit = currentCell.Unit.Unit;

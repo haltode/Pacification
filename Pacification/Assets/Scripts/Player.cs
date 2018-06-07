@@ -50,7 +50,7 @@ public class Player
         client = Object.FindObjectOfType<Client>();
         hexGrid = Object.FindObjectOfType<HexGrid>();
 
-        economyMalus = (GameManager.Instance.gamemode == GameManager.Gamemode.SOLO ? 0.8f : 1f); //High level "malus" for solo mode ;))))
+        economyMalus = /*(GameManager.Instance.gamemode == GameManager.Gamemode.SOLO ? 0.8f : */1f/*)*/; //Deactivated until more stable economy. Base value = 0.8f
     }
 
 

@@ -357,6 +357,9 @@ public class Player
         foreach (Unit u in playerUnits)
             u.Update();
 
+        foreach (Resource r in playerResources)
+            r.Update();
+
         ++roundNb;
         displayer.UpdateRoundDisplay(roundNb);
     }

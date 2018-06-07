@@ -314,19 +314,10 @@ public class HexGrid : MonoBehaviour
     public void ClearPath()
     {
         ResetDistances();
-        if(currentPathExists)
+        for(int i = 0; i < cells.Length; ++i)
         {
-            currentPathExists = false;
-            for(HexCell c = currentPathEnd; c && c != currentPathStart; c = c.PathFrom)
-            {
-                c.SetLabel(null);
-                c.DisableHighlight();
-            }    
-        }
-        if(currentPathStart)
-        {
-            currentPathStart.SetLabel(null);
-            currentPathStart.DisableHighlight();
+            cells[i].SetLabel(null);
+            cells[i].DisableHighlight();
         }
     }
 

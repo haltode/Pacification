@@ -321,16 +321,6 @@ public class Player
         displayer = Object.FindObjectOfType<DisplayInformationManager>();
     }
 
-    public void UpdateMoneyDisplay()
-    {
-        displayer.UpdateMoneyDisplay(money);
-    }
-
-    public void UpdateScienceDisplay()
-    {
-        displayer.UpdateScienceDisplay(science);
-    }
-
     // TODO : mettre les bons displays (ajouter fer/or/diamant/nourriture/bois/chevaux
 
     public int[] UnitLevel
@@ -369,7 +359,5 @@ public class Player
 
         ++roundNb;
         displayer.UpdateRoundDisplay(roundNb);
-        displayer.UpdateMoneyDisplay(money);
-        displayer.UpdateScienceDisplay(science);
     }
 }

@@ -5,12 +5,22 @@ using UnityEngine.UI;
 
 public class DisplayInformationManager : MonoBehaviour {
 
+    public Text nbRound;
 
     public Text money;
     public Text science;
-    public Text production;
+    public Text food;
+    public Text wood;
+    public Text horse;
+    public Text iron;
+    public Text gold;
+    public Text diamond;
+
+    public GameObject townResources;
+    public Text productivity;
+    public Text population;
     public Text happiness;
-    public Text nbRound;
+
 
     public Transform downPanel;
     public Transform upEditPanel;
@@ -20,12 +30,11 @@ public class DisplayInformationManager : MonoBehaviour {
     public GameObject editorRightPanel;
     public GameObject loadingPanel;
 
+    public Player player;
+
     void Start()
     {
-        money.text = "00000000000";
-        //science.text = "Science: 0";
-        //production.text = "Production: 0";
-        //happiness.text = "Happiness: 0";
+        InitiateResources();
 
         if(GameManager.Instance.gamemode == GameManager.Gamemode.EDITOR)
         {
@@ -52,33 +61,61 @@ public class DisplayInformationManager : MonoBehaviour {
         }
     }
 
+    private void Update()
+    {
+        if(player != null && player.canPlay)
+            DisplayResources();
+    }
+
+    public void UpdateRoundDisplay(int rounds)
+    {
+        nbRound.text = "" + rounds;
+    }
+
+    public void DisplayResources()
+    {
+        money.text = "" + player.money;
+        science.text = "" + player.science;
+        food.text = "" + player.resources[5];
+        wood.text = "" + player.resources[4];
+        horse.text = "" + player.resources[3];
+        iron.text = "" + player.resources[0];
+        gold.text = "" + player.resources[1];
+        diamond.text = "" + player.resources[2];
+    }
+
+    public void DisplayTownResources(string productivityC, string populationC, string happinessC)
+    {
+        productivity.text = productivityC;
+        population.text = populationC;
+        happiness.text = happinessC;
+        townResources.SetActive(true);
+    }
+
+    public void HideTownResources()
+    {
+        townResources.SetActive(false);
+    }
+
+    void InitiateResources()
+    {
+        money.text = "0";
+        science.text = "0";
+        food.text = "0";
+        wood.text = "0";
+        horse.text = "0";
+        iron.text = "0";
+        gold.text = "0";
+        diamond.text = "0";
+
+        townResources.SetActive(false);
+        productivity.text = "0";
+        population.text = "0";
+        happiness.text = "0";
+}
+
     public void KillLoading()
     {
         loadingPanel.SetActive(false);
-    }
-
-    public void UpdateMoneyDisplay(int value)
-    {
-        //money.text = "Money: " + value;
-    }
-
-    public void UpdateScienceDisplay(int value)
-    {
-        //science.text = "Science: " + value;
-    }
-
-    public void UpdateProductionDisplay(int value)
-    {
-        //production.text = "Production: " + value;
-    }
-
-    public void UpdateHappinessDisplay(int value)
-    {
-        //happiness.text = "Happiness: " + value;
-    }
-
-    public void UpdateRoundDisplay(int value)
-    {
-        nbRound.text = "Round  " + value;
     }
 }

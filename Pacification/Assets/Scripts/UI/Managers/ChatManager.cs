@@ -172,8 +172,13 @@ public class ChatManager : MonoBehaviour
                     switch(ExtractCommand(ref index, input.text))
                     {
                         case "coinage":
-                            client.player.money += 1000;
-                            client.player.UpdateMoneyDisplay();
+                            ++index;
+                            string beRich = ExtractCommand(ref index, input.text);
+                            if(beRich == "")
+                                client.player.money += 1000;
+                            else
+                                client.player.money += int.Parse(beRich);
+                            client.player.displayer.DisplayResources();
                             break;
 
                         case "fog":

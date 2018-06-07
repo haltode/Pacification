@@ -301,10 +301,8 @@ public class Client : MonoBehaviour
                     mapLoader.StartGame(receivedData[1]);
                 }
                 player.InitialSpawnUnit();
-                player.UpdateMoneyDisplay();
-                //player.UpdateHappinessDisplay();
-                //player.UpdateProductionDisplay();
-                player.UpdateScienceDisplay();
+                player.displayer.player = player;
+                player.displayer.DisplayResources();
                 chat = FindObjectOfType<ChatManager>();
                 gameUI = FindObjectOfType<HexGameUI>();
                 player.displayer.KillLoading();

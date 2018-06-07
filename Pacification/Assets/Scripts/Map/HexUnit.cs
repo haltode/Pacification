@@ -159,7 +159,7 @@ public class HexUnit : MonoBehaviour
             }
 
             // Embark on water
-            if(location.IsUnderWater && !Unit.embark && Unit.owner.science >= 2000) //arbitrary science amount, no proper balance yet
+            if(location.IsUnderWater && !Unit.embark && Unit.CanEmbark)
             {
                 Unit.embark = true;
                 // TODO: add actual boat prefab

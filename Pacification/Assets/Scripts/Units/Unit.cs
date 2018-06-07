@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class Unit
 {
+    const int ScienceMinLevelEmbark = 2000;
 
     protected HexUnit hexUnit;
     public GameObject hexGameObject;
@@ -48,6 +49,11 @@ public class Unit
     {
         get { return hexUnit; }
         set { hexUnit = value; }
+    }
+
+    public bool CanEmbark
+    {
+        get { return owner.science >= ScienceMinLevelEmbark; }
     }
 
     public static bool CanAttack(UnitType type)

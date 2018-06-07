@@ -256,6 +256,8 @@ public class HexGrid : MonoBehaviour
                 HexCell neighbor = current.GetNeighbor(dir);
                 if(neighbor == null || neighbor.Distance != int.MaxValue)
                     continue;
+                if(neighbor.IsUnderWater && !unit.Unit.CanEmbark)
+                    continue;
                 // In case a unit is in the targeted city
                 if(isAI && (neighbor != end && neighbor.Unit))
                     continue;

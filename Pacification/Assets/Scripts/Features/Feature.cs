@@ -12,9 +12,11 @@ public class Feature
 
     public Player Owner { get; set; }
 
-    public FeatureType Type { get; protected set; }
+    public FeatureType Type { get; set; }
 
     public HexCell Location { get; set; }
 
     public int Hp { get; set; }
+
+    public int MaxHp { get; set; }
 }

@@ -11,7 +11,6 @@ public class City : Feature
         MEGALOPOLIS
     }
 
-    public int maxHP; //La ville est réparée lorsqu'elle évolue.
     public int pop;
 
     //economy
@@ -37,7 +36,7 @@ public class City : Feature
         Type = FeatureType.CITY;
         Size = CitySize.SETTLEMENT;
         Hp = 600;
-        maxHP = Hp;
+        MaxHp = Hp;
         pop = 100;
 
         perTurnScience = 0.2f;
@@ -56,7 +55,7 @@ public class City : Feature
         Owner.money += (int)(pop * perTurnMoney * ((happiness * happinessMalus < 1) ? (happiness * happinessMalus) : 1f));
         Owner.science += (int)(pop * perTurnScience * ((happiness * happinessMalus < 1) ? (happiness * happinessMalus) : 1f));
 
-        happinessMalus = (float)(Hp / maxHP); //damaged cities get a happiness malus, for obvious reasons people are not happy to be on fire
+        happinessMalus = (float)(Hp / MaxHp); //damaged cities get a happiness malus, for obvious reasons people are not happy to be on fire
 
         if(Size == CitySize.SETTLEMENT && pop >= 1000)
             return "|" + Location.coordinates.X + "#" + Location.coordinates.Z + "#1";
@@ -72,14 +71,14 @@ public class City : Feature
         {
             Size = CitySize.CITY;
             Hp = 900;
-            maxHP = Hp;
+            MaxHp = Hp;
             Location.FeatureIndex = 2;
         }
         else if(upgrade == "2")
         {
             Size = CitySize.MEGALOPOLIS;
             Hp = 1300;
-            maxHP = Hp;
+            MaxHp = Hp;
             Location.FeatureIndex = 3;
         }
     }
@@ -109,7 +108,7 @@ public class City : Feature
                 break;
 
             default:
-                Debug.Log("REEEEEEEEEEEE");
+                Debug.Log("Unknown Building Type");
                 break;
         }
     }

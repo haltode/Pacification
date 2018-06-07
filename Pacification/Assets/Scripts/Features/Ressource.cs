@@ -24,6 +24,7 @@ public class Resource : Feature
         RessourceType = ressourceType;
         Type = FeatureType.RESOURCE;
         Hp = 700;
+        MaxHp = Hp;
     }
 
     public void Update()

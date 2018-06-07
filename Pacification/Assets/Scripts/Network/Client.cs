@@ -178,11 +178,11 @@ public class Client : MonoBehaviour
 
             //Resources TakeDamage
             case "SRTD":
-                for(int i = 1; i < receivedData.Length - 1; i++)
+                for(int i = 1; i < receivedData.Length - 2; i++)
                 {
                     foreach(Player p in players)
                     {
-                        if(p.name == receivedData[receivedData.Length - 1])
+                        if(p.name == receivedData[receivedData.Length - 2])
                             p.NetworkTakeDamageResource(receivedData[i]);
                     }
                 }
@@ -207,9 +207,8 @@ public class Client : MonoBehaviour
                 {
                     if(p.name == receivedData[2])
                     {
-                        Resource resource = (Resource)exploit.Feature;
+                        Resource resource = new Resource(p, exploit, (Resource.ResourceType)int.Parse(exploitData[2]));
                         exploit.Feature = resource;
-                        exploit.Feature.Owner = p;
                         exploit.Feature.Type = Feature.FeatureType.RESOURCE;
                         exploit.FeatureIndex += 6;
                         p.playerResources.Add(resource);

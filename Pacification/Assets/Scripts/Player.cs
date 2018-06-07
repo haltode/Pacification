@@ -308,10 +308,9 @@ public class Player
 
     public void ResetResource(Resource resource)
     {
-        HexCell location = resource.Location;
+        resource.Location.FeatureIndex -= 6;
         resource.Owner = null;
-
-        location.FeatureIndex -= 6;
+        resource.Hp = resource.MaxHp;
         playerResources.Remove(resource);
     }
 

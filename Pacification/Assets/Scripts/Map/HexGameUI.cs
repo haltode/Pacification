@@ -111,15 +111,15 @@ public class HexGameUI : MonoBehaviour
         if(city != null)
         {
             cityUI.SetActive(true);
-            cityHealthText.text = city.Hp + " / " + city.maxHP;
-            healthCity.sizeDelta = new Vector2(((float)city.Hp / (float)city.maxHP) * 90f, healthCity.sizeDelta.y);
+            cityHealthText.text = city.Hp + " / " + city.MaxHp;
+            healthCity.sizeDelta = new Vector2(((float)city.Hp / (float)city.MaxHp) * 90f, healthCity.sizeDelta.y);
         }
         else if(location.HasCity)
         {
             City ennemiCity = (City)location.Feature;
             ennemiCityUI.SetActive(true);
-            ennemiCityHealthText.text = ennemiCity.Hp + " / " + ennemiCity.maxHP;
-            healthEnnemiCity.sizeDelta = new Vector2(((float)ennemiCity.Hp / (float)ennemiCity.maxHP) * 90f, healthEnnemiCity.sizeDelta.y);
+            ennemiCityHealthText.text = ennemiCity.Hp + " / " + ennemiCity.MaxHp;
+            healthEnnemiCity.sizeDelta = new Vector2(((float)ennemiCity.Hp / (float)ennemiCity.MaxHp) * 90f, healthEnnemiCity.sizeDelta.y);
         }
         return city;
     }
@@ -190,8 +190,8 @@ public class HexGameUI : MonoBehaviour
                     UnitBothUI.SetActive(true);
                     unitUI.SetActive(false);
 
-                    healthCity.sizeDelta = new Vector2(((float)selectedCity.Hp / (float)selectedCity.maxHP) * 90f, healthCity.sizeDelta.y);
-                    ennemiCityBothHealthText.text = selectedCity.Hp + " / " + selectedCity.maxHP;
+                    healthCity.sizeDelta = new Vector2(((float)selectedCity.Hp / (float)selectedCity.MaxHp) * 90f, healthCity.sizeDelta.y);
+                    ennemiCityBothHealthText.text = selectedCity.Hp + " / " + selectedCity.MaxHp;
 
                     healthUnitBoth.sizeDelta = new Vector2(((float)unit.Hp / (float)unit.maxHP) * 90f, healthUnitBoth.sizeDelta.y);
                     unitTypeBothText.text = (unit.owner != client.player ? "Enemy ":"")  + unit.TypeToStr();
@@ -205,8 +205,8 @@ public class HexGameUI : MonoBehaviour
 
                     ennemiCityBothUI.SetActive(true);
 
-                    healthEnnemiCityBoth.sizeDelta = new Vector2(((float)selectedCity.Hp / (float)selectedCity.maxHP) * 90f, healthEnnemiCity.sizeDelta.y);
-                    ennemiCityBothHealthText.text = selectedCity.Hp + " / " + selectedCity.maxHP;
+                    healthEnnemiCityBoth.sizeDelta = new Vector2(((float)selectedCity.Hp / (float)selectedCity.MaxHp) * 90f, healthEnnemiCity.sizeDelta.y);
+                    ennemiCityBothHealthText.text = selectedCity.Hp + " / " + selectedCity.MaxHp;
 
                     healthUnit.sizeDelta = new Vector2(((float)unit.Hp / (float)unit.maxHP) * 90f, healthUnitBoth.sizeDelta.y);
                     unitTypeText.text = (unit.owner != client.player ? "Enemy " : "") + unit.TypeToStr();
@@ -261,7 +261,7 @@ public class HexGameUI : MonoBehaviour
                     attackTargetCell.EnableHighlight(Color.red);
                     attacker.Attack((City)attackTargetCell.Feature);
                 }
-                else if(attackTargetCell.HasResource && ((Resource)attackTargetCell.Feature).Exploited && selectedUnit.owner != attackTargetCell.Feature.Owner)
+                else if(attackTargetCell.HasResource && attackTargetCell.FeatureIndex > 9 && selectedUnit.owner != attackTargetCell.Feature.Owner)
                 {
                     attackTargetCell.EnableHighlight(Color.red);
                     attacker.Attack((Resource)attackTargetCell.Feature);

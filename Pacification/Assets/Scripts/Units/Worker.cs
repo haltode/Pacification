@@ -27,7 +27,7 @@ public class Worker : Unit
             return;
 
         if(cell.FeatureIndex + 6 < 16)
-            owner.client.Send("CUNI|WEX|" + cell.coordinates.X + "#" + cell.coordinates.Z);
+            owner.client.Send("CUNI|WEX|" + cell.coordinates.X + "#" + cell.coordinates.Z + "#" + (cell.FeatureIndex - 4));
         hasMadeAction = true;
     }
 

@@ -50,19 +50,21 @@ public class City : Feature
         // TODO : couleur du joueur
     }
 
-    public void Update()
+    public string Update()
     {
         pop = (int)(pop * happiness * happinessMalus * 3f); //For testing purposes. Change back to 1.1f for normal play
 
         owner.money += (int)(pop * perTurnMoney * ((happiness * happinessMalus < 1) ? (happiness * happinessMalus) : 1f));
         owner.science += (int)(pop * perTurnScience * ((happiness * happinessMalus < 1) ? (happiness * happinessMalus) : 1f));
 
-        if (Size == CitySize.SETTLEMENT && pop >= 1000)
-            owner.client.Send("CUNI|CUP|" + location.coordinates.X + "#" + location.coordinates.Z + "#1");
-        else if (Size == CitySize.CITY && pop >= 5000)
-             owner.client.Send("CUNI|CUP|" + location.coordinates.X + "#" + location.coordinates.Z + "#2");
-
         happinessMalus = (float)(hp / maxHP); //damaged cities get a happiness malus, for obvious reasons people are not happy to be on fire
+
+        if(Size == CitySize.SETTLEMENT && pop >= 1000)
+            return "|" + location.coordinates.X + "#" + location.coordinates.Z + "#1";
+        else if(Size == CitySize.CITY && pop >= 5000)
+            return "|" + location.coordinates.X + "#" + location.coordinates.Z + "#2";
+        else
+            return "";
     }
 
     public void LevelUp(string upgrade)

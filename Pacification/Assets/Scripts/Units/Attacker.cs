@@ -74,7 +74,7 @@ public class Attacker : Unit
         int damage = (int)((float)((defaultATK - upgradeATK) + upgradeATK * level) * multiplier);
 
         if(GameManager.Instance.gamemode == GameManager.Gamemode.MULTI)
-            owner.client.Send("CUNM|UTD|" + target.HexUnit.location.coordinates.X + "#" + target.HexUnit.location.coordinates.Z + "#" + damage + "|" + target.owner.name);
+            owner.client.Send("CUNI|UTD|" + target.HexUnit.location.coordinates.X + "#" + target.HexUnit.location.coordinates.Z + "#" + damage + "|" + target.owner.name);
         else
             target.owner.NetworkTakeDamageUnit(target.HexUnit.location.coordinates.X + "#" + target.HexUnit.location.coordinates.Z + "#" + damage);
         hasMadeAction = true;
@@ -89,7 +89,7 @@ public class Attacker : Unit
         target.happiness *= 0.9f;
 
         if(GameManager.Instance.gamemode == GameManager.Gamemode.MULTI)
-            owner.client.Send("CUNM|CTD|" + target.location.coordinates.X + "#" + target.location.coordinates.Z + "#" + damage + "|" + target.owner.name);
+            owner.client.Send("CUNI|CTD|" + target.location.coordinates.X + "#" + target.location.coordinates.Z + "#" + damage + "|" + target.owner.name);
         else
             target.owner.NetworkTakeDamageCity(target.location.coordinates.X + "#" + target.location.coordinates.Z + "#" + damage);
         hasMadeAction = true;

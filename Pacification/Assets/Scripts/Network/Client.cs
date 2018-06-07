@@ -82,6 +82,7 @@ public class Client : MonoBehaviour
          * CLS
          * CNN
          * CTD 
+         * CUP
          * DEC
          * DED
          * 
@@ -94,10 +95,8 @@ public class Client : MonoBehaviour
          * MSG
          * MOV
          * 
-         * UAA
          * UNC
          * UTD
-         * UNL
          * 
          * YGO
          * YOP 
@@ -110,31 +109,25 @@ public class Client : MonoBehaviour
         {
             ////// UNITS : Add
             case "SUNC":
-                foreach(Player p in players)
+                for(int i = 1; i < receivedData.Length - 1; i++)
                 {
-                    if(p.name == receivedData[2])
-                        p.NetworkAddUnit(receivedData[1]);
-                }
-                break;
-
-            //Unit Add Multiple
-            case "SUAA":
-                foreach(Player p in players)
-                {
-                    if(p.name == receivedData[3])
+                    foreach(Player p in players)
                     {
-                        p.NetworkAddUnit(receivedData[1]);
-                        p.NetworkAddUnit(receivedData[2]);
+                        if(p.name == receivedData[receivedData.Length - 1])
+                            p.NetworkAddUnit(receivedData[i]);
                     }
                 }
                 break;
 
             //Unit TakeDamage
             case "SUTD":
-                foreach(Player p in players)
+                for(int i = 1; i < receivedData.Length - 1; i++)
                 {
-                    if(p.name == receivedData[2])
-                        p.NetworkTakeDamageUnit(receivedData[1]);
+                    foreach(Player p in players)
+                    {
+                        if(p.name == receivedData[receivedData.Length - 1])
+                            p.NetworkTakeDamageUnit(receivedData[i]);
+                    }
                 }
                 break;
 
@@ -145,33 +138,42 @@ public class Client : MonoBehaviour
                 
             ////// SETTLER : City creation
             case "SCIT":
-                foreach(Player p in players)
+                for(int i = 1; i < receivedData.Length - 1; i++)
                 {
-                    if(p.name == receivedData[3])
+                    foreach(Player p in players)
                     {
-                        p.NetworkAddCity(receivedData[1]);
+                        if(p.name == receivedData[receivedData.Length - 1])
+                        {
+                            p.NetworkAddCity(receivedData[i]);
 
-                        string[] remover = receivedData[2].Split('#');
-                        Unit unit = player.hexGrid.GetCell(new HexCoordinates(int.Parse(remover[0]), int.Parse(remover[1]))).Unit.Unit;
-                        p.RemoveUnit(unit);
+                            string[] remover = receivedData[i].Split('#');
+                            Unit unit = player.hexGrid.GetCell(new HexCoordinates(int.Parse(remover[1]), int.Parse(remover[2]))).Unit.Unit;
+                            p.RemoveUnit(unit);
+                        }
                     }
                 }
                 break;
 
             //City destruction
             case "SCTD":
-                foreach(Player p in players)
+                for(int i = 1; i < receivedData.Length - 1; i++)
                 {
-                    if(p.name == receivedData[2])
-                        p.NetworkTakeDamageCity(receivedData[1]);
+                    foreach(Player p in players)
+                    {
+                        if(p.name == receivedData[receivedData.Length - 1])
+                            p.NetworkTakeDamageCity(receivedData[i]);
+                    }
                 }
                 break;
 
             //City Levelup
             case "SCUP":
-                string[] cityData = receivedData[1].Split('#');
-                City city = (City)player.hexGrid.GetCell(new HexCoordinates(int.Parse(cityData[0]), int.Parse(cityData[1]))).Feature;
-                city.LevelUp(cityData[2]);
+                for(int i = 1; i < receivedData.Length - 1; i++)
+                {
+                    string[] cityData = receivedData[i].Split('#');
+                    City city = (City)player.hexGrid.GetCell(new HexCoordinates(int.Parse(cityData[0]), int.Parse(cityData[1]))).Feature;
+                    city.LevelUp(cityData[2]);
+                }
                 break;
 
             ///// WORKER : Build.Destroy road

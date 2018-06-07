@@ -157,11 +157,10 @@ public class Server : MonoBehaviour
                 break;
 
             case "CUNI":
-                Broadcast("S" + receivedData[1] +"|"+ receivedData[2] + "|" + client.clientName, clients);
-                break;
-
-            case "CUNM":
-                Broadcast("S" + receivedData[1] + "|" + receivedData[2] + "|" + receivedData[3] + "|" + client.clientName, clients);
+                string toSend = "";
+                for(int i = 2; i < receivedData.Length; i++)
+                    toSend += "|" + receivedData[i];
+                Broadcast("S" + receivedData[1] + toSend + "|" + client.clientName, clients);
                 break;
 
             case "CEND":

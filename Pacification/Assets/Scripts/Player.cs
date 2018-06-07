@@ -92,7 +92,7 @@ public class Player
 
     public void AddUnits(Unit.UnitType type, HexCell location, Unit.UnitType type2, HexCell location2)
     {
-        client.Send("CUNM|UAA|" + (int)type + "#" + location.coordinates.X + "#" + location.coordinates.Z + "#" + GetUnitLevel(type) + "|" + (int)type2 + "#" + location2.coordinates.X + "#" + location2.coordinates.Z + "#" + GetUnitLevel(type2));
+        client.Send("CUNI|UNC|" + (int)type + "#" + location.coordinates.X + "#" + location.coordinates.Z + "#" + GetUnitLevel(type) + "|" + (int)type2 + "#" + location2.coordinates.X + "#" + location2.coordinates.Z + "#" + GetUnitLevel(type2));
     }
 
     public void NetworkAddUnit(string data)
@@ -337,8 +337,11 @@ public class Player
 
     public void Newturn()
     {
-        foreach (City c in playerCities)
-            c.Update();
+        string cityUpgrade = "";
+        foreach(City c in playerCities)
+            cityUpgrade += c.Update();
+        if(cityUpgrade != "")
+            client.Send("CUNI|CUP" + cityUpgrade);
 
         foreach (Unit u in playerUnits)
             u.Update();

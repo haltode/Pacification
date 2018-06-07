@@ -112,25 +112,28 @@ public class Player
         {
             Regular regular = new Regular(this);
             regular.Level = int.Parse(receivedData[3]);
+            if(regular.Level >= 10)
+                type = (Unit.UnitType)((int)type + 4);
             unit = regular;
         }
         else if(type == Unit.UnitType.RANGED)
         {
             Ranged ranged = new Ranged(this);
             ranged.Level = int.Parse(receivedData[3]);
+            if(ranged.Level >= 10)
+                type = (Unit.UnitType)((int)type + 4);
             unit = ranged;
         }
         else if(type == Unit.UnitType.HEAVY)
         {
             Heavy heavy = new Heavy(this);
             heavy.Level = int.Parse(receivedData[3]);
+            if(heavy.Level >= 10)
+                type = (Unit.UnitType)((int)type + 4);
             unit = heavy;
         }
         else
             Debug.Log("Unknown unit type");
-        
-        if (Unit.CanAttack(unit.Type) && unitLevel[(int)type - 2] > 10)
-            type = (Unit.UnitType)((int)type + 4);
 
         unit.hexGameObject = GameObject.Instantiate(hexGrid.mainUnitPrefab);
         unit.HexUnit = unit.hexGameObject.GetComponent<HexUnit>();
@@ -344,10 +347,5 @@ public class Player
         displayer.UpdateRoundDisplay(roundNb);
         displayer.UpdateMoneyDisplay(money);
         displayer.UpdateScienceDisplay(science);
-
-        Debug.Log("NextTurn");
-        LevelUp(Unit.UnitType.HEAVY);
-        LevelUp(Unit.UnitType.RANGED);
-        LevelUp(Unit.UnitType.REGULAR);
     }
 }

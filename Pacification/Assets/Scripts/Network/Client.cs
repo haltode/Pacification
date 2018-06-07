@@ -180,7 +180,6 @@ public class Client : MonoBehaviour
             //Worker : Exploit ressources
             case "SWEX":
                 string[] exploitData = receivedData[1].Split('#');
-                Debug.Log(exploitData);
                 HexCell exploit = player.hexGrid.GetCell(new HexCoordinates(int.Parse(exploitData[0]), int.Parse(exploitData[1])));
                 
                 foreach(Player p in players)

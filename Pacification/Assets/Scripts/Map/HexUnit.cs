@@ -125,10 +125,20 @@ public class HexUnit : MonoBehaviour
     {
         if(path.Count <= 1)
             return;
+        List<HexCell> actualPath = new List<HexCell>();
+        actualPath.Add(path[0]);
+        for(int i = 1; i < path.Count; ++i)
+        {
+            int cost = GetMoveCost(path[i - 1], path[i]);
+            if(Unit.currMVT + cost > Unit.MvtSPD)
+                break;
+            Unit.currMVT += cost;
+            actualPath.Add(path[i]);
+        }
         location.Unit = null;
-        location = path[path.Count - 1];
+        location = actualPath[actualPath.Count - 1];
         location.Unit = this;
-        pathToTravel = path;
+        pathToTravel = actualPath;
         StopAllCoroutines();
         StartCoroutine(TravelPath());
     }

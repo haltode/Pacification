@@ -196,7 +196,8 @@ public class Player
         hexGrid.ClearPath();
         hexGrid.FindPath(cellStart, cellEnd, cellStart.Unit, isAI);
 
-        cellStart.Unit.Travel(hexGrid.GetPath());
+        if(hexGrid.HasPath)
+            cellStart.Unit.Travel(hexGrid.GetPath());
         hexGrid.ClearPath();
     }
 

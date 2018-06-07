@@ -243,14 +243,12 @@ public class HexGrid : MonoBehaviour
         PriorityQueue<HexCell> searchQueue = new PriorityQueue<HexCell>(HexCell.CompareCells);
         start.Distance = 0;
         searchQueue.Enqueue(start);
-        int speed = unit.Speed;
         while(!searchQueue.IsEmpty())
         {
             HexCell current = searchQueue.Dequeue();
             if(current == end)
                 return true;
 
-            int currentTurn = (current.Distance - 1) / speed;
             for(HexDirection dir = HexDirection.NE; dir <= HexDirection.NW; ++dir)
             {
                 HexCell neighbor = current.GetNeighbor(dir);
@@ -268,7 +266,11 @@ public class HexGrid : MonoBehaviour
                 int moveCost = unit.GetMoveCost(current, neighbor);
                 if(moveCost == -1)
                     continue;
+                if(moveCost > unit.Unit.MvtSPD)
+                    continue;
                 int newDist = current.Distance + moveCost;
+                if(!isAI && (newDist > unit.Unit.MvtSPD - unit.Unit.currMVT))
+                    continue;
 
                 neighbor.Distance = newDist;
                 neighbor.PathFrom = current;
@@ -312,11 +314,14 @@ public class HexGrid : MonoBehaviour
     public void ClearPath()
     {
         ResetDistances();
-        currentPathExists = false;
-        for(HexCell c = currentPathEnd; c && c != currentPathStart; c = c.PathFrom)
+        if(currentPathExists)
         {
-            c.SetLabel(null);
-            c.DisableHighlight();
+            currentPathExists = false;
+            for(HexCell c = currentPathEnd; c && c != currentPathStart; c = c.PathFrom)
+            {
+                c.SetLabel(null);
+                c.DisableHighlight();
+            }    
         }
         if(currentPathStart)
         {

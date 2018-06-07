@@ -8,6 +8,7 @@ public class Unit
 
     protected HexUnit hexUnit;
     public GameObject hexGameObject;
+    public UnitsAnimator anim;
     protected int level = 1;
     public int maxLevel = 1;
 

@@ -5192,7 +5192,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 0, y: 0.00002892272}
+  m_AnchoredPosition: {x: 0, y: 0.000049037142}
   m_SizeDelta: {x: 400, y: 0}
   m_Pivot: {x: 0, y: 1}
 --- !u!114 &430921716
@@ -15155,15 +15155,15 @@ MonoBehaviour:
   mainUnitPrefab: {fileID: 1755938730281386, guid: 6051e15cd963545a2a9f8bbfdfac4d09,
     type: 2}
   unitPrefab:
-  - {fileID: 100004, guid: 45fb97fc806f7d643812334fa7eaa60c, type: 3}
-  - {fileID: 100010, guid: c1a3a87b8b558634187bb270184ee52f, type: 3}
-  - {fileID: 100020, guid: 2d0fa57d9a6bbdd4fb0ca7480206fff4, type: 3}
-  - {fileID: 100000, guid: 04086fefeef1a2b42bd1cd776190bd7c, type: 3}
-  - {fileID: 100000, guid: 206dfb597bb1e7340a1bbebfd6938ae6, type: 3}
-  - {fileID: 100012, guid: 60dd8b367673bc742a81f067c5170501, type: 3}
-  - {fileID: 100002, guid: 37ee40c757ccd714a8c24d8f5b13446d, type: 3}
-  - {fileID: 100000, guid: 5b324d718a66e0f4db145678a8e6d43c, type: 3}
-  - {fileID: 100000, guid: 8ec120181ae3d87428554283a897f59b, type: 3}
+  - {fileID: 1010013636332960, guid: b6710f9c0ec41a94ebb73fd799282756, type: 2}
+  - {fileID: 1215384332225196, guid: 0f5c04e16ba478049960dbfaa4af0514, type: 2}
+  - {fileID: 1200457717818056, guid: cca35b58ecbfaee41b3252cf54460626, type: 2}
+  - {fileID: 1071995080967004, guid: b4d1401c103b6614d9163f8affcf3c23, type: 2}
+  - {fileID: 1027331017760012, guid: 82a0c450c059a504eb7d3d0697a63460, type: 2}
+  - {fileID: 1212108902183192, guid: 94969b272e2d6654bbd188de322568c4, type: 2}
+  - {fileID: 1326826048205908, guid: 149fb57faf98c07429f7a0fd702ad8e6, type: 2}
+  - {fileID: 1731269538193776, guid: 4b463a6ca7851494e86ae28db98d05eb, type: 2}
+  - {fileID: 1651490238154736, guid: 9920c74d04805c74abc9b8e2f763fd95, type: 2}
   cityPrefab:
   - {fileID: 100000, guid: 8cd39f9aa54a60c4690c647fe282139f, type: 3}
   - {fileID: 100000, guid: b4768eee145282e42803b173574bfc87, type: 3}

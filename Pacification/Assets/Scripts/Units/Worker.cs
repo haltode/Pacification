@@ -22,6 +22,8 @@ public class Worker : Unit
         if (hasMadeAction)
             return;
 
+        anim.animator.SetInteger("AnimPar", 2);
+ 
         HexCell cell = hexUnit.location;
         if(cell.FeatureIndex <= 3)
             return;
@@ -35,6 +37,8 @@ public class Worker : Unit
     {
         HexCell currentCell = hexUnit.location;
         bool isNeighbor = false;
+        anim.animator.SetInteger("AnimPar", 2);
+
         HexDirection roadDir = HexDirection.NE;
         for(HexDirection dir = HexDirection.NE; dir <= HexDirection.NW && !isNeighbor; ++dir)
         {

@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using System.Threading;
 
 public class Attacker : Unit
 {
@@ -62,6 +63,9 @@ public class Attacker : Unit
         if (hasMadeAction)
             return false;
 
+        anim.animator.SetInteger("AnimPar", 2);
+        Thread.Sleep(250);
+
         float multiplier = 1f;
         dmgMult.TryGetValue(target.Type, out multiplier);
         int damage = (int)((float)((defaultATK - upgradeATK) + upgradeATK * level) * multiplier);
@@ -79,6 +83,9 @@ public class Attacker : Unit
         if (hasMadeAction)
             return false;
 
+        anim.animator.SetInteger("AnimPar", 2);
+        Thread.Sleep(250);
+
         int damage = (int)((float)((defaultATK - upgradeATK) + upgradeATK * level) * dmgMultCity);
 
         if(GameManager.Instance.gamemode == GameManager.Gamemode.MULTI)
@@ -93,6 +100,9 @@ public class Attacker : Unit
     {
         if(hasMadeAction)
             return false;
+
+        anim.animator.SetInteger("AnimPar", 2);
+        Thread.Sleep(250);
 
         int damage = (int)((float)((defaultATK - upgradeATK) + upgradeATK * level) * dmgMultCity);
 

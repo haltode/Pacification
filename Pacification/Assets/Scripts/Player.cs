@@ -147,6 +147,7 @@ public class Player
             Debug.Log("Unknown unit type");
 
         unit.hexGameObject = GameObject.Instantiate(hexGrid.mainUnitPrefab);
+        unit.anim = unit.hexGameObject.AddComponent<UnitsAnimator>();
         unit.HexUnit = unit.hexGameObject.GetComponent<HexUnit>();
         unit.HexUnit.Unit = unit;
         unit.SetGraphics(hexGrid.unitPrefab[(int)type]);
@@ -168,7 +169,7 @@ public class Player
 
         unit.Hp -= int.Parse(receivedData[2]);
 
-        if(unit.Hp <= 0)
+        if (unit.Hp <= 0)
             RemoveUnit(unit);
     }
 

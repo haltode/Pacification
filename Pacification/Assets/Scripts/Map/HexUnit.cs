@@ -76,6 +76,7 @@ public class HexUnit : MonoBehaviour
             Grid.DecreaseVisibility(location, VisionRange);
             location.DisableHighlight();
         }
+        Unit.anim.animator.SetInteger("AnimPar", 3);
         location.Unit = null;
         Destroy(gameObject);
     }
@@ -140,6 +141,7 @@ public class HexUnit : MonoBehaviour
         location.Unit = this;
         pathToTravel = actualPath;
         StopAllCoroutines();
+        Unit.anim.animator.SetInteger("AnimPar", 1);
         StartCoroutine(TravelPath());
     }
 
@@ -205,6 +207,7 @@ public class HexUnit : MonoBehaviour
     
         ListPool<HexCell>.Add(pathToTravel);
         pathToTravel = null;
+        Unit.anim.animator.SetInteger("AnimPar", 0);
     }
 
     IEnumerator LookAt(Vector3 point)

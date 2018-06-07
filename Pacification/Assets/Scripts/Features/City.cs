@@ -11,7 +11,6 @@ public class City : Feature
         MEGALOPOLIS
     }
 
-    private CitySize size;
     private int hp;
     public int maxHP; //La ville est réparée lorsqu'elle évolue.
     public int pop;
@@ -37,7 +36,7 @@ public class City : Feature
         this.owner = owner;
         this.location = location;
         type = FeatureType.CITY;
-        size = CitySize.SETTLEMENT;
+        Size = CitySize.SETTLEMENT;
         hp = 600;
         maxHP = hp;
         pop = 100;
@@ -58,22 +57,30 @@ public class City : Feature
         owner.money += (int)(pop * perTurnMoney * ((happiness * happinessMalus < 1) ? (happiness * happinessMalus) : 1f));
         owner.science += (int)(pop * perTurnScience * ((happiness * happinessMalus < 1) ? (happiness * happinessMalus) : 1f));
 
-        if (size == CitySize.SETTLEMENT && pop >= 1000)
+        if (Size == CitySize.SETTLEMENT && pop >= 1000)
+            owner.client.Send("CUNI|CUP|" + location.coordinates.X + "#" + location.coordinates.Z + "#1");
+        else if (Size == CitySize.CITY && pop >= 5000)
+             owner.client.Send("CUNI|CUP|" + location.coordinates.X + "#" + location.coordinates.Z + "#2");
+
+        happinessMalus = (float)(hp / maxHP); //damaged cities get a happiness malus, for obvious reasons people are not happy to be on fire
+    }
+
+    public void LevelUp(string upgrade)
+    {
+        if(upgrade == "1")
         {
-            size = CitySize.CITY;
+            Size = CitySize.CITY;
             hp = 900;
             maxHP = hp;
             location.FeatureIndex = 2;
         }
-        else if (size == CitySize.CITY && pop >= 5000)
+        else if(upgrade == "2")
         {
-            size = CitySize.MEGALOPOLIS;
+            Size = CitySize.MEGALOPOLIS;
             hp = 1300;
             maxHP = hp;
             location.FeatureIndex = 3;
         }
-
-        happinessMalus = (float)(hp / maxHP); //damaged cities get a happiness malus, for obvious reasons people are not happy to be on fire
     }
 
     public void LevelupBuilding(int type)
@@ -124,9 +131,5 @@ public class City : Feature
         set { hp = value; }
     }
 
-    public CitySize Size
-    {
-        get { return size; }
-        set { size = value; }
-    }
+    public CitySize Size { get; set; }
 }

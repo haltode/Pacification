@@ -167,6 +167,13 @@ public class Client : MonoBehaviour
                 }
                 break;
 
+            //City Levelup
+            case "SCUP":
+                string[] cityData = receivedData[1].Split('#');
+                City city = (City)player.hexGrid.GetCell(new HexCoordinates(int.Parse(cityData[0]), int.Parse(cityData[1]))).Feature;
+                city.LevelUp(cityData[2]);
+                break;
+
             ///// WORKER : Build.Destroy road
             case "SWRD":
                 gameUI.NetworkRoad(receivedData[1]);

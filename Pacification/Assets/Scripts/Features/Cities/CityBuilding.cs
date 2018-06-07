@@ -12,8 +12,8 @@ public static class CityBuilding
         HAPPINESS
     }
 
-    public static int[] price = new int[] {500, 500, 500, 500, 2000, 3000, 2000, 1500, 5000, 8000, 4000, 4000};
-    public static float[] multiplier = new float[] {0.01f, 0.01f, 0.01f, 0.01f, 0.05f, 0.05f, 0.05f, 0.05f, 0.08f, 0.08f, 0.08f, 0.08f};
+    public static int[] price = new int[] {/*level 1:*/ 700, 400, 500, 500, /*level 2:*/ 2500, 2000, 1500, 1500, /*level 3:*/ 7000, 5000, 3000, 5000}; //= gold price. Wood price = gold price * 0.1
+    public static float[] multiplier = new float[] {/*level 1:*/ 0.00001f, 0.00005f, 0.01f, 0.0001f, /*level 2:*/ 0.00005f, 0.0001f, 0.05f, 0.0005f, /*level 3:*/ 0.0001f, 0.0005f, 0.1f, 0.001f};
 
     public static void Build(BuildingType type, City city)
     {

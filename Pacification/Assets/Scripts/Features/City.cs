@@ -17,6 +17,7 @@ public class City : Feature
     //economy
     public float perTurnMoney;
     public float perTurnScience;
+    public float perTurnPop;
     public float prodRate;
     public float happiness;
     public float happinessMalus; //Malus temporaire si la ville est endommagée, il y a aussi un malus permanent lors d'une attaque (cf attacker.cf : attack(City))
@@ -40,8 +41,9 @@ public class City : Feature
         MaxHp = Hp;
         pop = 100;
 
-        perTurnScience = 0.2f;
-        perTurnMoney = 0.1f;
+        perTurnScience = 0.0075f;
+        perTurnMoney = 0.025f;
+        perTurnPop = 0.05f;
         prodRate = 1f;
         happiness = 1f;
         happinessMalus = 1f;
@@ -54,7 +56,7 @@ public class City : Feature
     public string Update()
     {
         spawncount = 0;
-        pop = (int)(pop * happiness * happinessMalus * 1.1f);
+        pop = (int)(pop * happiness * happinessMalus * perTurnPop);
 
         Owner.money += (int)(Owner.economyMalus * pop * perTurnMoney * ((happiness * happinessMalus < 1) ? (happiness * happinessMalus) : 1f));
         Owner.science += (int)(Owner.economyMalus * pop * perTurnScience * ((happiness * happinessMalus < 1) ? (happiness * happinessMalus) : 1f));
@@ -77,6 +79,7 @@ public class City : Feature
             Hp = 900;
             MaxHp = Hp;
             Location.FeatureIndex = 2;
+            perTurnPop = 0.015f;
         }
         else if(upgrade == "2")
         {
@@ -84,6 +87,7 @@ public class City : Feature
             Hp = 1300;
             MaxHp = Hp;
             Location.FeatureIndex = 3;
+            perTurnPop = 0.005f;
         }
     }
 

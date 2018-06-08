@@ -121,15 +121,15 @@ public class City : Feature
         }
     }
 
-    public void Build (string buildingType)
+    public void Build(string buildingType)
     {
-        if (buildingType == "Science")
+        if (buildingType == "science")
             CityBuilding.Build(CityBuilding.BuildingType.SCIENCE, this);
-        if (buildingType == "Money")
+        if (buildingType == "money")
             CityBuilding.Build(CityBuilding.BuildingType.MONEY, this);
-        if (buildingType == "Prod")
+        if (buildingType == "prod")
             CityBuilding.Build(CityBuilding.BuildingType.PROD, this);
-        if (buildingType == "Happiness")
+        if (buildingType == "happiness")
             CityBuilding.Build(CityBuilding.BuildingType.HAPPINESS, this);
     }
 

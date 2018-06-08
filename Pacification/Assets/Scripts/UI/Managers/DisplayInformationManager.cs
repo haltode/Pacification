@@ -88,7 +88,31 @@ public class DisplayInformationManager : MonoBehaviour {
 
     //CITY
     //////////////////////
+    public GameObject cityPanel;
+    public GameObject seeMore;
+    public GameObject seeLess;
 
+    public GameObject settler;
+    public GameObject worker;
+    public GameObject regular;
+    public GameObject ranged;
+    public GameObject heavy;
+
+    public GameObject settlerMORE;
+    public GameObject workerMORE;
+    public GameObject regularMORE;
+    public GameObject rangedMORE;
+    public GameObject heavyMORE;
+
+    public GameObject moneyUp;
+    public GameObject scienceUp;
+    public GameObject productionUp;
+    public GameObject happinessUp;
+
+    public GameObject moneyUpMORE;
+    public GameObject scienceUpMORE;
+    public GameObject productionUpMORE;
+    public GameObject happinessUpMORE;
     //////////////////////
 
     public Player player;
@@ -310,10 +334,54 @@ public class DisplayInformationManager : MonoBehaviour {
             population.text = "" + city.pop;
             happiness.text = "" + (int)city.happiness;
             townResources.SetActive(true);
+            cityPanel.SetActive(true);
+
+            bool canbuySettler = true;      //CHANGER TOUT CA EN FONCTION DES PRIX
+            bool canbuyWorker = true;       //
+            bool canbuyRegular = true;      //
+            bool canbuyRanged = true;        //
+            bool canbuyHeavy = true;        //
+            bool canUpgradeMoney = true;    //
+            bool canUpgradeScience = true;  //
+            bool canUpgradeProduction = true;//
+            bool canUpgradeHapiness = true; //
 
 
+            settler.SetActive(canbuySettler);
+            worker.SetActive(canbuyWorker); ;
+            regular.SetActive(canbuyRegular);
+            ranged.SetActive(canbuyRanged);
+            heavy.SetActive(canbuyHeavy);
+            moneyUp.SetActive(canUpgradeMoney);
+            scienceUp.SetActive(canUpgradeScience);
+            productionUp.SetActive(canUpgradeProduction);
+            happinessUp.SetActive(canUpgradeHapiness);
+
+            /* Need MORE panel
+            settlerMORE.SetActive(canbuySettler);
+            workerMORE.SetActive(canbuyWorker);
+            regularMORE.SetActive(canbuyRegular);
+            rangedMORE.SetActive(canbuyRanged);
+            heavyMORE.SetActive(canbuyHeavy);
+            moneyUpMORE.SetActive(canUpgradeMoney);
+            scienceUpMORE.SetActive(canUpgradeScience);
+            productionUpMORE.SetActive(canUpgradeProduction);
+            happinessUpMORE.SetActive(canUpgradeHapiness);
+            */
         }
         else
             townResources.SetActive(false);
     }
+
+    public void SeeMoreCityPanel()
+    {
+        seeLess.SetActive(false);
+        seeMore.SetActive(true);
+    }
+    public void SeeLessCityPanel()
+    {
+        seeMore.SetActive(false);
+        seeLess.SetActive(true);
+    }
+
 }

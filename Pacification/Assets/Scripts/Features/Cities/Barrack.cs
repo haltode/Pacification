@@ -21,6 +21,13 @@ public class Barrack : MonoBehaviour
             city.Owner.AddUnit(Unit.StrToType(type), city.Location);
     }
 
+    public void UpgradeBuilding(string type)
+    {
+        City city = gameUI.selectedCity;
+        if(city != null)
+            city.Build(type);
+    }
+
     public GameObject GetBarrackObject
     {
         get { return barrackObject; }

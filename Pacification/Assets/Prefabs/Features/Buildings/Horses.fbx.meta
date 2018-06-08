@@ -1,40 +1,40 @@
 fileFormatVersion: 2
-guid: 6f163c09549719945892444f8c36135c
-timeCreated: 1528466734
+guid: 8dde2d5fdc8beb44cae5377d25e24f2e
+timeCreated: 1528483538
 licenseType: Free
 ModelImporter:
   serializedVersion: 22
   fileIDToRecycleName:
-    100000: Cube.003
-    100002: Cube.004
-    100004: Cube.030
-    100006: Cube.031
-    100008: Cube.032
+    100000: Cube
+    100002: Cube.001
+    100004: Cube.002
+    100006: Cube.003
+    100008: Cube.004
     100010: //RootNode
-    400000: Cube.003
-    400002: Cube.004
-    400004: Cube.030
-    400006: Cube.031
-    400008: Cube.032
+    400000: Cube
+    400002: Cube.001
+    400004: Cube.002
+    400006: Cube.003
+    400008: Cube.004
     400010: //RootNode
     2100000: ChevalMarron
     2100002: ChevalGris
-    2100004: ChevalNoir
-    2300000: Cube.003
-    2300002: Cube.004
-    2300004: Cube.030
-    2300006: Cube.031
-    2300008: Cube.032
-    3300000: Cube.003
-    3300002: Cube.004
-    3300004: Cube.030
-    3300006: Cube.031
-    3300008: Cube.032
+    2100004: ChevalNoir.001
+    2300000: Cube
+    2300002: Cube.001
+    2300004: Cube.002
+    2300006: Cube.003
+    2300008: Cube.004
+    3300000: Cube
+    3300002: Cube.001
+    3300004: Cube.002
+    3300006: Cube.003
+    3300008: Cube.004
     4300000: Cube.004
     4300002: Cube.003
-    4300004: Cube.030
-    4300006: Cube.031
-    4300008: Cube.032
+    4300004: Cube.002
+    4300006: Cube.001
+    4300008: Cube
   externalObjects:
   - first:
       type: UnityEngine:Material
@@ -49,7 +49,7 @@ ModelImporter:
   - first:
       type: UnityEngine:Material
       assembly: UnityEngine.CoreModule
-      name: ChevalNoir
+      name: ChevalNoir.001
     second: {fileID: 2100000, guid: 5770591d328a3094bb2652bd9121d937, type: 2}
   materials:
     importMaterials: 1

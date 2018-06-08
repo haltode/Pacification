@@ -11,7 +11,7 @@ public class Player
     const int MaxIterationGen = 1000;
     const int MaxUnitInitSpawnRadius = 10;
 
-    private int[] unitLevel;
+    public int[] unitLevel;
 
     public int money;
     public int science;
@@ -331,23 +331,18 @@ public class Player
         displayer = Object.FindObjectOfType<DisplayInformationManager>();
     }
 
-    public int[] UnitLevel
-    {
-        get { return unitLevel; }
-    }
-
     public int GetUnitLevel(Unit.UnitType type)
     {
         switch(type)
         {
             case Unit.UnitType.HEAVY:
-                return UnitLevel[2];
+                return unitLevel[2];
 
             case Unit.UnitType.RANGED:
-                return UnitLevel[1];
+                return unitLevel[1];
 
             case Unit.UnitType.REGULAR:
-                return UnitLevel[0];
+                return unitLevel[0];
 
             default:
                 return 0;

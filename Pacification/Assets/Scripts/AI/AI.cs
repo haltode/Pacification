@@ -52,14 +52,18 @@ public class AI
     {
         UnityEngine.Object.FindObjectOfType<SoundManager>().PlayBarbarianSpawn();
         lastSpawnRound = currentRound;
-        // TODO: need level up
-        /*int currentPlayerLvl = ennemy.UnitLevel;
+        int delta = 0;
         if(difficultyLevel == Difficulty.EASY)
-            aiPlayer.IncreaseUnitLevel(currentPlayerLvl - 2);
+            delta = -1;
         else if(difficultyLevel == Difficulty.NORMAL)
-            aiPlayer.IncreaseUnitLevel(currentPlayerLvl + 1);
+            delta = 1;
         else if(difficultyLevel == Difficulty.HARD)
-            aiPlayer.IncreaseUnitLevel(currentPlayerLvl + 3);*/
+            delta = 2;
+        for(int i = 0; i < 3; ++i)
+        {
+            // Min unit level is 1
+            aiPlayer.unitLevel[i] = Math.Max(1, ennemy.unitLevel[i] + delta);
+        }
 
         HexCell location = GetSpawningLocation();
         string cmd = (int)Unit.UnitType.REGULAR + "#" + location.coordinates.X + "#" + location.coordinates.Z + "#" + aiPlayer.GetUnitLevel(Unit.UnitType.REGULAR);

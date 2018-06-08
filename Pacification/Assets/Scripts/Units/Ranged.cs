@@ -9,7 +9,7 @@ public class Ranged : Attacker
         this.owner = owner;
         type = UnitType.RANGED;
         hasMadeAction = false;
-        this.level = owner.UnitLevel[1];
+        this.level = owner.unitLevel[1];
         maxLevel = 20;
 
         upgradeHP = 25;

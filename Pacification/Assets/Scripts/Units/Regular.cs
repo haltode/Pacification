@@ -9,7 +9,7 @@ public class Regular : Attacker
         this.owner = owner;
         type = UnitType.REGULAR;
         hasMadeAction = false;
-        this.level = owner.UnitLevel[0];
+        this.level = owner.unitLevel[0];
         maxLevel = 20;
 
         upgradeHP = 20;

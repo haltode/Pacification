@@ -9,7 +9,7 @@ public class Heavy : Attacker
         this.owner = owner;
         type = UnitType.HEAVY;
         hasMadeAction = false;
-        this.level = owner.UnitLevel[2];
+        this.level = owner.unitLevel[2];
         maxLevel = 20;
 
         upgradeHP = 20;

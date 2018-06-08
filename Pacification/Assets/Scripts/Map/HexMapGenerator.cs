@@ -418,7 +418,7 @@ public class HexMapGenerator : MonoBehaviour
             else if (cell.TerrainBiomeIndex == (int)HexCell.BiomeType.PLAIN)
             {
                 float val = Random.value;
-                if(val < 0.5f)
+                if(val < 0.6f)
                 {
                     cell.FeatureIndex = (int)HexCell.FeatureType.FOREST;
                     // Double forest!
@@ -436,10 +436,10 @@ public class HexMapGenerator : MonoBehaviour
                         }
                     }
                 }
-                else if(val < 0.65f)
-                    cell.FeatureIndex = (int)HexCell.FeatureType.HORSE;
-                else
+                else if(val < 0.9f)
                     cell.FeatureIndex = (int)HexCell.FeatureType.FOOD;
+                else
+                    cell.FeatureIndex = (int)HexCell.FeatureType.HORSE;
             }
             else
                 resourcesBudget++;

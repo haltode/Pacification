@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.44657868, g: 0.49641263, b: 0.57481706, a: 1}
+  m_IndirectSpecularColor: {r: 0.44657898, g: 0.4964133, b: 0.5748178, a: 1}
 --- !u!157 &3
 LightmapSettings:
   m_ObjectHideFlags: 0
@@ -88,6 +88,7 @@ LightmapSettings:
     m_PVRFilteringAtrousPositionSigmaDirect: 0.5
     m_PVRFilteringAtrousPositionSigmaIndirect: 2
     m_PVRFilteringAtrousPositionSigmaAO: 1
+    m_ShowResolutionOverlay: 1
   m_LightingDataAsset: {fileID: 0}
   m_UseShadowmask: 0
 --- !u!196 &4
@@ -6853,7 +6854,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 0, y: -0.0000006306596}
+  m_AnchoredPosition: {x: 0, y: -0.000070997834}
   m_SizeDelta: {x: 400, y: 0}
   m_Pivot: {x: 0, y: 1}
 --- !u!114 &430921716
@@ -20140,7 +20141,7 @@ MonoBehaviour:
   - {fileID: 1215384332225196, guid: 0f5c04e16ba478049960dbfaa4af0514, type: 2}
   - {fileID: 1200457717818056, guid: cca35b58ecbfaee41b3252cf54460626, type: 2}
   - {fileID: 1071995080967004, guid: b4d1401c103b6614d9163f8affcf3c23, type: 2}
-  - {fileID: 1027331017760012, guid: 82a0c450c059a504eb7d3d0697a63460, type: 2}
+  - {fileID: 1801418324627442, guid: 5cdbcba93b6ea7a468f295ef8dc07098, type: 2}
   - {fileID: 1212108902183192, guid: 94969b272e2d6654bbd188de322568c4, type: 2}
   - {fileID: 1326826048205908, guid: 149fb57faf98c07429f7a0fd702ad8e6, type: 2}
   - {fileID: 1731269538193776, guid: 4b463a6ca7851494e86ae28db98d05eb, type: 2}

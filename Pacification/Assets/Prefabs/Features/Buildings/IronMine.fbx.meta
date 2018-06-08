@@ -1,125 +1,81 @@
 fileFormatVersion: 2
-guid: f56c0b76b0099ba4ca712173465059b0
-timeCreated: 1520940139
+guid: 3566c0b10fe85454f9ecc8edfda6372a
+timeCreated: 1528471543
 licenseType: Free
 ModelImporter:
   serializedVersion: 22
   fileIDToRecycleName:
     100000: Caverne
-    100002: Caverne.001
-    100004: Caverne.002
-    100006: Icosphere
-    100008: Icosphere.001
-    100010: Icosphere.002
-    100012: Icosphere.003
-    100014: Icosphere.004
-    100016: Icosphere.005
-    100018: Icosphere.006
-    100020: Icosphere.007
-    100022: Icosphere.008
-    100024: Icosphere.009
-    100026: Icosphere.010
-    100028: Icosphere.011
-    100030: Icosphere.012
-    100032: Icosphere.013
-    100034: Icosphere.014
-    100036: Icosphere.015
-    100038: Icosphere.016
-    100040: Icosphere.017
-    100042: //RootNode
+    100002: Icosphere
+    100004: Icosphere.001
+    100006: Icosphere.002
+    100008: Icosphere.003
+    100010: Icosphere.004
+    100012: Icosphere.005
+    100014: Icosphere.006
+    100016: Icosphere.007
+    100018: Icosphere.008
+    100020: Icosphere.009
+    100022: //RootNode
     400000: Caverne
-    400002: Caverne.001
-    400004: Caverne.002
-    400006: Icosphere
-    400008: Icosphere.001
-    400010: Icosphere.002
-    400012: Icosphere.003
-    400014: Icosphere.004
-    400016: Icosphere.005
-    400018: Icosphere.006
-    400020: Icosphere.007
-    400022: Icosphere.008
-    400024: Icosphere.009
-    400026: Icosphere.010
-    400028: Icosphere.011
-    400030: Icosphere.012
-    400032: Icosphere.013
-    400034: Icosphere.014
-    400036: Icosphere.015
-    400038: Icosphere.016
-    400040: Icosphere.017
-    400042: //RootNode
-    2100000: Rock
-    2100002: Iron
+    400002: Icosphere
+    400004: Icosphere.001
+    400006: Icosphere.002
+    400008: Icosphere.003
+    400010: Icosphere.004
+    400012: Icosphere.005
+    400014: Icosphere.006
+    400016: Icosphere.007
+    400018: Icosphere.008
+    400020: Icosphere.009
+    400022: //RootNode
+    2100000: Iron
+    2100002: Rock
+    2100004: No Name
     2300000: Caverne
-    2300002: Caverne.001
-    2300004: Caverne.002
-    2300006: Icosphere
-    2300008: Icosphere.001
-    2300010: Icosphere.002
-    2300012: Icosphere.003
-    2300014: Icosphere.004
-    2300016: Icosphere.005
-    2300018: Icosphere.006
-    2300020: Icosphere.007
-    2300022: Icosphere.008
-    2300024: Icosphere.009
-    2300026: Icosphere.010
-    2300028: Icosphere.011
-    2300030: Icosphere.012
-    2300032: Icosphere.013
-    2300034: Icosphere.014
-    2300036: Icosphere.015
-    2300038: Icosphere.016
-    2300040: Icosphere.017
+    2300002: Icosphere
+    2300004: Icosphere.001
+    2300006: Icosphere.002
+    2300008: Icosphere.003
+    2300010: Icosphere.004
+    2300012: Icosphere.005
+    2300014: Icosphere.006
+    2300016: Icosphere.007
+    2300018: Icosphere.008
+    2300020: Icosphere.009
     3300000: Caverne
-    3300002: Caverne.001
-    3300004: Caverne.002
-    3300006: Icosphere
-    3300008: Icosphere.001
-    3300010: Icosphere.002
-    3300012: Icosphere.003
-    3300014: Icosphere.004
-    3300016: Icosphere.005
-    3300018: Icosphere.006
-    3300020: Icosphere.007
-    3300022: Icosphere.008
-    3300024: Icosphere.009
-    3300026: Icosphere.010
-    3300028: Icosphere.011
-    3300030: Icosphere.012
-    3300032: Icosphere.013
-    3300034: Icosphere.014
-    3300036: Icosphere.015
-    3300038: Icosphere.016
-    3300040: Icosphere.017
-    4300000: Icosphere.017
-    4300002: Icosphere.016
-    4300004: Icosphere.013
-    4300006: Icosphere.010
-    4300008: Icosphere.015
-    4300010: Icosphere.014
-    4300012: Icosphere.012
-    4300014: Caverne.002
-    4300016: Caverne.001
-    4300018: Icosphere.011
-    4300020: Icosphere.009
-    4300022: Icosphere.008
-    4300024: Icosphere.007
-    4300026: Icosphere.006
-    4300028: Icosphere.005
-    4300030: Icosphere.004
-    4300032: Icosphere.003
-    4300034: Icosphere.002
-    4300036: Icosphere.001
-    4300038: Icosphere
-    4300040: Caverne
+    3300002: Icosphere
+    3300004: Icosphere.001
+    3300006: Icosphere.002
+    3300008: Icosphere.003
+    3300010: Icosphere.004
+    3300012: Icosphere.005
+    3300014: Icosphere.006
+    3300016: Icosphere.007
+    3300018: Icosphere.008
+    3300020: Icosphere.009
+    4300000: Icosphere.009
+    4300002: Icosphere.008
+    4300004: Icosphere.006
+    4300006: Icosphere.005
+    4300008: Icosphere.004
+    4300010: Icosphere.003
+    4300012: Icosphere.007
+    4300014: Icosphere.002
+    4300016: Icosphere.001
+    4300018: Icosphere
+    4300020: Caverne
   externalObjects:
   - first:
       type: UnityEngine:Material
       assembly: UnityEngine.CoreModule
       name: Iron
     second: {fileID: 2100000, guid: 385710ef9966bce428dc0acd6b9fd1ec, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: No Name
+    second: {fileID: 2100000, guid: 558cbcd575cf95c49b65a95c01a8f0b3, type: 2}
   - first:
       type: UnityEngine:Material
       assembly: UnityEngine.CoreModule

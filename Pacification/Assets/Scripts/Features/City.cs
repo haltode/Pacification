@@ -88,7 +88,7 @@ public class City : Feature
             Hp = 900;
             MaxHp = Hp;
             Location.FeatureIndex = 2;
-            perTurnPop = 0.015f;
+            perTurnPop = 1.015f;
         }
         else if(upgrade == "2")
         {
@@ -96,7 +96,7 @@ public class City : Feature
             Hp = 1300;
             MaxHp = Hp;
             Location.FeatureIndex = 3;
-            perTurnPop = 0.005f;
+            perTurnPop = 1.005f;
         }
     }
 

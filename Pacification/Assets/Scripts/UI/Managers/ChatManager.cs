@@ -232,19 +232,19 @@ public class ChatManager : MonoBehaviour
                             client.player.displayer.DisplayResources();
                             break;
 
-                        case "ohmygod":
+                        case "ohmycode":
                             ++index;
                             string beGod = ExtractCommand(ref index, input.text);
                             if(beGod == "")
                             {
-                                client.player.resources[0] += 1000;
-                                client.player.resources[1] += 1000;
-                                client.player.resources[2] += 1000;
-                                client.player.resources[3] += 1000;
-                                client.player.resources[4] += 1000;
-                                client.player.resources[5] += 1000;
-                                client.player.money += 1000;
-                                client.player.science += 1000;
+                                client.player.resources[0] += 100000;
+                                client.player.resources[1] += 100000;
+                                client.player.resources[2] += 100000;
+                                client.player.resources[3] += 100000;
+                                client.player.resources[4] += 100000;
+                                client.player.resources[5] += 100000;
+                                client.player.money += 100000;
+                                client.player.science += 100000;
                             }
                             else
                             {
@@ -258,6 +258,17 @@ public class ChatManager : MonoBehaviour
                                 client.player.science += int.Parse(beGod);
                             }
                             client.player.displayer.DisplayResources();
+                            break;
+
+                        case "oversize":
+                            ++index;
+                            string beBig = ExtractCommand(ref index, input.text);
+                            if(beBig == "on")
+                                foreach(City c in client.player.playerCities)
+                                    c.perTurnPop += 5F;
+                            else if(beBig == "off")
+                                foreach(City c in client.player.playerCities)
+                                    c.perTurnPop -= 5F;
                             break;
 
                         case "fog":

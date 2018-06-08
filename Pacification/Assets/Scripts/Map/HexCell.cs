@@ -187,6 +187,8 @@ public class HexCell : MonoBehaviour
             if(featureIndex != value)
             {
                 featureIndex = value;
+                if(featureIndex >= 10)
+                    IncreaseVisibility();
                 RefreshSelfOnly();
             }
         }

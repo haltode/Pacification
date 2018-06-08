@@ -20,7 +20,7 @@ public class Player
     public List<City> playerCities;
     public List<Resource> playerResources;
 
-    // TODO : couleur du joueur
+    public Color color = Color.blue;
 
     public bool canPlay;
     public string name;

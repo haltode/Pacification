@@ -21,7 +21,6 @@ public class Unit
         HEAVY
     }
 
-    // TODO : couleur du joueur
     public Player Owner;
     protected UnitType type;
     protected int mvtSPD;
@@ -127,6 +126,7 @@ public class Unit
         instantiated.transform.parent = hexGameObject.transform;
 
         anim = hexGameObject.AddComponent<UnitsAnimator>();
+        Object.FindObjectOfType<UnitsParticlesColor>().SetColor(Owner.color);
     }
 
     public void Update()

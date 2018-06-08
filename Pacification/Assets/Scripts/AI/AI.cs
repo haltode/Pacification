@@ -22,6 +22,7 @@ public class AI
         aiPlayer = new Player("Google");
         // AI should always be able to embark
         aiPlayer.science = Unit.ScienceMinLevelEmbark;
+        aiPlayer.color = Color.red;
         this.ennemy = ennemy;
         this.difficultyLevel = difficultyLevel;
         currentRound = 0;

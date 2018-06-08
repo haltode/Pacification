@@ -15,7 +15,7 @@ public class Resource : Feature
     }
 
     public ResourceType RessourceType;
-    int[] resourceProd = {75, 50, 25, 1, 250, 100};
+    int[] resourceProd = {50, 25, 1, 1, 250, 100};
 
     public Resource(Player owner, HexCell location, ResourceType ressourceType)
     {

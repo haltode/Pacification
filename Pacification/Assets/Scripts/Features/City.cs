@@ -48,7 +48,7 @@ public class City : Feature
         happiness = 1f;
         happinessMalus = 1f;
 
-        spawncount = 0;
+        spawncount = 1;
 
         // TODO : couleur du joueur
     }

@@ -10,7 +10,7 @@ public class ButtonManager : MonoBehaviour {
     public GameObject activePlayer;
     public ControlsManager controls;
 
-    public bool cheatmode = false;
+    public bool endTurn = false;
 
     private Client client;
 
@@ -22,9 +22,12 @@ public class ButtonManager : MonoBehaviour {
 
     public void EndTurnButton()
     {
-        client.Send("CEND|" +  client.clientName);
-        client.player.canPlay = false;
-        activePlayer.SetActive(false);
+        if(client.player.canPlay)
+        {
+            client.Send("CEND|" + client.clientName);
+            client.player.canPlay = false;
+            activePlayer.SetActive(false);
+        }
     }
 
     public void TakeTurn()

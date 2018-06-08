@@ -55,7 +55,6 @@ public class ChatManager : MonoBehaviour
             SendChatMessage();
         if(Input.GetKeyUp(controls.passTurn))
             buttonManager.EndTurnButton();
-
     }
 
     public void ChatAppearManager()

@@ -420,12 +420,12 @@ public class HexGrid : MonoBehaviour
             str += client.players[i].name + "|";
 
             string settler = (int)Unit.UnitType.SETTLER + "#" + spawnSettler.coordinates.X + "#" + spawnSettler.coordinates.Z + "#" + "1";
-            client.player.NetworkAddUnit(settler);
+            client.players[i].NetworkAddUnit(settler);
 
             str += settler + "|";
 
             string attacker = (int)Unit.UnitType.REGULAR + "#" + spawnAttacker.coordinates.X + "#" + spawnAttacker.coordinates.Z + "#" + "1";
-            client.player.NetworkAddUnit(attacker);
+            client.players[i].NetworkAddUnit(attacker);
 
             str += attacker;
             if(i < client.players.Count -1)

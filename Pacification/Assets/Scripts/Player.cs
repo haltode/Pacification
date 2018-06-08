@@ -134,6 +134,7 @@ public class Player
 
     public void NetworkTakeDamageUnit(string data)
     {
+        hexGrid = Object.FindObjectOfType<HexGrid>();
         string[] receivedData = data.Split('#');
         HexCell attackedCell = hexGrid.GetCell(new HexCoordinates(int.Parse(receivedData[0]), int.Parse(receivedData[1])));
         Unit unit = attackedCell.Unit.Unit;
@@ -205,14 +206,6 @@ public class Player
         }
     }
 
-    /*
-    public void IncreaseUnitLevel(int target)
-    {
-        while(unitLevel < target)
-            LevelUp();
-    }
-    */
-
     public Unit GetUnit(HexCell location)
     {
         for(int i = 0; i < playerUnits.Count; ++i)
@@ -231,6 +224,7 @@ public class Player
 
     public void NetworkAddCity(string data)
     {
+        hexGrid = Object.FindObjectOfType<HexGrid>();
         string[] receivedData = data.Split('#');
 
         City.CitySize size = (City.CitySize)int.Parse(receivedData[0]);
@@ -249,6 +243,7 @@ public class Player
 
     public void NetworkTakeDamageCity(string data)
     {
+        hexGrid = Object.FindObjectOfType<HexGrid>();
         string[] receivedData = data.Split('#');
         HexCell attackedCell = hexGrid.GetCell(new HexCoordinates(int.Parse(receivedData[0]), int.Parse(receivedData[1])));
         City city = (City)attackedCell.Feature;
@@ -281,6 +276,7 @@ public class Player
     ///////////////////////
     public void NetworkTakeDamageResource(string data)
     {
+        hexGrid = Object.FindObjectOfType<HexGrid>();
         string[] receivedData = data.Split('#');
         HexCell attackedCell = hexGrid.GetCell(new HexCoordinates(int.Parse(receivedData[0]), int.Parse(receivedData[1])));
         Resource resource = (Resource)attackedCell.Feature;
@@ -351,6 +347,7 @@ public class Player
 
     public void Newturn()
     {
+        hexGrid = Object.FindObjectOfType<HexGrid>();
         isDead = !CheckStillAliiiiiiive();
         if(isDead)
         {

@@ -1,6 +1,6 @@
 fileFormatVersion: 2
-guid: ca4b8ce1dcdccee4ba7b6d7bf791357c
-timeCreated: 1528398379
+guid: ff3680e3fc593854aa989bc8baa792ec
+timeCreated: 1528487907
 licenseType: Free
 ModelImporter:
   serializedVersion: 22
@@ -20,8 +20,8 @@ ModelImporter:
     3300002: WoodenArmature
     4300000: Sphere
     4300002: WoodenArmature
-    7400000: Attack
-    7400002: Others
+    7400000: Others
+    7400002: Attack
     9500000: //RootNode
   externalObjects:
   - first:
@@ -97,7 +97,7 @@ ModelImporter:
       name: Attack
       takeName: Default Take
       firstFrame: 1
-      lastFrame: 11
+      lastFrame: 13
       wrapMode: 0
       orientationOffsetY: 0
       level: 0

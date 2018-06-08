@@ -17,6 +17,7 @@ public class MapSenderReceiver : MonoBehaviour {
             return;
 
         string map;
+        path = GameManager.Instance.path;
         if(path == "")
         {
             path = Path.Combine(Application.persistentDataPath, "31uikx83y54gnt661zf651_646a89knz7984dt13a");
@@ -28,8 +29,9 @@ public class MapSenderReceiver : MonoBehaviour {
         }
         else
         {
-            map = File.ReadAllText(FindObjectOfType<MapGeneratorPanel>().path);
+            map = File.ReadAllText(path);
             saveAndLoad.Load(path);
+            Debug.Log(path);
         }
 
         server.Broadcast("SMAP|" + map, server.clients);

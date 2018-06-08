@@ -22,6 +22,7 @@ public class GameManager : MonoBehaviour
     public Text errorLog;
 
     public Slider AILevel;
+    public string path = "";
     
     public enum Gamemode
     {

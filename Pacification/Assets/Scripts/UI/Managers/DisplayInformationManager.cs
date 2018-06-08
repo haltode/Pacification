@@ -383,10 +383,10 @@ public class DisplayInformationManager : MonoBehaviour {
             bool canbuyRegular = PlayerEconomy.canSpawn(Unit.UnitType.REGULAR, player, city);
             bool canbuyRanged = PlayerEconomy.canSpawn(Unit.UnitType.RANGED, player, city);
             bool canbuyHeavy = PlayerEconomy.canSpawn(Unit.UnitType.HEAVY, player, city);
-            bool canUpgradeMoney = CityBuilding.RessourceCheck((int)(CityBuilding.BuildingType.MONEY), city.moneyLevel, city);
-            bool canUpgradeScience = CityBuilding.RessourceCheck((int)(CityBuilding.BuildingType.SCIENCE), city.scienceLevel, city);
-            bool canUpgradeProduction = CityBuilding.RessourceCheck((int)(CityBuilding.BuildingType.PROD), city.prodLevel, city);
-            bool canUpgradeHapiness = CityBuilding.RessourceCheck((int)(CityBuilding.BuildingType.HAPPINESS), city.happinessLevel, city);
+            bool canUpgradeMoney = CityBuilding.RessourceCheck(1, city.moneyLevel, city);
+            bool canUpgradeScience = CityBuilding.RessourceCheck(0, city.scienceLevel, city);
+            bool canUpgradeProduction = CityBuilding.RessourceCheck(2, city.prodLevel, city);
+            bool canUpgradeHapiness = CityBuilding.RessourceCheck(3, city.happinessLevel, city);
 
 
             settler.SetActive(canbuySettler);

@@ -50,6 +50,11 @@ public class City : Feature
 
         spawncount = 1;
 
+        scienceLevel = 1;
+        moneyLevel = 1;
+        prodLevel = 1;
+        happinessLevel = 1;
+
         // TODO : couleur du joueur
     }
 

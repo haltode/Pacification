@@ -77,6 +77,7 @@ public class Client : MonoBehaviour
     {
         Debug.Log("Client " + clientName + " received: " + data);
         /* LIST OF USED COMMAND : 
+         * COD
          * CID
          * CIT
          * CLS
@@ -133,7 +134,9 @@ public class Client : MonoBehaviour
 
             //Unit Movement
             case "SMOV":
-                player.NetworkMoveUnit(receivedData[1]);
+                foreach(Player p in players)
+                    if(p.name == receivedData[2])
+                        p.NetworkMoveUnit(receivedData[1]);
                 break;
                 
             ////// CITY : City Creation
@@ -228,8 +231,13 @@ public class Client : MonoBehaviour
                     ai.NewTurn();
                     ai.PlayTurn();
                 }
-                if (player.displayer != null)
-                    player.Newturn();
+                if(player.displayer != null)
+                    foreach(Player p in players)
+                    {
+                        player.Newturn();
+                        foreach(Unit u in p.playerUnits)
+                            u.Update();
+                    }
                 FindObjectOfType<ButtonManager>().TakeTurn();
                 break;
             
@@ -272,6 +280,12 @@ public class Client : MonoBehaviour
             //Chat : Kick player
             case "SKIK":
                 FindObjectOfType<ButtonManager>().DeconnectionButton();
+                break;
+
+            case "SCOD":
+                foreach(Player p in players)
+                    if(p.name == receivedData[2] && player.name != p.name)
+                        p.science += int.Parse(receivedData[1]);
                 break;
 
             /////// REGISTRATION ON SERVER

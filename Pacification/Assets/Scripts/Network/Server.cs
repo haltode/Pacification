@@ -153,7 +153,7 @@ public class Server : MonoBehaviour
         {
             /////// GAMEPLAY
             case "CMOV":
-                Broadcast("SMOV|" + receivedData[1], clients);
+                Broadcast("SMOV|" + receivedData[1] + "|" + client.clientName, clients);
                 break;
 
             case "CUNI":

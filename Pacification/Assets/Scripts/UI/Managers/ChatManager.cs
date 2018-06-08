@@ -53,7 +53,7 @@ public class ChatManager : MonoBehaviour
             ChatAppearManager();
         if(Input.GetKey(controls.chatSend))
             SendChatMessage();
-        if(Input.GetKey(controls.passTurn))
+        if(Input.GetKeyUp(controls.passTurn))
             buttonManager.EndTurnButton();
 
     }
@@ -192,6 +192,7 @@ public class ChatManager : MonoBehaviour
                             else
                                 client.player.science += int.Parse(beSmart);
                             client.player.displayer.DisplayResources();
+                            client.Send("CUNI|COD|" + (beSmart == "" ? "1000":beSmart));
                             break;
 
                         case "minecraft":

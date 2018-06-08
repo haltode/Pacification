@@ -57,6 +57,7 @@ public class Player
     ///////////////////////
     public void InitialSpawnUnit(string settler, string attacker, bool focus)
     {
+        hexGrid = Object.FindObjectOfType<HexGrid>();
         NetworkAddUnit(settler);
         NetworkAddUnit(attacker);
 
@@ -76,8 +77,8 @@ public class Player
 
     public void NetworkAddUnit(string data)
     {
-        string[] receivedData = data.Split('#');
         hexGrid = Object.FindObjectOfType<HexGrid>();
+        string[] receivedData = data.Split('#');
 
         Unit.UnitType type = (Unit.UnitType)int.Parse(receivedData[0]);
         HexCell location = hexGrid.GetCell(new HexCoordinates(int.Parse(receivedData[1]), int.Parse(receivedData[2])));
@@ -162,6 +163,7 @@ public class Player
 
     public void NetworkMoveUnit(string data, bool isAI=false)
     {
+        hexGrid = Object.FindObjectOfType<HexGrid>();
         string[] receivedData = data.Split('#');
 
         int xStart = int.Parse(receivedData[0]);
@@ -178,6 +180,7 @@ public class Player
 
         if(hexGrid.HasPath)
             cellStart.Unit.Travel(hexGrid.GetPath());
+
         hexGrid.ClearPath();
     }
 

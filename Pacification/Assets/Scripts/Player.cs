@@ -8,6 +8,8 @@ public class Player
     public HexGrid hexGrid;
     public Client client;
 
+    bool isDead;
+
     public int[] unitLevel;
 
     public int money;
@@ -317,8 +319,39 @@ public class Player
         }
     }
 
+    public bool CheckStillAliiiiiiive()
+    {
+        bool alive = false;
+        foreach(Unit u in playerUnits)
+        {
+            if(u != null)
+            {
+                alive = true;
+                break;
+            }
+        }
+
+        if(alive)
+            return true;
+
+        foreach(City c in playerCities)
+        {
+            if(c != null)
+            {
+                alive = true;
+                break;
+            }
+        }
+
+        return alive;
+    }
+
     public void Newturn()
     {
+        isDead = !CheckStillAliiiiiiive();
+        if(isDead)
+            client.Send("CEND|");
+
         string cityUpgrade = "";
         foreach(City c in playerCities)
             cityUpgrade += c.Update();

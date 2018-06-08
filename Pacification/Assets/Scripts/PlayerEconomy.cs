@@ -217,7 +217,7 @@ public class PlayerEconomy
 
         if (type == Unit.UnitType.REGULAR)
         {
-            cityCheck = true;
+            cityCheck = (city.spawncount) < (city.prodRate);
             resourceCheck = (owner.money >= int.Parse((unitCosts[0])[owner.GetUnitLevel(Unit.UnitType.REGULAR) - 1, 0])) &&
                             (owner.resources[5] >= int.Parse((unitCosts[0])[owner.GetUnitLevel(Unit.UnitType.REGULAR) - 1, 1])) &&
                             (owner.resources[0] >= int.Parse((unitCosts[0])[owner.GetUnitLevel(Unit.UnitType.REGULAR) - 1, 2])) &&
@@ -225,7 +225,7 @@ public class PlayerEconomy
         }
         else if (type == Unit.UnitType.RANGED)
         {
-            cityCheck = (city.Size == City.CitySize.CITY || city.Size == City.CitySize.MEGALOPOLIS);
+            cityCheck = ((city.spawncount) < (city.prodRate)) && (city.Size == City.CitySize.CITY || city.Size == City.CitySize.MEGALOPOLIS);
             resourceCheck = (owner.money >= int.Parse((unitCosts[0])[owner.GetUnitLevel(Unit.UnitType.RANGED) - 1, 0])) &&
                             (owner.resources[4] >= int.Parse((unitCosts[1])[owner.GetUnitLevel(Unit.UnitType.RANGED) - 1, 1])) &&
                             (owner.resources[0] >= int.Parse((unitCosts[1])[owner.GetUnitLevel(Unit.UnitType.RANGED) - 1, 2])) &&
@@ -233,7 +233,7 @@ public class PlayerEconomy
         }
         else if (type == Unit.UnitType.HEAVY)
         {
-            cityCheck = (city.Size == City.CitySize.MEGALOPOLIS);
+            cityCheck = ((city.spawncount) < (city.prodRate)) && (city.Size == City.CitySize.MEGALOPOLIS);
             resourceCheck = (owner.money >= int.Parse((unitCosts[0])[owner.GetUnitLevel(Unit.UnitType.HEAVY) - 1, 0])) &&
                             (owner.resources[4] >= int.Parse((unitCosts[2])[owner.GetUnitLevel(Unit.UnitType.HEAVY) - 1, 1])) &&
                             (owner.resources[0] >= int.Parse((unitCosts[2])[owner.GetUnitLevel(Unit.UnitType.HEAVY) - 1, 2])) &&
@@ -241,7 +241,7 @@ public class PlayerEconomy
         }
         else if (type == Unit.UnitType.WORKER)
         {
-            cityCheck = true;
+            cityCheck = (city.spawncount) < (city.prodRate);
             resourceCheck = (owner.money >= 120) &&
                             (owner.resources[5] >= 200) &&
                             (owner.resources[4] >= 200) &&
@@ -249,11 +249,11 @@ public class PlayerEconomy
         }
         else if (type == Unit.UnitType.SETTLER)
         {
-            cityCheck = (city.Size == City.CitySize.CITY || city.Size == City.CitySize.MEGALOPOLIS);
+            cityCheck = ((city.spawncount) < (city.prodRate)) && (city.Size == City.CitySize.CITY || city.Size == City.CitySize.MEGALOPOLIS);
             resourceCheck = (owner.money >= 300) &&
                             (owner.resources[5] >= 420) &&
                             (owner.resources[4] >= 500) &&
-                            (owner.resources[2] >= 5);
+                            (owner.resources[2] >= 10);
         }
         else
         {

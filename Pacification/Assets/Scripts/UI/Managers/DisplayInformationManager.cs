@@ -390,7 +390,7 @@ public class DisplayInformationManager : MonoBehaviour {
 
 
             settler.SetActive(canbuySettler);
-            worker.SetActive(canbuyWorker); ;
+            worker.SetActive(canbuyWorker);
             regular.SetActive(canbuyRegular);
             ranged.SetActive(canbuyRanged);
             heavy.SetActive(canbuyHeavy);
@@ -413,7 +413,7 @@ public class DisplayInformationManager : MonoBehaviour {
             //Batiments: R1 = money, R2 = wood
             settlerR1.text = "420"; //Food
             settlerR2.text = "500"; //Wood
-            settlerR3.text = "5";   //Diamond
+            settlerR3.text = "10";   //Diamond
             settlerR4.text = "300";
 
             workerR1.text = "200"; //Food

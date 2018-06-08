@@ -12,8 +12,8 @@ public class HexUnit : MonoBehaviour
     float orientation;
 
     List<HexCell> pathToTravel;
-    const float TravelSpeed = 4f;
-    const float RotationSpeed = 180f;
+    const float TravelSpeed = 2f;
+    const float RotationSpeed = 280f;
 
     public int Speed
     {
@@ -141,7 +141,6 @@ public class HexUnit : MonoBehaviour
         location.Unit = this;
         pathToTravel = actualPath;
         StopAllCoroutines();
-        Unit.anim.animator.SetInteger("AnimPar", 1);
         StartCoroutine(TravelPath());
     }
 
@@ -153,6 +152,7 @@ public class HexUnit : MonoBehaviour
             currentTravelLocation ? currentTravelLocation : pathToTravel[0],
             VisionRange);
 
+        Unit.anim.animator.SetInteger("AnimPar", 1);
         float t = Time.deltaTime * TravelSpeed;
         for(int i = 1; i < pathToTravel.Count; ++i)
         {
@@ -163,6 +163,8 @@ public class HexUnit : MonoBehaviour
             Grid.IncreaseVisibility(pathToTravel[i], VisionRange);
             for(; t < 1f; t += Time.deltaTime * TravelSpeed)
             {
+                if(i == pathToTravel.Count - 1 && t > 0.6f)
+                    Unit.anim.animator.SetInteger("AnimPar", 0);
                 transform.localPosition = Bezier.GetPoint(a, b, c, t);
                 Vector3 d = Bezier.GetDerivative(a, b, c, t);
                 d.y = 0f;
@@ -207,7 +209,6 @@ public class HexUnit : MonoBehaviour
     
         ListPool<HexCell>.Add(pathToTravel);
         pathToTravel = null;
-        Unit.anim.animator.SetInteger("AnimPar", 0);
     }
 
     IEnumerator LookAt(Vector3 point)

@@ -273,15 +273,12 @@ public class Client : MonoBehaviour
                 player.hexGrid.ClearUnits();
                 break;
 
-            //Chat : You've been killed
-            case "SKIL":
-                break;
-
             //Chat : Kick player
             case "SKIK":
                 FindObjectOfType<ButtonManager>().DeconnectionButton();
                 break;
 
+            //Chat : Use science cheatcode
             case "SCOD":
                 foreach(Player p in players)
                     if(p.name == receivedData[2] && player.name != p.name)

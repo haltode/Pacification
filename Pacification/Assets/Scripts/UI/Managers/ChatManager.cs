@@ -194,6 +194,26 @@ public class ChatManager : MonoBehaviour
                             client.Send("CUNI|COD|" + (beSmart == "" ? "1000":beSmart));
                             break;
 
+                        case "pizza":
+                            ++index;
+                            string beHungry = ExtractCommand(ref index, input.text);
+                            if(beHungry == "")
+                                client.player.resources[5] += 1000;
+                            else
+                                client.player.resources[5] += int.Parse(beHungry);
+                            client.player.displayer.DisplayResources();
+                            break;
+
+                        case "dada":
+                            ++index;
+                            string beEquitation = ExtractCommand(ref index, input.text);
+                            if(beEquitation == "")
+                                client.player.resources[3] += 1000;
+                            else
+                                client.player.resources[3] += int.Parse(beEquitation);
+                            client.player.displayer.DisplayResources();
+                            break;
+
                         case "minecraft":
                             ++index;
                             string beRock = ExtractCommand(ref index, input.text);
@@ -209,11 +229,36 @@ public class ChatManager : MonoBehaviour
                                 client.player.resources[1] += int.Parse(beRock);
                                 client.player.resources[2] += int.Parse(beRock);
                             }
-                                
                             client.player.displayer.DisplayResources();
                             break;
 
-
+                        case "ohmygod":
+                            ++index;
+                            string beGod = ExtractCommand(ref index, input.text);
+                            if(beGod == "")
+                            {
+                                client.player.resources[0] += 1000;
+                                client.player.resources[1] += 1000;
+                                client.player.resources[2] += 1000;
+                                client.player.resources[3] += 1000;
+                                client.player.resources[4] += 1000;
+                                client.player.resources[5] += 1000;
+                                client.player.money += 1000;
+                                client.player.science += 1000;
+                            }
+                            else
+                            {
+                                client.player.resources[0] += int.Parse(beGod);
+                                client.player.resources[1] += int.Parse(beGod);
+                                client.player.resources[2] += int.Parse(beGod);
+                                client.player.resources[3] += int.Parse(beGod);
+                                client.player.resources[4] += int.Parse(beGod);
+                                client.player.resources[5] += int.Parse(beGod);
+                                client.player.money += int.Parse(beGod);
+                                client.player.science += int.Parse(beGod);
+                            }
+                            client.player.displayer.DisplayResources();
+                            break;
 
                         case "fog":
                             ++index;

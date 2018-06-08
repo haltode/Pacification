@@ -3607,7 +3607,7 @@ GameObject:
   - component: {fileID: 174306270}
   - component: {fileID: 174306269}
   m_Layer: 5
-  m_Name: Food
+  m_Name: Wood
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -6854,7 +6854,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 0, y: -0.000032352633}
+  m_AnchoredPosition: {x: 0, y: -0.000040051542}
   m_SizeDelta: {x: 400, y: 0}
   m_Pivot: {x: 0, y: 1}
 --- !u!114 &430921716
@@ -8163,7 +8163,7 @@ GameObject:
   - component: {fileID: 501993805}
   - component: {fileID: 501993804}
   m_Layer: 5
-  m_Name: Iron
+  m_Name: Wood
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -8615,7 +8615,7 @@ GameObject:
   - component: {fileID: 530809078}
   - component: {fileID: 530809077}
   m_Layer: 5
-  m_Name: Horse
+  m_Name: Gold
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -8950,7 +8950,7 @@ GameObject:
   - component: {fileID: 536399748}
   - component: {fileID: 536399747}
   m_Layer: 5
-  m_Name: ImgHorse
+  m_Name: ImgDiamond
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -8993,7 +8993,7 @@ MonoBehaviour:
       m_Calls: []
     m_TypeName: UnityEngine.UI.MaskableGraphic+CullStateChangedEvent, UnityEngine.UI,
       Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
-  m_Texture: {fileID: 2800000, guid: 0c82b38ac90bfdf4c98f7fb8aa3cd029, type: 3}
+  m_Texture: {fileID: 2800000, guid: b038d54a9bc20e541a52a6fa182ca66c, type: 3}
   m_UVRect:
     serializedVersion: 2
     x: 0
@@ -11133,7 +11133,7 @@ GameObject:
   - component: {fileID: 656907168}
   - component: {fileID: 656907167}
   m_Layer: 5
-  m_Name: Iron
+  m_Name: Wood
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -11931,7 +11931,7 @@ GameObject:
   - component: {fileID: 696288300}
   - component: {fileID: 696288299}
   m_Layer: 5
-  m_Name: ImgHorse
+  m_Name: ImgIron
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -11974,7 +11974,7 @@ MonoBehaviour:
       m_Calls: []
     m_TypeName: UnityEngine.UI.MaskableGraphic+CullStateChangedEvent, UnityEngine.UI,
       Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
-  m_Texture: {fileID: 2800000, guid: 0c82b38ac90bfdf4c98f7fb8aa3cd029, type: 3}
+  m_Texture: {fileID: 2800000, guid: cdc8ab243da90f741852d32f2afcb22a, type: 3}
   m_UVRect:
     serializedVersion: 2
     x: 0
@@ -14208,7 +14208,7 @@ GameObject:
   - component: {fileID: 867237772}
   - component: {fileID: 867237771}
   m_Layer: 5
-  m_Name: Horse
+  m_Name: Diamond
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -17146,7 +17146,7 @@ GameObject:
   - component: {fileID: 989203689}
   - component: {fileID: 989203688}
   m_Layer: 5
-  m_Name: ImgHorse
+  m_Name: ImgGold
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -17189,7 +17189,7 @@ MonoBehaviour:
       m_Calls: []
     m_TypeName: UnityEngine.UI.MaskableGraphic+CullStateChangedEvent, UnityEngine.UI,
       Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
-  m_Texture: {fileID: 2800000, guid: 0c82b38ac90bfdf4c98f7fb8aa3cd029, type: 3}
+  m_Texture: {fileID: 2800000, guid: 394f8dde6ff4cd64195ff5de57abdd9f, type: 3}
   m_UVRect:
     serializedVersion: 2
     x: 0
@@ -21219,7 +21219,7 @@ GameObject:
   - component: {fileID: 1234062483}
   - component: {fileID: 1234062482}
   m_Layer: 5
-  m_Name: ImgIron
+  m_Name: ImgWood
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -21262,7 +21262,7 @@ MonoBehaviour:
       m_Calls: []
     m_TypeName: UnityEngine.UI.MaskableGraphic+CullStateChangedEvent, UnityEngine.UI,
       Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
-  m_Texture: {fileID: 2800000, guid: cdc8ab243da90f741852d32f2afcb22a, type: 3}
+  m_Texture: {fileID: 2800000, guid: 7a253935b98d4e741ab1fa6e8d7e9861, type: 3}
   m_UVRect:
     serializedVersion: 2
     x: 0
@@ -21286,7 +21286,7 @@ GameObject:
   - component: {fileID: 1234793129}
   - component: {fileID: 1234793128}
   m_Layer: 5
-  m_Name: Horse
+  m_Name: Diamond
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -22968,7 +22968,7 @@ GameObject:
   - component: {fileID: 1322261888}
   - component: {fileID: 1322261887}
   m_Layer: 5
-  m_Name: ImgFood
+  m_Name: ImgWood
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -23011,7 +23011,7 @@ MonoBehaviour:
       m_Calls: []
     m_TypeName: UnityEngine.UI.MaskableGraphic+CullStateChangedEvent, UnityEngine.UI,
       Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
-  m_Texture: {fileID: 2800000, guid: 0909c201a87552c4daf05d3b0e92c18f, type: 3}
+  m_Texture: {fileID: 2800000, guid: 7a253935b98d4e741ab1fa6e8d7e9861, type: 3}
   m_UVRect:
     serializedVersion: 2
     x: 0
@@ -25661,7 +25661,7 @@ GameObject:
   - component: {fileID: 1527636978}
   - component: {fileID: 1527636977}
   m_Layer: 5
-  m_Name: ImgHorse
+  m_Name: ImgDiamond
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -25704,7 +25704,7 @@ MonoBehaviour:
       m_Calls: []
     m_TypeName: UnityEngine.UI.MaskableGraphic+CullStateChangedEvent, UnityEngine.UI,
       Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
-  m_Texture: {fileID: 2800000, guid: 0c82b38ac90bfdf4c98f7fb8aa3cd029, type: 3}
+  m_Texture: {fileID: 2800000, guid: b038d54a9bc20e541a52a6fa182ca66c, type: 3}
   m_UVRect:
     serializedVersion: 2
     x: 0
@@ -25926,7 +25926,7 @@ GameObject:
   - component: {fileID: 1539109227}
   - component: {fileID: 1539109226}
   m_Layer: 5
-  m_Name: ImgFood
+  m_Name: ImgWood
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -25969,7 +25969,7 @@ MonoBehaviour:
       m_Calls: []
     m_TypeName: UnityEngine.UI.MaskableGraphic+CullStateChangedEvent, UnityEngine.UI,
       Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
-  m_Texture: {fileID: 2800000, guid: 0909c201a87552c4daf05d3b0e92c18f, type: 3}
+  m_Texture: {fileID: 2800000, guid: 7a253935b98d4e741ab1fa6e8d7e9861, type: 3}
   m_UVRect:
     serializedVersion: 2
     x: 0
@@ -26780,7 +26780,7 @@ GameObject:
   - component: {fileID: 1610085165}
   - component: {fileID: 1610085164}
   m_Layer: 5
-  m_Name: Horse
+  m_Name: Iron
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -26928,7 +26928,7 @@ GameObject:
   - component: {fileID: 1617929758}
   - component: {fileID: 1617929757}
   m_Layer: 5
-  m_Name: Food
+  m_Name: Wood
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -31056,7 +31056,7 @@ GameObject:
   - component: {fileID: 1878328243}
   - component: {fileID: 1878328242}
   m_Layer: 5
-  m_Name: ImgIron
+  m_Name: ImgWood
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -31099,7 +31099,7 @@ MonoBehaviour:
       m_Calls: []
     m_TypeName: UnityEngine.UI.MaskableGraphic+CullStateChangedEvent, UnityEngine.UI,
       Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
-  m_Texture: {fileID: 2800000, guid: cdc8ab243da90f741852d32f2afcb22a, type: 3}
+  m_Texture: {fileID: 2800000, guid: 7a253935b98d4e741ab1fa6e8d7e9861, type: 3}
   m_UVRect:
     serializedVersion: 2
     x: 0

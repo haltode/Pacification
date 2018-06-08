@@ -8,7 +8,7 @@ public class Player
     public HexGrid hexGrid;
     public Client client;
 
-    bool isDead;
+    public bool isDead;
 
     public int[] unitLevel;
 
@@ -317,48 +317,43 @@ public class Player
     {
         bool alive = false;
         foreach(Unit u in playerUnits)
-        {
             if(u != null)
             {
                 alive = true;
                 break;
             }
-        }
         if(alive)
             return true;
 
         foreach(City c in playerCities)
-        {
             if(c != null)
             {
                 alive = true;
                 break;
             }
-        }
 
         return alive;
     }
 
-    public void Newturn()
+    public void Newturn(bool isPlayer)
     {
         hexGrid = Object.FindObjectOfType<HexGrid>();
-        isDead = !CheckStillAliiiiiiive();
-        if(isDead)
-        {
-            client.Send("CEND|");
-            return;
-        }
 
-        string cityUpgrade = "";
-        foreach(City c in playerCities)
-            cityUpgrade += c.Update();
-        if(cityUpgrade != "")
-            client.Send("CUNI|CUP" + cityUpgrade);
+        if(isPlayer)
+        {
+            string cityUpgrade = "";
+            foreach(City c in playerCities)
+                cityUpgrade += c.Update();
+            if(cityUpgrade != "")
+                client.Send("CUNI|CUP" + cityUpgrade);
+        }
 
         foreach (Unit u in playerUnits)
             u.Update();
 
         foreach (Resource r in playerResources)
             r.Update();
+
+        isDead = !CheckStillAliiiiiiive();
     }
 }

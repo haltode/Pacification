@@ -31,7 +31,8 @@ public class DisplayInformationManager : MonoBehaviour {
     public GameObject loadingPanel;
     public GameObject rightGamePanel;
 
-
+    public GameObject defeat;
+    public GameObject victory;
 
     //UPGRADE
     //////////////////////

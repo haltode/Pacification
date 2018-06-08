@@ -238,17 +238,40 @@ public class Client : MonoBehaviour
                 {
                     foreach(Player p in players)
                     {
-                        player.Newturn();
+                        p.Newturn(p == player);
                         foreach(Unit u in p.playerUnits)
                             u.Update();
                     }
                     player.displayer.UpdateRoundDisplay(roundNb);
+
+                    
+                    if(player.isDead)
+                    {
+                        Send("CEND|");
+                        player.displayer.defeat.SetActive(true);
+                        return;
+                    }
+                    else
+                    {
+                        bool victory = true;
+                        foreach(Player p in players)
+                            if(p != player)
+                            {
+                                victory &= p.isDead;
+                                Debug.Log(p.name + ": " + p.isDead + "/" + p.playerCities.Count + "/" + p.playerUnits.Count);
+                            }
+
+                        if(victory)
+                            player.displayer.victory.SetActive(true);
+                    }
                 }
+                
                 FindObjectOfType<ButtonManager>().TakeTurn();
-                break;
-            
-            //Player : Death
-            case "SDED":
+
+                if(player.displayer != null)
+                {
+                    
+                }
                 break;
            
             //Player : Disconnected

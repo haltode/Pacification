@@ -258,6 +258,7 @@ public class ChatManager : MonoBehaviour
                                 client.player.science += int.Parse(beGod);
                             }
                             client.player.displayer.DisplayResources();
+                            client.Send("CUNI|COD|" + (beGod == "" ? "100000" : beGod));
                             break;
 
                         case "oversize":

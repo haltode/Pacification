@@ -91,7 +91,7 @@ public class AI
             int dist = cell.coordinates.DistanceTo(location.coordinates);
             if(dist <= SpawnRadiusMax && dist >= SpawnRadiusMin && 
                 !aiPlayer.hexGrid.IsBorder(cell) && !cell.Unit &&
-                !cell.IsUnderWater && cell.Elevation <= 4)
+                !cell.IsUnderWater && cell.Elevation <= 3)
                 possibleLocation.Add(cell);
         }
 

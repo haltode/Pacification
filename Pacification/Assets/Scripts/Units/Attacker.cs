@@ -57,8 +57,9 @@ public class Attacker : Unit
         if (hasMadeAction)
             return false;
 
-        anim.animator.SetInteger("AnimPar", 2);
+        hexUnit.Rotation(target.HexUnit.Location);
         Thread.Sleep(250);
+        anim.animator.SetInteger("AnimPar", 2);
 
         float multiplier = 1f;
         dmgMult.TryGetValue(target.Type, out multiplier);
@@ -77,8 +78,9 @@ public class Attacker : Unit
         if (hasMadeAction)
             return false;
 
-        anim.animator.SetInteger("AnimPar", 2);
+        hexUnit.Rotation(target.Location);
         Thread.Sleep(250);
+        anim.animator.SetInteger("AnimPar", 2);
 
         int damage = (int)((float)((defaultATK - upgradeATK) + upgradeATK * level) * dmgMultCity);
 
@@ -95,8 +97,9 @@ public class Attacker : Unit
         if(hasMadeAction)
             return false;
 
-        anim.animator.SetInteger("AnimPar", 2);
+        hexUnit.Rotation(target.Location);
         Thread.Sleep(250);
+        anim.animator.SetInteger("AnimPar", 2);
 
         int damage = (int)((float)((defaultATK - upgradeATK) + upgradeATK * level) * dmgMultCity);
 
@@ -104,5 +107,4 @@ public class Attacker : Unit
         hasMadeAction = true;
         return true;
     }
-
 }

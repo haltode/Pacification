@@ -229,4 +229,12 @@ public class HexUnit : MonoBehaviour
             orientation = transform.localRotation.eulerAngles.y;
         }
     }
+
+    public void Rotation(HexCell neighbor)
+    {
+        if(location == neighbor)
+            return;
+        StopAllCoroutines();
+        StartCoroutine(LookAt(neighbor.Position));
+    }
 }

@@ -8,6 +8,9 @@ public class HexGrid : MonoBehaviour
 {
     public int seed;
 
+    const int MaxIterationGen = 1000;
+    const int MaxUnitInitSpawnRadius = 10;
+
     public int cellCountX = 20;
     public int cellCountZ = 15;
 
@@ -378,6 +381,47 @@ public class HexGrid : MonoBehaviour
             HexUnit unit = units[i];
             IncreaseVisibility(unit.Location, unit.VisionRange);
         }
+    }
+
+    public void InitialSpawnUnit()
+    {
+        List<HexCell> possibleLocation = new List<HexCell>();
+        for(int i = 0; i < cells.Length; ++i)
+        {
+            HexCell cell = cells[i];
+            if(!cell.IsUnderWater && !cell.Unit && !IsBorder(cell) && cell.Elevation <= 3)
+                possibleLocation.Add(cell);
+        }
+
+        Client client = FindObjectOfType<Client>();
+        string str = "CUNI|INI|";
+        for(int i = 0; i < client.players.Count; ++i)
+        {
+            HexCell randomCell = null;
+            int guard = 0;
+            do
+            {
+                int idx = rnd.Next(possibleLocation.Count);
+                randomCell = possibleLocation[idx];
+                possibleLocation.RemoveAt(idx);
+                guard++;
+            } while(possibleLocation.Count > 0 && guard < MaxIterationGen &&
+                    OtherUnitInRadius(randomCell, MaxUnitInitSpawnRadius));
+            if(randomCell == null || possibleLocation.Count == 0 || guard == MaxIterationGen ||
+                OtherUnitInRadius(randomCell, MaxUnitInitSpawnRadius))
+                Debug.LogError("The current map is too small for this many players");
+            
+            HexCell spawnSettler = randomCell;
+            HexCell spawnAttacker = GetNearFreeCell(randomCell);
+
+            str += client.players[i].name;
+            str += (int)Unit.UnitType.SETTLER + spawnSettler.coordinates.X + "#" + spawnSettler.coordinates.Z + "#" + "1";
+            str += "|";
+            str += (int)Unit.UnitType.REGULAR + spawnAttacker.coordinates.X + "#" + spawnAttacker.coordinates.Z + "#" + "1";
+            str += "|";
+        }
+
+        client.Send(str);
     }
 
     public void AddUnit(HexUnit unit, HexCell location, float orientation)

@@ -300,12 +300,19 @@ public class Client : MonoBehaviour
                     MapSenderReceiver mapLoader = FindObjectOfType<MapSenderReceiver>();
                     mapLoader.StartGame(receivedData[1]);
                 }
-                player.InitialSpawnUnit();
+                else
+                {
+                    Server server = FindObjectOfType<Server>();
+                    player.hexGrid.InitialSpawnUnit();
+                }
                 player.displayer.player = player;
                 player.displayer.DisplayResources();
                 chat = FindObjectOfType<ChatManager>();
                 gameUI = FindObjectOfType<HexGameUI>();
                 player.displayer.KillLoading();
+                break;
+
+            case "SINI":
                 break;
         }
 

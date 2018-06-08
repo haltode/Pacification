@@ -8,9 +8,6 @@ public class Player
     public HexGrid hexGrid;
     public Client client;
 
-    const int MaxIterationGen = 1000;
-    const int MaxUnitInitSpawnRadius = 10;
-
     public int[] unitLevel;
 
     public int money;
@@ -59,38 +56,10 @@ public class Player
     public void InitialSpawnUnit()
     {
         hexGrid = Object.FindObjectOfType<HexGrid>();
-
         displayer = Object.FindObjectOfType<DisplayInformationManager>();
 
-        List<HexCell> possibleLocation = new List<HexCell>();
-        for(int i = 0; i < hexGrid.cells.Length; ++i)
-        {
-            HexCell cell = hexGrid.cells[i];
-            if(!cell.IsUnderWater && !cell.Unit && !hexGrid.IsBorder(cell) && cell.Elevation <= 3)
-                possibleLocation.Add(cell);
-        }
-
-        HexCell randomCell = null;
-        int guard = 0;
-        do
-        {
-            int rnd = hexGrid.rnd.Next(possibleLocation.Count);
-            randomCell = possibleLocation[rnd];
-            possibleLocation.RemoveAt(rnd);
-            guard++;
-        } while(possibleLocation.Count > 0 && guard < MaxIterationGen &&
-                hexGrid.OtherUnitInRadius(randomCell, MaxUnitInitSpawnRadius));
-
-        if(randomCell == null || possibleLocation.Count == 0 || guard == MaxIterationGen ||
-            hexGrid.OtherUnitInRadius(randomCell, MaxUnitInitSpawnRadius))
-            Debug.LogError("The current map is too small for this many players");
-
-        HexCell spawnSettler = randomCell;
-        HexCell spawnAttacker = hexGrid.GetNearFreeCell(randomCell);
-
-        AddUnits(Unit.UnitType.SETTLER, spawnSettler, Unit.UnitType.REGULAR, spawnAttacker);
-
-        HexMapCamera.FocusOnPosition(spawnSettler.Position);
+        //AddUnits(Unit.UnitType.SETTLER, spawnSettler, Unit.UnitType.REGULAR, spawnAttacker);
+        //HexMapCamera.FocusOnPosition(spawnSettler.Position);
     }
 
     public void AddUnit(Unit.UnitType type, HexCell location)

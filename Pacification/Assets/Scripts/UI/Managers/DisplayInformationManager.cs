@@ -85,6 +85,12 @@ public class DisplayInformationManager : MonoBehaviour {
     public RectTransform healthCity;
     //////////////////////
 
+
+    //CITY
+    //////////////////////
+
+    //////////////////////
+
     public Player player;
     HexCell currentcell;
 
@@ -140,14 +146,6 @@ public class DisplayInformationManager : MonoBehaviour {
         iron.text = "" + player.resources[0];
         gold.text = "" + player.resources[1];
         diamond.text = "" + player.resources[2];
-    }
-
-    public void DisplayTownResources(string productivityC, string populationC, string happinessC)
-    {
-        productivity.text = productivityC;
-        population.text = populationC;
-        happiness.text = happinessC;
-        townResources.SetActive(true);
     }
 
     public void HideTownResources()
@@ -303,5 +301,19 @@ public class DisplayInformationManager : MonoBehaviour {
         }
         else
             info2IsActive.SetActive(false);
+
+
+        if(cell.HasCity && cell.Feature.Owner == player)
+        {
+            City city = (City)cell.Feature;
+            productivity.text = "" + city.prodLevel;
+            population.text = "" + city.pop;
+            happiness.text = "" + (int)city.happiness;
+            townResources.SetActive(true);
+
+
+        }
+        else
+            townResources.SetActive(false);
     }
 }

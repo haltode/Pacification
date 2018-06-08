@@ -251,7 +251,7 @@ public class Client : MonoBehaviour
                         player.displayer.defeat.SetActive(true);
                         return;
                     }
-                    else
+                    else if (GameManager.Instance.gamemode != GameManager.Gamemode.SOLO )
                     {
                         bool victory = true;
                         foreach(Player p in players)
@@ -267,11 +267,6 @@ public class Client : MonoBehaviour
                 }
                 
                 FindObjectOfType<ButtonManager>().TakeTurn();
-
-                if(player.displayer != null)
-                {
-                    
-                }
                 break;
            
             //Player : Disconnected

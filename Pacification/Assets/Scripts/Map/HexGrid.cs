@@ -413,7 +413,7 @@ public class HexGrid : MonoBehaviour
         for(int i = 0; i < cells.Length; ++i)
         {
             HexCell cell = cells[i];
-            if(!cell.IsUnderWater && !cell.Unit && !IsBorder(cell) && cell.Elevation <= 3)
+            if(!cell.IsUnderWater && !cell.Unit && !IsBorder(cell) && cell.Elevation <= 2)
                 possibleLocation.Add(cell);
         }
 

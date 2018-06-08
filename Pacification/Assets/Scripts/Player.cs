@@ -247,7 +247,7 @@ public class Player
         string[] receivedData = data.Split('#');
         HexCell attackedCell = hexGrid.GetCell(new HexCoordinates(int.Parse(receivedData[0]), int.Parse(receivedData[1])));
         City city = (City)attackedCell.Feature;
-        city.happiness *= 0.9f;
+        //city.happiness *= 0.9f;
         city.Hp -= int.Parse(receivedData[2]);
 
         if(city.Hp <= 0)

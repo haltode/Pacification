@@ -66,7 +66,7 @@ public class City : Feature
         Owner.money += (int)(Owner.economyMalus * pop * perTurnMoney * ((happiness * happinessMalus < 1) ? (happiness * happinessMalus) : 1f));
         Owner.science += (int)(Owner.economyMalus * pop * perTurnScience * ((happiness * happinessMalus < 1) ? (happiness * happinessMalus) : 1f));
 
-        happinessMalus = (float)(Hp / MaxHp); //damaged cities get a happiness malus, for obvious reasons people are not happy to be on fire
+        //happinessMalus = (float)(Hp / MaxHp); //damaged cities get a happiness malus, for obvious reasons people are not happy to be on fire
 
         if(Size == CitySize.SETTLEMENT && pop >= 1000)
             return "|" + Location.coordinates.X + "#" + Location.coordinates.Z + "#1";

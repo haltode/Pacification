@@ -383,6 +383,17 @@ public class HexMapGenerator : MonoBehaviour
         }
     }
 
+    int GetMineType()
+    {
+        float val = Random.value;
+        if(val < 0.55f)
+            return (int)HexCell.FeatureType.IRON;
+        else if(val < 0.85f)
+            return (int)HexCell.FeatureType.GOLD;
+        else
+            return (int)HexCell.FeatureType.DIAMOND; 
+    }
+
     void AddResources()
     {
         int nbValidCell = 0;
@@ -397,13 +408,13 @@ public class HexMapGenerator : MonoBehaviour
             resourcesBudget--;
             if (cell.TerrainBiomeIndex == (int)HexCell.BiomeType.DESERT && cell.IsHill)
             {
-                if(Random.value < 0.7f)
-                    cell.FeatureIndex = Random.Range((int)HexCell.FeatureType.IRON, (int)HexCell.FeatureType.DIAMOND + 1);
+                if(Random.value < 0.85f)
+                    cell.FeatureIndex = GetMineType();
                 else
                     cell.FeatureIndex = (int)HexCell.FeatureType.HORSE;
             }
             else if (cell.TerrainBiomeIndex == (int)HexCell.BiomeType.ROCKY)
-                cell.FeatureIndex = Random.Range((int)HexCell.FeatureType.IRON, (int)HexCell.FeatureType.DIAMOND + 1);
+                cell.FeatureIndex = GetMineType();
             else if (cell.TerrainBiomeIndex == (int)HexCell.BiomeType.PLAIN)
                 cell.FeatureIndex = Random.Range((int)HexCell.FeatureType.HORSE, (int)HexCell.FeatureType.FOOD + 1);
             else

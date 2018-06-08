@@ -46,6 +46,9 @@ public static class CityBuilding
         }
 
         city.buildings[(int)type, level]++;
+
+        city.Owner.displayer.UpdateUpgradePannel();
+        city.Owner.displayer.UpdateInformationPannels();
     }
 
     public static bool RessourceCheck(int type, int level, City city)

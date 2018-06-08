@@ -30,8 +30,8 @@ ModelImporter:
     4300000: Icosphere_001
     4300002: Cube_013
     4300004: Cube_012
-    7400000: Default Take
-    7400002: Default Take (1)
+    7400000: Others
+    7400002: Attack
     9500000: //RootNode
     13700000: Cube_013
     13700002: Icosphere_001
@@ -83,10 +83,10 @@ ModelImporter:
     extraUserProperties: []
     clipAnimations:
     - serializedVersion: 16
-      name: Default Take
+      name: Others
       takeName: Default Take
-      firstFrame: 0
-      lastFrame: 13
+      firstFrame: 1
+      lastFrame: 1
       wrapMode: 0
       orientationOffsetY: 0
       level: 0
@@ -111,9 +111,9 @@ ModelImporter:
       maskSource: {instanceID: 0}
       additiveReferencePoseFrame: 0
     - serializedVersion: 16
-      name: Default Take (1)
+      name: Attack
       takeName: Default Take
-      firstFrame: 0
+      firstFrame: 1
       lastFrame: 13
       wrapMode: 0
       orientationOffsetY: 0

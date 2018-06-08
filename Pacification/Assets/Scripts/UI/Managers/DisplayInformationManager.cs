@@ -410,7 +410,7 @@ public class DisplayInformationManager : MonoBehaviour {
 
 
             //Unités: R1, R2, R3 = resources, R4 = money
-            //Batiments: R1 = wood, R2 = money
+            //Batiments: R1 = money, R2 = wood
             settlerR1.text = "420"; //Food
             settlerR2.text = "500"; //Wood
             settlerR3.text = "5";   //Diamond
@@ -436,17 +436,17 @@ public class DisplayInformationManager : MonoBehaviour {
             heavyR3.text = "" + (PlayerEconomy.unitCosts[2])[player.GetUnitLevel(Unit.UnitType.HEAVY) - 1, 3]; //Diamond
             heavyR4.text = "" + (PlayerEconomy.unitCosts[2])[player.GetUnitLevel(Unit.UnitType.HEAVY) - 1, 0];
 
-            moneyR1.text = "" + (CityBuilding.price[city.moneyLevel * 2 - 1] / 2);
-            moneyR2.text = "" + CityBuilding.price[city.moneyLevel * 2 - 1];
+            moneyR2.text = "" + (CityBuilding.price[city.moneyLevel * 2 - 1] / 2);
+            moneyR1.text = "" + CityBuilding.price[city.moneyLevel * 2 - 1];
 
-            scienceR1.text = "" + (CityBuilding.price[city.moneyLevel * 1 - 1] / 2);
-            scienceR2.text = "" + CityBuilding.price[city.moneyLevel * 1 - 1];
+            scienceR2.text = "" + (CityBuilding.price[city.moneyLevel * 1 - 1] / 2);
+            scienceR1.text = "" + CityBuilding.price[city.moneyLevel * 1 - 1];
 
-            prodR1.text = "" + (CityBuilding.price[city.moneyLevel * 3 - 1] / 2);
-            prodR2.text = "" + CityBuilding.price[city.moneyLevel * 3 - 1];
+            prodR2.text = "" + (CityBuilding.price[city.moneyLevel * 3 - 1] / 2);
+            prodR1.text = "" + CityBuilding.price[city.moneyLevel * 3 - 1];
 
-            happiR1.text = "" + (CityBuilding.price[city.moneyLevel * 4 - 1] / 2);
-            happiR2.text = "" + CityBuilding.price[city.moneyLevel * 4 - 1];
+            happiR2.text = "" + (CityBuilding.price[city.moneyLevel * 4 - 1] / 2);
+            happiR1.text = "" + CityBuilding.price[city.moneyLevel * 4 - 1];
         }
         else
         {

@@ -37,7 +37,7 @@ public class Player
 
         money = 1000;
         science = 0;
-        resources = new int[] {200, 0, 0, 0, 500, 100}; // Iron, gold, Diamond, Horses, Wood, Food
+        resources = new int[] {200, 0, 0, 0, 500, 500}; // Iron, gold, Diamond, Horses, Wood, Food
 
         roundNb = 0;
 

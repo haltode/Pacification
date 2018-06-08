@@ -13,27 +13,6 @@ public class HexGameUI : MonoBehaviour
     public Unit selectedUnit;
     public City selectedCity;
 
-    public GameObject cityUI;
-    public GameObject unitUI;
-    public GameObject UnitBothUI;
-    public GameObject ennemiCityUI;
-    public GameObject ennemiCityBothUI;
-
-    public Text unitTypeText;
-    public Text unitTypeBothText;
-
-    public Text unitHealthText;
-    public Text cityHealthText;
-    public Text unitBothHealthText;
-    public Text ennemiCityHealthText;
-    public Text ennemiCityBothHealthText;
-
-    public RectTransform healthUnit;
-    public RectTransform healthCity;
-    public RectTransform healthUnitBoth;
-    public RectTransform healthEnnemiCity;
-    public RectTransform healthEnnemiCityBoth;
-
     bool didPathfinding;
 
     Client client;
@@ -83,14 +62,7 @@ public class HexGameUI : MonoBehaviour
             if(Input.GetMouseButton(1))
                 DoPathfinding();
             else if(Input.GetMouseButtonUp(1))
-            {
                 DoMove();
-                UnitBothUI.SetActive(false);
-                unitUI.SetActive(false);
-                cityUI.SetActive(false);
-                ennemiCityUI.SetActive(false);
-                ennemiCityBothUI.SetActive(false);
-            }
             else
                 DoAction();
             // After pathfinding clearing
@@ -103,47 +75,6 @@ public class HexGameUI : MonoBehaviour
     {
         Ray inputRay = Camera.main.ScreenPointToRay(Input.mousePosition);
         return hexGrid.GetCell(inputRay);
-    }
-
-    City GetSelectCity(HexCell location)
-    {
-        City city = client.player.GetCity(location);
-        if(city != null)
-        {
-            cityUI.SetActive(true);
-            cityHealthText.text = city.Hp + " / " + city.MaxHp;
-            healthCity.sizeDelta = new Vector2(((float)city.Hp / (float)city.MaxHp) * 90f, healthCity.sizeDelta.y);
-        }
-        else if(location.HasCity)
-        {
-            City ennemiCity = (City)location.Feature;
-            ennemiCityUI.SetActive(true);
-            ennemiCityHealthText.text = ennemiCity.Hp + " / " + ennemiCity.MaxHp;
-            healthEnnemiCity.sizeDelta = new Vector2(((float)ennemiCity.Hp / (float)ennemiCity.MaxHp) * 90f, healthEnnemiCity.sizeDelta.y);
-        }
-        return city;
-    }
-
-    Unit GetSelectUnit(HexCell location)
-    {
-        Unit unit = client.player.GetUnit(currentCell);
-        if(unit != null)
-        {
-            unitUI.SetActive(true);
-            unitTypeText.text = unit.TypeToStr();
-            unitHealthText.text = unit.Hp + " / " + unit.maxHP;
-            healthUnit.sizeDelta = new Vector2(((float)unit.Hp / (float)unit.maxHP) * 90f, healthUnit.sizeDelta.y);
-        }
-        else if(location.Unit != null)
-        {
-            Unit ennemiUnit = location.Unit.Unit;
-            unitUI.SetActive(true);
-            unitTypeText.text = "Enemy " + ennemiUnit.TypeToStr();
-            unitHealthText.text = ennemiUnit.Hp + " / " + ennemiUnit.maxHP;
-            healthUnit.sizeDelta = new Vector2(((float)ennemiUnit.Hp / (float)ennemiUnit.maxHP) * 90f, healthUnit.sizeDelta.y);
-        }
-
-        return unit;
     }
 
     bool UpdateCurrentCell()
@@ -169,62 +100,20 @@ public class HexGameUI : MonoBehaviour
         selectedUnit = null;
         selectedCity = null;
 
-        cityUI.SetActive(false);
-        unitUI.SetActive(false);
-        UnitBothUI.SetActive(false);
-        ennemiCityUI.SetActive(false);
-        ennemiCityBothUI.SetActive(false);
-
         if(currentCell)
         {
             client.player.displayer.UpdateInformationPannels(currentCell);
 
-            if(currentCell.Unit && currentCell.HasCity)
+            if(currentCell.Unit)
             {
-                
-                selectedUnit = GetSelectUnit(currentCell);
-                selectedCity = GetSelectCity(currentCell);
-                Unit unit = currentCell.Unit.Unit;
-
-                StartCoroutine(mapCamera.FocusSmoothTransition(currentCell.Position));
-
-                if(selectedCity != null)
-                {
-                    UnitBothUI.SetActive(true);
-                    unitUI.SetActive(false);
-
-                    healthCity.sizeDelta = new Vector2(((float)selectedCity.Hp / (float)selectedCity.MaxHp) * 90f, healthCity.sizeDelta.y);
-                    ennemiCityBothHealthText.text = selectedCity.Hp + " / " + selectedCity.MaxHp;
-
-                    healthUnitBoth.sizeDelta = new Vector2(((float)unit.Hp / (float)unit.maxHP) * 90f, healthUnitBoth.sizeDelta.y);
-                    unitTypeBothText.text = (unit.owner != client.player ? "Enemy ":"")  + unit.TypeToStr();
-                    unitBothHealthText.text = unit.Hp + " / " + unit.maxHP;
-                }
-                else
-                {
-                    cityUI.SetActive(false);
-                    ennemiCityUI.SetActive(false);
-                    selectedCity = (City)currentCell.Feature;
-
-                    ennemiCityBothUI.SetActive(true);
-
-                    healthEnnemiCityBoth.sizeDelta = new Vector2(((float)selectedCity.Hp / (float)selectedCity.MaxHp) * 90f, healthEnnemiCity.sizeDelta.y);
-                    ennemiCityBothHealthText.text = selectedCity.Hp + " / " + selectedCity.MaxHp;
-
-                    healthUnit.sizeDelta = new Vector2(((float)unit.Hp / (float)unit.maxHP) * 90f, healthUnitBoth.sizeDelta.y);
-                    unitTypeText.text = (unit.owner != client.player ? "Enemy " : "") + unit.TypeToStr();
-                    unitHealthText.text = unit.Hp + " / " + unit.maxHP;
-                }
-            }
-            else if(currentCell.Unit)
-            {
-                selectedUnit = GetSelectUnit(currentCell);
+                selectedUnit = client.player.GetUnit(currentCell);
                 if(selectedUnit != null)
                     StartCoroutine(mapCamera.FocusSmoothTransition(currentCell.Position));
             }
-            else if(currentCell.HasCity)
+
+            if(currentCell.HasCity)
             {
-                selectedCity = GetSelectCity(currentCell);
+                selectedCity = client.player.GetCity(currentCell);
                 if(selectedCity != null)
                     StartCoroutine(mapCamera.FocusSmoothTransition(currentCell.Position));
             }

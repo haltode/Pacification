@@ -117,7 +117,6 @@ public class Client : MonoBehaviour
                             p.NetworkAddUnit(receivedData[i]);
                     }
                 }
-                player.displayer.UpdateInformationPannels();
                 break;
 
             //Unit TakeDamage
@@ -130,7 +129,6 @@ public class Client : MonoBehaviour
                             p.NetworkTakeDamageUnit(receivedData[i]);
                     }
                 }
-                player.displayer.UpdateInformationPannels();
                 break;
 
             //Unit Movement
@@ -154,7 +152,6 @@ public class Client : MonoBehaviour
                         }
                     }
                 }
-                player.displayer.UpdateInformationPannels();
                 break;
 
             //City Take Damage
@@ -167,7 +164,6 @@ public class Client : MonoBehaviour
                             p.NetworkTakeDamageCity(receivedData[i]);
                     }
                 }
-                player.displayer.UpdateInformationPannels();
                 break;
 
             //City Levelup
@@ -178,7 +174,6 @@ public class Client : MonoBehaviour
                     City city = (City)player.hexGrid.GetCell(new HexCoordinates(int.Parse(cityData[0]), int.Parse(cityData[1]))).Feature;
                     city.LevelUp(cityData[2]);
                 }
-                player.displayer.UpdateInformationPannels();
                 break;
 
             //Resources TakeDamage
@@ -191,7 +186,6 @@ public class Client : MonoBehaviour
                             p.NetworkTakeDamageResource(receivedData[i]);
                     }
                 }
-                player.displayer.UpdateInformationPannels();
                 break;
 
             ///// WORKER : Build.Destroy road
@@ -220,7 +214,6 @@ public class Client : MonoBehaviour
                         p.playerResources.Add(resource);
                     }
                 }
-                player.displayer.UpdateInformationPannels();
                 break;
 
             /////PLAYER : Take turn
@@ -315,6 +308,9 @@ public class Client : MonoBehaviour
                 player.displayer.KillLoading();
                 break;
         }
+
+        if(player != null && player.displayer != null)
+            player.displayer.UpdateInformationPannels();
     }
 
     void UserConnected(string name, bool host)

@@ -12,7 +12,7 @@ public class Settler : Unit
         mvtSPD = 2;
         currMVT = 0;
         hp = 100;
-        maxHP = hp;
+        MaxHP = hp;
         // TODO : couleur du joueur
     }
 

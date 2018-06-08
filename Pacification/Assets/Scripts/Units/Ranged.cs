@@ -14,7 +14,7 @@ public class Ranged : Attacker
 
         upgradeHP = 25;
         hp = (IsUpgraded() ? 400 : 100) - upgradeHP + ((level - (IsUpgraded() ? 10 : 0)) * upgradeHP);
-        maxHP = hp;
+        MaxHP = hp;
 
         upgradeATK = 20;
         defaultATK = (IsUpgraded() ? 300 : 80) - upgradeATK + ((level - (IsUpgraded() ? 10 : 0)) * upgradeATK);
@@ -58,7 +58,7 @@ public class Ranged : Attacker
         }*/
         else
         {
-            maxHP += upgradeHP;
+            MaxHP += upgradeHP;
             hp += upgradeHP;
             defaultATK += upgradeATK;
         }

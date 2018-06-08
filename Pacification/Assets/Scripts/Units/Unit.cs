@@ -26,7 +26,7 @@ public class Unit
     protected UnitType type;
     protected int mvtSPD;
     protected int hp;
-    public int maxHP;
+    protected int maxHp;
     public bool embark;
     public bool hasMadeAction;
     public int currMVT;
@@ -34,6 +34,12 @@ public class Unit
     public UnitType Type
     {
         get { return type; }
+    }
+
+    public int MaxHP
+    {
+        get { return maxHp; }
+        set { maxHp = value; }
     }
 
     public int MvtSPD

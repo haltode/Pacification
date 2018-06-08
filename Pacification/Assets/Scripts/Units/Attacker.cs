@@ -13,12 +13,6 @@ public class Attacker : Unit
     protected Dictionary<Unit.UnitType, float> dmgMult;
     protected float dmgMultCity;
 
-    public int MaxHP
-    {
-        get { return maxHP; }
-        set { maxHP = value; }
-    }
-
     public int UpgradeHP
     {
         get { return upgradeHP; }

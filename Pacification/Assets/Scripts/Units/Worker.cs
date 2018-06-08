@@ -12,7 +12,7 @@ public class Worker : Unit
         mvtSPD = 2;
         currMVT = 0;
         hp = 300;
-        maxHP = hp;
+        MaxHP = hp;
 
         // TODO : couleur du joueur
     }

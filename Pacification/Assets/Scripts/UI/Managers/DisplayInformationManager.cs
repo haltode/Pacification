@@ -202,21 +202,21 @@ public class DisplayInformationManager : MonoBehaviour {
         regularRes1.text = "" + (PlayerEconomy.upgradeCosts[0])[player.GetUnitLevel(Unit.UnitType.REGULAR) - 1, 1]; //Food
         regularRes2.text = "" + (PlayerEconomy.upgradeCosts[0])[player.GetUnitLevel(Unit.UnitType.REGULAR) - 1, 2]; //Iron
         regularRes3.text = "" + (PlayerEconomy.upgradeCosts[0])[player.GetUnitLevel(Unit.UnitType.REGULAR) - 1, 3]; //Horse
-        regularUpgrade.SetActive(player.science < int.Parse(regularScience.text)); //Change the 0 (condition must be false in order to buy)
+        regularUpgrade.SetActive(player.science < 0); //Change the 0 (condition must be false in order to buy)
 
         rangedLvl.text = "" + player.GetUnitLevel(Unit.UnitType.RANGED) + "/20";
-        rangedScience.text = "" + (PlayerEconomy.upgradeCosts[1])[player.GetUnitLevel(Unit.UnitType.REGULAR) - 1, 0];
-        rangedRes1.text = "" + (PlayerEconomy.upgradeCosts[1])[player.GetUnitLevel(Unit.UnitType.REGULAR) - 1, 1]; //Wood
-        rangedRes2.text = "" + (PlayerEconomy.upgradeCosts[1])[player.GetUnitLevel(Unit.UnitType.REGULAR) - 1, 2]; //Iron
-        rangedRes3.text = "" + (PlayerEconomy.upgradeCosts[1])[player.GetUnitLevel(Unit.UnitType.REGULAR) - 1, 3]; //Gold
-        rangedUpgrade.SetActive(player.science < int.Parse(regularScience.text)); //Change the 0 (condition must be false in order to buy)
+        rangedScience.text = "" + (PlayerEconomy.upgradeCosts[1])[player.GetUnitLevel(Unit.UnitType.RANGED) - 1, 0];
+        rangedRes1.text = "" + (PlayerEconomy.upgradeCosts[1])[player.GetUnitLevel(Unit.UnitType.RANGED) - 1, 1]; //Wood
+        rangedRes2.text = "" + (PlayerEconomy.upgradeCosts[1])[player.GetUnitLevel(Unit.UnitType.RANGED) - 1, 2]; //Iron
+        rangedRes3.text = "" + (PlayerEconomy.upgradeCosts[1])[player.GetUnitLevel(Unit.UnitType.RANGED) - 1, 3]; //Gold
+        rangedUpgrade.SetActive(player.science < 0); //Change the 0 (condition must be false in order to buy)
 
         heavyLvl.text = "" + player.GetUnitLevel(Unit.UnitType.HEAVY) + "/20";
-        heavyScience.text = "" + (PlayerEconomy.upgradeCosts[2])[player.GetUnitLevel(Unit.UnitType.REGULAR) - 1, 0];
-        heavyRes1.text = "" + (PlayerEconomy.upgradeCosts[2])[player.GetUnitLevel(Unit.UnitType.REGULAR) - 1, 1]; //Wood
-        heavyRes2.text = "" + (PlayerEconomy.upgradeCosts[2])[player.GetUnitLevel(Unit.UnitType.REGULAR) - 1, 2]; //Iron
-        heavyRes3.text = "" + (PlayerEconomy.upgradeCosts[2])[player.GetUnitLevel(Unit.UnitType.REGULAR) - 1, 3]; //Diams
-        heavyUpgrade.SetActive(player.science < int.Parse(regularScience.text)); //Change the 0 (condition must be false in order to buy)
+        heavyScience.text = "" + (PlayerEconomy.upgradeCosts[2])[player.GetUnitLevel(Unit.UnitType.HEAVY) - 1, 0];
+        heavyRes1.text = "" + (PlayerEconomy.upgradeCosts[2])[player.GetUnitLevel(Unit.UnitType.HEAVY) - 1, 1]; //Wood
+        heavyRes2.text = "" + (PlayerEconomy.upgradeCosts[2])[player.GetUnitLevel(Unit.UnitType.HEAVY) - 1, 2]; //Iron
+        heavyRes3.text = "" + (PlayerEconomy.upgradeCosts[2])[player.GetUnitLevel(Unit.UnitType.HEAVY) - 1, 3]; //Diams
+        heavyUpgrade.SetActive(player.science < 0); //Change the 0 (condition must be false in order to buy)
     }
 
 
@@ -263,21 +263,22 @@ public class DisplayInformationManager : MonoBehaviour {
             {
                 infoIsEnemy.text = "";
                 infoLevel.text = unit.Level + "/" + unit.maxLevel;
+                canAct.SetActive(!unit.hasMadeAction);
+                //canMove;
             }
             else
             {
                 infoIsEnemy.text = "Enemy";
                 infoLevel.text = "??/??";
+                canAct.SetActive(false);
+                canMove.SetActive(false);
             }
-            
+
             infoType.text = unit.TypeToStr();
             infoOwner.text = unit.owner.name;
-            infoHealth.text = unit.Hp + " / " + unit.maxHP;
-            //healthUnit;
-            canAct.SetActive(!unit.hasMadeAction);
-            //canMove;
-
-}
+            infoHealth.text = unit.Hp + " / " + unit.MaxHP;
+            healthUnit.sizeDelta = new Vector2(((float)unit.Hp / (float)unit.MaxHP) * 60f, healthCity.sizeDelta.y);
+        }
         else
             infoIsActive.SetActive(false);
 
@@ -297,8 +298,8 @@ public class DisplayInformationManager : MonoBehaviour {
             }
 
             info2Type.text = feature.TypeToStr();
-            infoHealth.text = feature.Hp + " / " + feature.MaxHp;
-            //healthCity;
+            info2Health.text = feature.Hp + " / " + feature.MaxHp;
+            healthCity.sizeDelta = new Vector2(((float)feature.Hp / (float)feature.MaxHp) * 60f, healthCity.sizeDelta.y);
         }
         else
             info2IsActive.SetActive(false);

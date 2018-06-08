@@ -14,7 +14,7 @@ public class Heavy : Attacker
 
         upgradeHP = 20;
         hp = (IsUpgraded() ? 350 : 120) - upgradeHP + ((level - (IsUpgraded() ? 10 : 0)) * upgradeHP);
-        maxHP = hp;
+        MaxHP = hp;
 
         upgradeATK = 10;
         defaultATK = (IsUpgraded() ? 210 : 100) - upgradeATK + ((level - (IsUpgraded() ? 10 : 0)) * upgradeATK);
@@ -51,7 +51,7 @@ public class Heavy : Attacker
         }*/
         else
         {
-            maxHP += upgradeHP;
+            MaxHP += upgradeHP;
             hp += upgradeHP;
             defaultATK += upgradeATK;
         }

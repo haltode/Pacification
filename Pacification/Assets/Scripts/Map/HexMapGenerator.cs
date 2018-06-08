@@ -416,7 +416,31 @@ public class HexMapGenerator : MonoBehaviour
             else if (cell.TerrainBiomeIndex == (int)HexCell.BiomeType.ROCKY)
                 cell.FeatureIndex = GetMineType();
             else if (cell.TerrainBiomeIndex == (int)HexCell.BiomeType.PLAIN)
-                cell.FeatureIndex = Random.Range((int)HexCell.FeatureType.HORSE, (int)HexCell.FeatureType.FOOD + 1);
+            {
+                float val = Random.value;
+                if(val < 0.5f)
+                {
+                    cell.FeatureIndex = (int)HexCell.FeatureType.FOREST;
+                    // Double forest!
+                    if(Random.value < 0.4f)
+                    {
+                        for(HexDirection dir = HexDirection.NE; dir <= HexDirection.NW; ++dir)
+                        {
+                            HexCell neighbor = cell.GetNeighbor(dir);
+                            if(neighbor && !neighbor.IsUnderWater &&
+                               !neighbor.HasFeature && neighbor.Elevation == cell.Elevation)
+                            {
+                                neighbor.FeatureIndex = (int)HexCell.FeatureType.FOREST;
+                                break;
+                            }
+                        }
+                    }
+                }
+                else if(val < 0.65f)
+                    cell.FeatureIndex = (int)HexCell.FeatureType.HORSE;
+                else
+                    cell.FeatureIndex = (int)HexCell.FeatureType.FOOD;
+            }
             else
                 resourcesBudget++;
             guard++;

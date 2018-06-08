@@ -113,6 +113,36 @@ public class DisplayInformationManager : MonoBehaviour {
     public GameObject scienceUpMORE;
     public GameObject productionUpMORE;
     public GameObject happinessUpMORE;
+
+    ///////
+    public Text settlerR1;
+    public Text settlerR2;
+    public Text settlerR3;
+    public Text settlerR4;
+    public Text workerR1;
+    public Text workerR2;
+    public Text workerR3;
+    public Text workerR4;
+    public Text regularR1;
+    public Text regularR2;
+    public Text regularR3;
+    public Text regularR4;
+    public Text rangedR1;
+    public Text rangedR2;
+    public Text rangedR3;
+    public Text rangedR4;
+    public Text heavyR1;
+    public Text heavyR2;
+    public Text heavyR3;
+    public Text heavyR4;
+    public Text moneyR1;
+    public Text moneyR2;
+    public Text scienceR1;
+    public Text scienceR2;
+    public Text prodR1;
+    public Text prodR2;
+    public Text happiR1;
+    public Text happiR2;
     //////////////////////
 
     public Player player;
@@ -133,6 +163,8 @@ public class DisplayInformationManager : MonoBehaviour {
             editorLeftPanel.SetActive(true);
             editorRightPanel.SetActive(true);
             rightGamePanel.SetActive(false);
+            closeInformation2Pannel.SetActive(false);
+            closeInformationPannel.SetActive(false);
 
             Shader.EnableKeyword("HEX_MAP_EDITOR");
         }
@@ -144,6 +176,8 @@ public class DisplayInformationManager : MonoBehaviour {
             editorLeftPanel.SetActive(false);
             editorRightPanel.SetActive(false);
             rightGamePanel.SetActive(true);
+            closeInformation2Pannel.SetActive(true);
+            closeInformationPannel.SetActive(true);
 
             Shader.DisableKeyword("HEX_MAP_EDITOR");
         }
@@ -356,8 +390,6 @@ public class DisplayInformationManager : MonoBehaviour {
             scienceUp.SetActive(canUpgradeScience);
             productionUp.SetActive(canUpgradeProduction);
             happinessUp.SetActive(canUpgradeHapiness);
-
-            /* Need MORE panel
             settlerMORE.SetActive(canbuySettler);
             workerMORE.SetActive(canbuyWorker);
             regularMORE.SetActive(canbuyRegular);
@@ -367,10 +399,43 @@ public class DisplayInformationManager : MonoBehaviour {
             scienceUpMORE.SetActive(canUpgradeScience);
             productionUpMORE.SetActive(canUpgradeProduction);
             happinessUpMORE.SetActive(canUpgradeHapiness);
-            */
+
+
+            settlerR1.text = "0";   //REMPLIR ça en fonction des prix d'achat et d'upgrade batiment
+            settlerR2.text = "0";   //R1, R2, R3 les ressources -> R4 money
+            settlerR3.text = "0";
+            settlerR4.text = "0";
+            workerR1.text = "0";
+            workerR2.text = "0";
+            workerR3.text = "0";
+            workerR4.text = "0";
+            regularR1.text = "0";
+            regularR2.text = "0";
+            regularR3.text = "0";
+            regularR4.text = "0";
+            rangedR1.text = "0";
+            rangedR2.text = "0";
+            rangedR3.text = "0";
+            rangedR4.text = "0";
+            heavyR1.text = "0";
+            heavyR2.text = "0";
+            heavyR3.text = "0";
+            heavyR4.text = "0";
+            moneyR1.text = "0";
+            moneyR2.text = "0";
+            scienceR1.text = "0";
+            scienceR2.text = "0";
+            prodR1.text = "0";
+            prodR2.text = "0";
+            happiR1.text = "0";
+            happiR2.text = "0";
+
         }
         else
+        {
             townResources.SetActive(false);
+            cityPanel.SetActive(false);
+        }
     }
 
     public void SeeMoreCityPanel()

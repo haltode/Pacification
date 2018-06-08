@@ -125,12 +125,14 @@ public class City : Feature
     {
         if (buildingType == "science")
             CityBuilding.Build(CityBuilding.BuildingType.SCIENCE, this);
-        if (buildingType == "money")
+        else if (buildingType == "money")
             CityBuilding.Build(CityBuilding.BuildingType.MONEY, this);
-        if (buildingType == "prod")
+        else if (buildingType == "prod")
             CityBuilding.Build(CityBuilding.BuildingType.PROD, this);
-        if (buildingType == "happiness")
+        else if (buildingType == "happiness")
             CityBuilding.Build(CityBuilding.BuildingType.HAPPINESS, this);
+        else
+            Debug.Log("Unknown Building Type");
     }
 
     public CitySize Size { get; set; }

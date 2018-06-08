@@ -19,9 +19,6 @@ public static class CityBuilding
     {
         int level = city.scienceLevel;
 
-        if (!RessourceCheck((int)type, level, city))
-            return;
-
         switch ((int)type)
         {
             case 0:
@@ -53,16 +50,42 @@ public static class CityBuilding
 
     public static bool RessourceCheck(int type, int level, City city)
     {
-        if (city.Owner.resources[4] >= price[(level * ((int)type + 1)) - 1] / 10)
+        if (city.Owner.resources[4] >= price[(level * ((int)type + 1)) - 1] / 2)
         {
             if (city.Owner.money >= price[(level * ((int)type + 1)) - 1])
             {
-                city.Owner.money -= price[(level * ((int)type + 1)) - 1];
-                city.Owner.resources[4] -= price[(level * ((int)type + 1)) - 1] / 10;
                 return true;
             }
         }
 
         return false;
+    }
+
+    public static void MakeBuild(string type, City city)
+    {
+        if (type == "science")
+        {
+            city.Owner.money -= price[(city.scienceLevel * (0 + 1)) - 1];
+            city.Owner.resources[4] -= price[(city.scienceLevel * (0 + 1)) - 1] / 2;
+        }
+        else if (type == "money")
+        {
+            city.Owner.money -= price[(city.moneyLevel * (1 + 1)) - 1];
+            city.Owner.resources[4] -= price[(city.moneyLevel * (1 + 1)) - 1] / 2;
+        }
+        else if (type == "prod")
+        {
+            city.Owner.money -= price[(city.prodLevel * (2 + 1)) - 1];
+            city.Owner.resources[4] -= price[(city.prodLevel * (2 + 1)) - 1] / 2;
+        }
+        else if (type == "happiness")
+        {
+            city.Owner.money -= price[(city.happinessLevel * (3 + 1)) - 1];
+            city.Owner.resources[4] -= price[(city.happinessLevel * (3 + 1)) - 1] / 2;
+        }
+        else
+        {
+            Debug.Log("Unknown Building Type");
+        }
     }
 }

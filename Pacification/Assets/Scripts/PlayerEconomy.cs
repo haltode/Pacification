@@ -10,7 +10,7 @@ public class PlayerEconomy
 
     public static List<string[,]> upgradeCosts = new List<string[,]>
     {
-        // [ (upgrade from level) X - 1 , resource ID (cf Post-It ou commentaire) ]
+        // [ unit level - 1 , resource ID (cf Post-It ou commentaire) ]
 
         {new string[,] //Regular //science, food, steel, horse
             {
@@ -33,6 +33,7 @@ public class PlayerEconomy
                 {"11000", "2500", "1000", "18"},//lv17 -> 18
                 {"14000", "2500", "1000", "19"},//lv18 -> 19
                 {"20000", "5000", "2500", "20"},//lv19 -> 20 //Science: ~400 turns with a single non-upgraded city
+                {"0", "0", "0", "0"}            //All upgrades finished
             }
         },
         {new string[,] //Ranged //science, wood, steel, gold
@@ -56,6 +57,7 @@ public class PlayerEconomy
                 {"39500", "1000", "1000", "1800"},  //lv17 -> 18
                 {"46800", "1000", "1000", "1900"},  //lv18 -> 19
                 {"60000", "6000", "1000", "2000"},  //lv19 -> 20 //Science: ~600 turns with a single non-upgraded city
+                {"0", "0", "0", "0"}                //All upgrades finished
             }
         },
         {new string[,] //Heavy //science, wood, steel, diamond
@@ -79,6 +81,7 @@ public class PlayerEconomy
                 {"240000", "2500", "1000", "80"},   //lv17 -> 18
                 {"340000", "2500", "1000", "90"},   //lv18 -> 19
                 {"500000", "7500", "1000", "100"},  //lv19 -> 20 Science: ~1000 turns with a single non-upgraded city
+                {"0", "0", "0", "0"}                //All upgrades finished
             }
         }
     };
@@ -87,7 +90,7 @@ public class PlayerEconomy
 
     public static List<string[,]> unitCosts = new List<string[,]>
     {
-        // [ unit level , resource ID (cf Post-It ou commentaire) ]
+        // [ unit level - 1, resource ID (cf Post-It ou commentaire) ]
 
         {new string[,] //Regular //money, food, steel, horse
             {
@@ -162,4 +165,174 @@ public class PlayerEconomy
             }
         },
     };
+
+
+
+    public static bool canUpgrade(Unit.UnitType type, Player owner)
+    {
+        bool levelCheck = true;
+        bool resourceCheck = true;
+
+        if (type == Unit.UnitType.REGULAR)
+        {
+            levelCheck = owner.unitLevel[0] < 20;
+
+            resourceCheck = (owner.science >= int.Parse((upgradeCosts[0])[owner.GetUnitLevel(Unit.UnitType.REGULAR) - 1, 0])) &&
+                            (owner.resources[5] >= int.Parse((upgradeCosts[0])[owner.GetUnitLevel(Unit.UnitType.REGULAR) - 1, 1])) &&
+                            (owner.resources[0] >= int.Parse((upgradeCosts[0])[owner.GetUnitLevel(Unit.UnitType.REGULAR) - 1, 2])) &&
+                            (owner.resources[3] >= int.Parse((upgradeCosts[0])[owner.GetUnitLevel(Unit.UnitType.REGULAR) - 1, 3]));
+        }
+        else if (type == Unit.UnitType.RANGED)
+        {
+            levelCheck = owner.unitLevel[1] < 20;
+
+            resourceCheck = (owner.science >= int.Parse((upgradeCosts[0])[owner.GetUnitLevel(Unit.UnitType.RANGED) - 1, 0])) &&
+                            (owner.resources[4] >= int.Parse((upgradeCosts[1])[owner.GetUnitLevel(Unit.UnitType.RANGED) - 1, 1])) &&
+                            (owner.resources[0] >= int.Parse((upgradeCosts[1])[owner.GetUnitLevel(Unit.UnitType.RANGED) - 1, 2])) &&
+                            (owner.resources[1] >= int.Parse((upgradeCosts[1])[owner.GetUnitLevel(Unit.UnitType.RANGED) - 1, 3]));
+        }
+        else if (type == Unit.UnitType.HEAVY)
+        {
+            levelCheck = owner.unitLevel[2] < 20;
+
+            resourceCheck = (owner.science >= int.Parse((upgradeCosts[0])[owner.GetUnitLevel(Unit.UnitType.HEAVY) - 1, 0])) &&
+                            (owner.resources[4] >= int.Parse((upgradeCosts[2])[owner.GetUnitLevel(Unit.UnitType.HEAVY) - 1, 1])) &&
+                            (owner.resources[0] >= int.Parse((upgradeCosts[2])[owner.GetUnitLevel(Unit.UnitType.HEAVY) - 1, 2])) &&
+                            (owner.resources[2] >= int.Parse((upgradeCosts[2])[owner.GetUnitLevel(Unit.UnitType.HEAVY) - 1, 3]));
+        }
+        else
+        {
+            Debug.Log("canUpgrade : Unknown or non-attacker unit type");
+        }
+
+        return levelCheck && resourceCheck;
+    }
+
+
+
+    public static bool canSpawn(Unit.UnitType type, Player owner, City city)
+    {
+        bool cityCheck = true;
+        bool resourceCheck = true;
+
+        if (type == Unit.UnitType.REGULAR)
+        {
+            cityCheck = true;
+            resourceCheck = (owner.money >= int.Parse((unitCosts[0])[owner.GetUnitLevel(Unit.UnitType.REGULAR) - 1, 0])) &&
+                            (owner.resources[5] >= int.Parse((unitCosts[0])[owner.GetUnitLevel(Unit.UnitType.REGULAR) - 1, 1])) &&
+                            (owner.resources[0] >= int.Parse((unitCosts[0])[owner.GetUnitLevel(Unit.UnitType.REGULAR) - 1, 2])) &&
+                            (owner.resources[3] >= int.Parse((unitCosts[0])[owner.GetUnitLevel(Unit.UnitType.REGULAR) - 1, 3]));
+        }
+        else if (type == Unit.UnitType.RANGED)
+        {
+            cityCheck = (city.Size == City.CitySize.CITY || city.Size == City.CitySize.MEGALOPOLIS);
+            resourceCheck = (owner.money >= int.Parse((unitCosts[0])[owner.GetUnitLevel(Unit.UnitType.RANGED) - 1, 0])) &&
+                            (owner.resources[4] >= int.Parse((unitCosts[1])[owner.GetUnitLevel(Unit.UnitType.RANGED) - 1, 1])) &&
+                            (owner.resources[0] >= int.Parse((unitCosts[1])[owner.GetUnitLevel(Unit.UnitType.RANGED) - 1, 2])) &&
+                            (owner.resources[1] >= int.Parse((unitCosts[1])[owner.GetUnitLevel(Unit.UnitType.RANGED) - 1, 3]));
+        }
+        else if (type == Unit.UnitType.HEAVY)
+        {
+            cityCheck = (city.Size == City.CitySize.MEGALOPOLIS);
+            resourceCheck = (owner.money >= int.Parse((unitCosts[0])[owner.GetUnitLevel(Unit.UnitType.HEAVY) - 1, 0])) &&
+                            (owner.resources[4] >= int.Parse((unitCosts[2])[owner.GetUnitLevel(Unit.UnitType.HEAVY) - 1, 1])) &&
+                            (owner.resources[0] >= int.Parse((unitCosts[2])[owner.GetUnitLevel(Unit.UnitType.HEAVY) - 1, 2])) &&
+                            (owner.resources[2] >= int.Parse((unitCosts[2])[owner.GetUnitLevel(Unit.UnitType.HEAVY) - 1, 3]));
+        }
+        else if (type == Unit.UnitType.WORKER)
+        {
+            cityCheck = true;
+            resourceCheck = (owner.money >= 120) &&
+                            (owner.resources[5] >= 200) &&
+                            (owner.resources[4] >= 200) &&
+                            (owner.resources[0] >= 69);
+        }
+        else if (type == Unit.UnitType.SETTLER)
+        {
+            cityCheck = (city.Size == City.CitySize.CITY || city.Size == City.CitySize.MEGALOPOLIS);
+            resourceCheck = (owner.money >= 300) &&
+                            (owner.resources[5] >= 420) &&
+                            (owner.resources[4] >= 500) &&
+                            (owner.resources[2] >= 5);
+        }
+        else
+        {
+            Debug.Log("canSpawn : Unknown unit type");
+        }
+
+        return cityCheck && resourceCheck;
+    }
+
+
+
+    public static void MakeUpgrade(Unit.UnitType type, Player owner)
+    {
+        if (type == Unit.UnitType.REGULAR)
+        {
+            owner.resources[5] -= int.Parse((upgradeCosts[0])[owner.GetUnitLevel(Unit.UnitType.REGULAR) - 1, 1]);
+            owner.resources[0] -= int.Parse((upgradeCosts[0])[owner.GetUnitLevel(Unit.UnitType.REGULAR) - 1, 2]);
+            owner.resources[3] -= int.Parse((upgradeCosts[0])[owner.GetUnitLevel(Unit.UnitType.REGULAR) - 1, 3]);
+        }
+        else if (type == Unit.UnitType.RANGED)
+        {
+            owner.resources[4] -= int.Parse((upgradeCosts[1])[owner.GetUnitLevel(Unit.UnitType.RANGED) - 1, 1]);
+            owner.resources[0] -= int.Parse((upgradeCosts[1])[owner.GetUnitLevel(Unit.UnitType.RANGED) - 1, 2]);
+            owner.resources[1] -= int.Parse((upgradeCosts[1])[owner.GetUnitLevel(Unit.UnitType.RANGED) - 1, 3]);
+        }
+        else if (type == Unit.UnitType.HEAVY)
+        {
+            owner.resources[4] -= int.Parse((upgradeCosts[2])[owner.GetUnitLevel(Unit.UnitType.HEAVY) - 1, 1]);
+            owner.resources[0] -= int.Parse((upgradeCosts[2])[owner.GetUnitLevel(Unit.UnitType.HEAVY) - 1, 2]);
+            owner.resources[2] -= int.Parse((upgradeCosts[2])[owner.GetUnitLevel(Unit.UnitType.HEAVY) - 1, 3]);
+        }
+        else
+        {
+            Debug.Log("canUpgrade : Unknown or non-attacker unit type");
+        }
+    }
+    
+    
+
+    public static void MakePurshase(Unit.UnitType type, Player owner)
+    {
+        if (type == Unit.UnitType.REGULAR)
+        {
+            owner.money -= int.Parse((unitCosts[0])[owner.GetUnitLevel(Unit.UnitType.REGULAR) - 1, 0]);
+            owner.resources[5] -= int.Parse((unitCosts[0])[owner.GetUnitLevel(Unit.UnitType.REGULAR) - 1, 1]);
+            owner.resources[0] -= int.Parse((unitCosts[0])[owner.GetUnitLevel(Unit.UnitType.REGULAR) - 1, 2]);
+            owner.resources[3] -= int.Parse((unitCosts[0])[owner.GetUnitLevel(Unit.UnitType.REGULAR) - 1, 3]);
+        }
+        else if (type == Unit.UnitType.RANGED)
+        {
+            owner.money -= int.Parse((unitCosts[0])[owner.GetUnitLevel(Unit.UnitType.RANGED) - 1, 0]);
+            owner.resources[4] -= int.Parse((unitCosts[1])[owner.GetUnitLevel(Unit.UnitType.RANGED) - 1, 1]);
+            owner.resources[0] -= int.Parse((unitCosts[1])[owner.GetUnitLevel(Unit.UnitType.RANGED) - 1, 2]);
+            owner.resources[1] -= int.Parse((unitCosts[1])[owner.GetUnitLevel(Unit.UnitType.RANGED) - 1, 3]);
+        }
+        else if (type == Unit.UnitType.HEAVY)
+        {
+            owner.money -= int.Parse((unitCosts[0])[owner.GetUnitLevel(Unit.UnitType.HEAVY) - 1, 0]);
+            owner.resources[4] -= int.Parse((unitCosts[2])[owner.GetUnitLevel(Unit.UnitType.HEAVY) - 1, 1]);
+            owner.resources[0] -= int.Parse((unitCosts[2])[owner.GetUnitLevel(Unit.UnitType.HEAVY) - 1, 2]);
+            owner.resources[2] -= int.Parse((unitCosts[2])[owner.GetUnitLevel(Unit.UnitType.HEAVY) - 1, 3]);
+        }
+        else if (type == Unit.UnitType.WORKER)
+        {
+            owner.money -= 120;
+            owner.resources[5] -= 200;
+            owner.resources[4] -= 200;
+            owner.resources[0] -= 69;
+        }
+        else if (type == Unit.UnitType.SETTLER)
+        {
+            owner.money -= 300;
+            owner.resources[5] -= 420;
+            owner.resources[4] -= 500;
+            owner.resources[2] -= 5;
+        }
+        else
+        {
+            Debug.Log("canSpawn : Unknown unit type");
+        }
+    }
 }

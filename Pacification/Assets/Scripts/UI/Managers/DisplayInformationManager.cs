@@ -236,8 +236,10 @@ public class DisplayInformationManager : MonoBehaviour {
 
     public void LevelUp(string type)
     {
+        PlayerEconomy.MakeUpgrade(Unit.StrToType(type), player);
         player.LevelUp(Unit.StrToType(type));
         UpdateUpgradePannel();
+        UpdateInformationPannels();
     }
 
     //Upgrade pannel
@@ -260,21 +262,21 @@ public class DisplayInformationManager : MonoBehaviour {
         regularRes1.text = "" + (PlayerEconomy.upgradeCosts[0])[player.GetUnitLevel(Unit.UnitType.REGULAR) - 1, 1]; //Food
         regularRes2.text = "" + (PlayerEconomy.upgradeCosts[0])[player.GetUnitLevel(Unit.UnitType.REGULAR) - 1, 2]; //Iron
         regularRes3.text = "" + (PlayerEconomy.upgradeCosts[0])[player.GetUnitLevel(Unit.UnitType.REGULAR) - 1, 3]; //Horse
-        regularUpgrade.SetActive(player.science < 0); //Change the 0 (condition must be false in order to buy)
+        regularUpgrade.SetActive(!(PlayerEconomy.canUpgrade(Unit.UnitType.REGULAR, player)));
 
         rangedLvl.text = "" + player.GetUnitLevel(Unit.UnitType.RANGED) + "/20";
         rangedScience.text = "" + (PlayerEconomy.upgradeCosts[1])[player.GetUnitLevel(Unit.UnitType.RANGED) - 1, 0];
         rangedRes1.text = "" + (PlayerEconomy.upgradeCosts[1])[player.GetUnitLevel(Unit.UnitType.RANGED) - 1, 1]; //Wood
         rangedRes2.text = "" + (PlayerEconomy.upgradeCosts[1])[player.GetUnitLevel(Unit.UnitType.RANGED) - 1, 2]; //Iron
         rangedRes3.text = "" + (PlayerEconomy.upgradeCosts[1])[player.GetUnitLevel(Unit.UnitType.RANGED) - 1, 3]; //Gold
-        rangedUpgrade.SetActive(player.science < 0); //Change the 0 (condition must be false in order to buy)
+        rangedUpgrade.SetActive(!(PlayerEconomy.canUpgrade(Unit.UnitType.RANGED, player)));
 
         heavyLvl.text = "" + player.GetUnitLevel(Unit.UnitType.HEAVY) + "/20";
         heavyScience.text = "" + (PlayerEconomy.upgradeCosts[2])[player.GetUnitLevel(Unit.UnitType.HEAVY) - 1, 0];
         heavyRes1.text = "" + (PlayerEconomy.upgradeCosts[2])[player.GetUnitLevel(Unit.UnitType.HEAVY) - 1, 1]; //Wood
         heavyRes2.text = "" + (PlayerEconomy.upgradeCosts[2])[player.GetUnitLevel(Unit.UnitType.HEAVY) - 1, 2]; //Iron
         heavyRes3.text = "" + (PlayerEconomy.upgradeCosts[2])[player.GetUnitLevel(Unit.UnitType.HEAVY) - 1, 3]; //Diams
-        heavyUpgrade.SetActive(player.science < 0); //Change the 0 (condition must be false in order to buy)
+        heavyUpgrade.SetActive(!(PlayerEconomy.canUpgrade(Unit.UnitType.HEAVY, player)));
     }
 
 
@@ -376,15 +378,15 @@ public class DisplayInformationManager : MonoBehaviour {
             townResources.SetActive(true);
             cityPanel.SetActive(true);
 
-            bool canbuySettler = true;      //CHANGER TOUT CA EN FONCTION DES PRIX
-            bool canbuyWorker = true;       //
-            bool canbuyRegular = true;      //
-            bool canbuyRanged = true;        //
-            bool canbuyHeavy = true;        //
-            bool canUpgradeMoney = true;    //
-            bool canUpgradeScience = true;  //
-            bool canUpgradeProduction = true;//
-            bool canUpgradeHapiness = true; //
+            bool canbuySettler = PlayerEconomy.canSpawn(Unit.UnitType.SETTLER, player, city);
+            bool canbuyWorker = PlayerEconomy.canSpawn(Unit.UnitType.WORKER, player, city);
+            bool canbuyRegular = PlayerEconomy.canSpawn(Unit.UnitType.REGULAR, player, city);
+            bool canbuyRanged = PlayerEconomy.canSpawn(Unit.UnitType.RANGED, player, city);
+            bool canbuyHeavy = PlayerEconomy.canSpawn(Unit.UnitType.HEAVY, player, city);
+            bool canUpgradeMoney = CityBuilding.RessourceCheck((int)(CityBuilding.BuildingType.MONEY), city.moneyLevel, city);
+            bool canUpgradeScience = CityBuilding.RessourceCheck((int)(CityBuilding.BuildingType.SCIENCE), city.scienceLevel, city);
+            bool canUpgradeProduction = CityBuilding.RessourceCheck((int)(CityBuilding.BuildingType.PROD), city.prodLevel, city);
+            bool canUpgradeHapiness = CityBuilding.RessourceCheck((int)(CityBuilding.BuildingType.HAPPINESS), city.happinessLevel, city);
 
 
             settler.SetActive(canbuySettler);
@@ -407,35 +409,44 @@ public class DisplayInformationManager : MonoBehaviour {
             happinessUpMORE.SetActive(canUpgradeHapiness);
 
 
-            settlerR1.text = "0";   //REMPLIR ça en fonction des prix d'achat et d'upgrade batiment
-            settlerR2.text = "0";   //R1, R2, R3 les ressources -> R4 money
-            settlerR3.text = "0";
-            settlerR4.text = "0";
-            workerR1.text = "0";
-            workerR2.text = "0";
-            workerR3.text = "0";
-            workerR4.text = "0";
-            regularR1.text = "0";
-            regularR2.text = "0";
-            regularR3.text = "0";
-            regularR4.text = "0";
-            rangedR1.text = "0";
-            rangedR2.text = "0";
-            rangedR3.text = "0";
-            rangedR4.text = "0";
-            heavyR1.text = "0";
-            heavyR2.text = "0";
-            heavyR3.text = "0";
-            heavyR4.text = "0";
-            moneyR1.text = "0";
-            moneyR2.text = "0";
-            scienceR1.text = "0";
-            scienceR2.text = "0";
-            prodR1.text = "0";
-            prodR2.text = "0";
-            happiR1.text = "0";
-            happiR2.text = "0";
+            //Unités: R1, R2, R3 = resources, R4 = money
+            //Batiments: R1 = wood, R2 = money
+            settlerR1.text = "420"; //Food
+            settlerR2.text = "500"; //Wood
+            settlerR3.text = "5";   //Diamond
+            settlerR4.text = "300";
 
+            workerR1.text = "200"; //Food
+            workerR2.text = "200"; //Wood
+            workerR3.text = "69";  //Steel
+            workerR4.text = "120";
+
+            regularR1.text = "" + (PlayerEconomy.unitCosts[0])[player.GetUnitLevel(Unit.UnitType.REGULAR) - 1, 1]; //Food
+            regularR2.text = "" + (PlayerEconomy.unitCosts[0])[player.GetUnitLevel(Unit.UnitType.REGULAR) - 1, 2]; //Iron
+            regularR3.text = "" + (PlayerEconomy.unitCosts[0])[player.GetUnitLevel(Unit.UnitType.REGULAR) - 1, 3]; //Horses
+            regularR4.text = "" + (PlayerEconomy.unitCosts[0])[player.GetUnitLevel(Unit.UnitType.REGULAR) - 1, 0];
+
+            rangedR1.text = "" + (PlayerEconomy.unitCosts[1])[player.GetUnitLevel(Unit.UnitType.RANGED) - 1, 1]; //Wood
+            rangedR2.text = "" + (PlayerEconomy.unitCosts[1])[player.GetUnitLevel(Unit.UnitType.RANGED) - 1, 2]; //Iron
+            rangedR3.text = "" + (PlayerEconomy.unitCosts[1])[player.GetUnitLevel(Unit.UnitType.RANGED) - 1, 3]; //Gold
+            rangedR4.text = "" + (PlayerEconomy.unitCosts[1])[player.GetUnitLevel(Unit.UnitType.RANGED) - 1, 0];
+
+            heavyR1.text = "" + (PlayerEconomy.unitCosts[2])[player.GetUnitLevel(Unit.UnitType.HEAVY) - 1, 1]; //Wood
+            heavyR2.text = "" + (PlayerEconomy.unitCosts[2])[player.GetUnitLevel(Unit.UnitType.HEAVY) - 1, 2]; //Iron
+            heavyR3.text = "" + (PlayerEconomy.unitCosts[2])[player.GetUnitLevel(Unit.UnitType.HEAVY) - 1, 3]; //Diamond
+            heavyR4.text = "" + (PlayerEconomy.unitCosts[2])[player.GetUnitLevel(Unit.UnitType.HEAVY) - 1, 0];
+
+            moneyR1.text = "" + (CityBuilding.price[city.moneyLevel * 2 - 1] / 2);
+            moneyR2.text = "" + CityBuilding.price[city.moneyLevel * 2 - 1];
+
+            scienceR1.text = "" + (CityBuilding.price[city.moneyLevel * 1 - 1] / 2);
+            scienceR2.text = "" + CityBuilding.price[city.moneyLevel * 1 - 1];
+
+            prodR1.text = "" + (CityBuilding.price[city.moneyLevel * 3 - 1] / 2);
+            prodR2.text = "" + CityBuilding.price[city.moneyLevel * 3 - 1];
+
+            happiR1.text = "" + (CityBuilding.price[city.moneyLevel * 4 - 1] / 2);
+            happiR2.text = "" + CityBuilding.price[city.moneyLevel * 4 - 1];
         }
         else
         {

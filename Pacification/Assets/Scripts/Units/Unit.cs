@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class Unit
 {
-    const int ScienceMinLevelEmbark = 2000;
+    public const int ScienceMinLevelEmbark = 2000;
 
     protected HexUnit hexUnit;
     public GameObject hexGameObject;

@@ -24,18 +24,13 @@ public class ButtonManager : MonoBehaviour {
     {
         client.Send("CEND|" +  client.clientName);
         client.player.canPlay = false;
-        EndTurn();
+        activePlayer.SetActive(false);
     }
 
     public void TakeTurn()
     {
         client.player.canPlay = true; ;
         activePlayer.SetActive(true);
-    }
-
-    public void EndTurn()
-    {
-        activePlayer.SetActive(false);
     }
 
     public void DeconnectionButton()

@@ -13,6 +13,8 @@ public class ControlsManager : MonoBehaviour
     public KeyCode cycleCity = KeyCode.C;
     public KeyCode cycleUnit = KeyCode.U;
 
+    public KeyCode passTurn = KeyCode.Tab;
+
     void Start()
     {
         DontDestroyOnLoad(this);

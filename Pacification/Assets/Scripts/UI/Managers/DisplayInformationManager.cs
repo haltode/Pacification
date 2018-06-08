@@ -73,7 +73,8 @@ public class DisplayInformationManager : MonoBehaviour {
     public Text infoHealth;
     public RectTransform healthUnit;
     public GameObject canAct;
-    public GameObject canMove;
+    public GameObject cantAct;
+    public Text moves;
 
     public GameObject openInformation2Pannel;
     public GameObject closeInformation2Pannel;
@@ -316,23 +317,27 @@ public class DisplayInformationManager : MonoBehaviour {
         {
             Unit unit = cell.Unit.Unit;
             infoIsActive.SetActive(true);
-            if(unit.owner == player)
+
+            if(unit.Owner == player)
             {
                 infoIsEnemy.text = "";
                 infoLevel.text = unit.Level + "/" + unit.maxLevel;
+                moves.text = unit.currMVT + "/" + unit.MvtSPD;
+
                 canAct.SetActive(!unit.hasMadeAction);
-                //canMove;
+                cantAct.SetActive(unit.hasMadeAction);
             }
             else
             {
                 infoIsEnemy.text = "Enemy";
                 infoLevel.text = "??/??";
+                moves.text = "??/??";
                 canAct.SetActive(false);
-                canMove.SetActive(false);
+                cantAct.SetActive(true);
             }
 
             infoType.text = unit.TypeToStr();
-            infoOwner.text = unit.owner.name;
+            infoOwner.text = unit.Owner.name;
             infoHealth.text = unit.Hp + " / " + unit.MaxHP;
             healthUnit.sizeDelta = new Vector2(((float)unit.Hp / (float)unit.MaxHP) * 60f, healthCity.sizeDelta.y);
         }

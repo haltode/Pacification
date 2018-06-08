@@ -6,7 +6,7 @@ public class Settler : Unit
 {
     public Settler(Player owner)
     {
-        this.owner = owner;
+        Owner = owner;
         type = UnitType.SETTLER;
         hasMadeAction = false;
         mvtSPD = 3;
@@ -23,7 +23,7 @@ public class Settler : Unit
 
         anim.animator.SetInteger("AnimPar", 2);
 
-        owner.client.Send("CUNI|CIT|" + (int)type + "#" + hexUnit.location.coordinates.X + "#" + hexUnit.location.coordinates.Z);
+        Owner.client.Send("CUNI|CIT|" + (int)type + "#" + hexUnit.location.coordinates.X + "#" + hexUnit.location.coordinates.Z);
         hasMadeAction = true;
     }
 }

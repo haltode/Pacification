@@ -143,17 +143,17 @@ public class HexGameUI : MonoBehaviour
                 if(!attackTargetCell || !(attacker.IsInRangeToAttack(attackTargetCell)))
                     return;
 
-                if(attackTargetCell.Unit && selectedUnit.owner != attackTargetCell.Unit.Unit.owner)
+                if(attackTargetCell.Unit && selectedUnit.Owner != attackTargetCell.Unit.Unit.Owner)
                 {
                     if (attacker.Attack(attackTargetCell.Unit.Unit))
                         attackTargetCell.EnableHighlight(Color.red);
                 }
-                else if(attackTargetCell.HasCity && selectedUnit.owner != attackTargetCell.Feature.Owner)
+                else if(attackTargetCell.HasCity && selectedUnit.Owner != attackTargetCell.Feature.Owner)
                 {
                     if (attacker.Attack((City)attackTargetCell.Feature))
                         attackTargetCell.EnableHighlight(Color.red);
                 }
-                else if(attackTargetCell.HasResource && attackTargetCell.FeatureIndex > 9 && selectedUnit.owner != attackTargetCell.Feature.Owner)
+                else if(attackTargetCell.HasResource && attackTargetCell.FeatureIndex > 9 && selectedUnit.Owner != attackTargetCell.Feature.Owner)
                 {
                     if (attacker.Attack((Resource)attackTargetCell.Feature))
                         attackTargetCell.EnableHighlight(Color.red);

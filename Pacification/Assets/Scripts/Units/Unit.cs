@@ -22,7 +22,7 @@ public class Unit
     }
 
     // TODO : couleur du joueur
-    public Player owner;
+    public Player Owner;
     protected UnitType type;
     protected int mvtSPD;
     protected int hp;
@@ -68,7 +68,7 @@ public class Unit
 
     public bool CanEmbark
     {
-        get { return owner.science >= ScienceMinLevelEmbark; }
+        get { return Owner.science >= ScienceMinLevelEmbark; }
     }
 
     public static bool CanAttack(UnitType type)

@@ -6,10 +6,10 @@ public class Regular : Attacker
 {
     public Regular(Player owner)
     {
-        this.owner = owner;
+        Owner = owner;
         type = UnitType.REGULAR;
         hasMadeAction = false;
-        this.level = owner.unitLevel[0];
+        level = owner.unitLevel[0];
         maxLevel = 20;
 
         upgradeHP = 20;

@@ -6,10 +6,10 @@ public class Heavy : Attacker
 {
     public Heavy(Player owner)
     {
-        this.owner = owner;
+        Owner = owner;
         type = UnitType.HEAVY;
         hasMadeAction = false;
-        this.level = owner.unitLevel[2];
+        level = owner.unitLevel[2];
         maxLevel = 20;
 
         upgradeHP = 20;

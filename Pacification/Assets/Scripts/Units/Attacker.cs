@@ -65,9 +65,9 @@ public class Attacker : Unit
         int damage = (int)((float)((defaultATK - upgradeATK) + upgradeATK * level) * multiplier);
 
         if(GameManager.Instance.gamemode == GameManager.Gamemode.MULTI)
-            owner.client.Send("CUNI|UTD|" + target.HexUnit.location.coordinates.X + "#" + target.HexUnit.location.coordinates.Z + "#" + damage + "|" + target.owner.name);
+            Owner.client.Send("CUNI|UTD|" + target.HexUnit.location.coordinates.X + "#" + target.HexUnit.location.coordinates.Z + "#" + damage + "|" + target.Owner.name);
         else
-            target.owner.NetworkTakeDamageUnit(target.HexUnit.location.coordinates.X + "#" + target.HexUnit.location.coordinates.Z + "#" + damage);
+            target.Owner.NetworkTakeDamageUnit(target.HexUnit.location.coordinates.X + "#" + target.HexUnit.location.coordinates.Z + "#" + damage);
         hasMadeAction = true;
         return true;
     }
@@ -83,7 +83,7 @@ public class Attacker : Unit
         int damage = (int)((float)((defaultATK - upgradeATK) + upgradeATK * level) * dmgMultCity);
 
         if(GameManager.Instance.gamemode == GameManager.Gamemode.MULTI)
-            owner.client.Send("CUNI|CTD|" + target.Location.coordinates.X + "#" + target.Location.coordinates.Z + "#" + damage + "|" + target.Owner.name);
+            Owner.client.Send("CUNI|CTD|" + target.Location.coordinates.X + "#" + target.Location.coordinates.Z + "#" + damage + "|" + target.Owner.name);
         else
             target.Owner.NetworkTakeDamageCity(target.Location.coordinates.X + "#" + target.Location.coordinates.Z + "#" + damage);
         hasMadeAction = true;
@@ -100,7 +100,7 @@ public class Attacker : Unit
 
         int damage = (int)((float)((defaultATK - upgradeATK) + upgradeATK * level) * dmgMultCity);
 
-        owner.client.Send("CUNI|RTD|" + target.Location.coordinates.X + "#" + target.Location.coordinates.Z + "#" + damage + "|" + target.Owner.name);
+        Owner.client.Send("CUNI|RTD|" + target.Location.coordinates.X + "#" + target.Location.coordinates.Z + "#" + damage + "|" + target.Owner.name);
         hasMadeAction = true;
         return true;
     }

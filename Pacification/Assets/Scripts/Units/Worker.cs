@@ -6,7 +6,7 @@ public class Worker : Unit
 {
     public Worker(Player owner)
     {
-        this.owner = owner;
+        Owner = owner;
         type = UnitType.WORKER;
         hasMadeAction = false;
         mvtSPD = 3;
@@ -29,7 +29,7 @@ public class Worker : Unit
             return;
 
         if(cell.FeatureIndex + 6 < 16)
-            owner.client.Send("CUNI|WEX|" + cell.coordinates.X + "#" + cell.coordinates.Z + "#" + (cell.FeatureIndex - 4));
+            Owner.client.Send("CUNI|WEX|" + cell.coordinates.X + "#" + cell.coordinates.Z + "#" + (cell.FeatureIndex - 4));
         hasMadeAction = true;
     }
 

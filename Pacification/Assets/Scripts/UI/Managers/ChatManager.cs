@@ -261,8 +261,6 @@ public class ChatManager : MonoBehaviour
                             break;
 
                         case "oversize":
-                            ++index;
-                            string beBig = ExtractCommand(ref index, input.text);
                             foreach(City c in client.player.playerCities)
                                     c.perTurnPop += 5F;
                             break;

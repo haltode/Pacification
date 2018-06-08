@@ -151,7 +151,7 @@ public class AI
         if(target == null)
             return;
         HexCell start = unit.HexUnit.location;
-        HexCell end = target.Location;
+        HexCell end = aiPlayer.hexGrid.GetNearFreeCell(target.Location);
         string cmd = start.coordinates.X + "#" + start.coordinates.Z + "#" +
                      end.coordinates.X + "#" + end.coordinates.Z;
         aiPlayer.NetworkMoveUnit(cmd, isAI: true);

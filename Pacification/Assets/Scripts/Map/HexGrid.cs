@@ -9,6 +9,7 @@ public class HexGrid : MonoBehaviour
     public int seed;
 
     const int MaxIterationGen = 1000;
+    const int MaxIterationNearCell = 100;
     const int MaxUnitInitSpawnRadius = 10;
 
     public int cellCountX = 20;
@@ -74,15 +75,41 @@ public class HexGrid : MonoBehaviour
         return cells[cellIndex];
     }
 
-    public HexCell GetNearFreeCell(HexCell location)
+    public HexCell GetNearFreeCell(HexCell start)
     {
-        List<HexCell> possibleLocation = new List<HexCell>();   
-        for(HexDirection dir = HexDirection.NE; dir <= HexDirection.NW; ++dir)
+        List<HexCell> possibleLocation = new List<HexCell>();
+        ResetDistances();
+
+        PriorityQueue<HexCell> searchQueue = new PriorityQueue<HexCell>(HexCell.CompareCells);
+        start.Distance = 0;
+        searchQueue.Enqueue(start);
+        int guard = 0;
+        int lastDist = 0;
+        while(!searchQueue.IsEmpty())
         {
-            HexCell neighbor = location.GetNeighbor(dir);
-            if(neighbor && !neighbor.IsUnderWater && !neighbor.Unit &&
-                !IsBorder(neighbor) && neighbor.Elevation <= 3)
+            guard++;
+            if(guard > MaxIterationNearCell)
+                break;
+            HexCell current = searchQueue.Dequeue();
+            if(current.Distance != lastDist)
+            {
+                if(possibleLocation.Count >= 1)
+                    break;
+                lastDist = current.Distance;
+            }
+
+            for(HexDirection dir = HexDirection.NE; dir <= HexDirection.NW; ++dir)
+            {
+                HexCell neighbor = current.GetNeighbor(dir);
+                if(neighbor == null || neighbor.Distance != int.MaxValue)
+                    continue;
+                if(neighbor.IsUnderWater || neighbor.HasUnit || IsBorder(neighbor) || neighbor.Elevation >= 4)
+                    continue;
+                neighbor.Distance = current.Distance + 1;
+                neighbor.SearchHeuristic = 0;
+                searchQueue.Enqueue(neighbor);
                 possibleLocation.Add(neighbor);
+            }
         }
 
         int randomCell = rnd.Next(possibleLocation.Count);
@@ -257,13 +284,10 @@ public class HexGrid : MonoBehaviour
                 HexCell neighbor = current.GetNeighbor(dir);
                 if(neighbor == null || neighbor.Distance != int.MaxValue)
                     continue;
-                if(neighbor.IsUnderWater && !unit.Unit.CanEmbark)
-                    continue;
-                // In case a unit is in the targeted city
-                if(isAI && (neighbor != end && neighbor.Unit))
+                if(neighbor.IsUnderWater && !unit.Unit.CanEmbark || neighbor.Unit)
                     continue;
                 // AI ignores fog
-                if(!isAI && (!neighbor.IsExplored || neighbor.Unit))
+                if(!isAI && !neighbor.IsExplored)
                     continue;
 
                 int moveCost = unit.GetMoveCost(current, neighbor);

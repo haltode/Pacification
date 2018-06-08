@@ -84,9 +84,6 @@ public class Player
         HexCell location = hexGrid.GetCell(new HexCoordinates(int.Parse(receivedData[1]), int.Parse(receivedData[2])));
         Unit unit = null;
 
-        if (location.HasCity && (float)((City)(location.Feature)).spawncount >= ((City)(location.Feature)).prodRate)
-            return;
-
         if(type == Unit.UnitType.SETTLER)
             unit = new Settler(this);
         else if(type == Unit.UnitType.WORKER)
@@ -118,7 +115,7 @@ public class Player
         else
             Debug.Log("Unknown unit type");
 
-        unit.hexGameObject = GameObject.Instantiate(hexGrid.mainUnitPrefab);
+        unit.hexGameObject = Object.Instantiate(hexGrid.mainUnitPrefab);
         unit.HexUnit = unit.hexGameObject.GetComponent<HexUnit>();
         unit.HexUnit.Unit = unit;
         unit.SetGraphics(hexGrid.unitPrefab[(int)type]);

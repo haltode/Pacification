@@ -20,7 +20,7 @@ public class Heavy : Attacker
         defaultATK = (IsUpgraded() ? 210 : 100) - upgradeATK + ((level - (IsUpgraded() ? 10 : 0)) * upgradeATK);
 
         range = (IsUpgraded() ? 3 : 2);
-        mvtSPD = 1;
+        mvtSPD = 2;
         currMVT = 0;
 
         dmgMultCity = (IsUpgraded() ? 2f : 1.75f);

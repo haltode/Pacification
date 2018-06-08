@@ -9,7 +9,7 @@ public class Worker : Unit
         this.owner = owner;
         type = UnitType.WORKER;
         hasMadeAction = false;
-        mvtSPD = 2;
+        mvtSPD = 3;
         currMVT = 0;
         hp = 300;
         MaxHP = hp;

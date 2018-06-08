@@ -20,7 +20,7 @@ public class Regular : Attacker
         defaultATK = (IsUpgraded() ? 375 : 100) - upgradeATK + ((level - (IsUpgraded() ? 10 : 0)) * upgradeATK);
 
         range = 1;
-        mvtSPD = (IsUpgraded() ? 3 : 2);
+        mvtSPD = (IsUpgraded() ? 4 : 3);
         currMVT = 0;
 
         dmgMultCity = (IsUpgraded() ? 0.75f : 0.5f);

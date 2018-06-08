@@ -20,7 +20,7 @@ public class Ranged : Attacker
         defaultATK = (IsUpgraded() ? 300 : 80) - upgradeATK + ((level - (IsUpgraded() ? 10 : 0)) * upgradeATK);
 
         range = 2;
-        mvtSPD = 2;
+        mvtSPD = 3;
         currMVT = 0;
 
         dmgMultCity = (IsUpgraded() ? 0.5f : 0.25f);

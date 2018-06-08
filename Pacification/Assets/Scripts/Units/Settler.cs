@@ -9,7 +9,7 @@ public class Settler : Unit
         this.owner = owner;
         type = UnitType.SETTLER;
         hasMadeAction = false;
-        mvtSPD = 2;
+        mvtSPD = 3;
         currMVT = 0;
         hp = 100;
         MaxHP = hp;

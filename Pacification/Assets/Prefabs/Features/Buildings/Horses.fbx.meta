@@ -1,45 +1,40 @@
 fileFormatVersion: 2
-guid: ea3aae01ba34add4e994727914262612
-timeCreated: 1521026727
+guid: 6f163c09549719945892444f8c36135c
+timeCreated: 1528466734
 licenseType: Free
 ModelImporter:
   serializedVersion: 22
   fileIDToRecycleName:
-    100000: Chaval
-    100002: Chaval.001
-    100004: Chaval.002
-    100006: Chaval.003
-    100008: Chaval.004
-    100010: Chaval.005
-    100012: //RootNode
-    400000: Chaval
-    400002: Chaval.001
-    400004: Chaval.002
-    400006: Chaval.003
-    400008: Chaval.004
-    400010: Chaval.005
-    400012: //RootNode
-    2100000: ChevalNoir
-    2100002: ChevalMarron
-    2100004: ChevalGris
-    2300000: Chaval
-    2300002: Chaval.001
-    2300004: Chaval.002
-    2300006: Chaval.003
-    2300008: Chaval.004
-    2300010: Chaval.005
-    3300000: Chaval
-    3300002: Chaval.001
-    3300004: Chaval.002
-    3300006: Chaval.003
-    3300008: Chaval.004
-    3300010: Chaval.005
-    4300000: Chaval.005
-    4300002: Chaval.004
-    4300004: Chaval.003
-    4300006: Chaval.001
-    4300008: Chaval.002
-    4300010: Chaval
+    100000: Cube.003
+    100002: Cube.004
+    100004: Cube.030
+    100006: Cube.031
+    100008: Cube.032
+    100010: //RootNode
+    400000: Cube.003
+    400002: Cube.004
+    400004: Cube.030
+    400006: Cube.031
+    400008: Cube.032
+    400010: //RootNode
+    2100000: ChevalMarron
+    2100002: ChevalGris
+    2100004: ChevalNoir
+    2300000: Cube.003
+    2300002: Cube.004
+    2300004: Cube.030
+    2300006: Cube.031
+    2300008: Cube.032
+    3300000: Cube.003
+    3300002: Cube.004
+    3300004: Cube.030
+    3300006: Cube.031
+    3300008: Cube.032
+    4300000: Cube.004
+    4300002: Cube.003
+    4300004: Cube.030
+    4300006: Cube.031
+    4300008: Cube.032
   externalObjects:
   - first:
       type: UnityEngine:Material

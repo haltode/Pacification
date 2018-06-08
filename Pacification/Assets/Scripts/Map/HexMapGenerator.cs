@@ -394,17 +394,20 @@ public class HexMapGenerator : MonoBehaviour
         while (resourcesBudget > 0 && guard < MaxIteration)
         {
             HexCell cell = GetRandomValidCell();
-            if ((cell.TerrainBiomeIndex == (int)HexCell.BiomeType.DESERT && cell.IsHill) ||
-                cell.TerrainBiomeIndex == (int)HexCell.BiomeType.ROCKY)
+            resourcesBudget--;
+            if (cell.TerrainBiomeIndex == (int)HexCell.BiomeType.DESERT && cell.IsHill)
             {
+                if(Random.value < 0.7f)
+                    cell.FeatureIndex = Random.Range((int)HexCell.FeatureType.IRON, (int)HexCell.FeatureType.DIAMOND + 1);
+                else
+                    cell.FeatureIndex = (int)HexCell.FeatureType.HORSE;
+            }
+            else if (cell.TerrainBiomeIndex == (int)HexCell.BiomeType.ROCKY)
                 cell.FeatureIndex = Random.Range((int)HexCell.FeatureType.IRON, (int)HexCell.FeatureType.DIAMOND + 1);
-                resourcesBudget--;
-            }
             else if (cell.TerrainBiomeIndex == (int)HexCell.BiomeType.PLAIN)
-            {
                 cell.FeatureIndex = Random.Range((int)HexCell.FeatureType.HORSE, (int)HexCell.FeatureType.FOOD + 1);
-                resourcesBudget--;
-            }
+            else
+                resourcesBudget++;
             guard++;
         }
     }

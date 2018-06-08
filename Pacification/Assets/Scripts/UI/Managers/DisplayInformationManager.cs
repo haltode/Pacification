@@ -192,7 +192,7 @@ public class DisplayInformationManager : MonoBehaviour {
 
     public void UpdateRoundDisplay(int rounds)
     {
-        nbRound.text = "" + rounds;
+        nbRound.text = "Round: " + rounds;
     }
 
     public void DisplayResources()
@@ -372,7 +372,7 @@ public class DisplayInformationManager : MonoBehaviour {
         if(cell.HasCity && cell.Feature.Owner == player)
         {
             City city = (City)cell.Feature;
-            productivity.text = "" + city.prodLevel;
+            productivity.text = "" + city.prodRate;
             population.text = "" + city.pop;
             happiness.text = "" + (int)city.happiness;
             townResources.SetActive(true);

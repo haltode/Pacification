@@ -236,6 +236,7 @@ public class DisplayInformationManager : MonoBehaviour {
     public void LevelUp(string type)
     {
         player.LevelUp(Unit.StrToType(type));
+        UpdateUpgradePannel();
     }
 
     //Upgrade pannel

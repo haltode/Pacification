@@ -181,6 +181,37 @@ public class ChatManager : MonoBehaviour
                             client.player.displayer.DisplayResources();
                             break;
 
+                        case "epenser":
+                            ++index;
+                            string beSmart = ExtractCommand(ref index, input.text);
+                            if(beSmart == "")
+                                client.player.science += 1000;
+                            else
+                                client.player.science += int.Parse(beSmart);
+                            client.player.displayer.DisplayResources();
+                            break;
+
+                        case "minecraft":
+                            ++index;
+                            string beRock = ExtractCommand(ref index, input.text);
+                            if(beRock == "")
+                            {
+                                client.player.resources[0] += 1000;
+                                client.player.resources[1] += 1000;
+                                client.player.resources[2] += 1000;
+                            }
+                            else
+                            {
+                                client.player.resources[0] += int.Parse(beRock);
+                                client.player.resources[1] += int.Parse(beRock);
+                                client.player.resources[2] += int.Parse(beRock);
+                            }
+                                
+                            client.player.displayer.DisplayResources();
+                            break;
+
+
+
                         case "fog":
                             ++index;
                             string toggle = ExtractCommand(ref index, input.text);

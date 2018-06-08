@@ -53,9 +53,29 @@ public class HexGameUI : MonoBehaviour
             return;
 
         if(Input.GetKeyDown(controls.cycleCity))
-            mapCamera.CycleBetweenCities();
+        {
+            int cityIdx = mapCamera.CycleBetweenCities();
+            if(cityIdx != -1)
+            {
+                if(currentCell)
+                    currentCell.DisableHighlight();
+                currentCell = client.player.playerCities[cityIdx].Location;
+                currentCell.EnableHighlight(Color.blue);
+                DoSelection(updateCell: false);
+            }
+        }
         else if(Input.GetKeyDown(controls.cycleUnit))
-            mapCamera.CycleBetweenUnits();
+        {
+            int unitIdx = mapCamera.CycleBetweenUnits();
+            if(unitIdx != -1)
+            {
+                if(currentCell)
+                    currentCell.DisableHighlight();
+                currentCell = client.player.playerUnits[unitIdx].HexUnit.Location;
+                currentCell.EnableHighlight(Color.blue);
+                DoSelection(updateCell: false);
+            }
+        }
         
         if(selectedUnit != null)
         {
@@ -92,14 +112,16 @@ public class HexGameUI : MonoBehaviour
         return false;
     }
 
-    void DoSelection()
+    void DoSelection(bool updateCell = true)
     {
-        UpdateCurrentCell();
+        if(updateCell)
+            UpdateCurrentCell();
+
         if(selectedUnit != null)
             selectedUnit.HexUnit.location.DisableHighlight();
         selectedUnit = null;
         selectedCity = null;
-
+        
         if(currentCell)
         {
             client.player.displayer.UpdateInformationPannels(currentCell);

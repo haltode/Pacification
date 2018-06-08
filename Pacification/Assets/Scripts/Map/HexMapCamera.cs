@@ -121,27 +121,31 @@ public class HexMapCamera : MonoBehaviour
         }
     }
 
-    public void CycleBetweenCities()
+    public int CycleBetweenCities()
     {
         if(player.playerCities.Count == 0)
-            return;
+            return -1;
         if(lastCity >= player.playerCities.Count)
             lastCity = 0;
         Vector3 cityPos = player.playerCities[lastCity].Location.Position;
         StartCoroutine(FocusSmoothTransition(cityPos));
+        int ret = lastCity;
         lastCity = (lastCity + 1) % player.playerCities.Count;
         lastUnit = 0;
+        return ret;
     }
 
-    public void CycleBetweenUnits()
+    public int CycleBetweenUnits()
     {
         if(player.playerUnits.Count == 0)
-            return;
+            return -1;
         if(lastUnit >= player.playerUnits.Count)
             lastUnit = 0;
         Vector3 unitPos = player.playerUnits[lastUnit].HexUnit.location.Position;
         StartCoroutine(FocusSmoothTransition(unitPos));
+        int ret = lastUnit;
         lastUnit = (lastUnit + 1) % player.playerUnits.Count;
         lastCity = 0;
+        return ret;
     }
 }

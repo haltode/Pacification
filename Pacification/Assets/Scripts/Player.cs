@@ -116,7 +116,6 @@ public class Player
             Debug.Log("Unknown unit type");
 
         unit.hexGameObject = GameObject.Instantiate(hexGrid.mainUnitPrefab);
-        unit.anim = unit.hexGameObject.AddComponent<UnitsAnimator>();
         unit.HexUnit = unit.hexGameObject.GetComponent<HexUnit>();
         unit.HexUnit.Unit = unit;
         unit.SetGraphics(hexGrid.unitPrefab[(int)type]);

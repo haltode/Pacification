@@ -125,6 +125,8 @@ public class Unit
         GameObject instantiated = Object.Instantiate(prefab, spawnPos, orientation);
         instantiated.name = "Graphics";
         instantiated.transform.parent = hexGameObject.transform;
+
+        anim = hexGameObject.AddComponent<UnitsAnimator>();
     }
 
     public void Update()

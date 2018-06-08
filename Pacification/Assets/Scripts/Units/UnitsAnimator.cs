@@ -11,4 +11,9 @@ public class UnitsAnimator : MonoBehaviour
     {
         animator = gameObject.GetComponentInChildren<Animator>();
     }
+
+    public void Update()
+    {
+        animator = gameObject.GetComponentInChildren<Animator>();
+    }
 }

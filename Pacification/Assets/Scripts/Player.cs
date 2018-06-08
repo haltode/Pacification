@@ -53,23 +53,23 @@ public class Player
 
     //UNIT
     ///////////////////////
-    public void InitialSpawnUnit()
+    public void InitialSpawnUnit(string settler, string attacker, bool focus)
     {
-        hexGrid = Object.FindObjectOfType<HexGrid>();
-        displayer = Object.FindObjectOfType<DisplayInformationManager>();
+        NetworkAddUnit(settler);
+        NetworkAddUnit(attacker);
 
-        //AddUnits(Unit.UnitType.SETTLER, spawnSettler, Unit.UnitType.REGULAR, spawnAttacker);
-        //HexMapCamera.FocusOnPosition(spawnSettler.Position);
+        if(!focus)
+            return;
+
+        string[] settlerT = settler.Split('#');
+        HexCell cell = hexGrid.GetCell(new HexCoordinates(int.Parse(settlerT[1]), int.Parse(settlerT[2])));
+
+        HexMapCamera.FocusOnPosition(cell.Position);
     }
 
     public void AddUnit(Unit.UnitType type, HexCell location)
     {
         client.Send("CUNI|UNC|" + (int)type + "#" + location.coordinates.X + "#" + location.coordinates.Z + "#" + GetUnitLevel(type));
-    }
-
-    public void AddUnits(Unit.UnitType type, HexCell location, Unit.UnitType type2, HexCell location2)
-    {
-        client.Send("CUNI|UNC|" + (int)type + "#" + location.coordinates.X + "#" + location.coordinates.Z + "#" + GetUnitLevel(type) + "|" + (int)type2 + "#" + location2.coordinates.X + "#" + location2.coordinates.Z + "#" + GetUnitLevel(type2));
     }
 
     public void NetworkAddUnit(string data)

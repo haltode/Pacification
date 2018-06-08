@@ -397,6 +397,9 @@ public class HexGrid : MonoBehaviour
         string str = "CUNI|INI|";
         for(int i = 0; i < client.players.Count; ++i)
         {
+            if(client.players[i].name == "Google")
+                continue;
+
             HexCell randomCell = null;
             int guard = 0;
             do
@@ -414,11 +417,19 @@ public class HexGrid : MonoBehaviour
             HexCell spawnSettler = randomCell;
             HexCell spawnAttacker = GetNearFreeCell(randomCell);
 
-            str += client.players[i].name;
-            str += (int)Unit.UnitType.SETTLER + spawnSettler.coordinates.X + "#" + spawnSettler.coordinates.Z + "#" + "1";
-            str += "|";
-            str += (int)Unit.UnitType.REGULAR + spawnAttacker.coordinates.X + "#" + spawnAttacker.coordinates.Z + "#" + "1";
-            str += "|";
+            str += client.players[i].name + "|";
+
+            string settler = (int)Unit.UnitType.SETTLER + "#" + spawnSettler.coordinates.X + "#" + spawnSettler.coordinates.Z + "#" + "1";
+            client.player.NetworkAddUnit(settler);
+
+            str += settler + "|";
+
+            string attacker = (int)Unit.UnitType.REGULAR + "#" + spawnAttacker.coordinates.X + "#" + spawnAttacker.coordinates.Z + "#" + "1";
+            client.player.NetworkAddUnit(attacker);
+
+            str += attacker;
+            if(i < client.players.Count -1)
+                str += "|";
         }
 
         client.Send(str);

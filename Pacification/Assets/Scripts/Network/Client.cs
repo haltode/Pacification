@@ -295,16 +295,17 @@ public class Client : MonoBehaviour
                 break;
 
             case "SMAP":
+                player.hexGrid = FindObjectOfType<HexGrid>();
+                player.displayer = FindObjectOfType<DisplayInformationManager>();
+
                 if(!isHost)
                 {
                     MapSenderReceiver mapLoader = FindObjectOfType<MapSenderReceiver>();
                     mapLoader.StartGame(receivedData[1]);
                 }
                 else
-                {
-                    Server server = FindObjectOfType<Server>();
                     player.hexGrid.InitialSpawnUnit();
-                }
+
                 player.displayer.player = player;
                 player.displayer.DisplayResources();
                 chat = FindObjectOfType<ChatManager>();
@@ -313,6 +314,16 @@ public class Client : MonoBehaviour
                 break;
 
             case "SINI":
+                if(isHost)
+                {
+                    HexMapCamera.FocusOnPosition(player.playerUnits[0].HexUnit.location.Position);
+                    break;
+                }
+
+                for(int i = 1; i < receivedData.Length - 1; i+=3)
+                    foreach(Player p in players)
+                        if(p.name == receivedData[i])
+                            p.InitialSpawnUnit(receivedData[i + 1], receivedData[i + 2], p.name == player.name);
                 break;
         }
 

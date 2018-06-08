@@ -365,7 +365,11 @@ public class HexMapGenerator : MonoBehaviour
         for(int i = 0; i < cellCount; ++i)
         {
             HexCell cell = grid.GetCell(i);
-            cell.TerrainBiomeIndex = cell.Elevation / 2;
+            // For low-elevation, randomly choose between desert/plain
+            if(cell.Elevation <= 1)
+                cell.TerrainBiomeIndex = (Random.value < 0.65f) ? 0 : 1;
+            else
+                cell.TerrainBiomeIndex = cell.Elevation / 2;
         }
     }
 

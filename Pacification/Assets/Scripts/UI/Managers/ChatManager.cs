@@ -263,12 +263,8 @@ public class ChatManager : MonoBehaviour
                         case "oversize":
                             ++index;
                             string beBig = ExtractCommand(ref index, input.text);
-                            if(beBig == "on")
-                                foreach(City c in client.player.playerCities)
+                            foreach(City c in client.player.playerCities)
                                     c.perTurnPop += 5F;
-                            else if(beBig == "off")
-                                foreach(City c in client.player.playerCities)
-                                    c.perTurnPop -= 5F;
                             break;
 
                         case "fog":

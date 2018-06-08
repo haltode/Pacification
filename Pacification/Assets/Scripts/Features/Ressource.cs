@@ -34,6 +34,6 @@ public class Resource : Feature
 
     public bool Exploited
     {
-        get { return Location.FeatureIndex > 10; }
+        get { return Location.FeatureIndex >= 10; }
     }
 }

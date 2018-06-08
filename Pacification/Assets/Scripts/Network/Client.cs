@@ -26,6 +26,8 @@ public class Client : MonoBehaviour
     public List<Player> players = new List<Player>();
     AI ai = null;
 
+    int roundNb = 0;
+
     void Start()
     {
         playerListDisplay = FindObjectOfType<PlayerListManager>();
@@ -221,6 +223,7 @@ public class Client : MonoBehaviour
 
             /////PLAYER : Take turn
             case "SYGO":
+                ++roundNb;
                 if(GameManager.Instance.gamemode == GameManager.Gamemode.SOLO)
                 {
                     if(ai == null)
@@ -232,12 +235,15 @@ public class Client : MonoBehaviour
                     ai.PlayTurn();
                 }
                 if(player.displayer != null)
+                {
                     foreach(Player p in players)
                     {
                         player.Newturn();
                         foreach(Unit u in p.playerUnits)
                             u.Update();
                     }
+                    player.displayer.UpdateRoundDisplay(roundNb);
+                }
                 FindObjectOfType<ButtonManager>().TakeTurn();
                 break;
             

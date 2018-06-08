@@ -24,7 +24,6 @@ public class Player
 
     public bool canPlay;
     public string name;
-    private int roundNb;
 
     public float economyMalus;
 
@@ -40,9 +39,6 @@ public class Player
         money = 1000;
         science = 0;
         resources = new int[] {200, 0, 0, 0, 500, 500}; // Iron, gold, Diamond, Horses, Wood, Food
-
-        roundNb = 0;
-
         playerUnits = new List<Unit>();
         playerCities = new List<City>();
         playerResources = new List<Resource>();
@@ -328,7 +324,6 @@ public class Player
                 break;
             }
         }
-
         if(alive)
             return true;
 
@@ -365,8 +360,5 @@ public class Player
 
         foreach (Resource r in playerResources)
             r.Update();
-
-        ++roundNb;
-        displayer.UpdateRoundDisplay(roundNb);
     }
 }

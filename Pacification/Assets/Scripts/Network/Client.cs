@@ -331,10 +331,13 @@ public class Client : MonoBehaviour
                     break;
                 }
 
-                for(int i = 1; i < receivedData.Length - 1; i+=3)
+                for(int i = 1; i < receivedData.Length - 1; i += 4)
                     foreach(Player p in players)
                         if(p.name == receivedData[i])
+                        {
+                            p.color = p.PlayerColors[int.Parse(receivedData[i + 3])];
                             p.InitialSpawnUnit(receivedData[i + 1], receivedData[i + 2], p.name == player.name);
+                        }
                 break;
         }
 

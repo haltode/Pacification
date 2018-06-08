@@ -20,7 +20,7 @@ public class Player
     public List<City> playerCities;
     public List<Resource> playerResources;
 
-    public Color color = Color.blue;
+    public Color color;
 
     public bool canPlay;
     public string name;
@@ -29,6 +29,8 @@ public class Player
     public float economyMalus;
 
     public DisplayInformationManager displayer;
+
+    public Color[] PlayerColors = { Color.blue, Color.red, Color.green, Color.yellow, Color.black, Color.white, Color.magenta, Color.cyan };
 
     public Player(string name)
     {

@@ -350,7 +350,10 @@ public class Player
     {
         isDead = !CheckStillAliiiiiiive();
         if(isDead)
+        {
             client.Send("CEND|");
+            return;
+        }
 
         string cityUpgrade = "";
         foreach(City c in playerCities)

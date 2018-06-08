@@ -13,6 +13,7 @@ public class City : Feature
 
     public int pop;
     public int spawncount;
+    public bool firstturn;
 
     //economy
     public float perTurnMoney;
@@ -40,6 +41,7 @@ public class City : Feature
         Hp = 600;
         MaxHp = Hp;
         pop = 100;
+        firstturn = true;
 
         perTurnScience = 0.0075f;
         perTurnMoney = 0.025f;
@@ -60,6 +62,8 @@ public class City : Feature
 
     public string Update()
     {
+        if (firstturn)
+            firstturn = false;
         spawncount = 0;
         pop = (int)(pop * happiness * happinessMalus * perTurnPop);
 

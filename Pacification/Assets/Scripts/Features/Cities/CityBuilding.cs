@@ -54,7 +54,7 @@ public static class CityBuilding
         {
             if (city.Owner.money >= price[(level * ((int)type + 1)) - 1])
             {
-                return true;
+                return !city.firstturn;
             }
         }
 

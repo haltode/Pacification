@@ -186,7 +186,7 @@ public class PlayerEconomy
         {
             levelCheck = owner.unitLevel[1] < 20;
 
-            resourceCheck = (owner.science >= int.Parse((upgradeCosts[0])[owner.GetUnitLevel(Unit.UnitType.RANGED) - 1, 0])) &&
+            resourceCheck = (owner.science >= int.Parse((upgradeCosts[1])[owner.GetUnitLevel(Unit.UnitType.RANGED) - 1, 0])) &&
                             (owner.resources[4] >= int.Parse((upgradeCosts[1])[owner.GetUnitLevel(Unit.UnitType.RANGED) - 1, 1])) &&
                             (owner.resources[0] >= int.Parse((upgradeCosts[1])[owner.GetUnitLevel(Unit.UnitType.RANGED) - 1, 2])) &&
                             (owner.resources[1] >= int.Parse((upgradeCosts[1])[owner.GetUnitLevel(Unit.UnitType.RANGED) - 1, 3]));
@@ -195,7 +195,7 @@ public class PlayerEconomy
         {
             levelCheck = owner.unitLevel[2] < 20;
 
-            resourceCheck = (owner.science >= int.Parse((upgradeCosts[0])[owner.GetUnitLevel(Unit.UnitType.HEAVY) - 1, 0])) &&
+            resourceCheck = (owner.science >= int.Parse((upgradeCosts[2])[owner.GetUnitLevel(Unit.UnitType.HEAVY) - 1, 0])) &&
                             (owner.resources[4] >= int.Parse((upgradeCosts[2])[owner.GetUnitLevel(Unit.UnitType.HEAVY) - 1, 1])) &&
                             (owner.resources[0] >= int.Parse((upgradeCosts[2])[owner.GetUnitLevel(Unit.UnitType.HEAVY) - 1, 2])) &&
                             (owner.resources[2] >= int.Parse((upgradeCosts[2])[owner.GetUnitLevel(Unit.UnitType.HEAVY) - 1, 3]));

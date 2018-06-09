@@ -23,6 +23,7 @@ public class Worker : Unit
             return;
 
         anim.animator.SetTrigger("ActionTrigger");
+        anim.animator.SetTrigger("IdleTrigger");
 
         HexCell cell = hexUnit.location;
         if(cell.FeatureIndex <= 3)
@@ -38,6 +39,7 @@ public class Worker : Unit
         HexCell currentCell = hexUnit.location;
         bool isNeighbor = false;
         anim.animator.SetTrigger("ActionTrigger");
+        anim.animator.SetTrigger("IdleTrigger");
 
         HexDirection roadDir = HexDirection.NE;
         for(HexDirection dir = HexDirection.NE; dir <= HexDirection.NW && !isNeighbor; ++dir)

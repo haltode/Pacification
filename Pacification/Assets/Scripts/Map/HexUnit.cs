@@ -76,7 +76,6 @@ public class HexUnit : MonoBehaviour
             Grid.DecreaseVisibility(location, VisionRange);
             location.DisableHighlight();
         }
-        Unit.anim.animator.SetTrigger("DeathTrigger");
         location.Unit = null;
         Destroy(gameObject);
     }

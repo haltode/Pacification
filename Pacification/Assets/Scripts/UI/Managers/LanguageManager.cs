@@ -253,7 +253,7 @@ public class LanguageManager : MonoBehaviour {
         slidersName[1].text = "Jitter-Wahrscheinlichkeit";
         slidersName[2].text = "Flachenanteil";
         slidersName[3].text = "Erosionsprozentsatz";
-        slidersName[4].text = "Höhenmaximum";
+        slidersName[4].text = "Hohenmaximum";
         slidersName[5].text = "Chunk minimale GroBe";
         slidersName[6].text = "Chunk maximale GroBe";
         slidersName[7].text = "Regionsnummer";
@@ -263,7 +263,7 @@ public class LanguageManager : MonoBehaviour {
         slidersName[11].text = "Jitter-Wahrscheinlichkeit";
         slidersName[12].text = "Flachenanteil";
         slidersName[13].text = "Erosionsprozentsatz";
-        slidersName[14].text = "Höhenmaximum";
+        slidersName[14].text = "Hohenmaximum";
         slidersName[15].text = "Chunk minimale GroBe";
         slidersName[16].text = "Chunk maximale GroBe";
         slidersName[17].text = "Regionsnummer";
@@ -272,7 +272,7 @@ public class LanguageManager : MonoBehaviour {
 
         solo[0].text = "ANFANG";
         solo[1].text = "STORNIEREN";
-        solo[2].text = "Seed ( zufällig, wenn leer )";
+        solo[2].text = "Seed ( zufallig, wenn leer )";
         solo[3].text = "WARNUNG: Ladezeit erwarten";
         solo[4].text = "AI Ebene";
 
@@ -289,7 +289,7 @@ public class LanguageManager : MonoBehaviour {
         waiting[3].text = "Warten auf andere Spieler...";
         waiting[4].text = "ANFANG";
         waiting[5].text = "ANFANG";
-        waiting[6].text = "Seed ( zufällig, wenn leer )";
+        waiting[6].text = "Seed ( zufallig, wenn leer )";
 
         loadButton = "LADEN";
         randomButton = "ZUFALLIG";
@@ -357,14 +357,14 @@ public class LanguageManager : MonoBehaviour {
 
         solo[0].text = "COMIENZO";
         solo[1].text = "ANULAR";
-        solo[2].text = "Seed ( al azar si está vacío )";
+        solo[2].text = "Seed ( al azar si esta vacio )";
         solo[3].text = "ADVERTENCIA: Espere tiempo de carga";
         solo[4].text = "AI nivel";
 
         host[0].text = "Usuario";
         host[1].text = "SERVIDOR ABIERTO";
 
-        join[0].text = "Dirección del servidor";
+        join[0].text = "Direccion del servidor";
         join[1].text = "Usuario";
         join[2].text = "CONECTAR";
 
@@ -374,7 +374,7 @@ public class LanguageManager : MonoBehaviour {
         waiting[3].text = "Esperando a otros jugadores...";
         waiting[4].text = "COMIENZO";
         waiting[5].text = "COMIENZO";
-        waiting[6].text = "Seed ( al azar si está vacío )";
+        waiting[6].text = "Seed ( al azar si esta vacio )";
 
         loadButton = "CARGAR";
         randomButton = "EL AZAR";

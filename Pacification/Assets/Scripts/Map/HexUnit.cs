@@ -184,7 +184,10 @@ public class HexUnit : MonoBehaviour
             else if(!location.IsUnderWater && Unit.embark)
             {
                 Unit.embark = false;
-                Unit.SetGraphics(Grid.unitPrefab[(int)Unit.Type]);
+                int prefabIndex = (int)Unit.Type;
+                if(Unit.Level > 10)
+                    prefabIndex += 4;
+                Unit.SetGraphics(Grid.unitPrefab[prefabIndex]);
             }
 
             Grid.DecreaseVisibility(pathToTravel[i], VisionRange);

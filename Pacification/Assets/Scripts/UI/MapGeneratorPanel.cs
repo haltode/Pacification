@@ -90,6 +90,7 @@ public class MapGeneratorPanel : MonoBehaviour {
         if(modeRandom)
         {
             button.text = FindObjectOfType<LanguageManager>().loadButton;
+            Debug.Log(FindObjectOfType<LanguageManager>().randomButton);
             buttonM.text = button.text;
             GameManager.Instance.path = "";
         }
@@ -108,6 +109,7 @@ public class MapGeneratorPanel : MonoBehaviour {
                 g.SetActive(false);
 
             button.text = FindObjectOfType<LanguageManager>().randomButton;
+            Debug.Log(FindObjectOfType<LanguageManager>().randomButton);
             buttonM.text = button.text;
 
             string[] paths = Directory.GetFiles(Application.persistentDataPath, "*.map");

@@ -29,6 +29,13 @@ public class LanguageManager : MonoBehaviour {
     public string loadButton;
     public string randomButton;
 
+
+    private void Start()
+    {
+        loadButton = "LOAD";
+        randomButton = "RANDOM";
+}
+
     private void Update()
     {
         for(int i = 0; i < sliders.Length; ++i)
@@ -97,6 +104,7 @@ public class LanguageManager : MonoBehaviour {
         solo[1].text = "CANCEL";
         solo[2].text = "Seed ( random  if  empty )";
         solo[3].text = "WARNING: Expect loading time";
+        solo[4].text = "AI Level";
 
         host[0].text = "Enter your username";
         host[1].text = "OPEN SERVER";
@@ -181,6 +189,7 @@ public class LanguageManager : MonoBehaviour {
         solo[1].text = "ANNULER";
         solo[2].text = "Seed ( aleatoire si vide )";
         solo[3].text = "ATTENTION: Attendez vous a un temps de chargement";
+        solo[4].text = "Level de l'IA";
 
         host[0].text = "Entrer le pseudo";
         host[1].text = "DEMARER LE SERVEUR";
@@ -265,6 +274,7 @@ public class LanguageManager : MonoBehaviour {
         solo[1].text = "STORNIEREN";
         solo[2].text = "Seed ( zufällig, wenn leer )";
         solo[3].text = "WARNUNG: Ladezeit erwarten";
+        solo[4].text = "AI Ebene";
 
         host[0].text = "Nutzername";
         host[1].text = "ÖFFNEN SERVER";
@@ -349,6 +359,7 @@ public class LanguageManager : MonoBehaviour {
         solo[1].text = "ANULAR";
         solo[2].text = "Seed ( al azar si está vacío )";
         solo[3].text = "ADVERTENCIA: Espere tiempo de carga";
+        solo[4].text = "AI nivel";
 
         host[0].text = "Usuario";
         host[1].text = "SERVIDOR ABIERTO";

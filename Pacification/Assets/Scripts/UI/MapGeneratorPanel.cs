@@ -62,13 +62,14 @@ public class MapGeneratorPanel : MonoBehaviour {
     public GameObject[] mapsGM;
     public Text[] mapsM;
 
-
     public GameObject randomPanel;
     public GameObject loadPanel;
     public GameObject randomPanelM;
     public GameObject loadPanelM;
     public Text button;
     public Text buttonM;
+
+    public GameObject[] isActive;
 
     bool modeRandom = true;
 
@@ -103,6 +104,9 @@ public class MapGeneratorPanel : MonoBehaviour {
             foreach(GameObject g in mapsGM)
                 g.SetActive(false);
 
+            foreach(GameObject g in isActive)
+                g.SetActive(false);
+
             button.text = FindObjectOfType<LanguageManager>().randomButton;
             buttonM.text = button.text;
 
@@ -118,11 +122,16 @@ public class MapGeneratorPanel : MonoBehaviour {
                 }
 
             GameManager.Instance.path = Path.Combine(Application.persistentDataPath, maps[0].text + ".map");
+            isActive[0].SetActive(true);
         }
     }
 
     public void SelectMap(int i)
     {
+        foreach(GameObject g in isActive)
+            g.SetActive(false);
         GameManager.Instance.path = Path.Combine(Application.persistentDataPath, maps[i].text + ".map");
+        isActive[i].SetActive(true);
+        isActive[10 + i].SetActive(true);
     }
 }

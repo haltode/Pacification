@@ -77,7 +77,10 @@ public class HexUnit : MonoBehaviour
             location.DisableHighlight();
         }
         location.Unit = null;
-        Destroy(gameObject);
+        if (Unit.Type == Unit.UnitType.SETTLER || Unit.Type == Unit.UnitType.HEAVY)
+            Destroy(gameObject);
+        else
+            FindObjectOfType<Client>().DeadList.Add(gameObject);
     }
 
     public void ValidateLocation()

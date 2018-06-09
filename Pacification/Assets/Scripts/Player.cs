@@ -145,8 +145,6 @@ public class Player
 
     public void RemoveUnit(Unit unit)
     {
-        for (float t = 0; t < 5f; t += Time.deltaTime)
-        { }
         hexGrid.RemoveUnit(unit.HexUnit);
         playerUnits.Remove(unit);
         unit = null;

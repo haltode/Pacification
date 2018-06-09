@@ -27,6 +27,9 @@ public class ButtonManager : MonoBehaviour {
             client.Send("CEND|" + client.clientName);
             client.player.canPlay = false;
             activePlayer.SetActive(false);
+            foreach (GameObject g in client.DeadList)
+                Destroy(g);
+            client.DeadList.Clear();
         }
     }
 

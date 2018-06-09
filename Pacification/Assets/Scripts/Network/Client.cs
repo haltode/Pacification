@@ -26,12 +26,15 @@ public class Client : MonoBehaviour
     public List<Player> players = new List<Player>();
     AI ai = null;
 
+    public List<GameObject> DeadList;
+
     int roundNb = 0;
 
     void Start()
     {
         playerListDisplay = FindObjectOfType<PlayerListManager>();
         DontDestroyOnLoad(gameObject);
+        DeadList = new List<GameObject>();
     }
 
     public bool ConnectToServer(string host, int port)

@@ -32896,6 +32896,11 @@ MonoBehaviour:
   - {fileID: 467692792}
   - {fileID: 32768956}
   - {fileID: 66961673}
+  loadRandomButton:
+  - {fileID: 271539489}
+  - {fileID: 799269772}
+  loadButton: 
+  randomButton: 
 --- !u!4 &1028254439
 Transform:
   m_ObjectHideFlags: 0

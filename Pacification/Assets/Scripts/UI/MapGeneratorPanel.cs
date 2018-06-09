@@ -88,8 +88,8 @@ public class MapGeneratorPanel : MonoBehaviour {
 
         if(modeRandom)
         {
-            button.text = "LOAD";
-            buttonM.text = "LOAD";
+            button.text = FindObjectOfType<LanguageManager>().loadButton;
+            buttonM.text = button.text;
             GameManager.Instance.path = "";
         }
         else
@@ -103,8 +103,8 @@ public class MapGeneratorPanel : MonoBehaviour {
             foreach(GameObject g in mapsGM)
                 g.SetActive(false);
 
-            button.text = "RANDOM";
-            buttonM.text = "RANDOM";
+            button.text = FindObjectOfType<LanguageManager>().randomButton;
+            buttonM.text = button.text;
 
             string[] paths = Directory.GetFiles(Application.persistentDataPath, "*.map");
             Array.Sort(paths);

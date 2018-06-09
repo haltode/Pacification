@@ -24,6 +24,11 @@ public class LanguageManager : MonoBehaviour {
 
     public GameObject[] selected;
 
+    public Text[] loadRandomButton;
+
+    public string loadButton;
+    public string randomButton;
+
     private void Update()
     {
         for(int i = 0; i < sliders.Length; ++i)
@@ -67,7 +72,6 @@ public class LanguageManager : MonoBehaviour {
         play[1].text = "HOST";
         play[2].text = "JOIN";
 
-
         slidersName[0].text = "Map Size";
         slidersName[1].text = "Jitter Probability";
         slidersName[2].text = "Land Percentage";
@@ -109,6 +113,10 @@ public class LanguageManager : MonoBehaviour {
         waiting[5].text = "START";
         waiting[6].text = "Seed ( random if empty )";
 
+        loadButton = "LOAD";
+        randomButton = "RANDOM";
+        loadRandomButton[0].text = loadButton;
+        loadRandomButton[1].text = loadButton;
     }
 
     public void French()
@@ -188,6 +196,11 @@ public class LanguageManager : MonoBehaviour {
         waiting[4].text = "DEMARER";
         waiting[5].text = "DEMARER";
         waiting[6].text = "Seed ( aleatoire si vide )";
+
+        loadButton = "CHARGER";
+        randomButton = "ALEATOIRE";
+        loadRandomButton[0].text = loadButton;
+        loadRandomButton[1].text = loadButton;
     }
 
     public void German()
@@ -267,6 +280,11 @@ public class LanguageManager : MonoBehaviour {
         waiting[4].text = "ANFANG";
         waiting[5].text = "ANFANG";
         waiting[6].text = "Seed ( zufällig, wenn leer )";
+
+        loadButton = "LADEN";
+        randomButton = "ZUFALLIG";
+        loadRandomButton[0].text = loadButton;
+        loadRandomButton[1].text = loadButton;
     }
 
     public void Despacito()
@@ -346,6 +364,11 @@ public class LanguageManager : MonoBehaviour {
         waiting[4].text = "COMIENZO";
         waiting[5].text = "COMIENZO";
         waiting[6].text = "Seed ( al azar si está vacío )";
+
+        loadButton = "CARGAR";
+        randomButton = "EL AZAR";
+        loadRandomButton[0].text = loadButton;
+        loadRandomButton[1].text = loadButton;
     }
 
 }

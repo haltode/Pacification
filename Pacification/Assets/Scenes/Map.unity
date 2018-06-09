@@ -15304,6 +15304,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   barbarianSpawn: {fileID: 8300000, guid: 5fb9e8b20ac4e4996a6a8437093ede1b, type: 3}
+  newBuilding: {fileID: 8300000, guid: 5aeb252c1a5294fc995d59798840f50d, type: 3}
+  newCity: {fileID: 8300000, guid: b8912e2fb9ff34e31b7887d20354b65b, type: 3}
+  newAttacker: {fileID: 8300000, guid: 16d60c5ade4a64807b0910eb2f45f86e, type: 3}
 --- !u!82 &896144702
 AudioSource:
   m_ObjectHideFlags: 0

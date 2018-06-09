@@ -208,6 +208,7 @@ public class Client : MonoBehaviour
 
             //Worker : Exploit ressources
             case "SWEX":
+                FindObjectOfType<SoundManager>().PlayNewBuilding();
                 string[] exploitData = receivedData[1].Split('#');
                 HexCell exploit = player.hexGrid.GetCell(new HexCoordinates(int.Parse(exploitData[0]), int.Parse(exploitData[1])));
                 

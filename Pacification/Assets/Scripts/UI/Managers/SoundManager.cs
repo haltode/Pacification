@@ -4,6 +4,9 @@ public class SoundManager : MonoBehaviour
 {
     AudioSource[] gameSoundtrack;
     public AudioClip barbarianSpawn;
+    public AudioClip newBuilding;
+    public AudioClip newCity;
+    public AudioClip newAttacker;
 
     private void Start()
     {
@@ -21,5 +24,20 @@ public class SoundManager : MonoBehaviour
     public void PlayBarbarianSpawn()
     {
         AudioSource.PlayClipAtPoint(barbarianSpawn, Camera.main.transform.position);
+    }
+
+    public void PlayNewBuilding()
+    {
+        AudioSource.PlayClipAtPoint(newBuilding, Camera.main.transform.position);
+    }
+
+    public void PlayNewCity()
+    {
+        AudioSource.PlayClipAtPoint(newCity, Camera.main.transform.position);
+    }
+
+    public void PlayNewAttacker()
+    {
+        AudioSource.PlayClipAtPoint(newAttacker, Camera.main.transform.position);
     }
 }

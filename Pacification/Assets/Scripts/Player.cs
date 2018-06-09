@@ -82,6 +82,10 @@ public class Player
         HexCell location = hexGrid.GetCell(new HexCoordinates(int.Parse(receivedData[1]), int.Parse(receivedData[2])));
         Unit unit = null;
 
+        if(location.HasCity && (type == Unit.UnitType.REGULAR || type == Unit.UnitType.RANGED ||
+            type == Unit.UnitType.HEAVY))
+            UnityEngine.Object.FindObjectOfType<SoundManager>().PlayNewAttacker();
+
         if(type == Unit.UnitType.SETTLER)
             unit = new Settler(this);
         else if(type == Unit.UnitType.WORKER)
@@ -222,6 +226,7 @@ public class Player
 
     public void NetworkAddCity(string data)
     {
+        UnityEngine.Object.FindObjectOfType<SoundManager>().PlayNewCity();
         hexGrid = Object.FindObjectOfType<HexGrid>();
         string[] receivedData = data.Split('#');
 

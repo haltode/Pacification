@@ -149,13 +149,13 @@ public class HexGameUI : MonoBehaviour
 
         if(Input.GetKeyDown(controls.unitPrimaryAction))
         {
-            if(selectedUnit.Type == Unit.UnitType.SETTLER)
+            if(selectedUnit.Type == Unit.UnitType.SETTLER && !currentCell.IsUnderWater)
             {
                 ((Settler)selectedUnit).Settle();
                 selectedUnit = null;
                 currentCell = null;
             }
-            else if(selectedUnit.Type == Unit.UnitType.WORKER)
+            else if(selectedUnit.Type == Unit.UnitType.WORKER && currentCell.FeatureIndex < 10 && currentCell.FeatureIndex > 3)
                 ((Worker)selectedUnit).Exploit();
             else
             {

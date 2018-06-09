@@ -31,7 +31,7 @@ public class LanguageManager : MonoBehaviour {
         about.text = "Developed by Brainless Devs";
 
         foreach(Text t in back)
-            t.text = "Back";
+            t.text = "BACK";
 
         exit[0].text = "Are you sure ?";
         exit[1].text = "Yes";
@@ -54,8 +54,8 @@ public class LanguageManager : MonoBehaviour {
         main[3].text = "EXIT";
 
         play[0].text = "SOLO";
-        play[0].text = "HOST";
-        play[0].text = "JOIN";
+        play[1].text = "HOST";
+        play[2].text = "JOIN";
     }
 
     public void French()
@@ -65,8 +65,8 @@ public class LanguageManager : MonoBehaviour {
         selected[2].SetActive(false);
         selected[3].SetActive(false);
 
-        error.text = "Vous avez été déconnecté";
-        about.text = "Développé par Brainless Devs";
+        error.text = "Vous avez ete deconnecte";
+        about.text = "Developpe par Brainless Devs";
 
         foreach(Text t in back)
             t.text = "RETOUR";
@@ -75,11 +75,11 @@ public class LanguageManager : MonoBehaviour {
         exit[1].text = "Oui";
         exit[2].text = "Non";
 
-        controls[0].text = "Déplacer la Caméra";
-        controls[1].text = "Actions des unités";
+        controls[0].text = "Deplacer la Camera";
+        controls[1].text = "Actions des unites";
         controls[2].text = "Ouvrir le tchat";
         controls[3].text = "Naviguer entre les villes";
-        controls[4].text = "Naviguer entre les unités";
+        controls[4].text = "Naviguer entre les unites";
         controls[5].text = "Finir le tour";
 
         settings[0].text = "VOLUME DU JEU";
@@ -92,8 +92,8 @@ public class LanguageManager : MonoBehaviour {
         main[3].text = "QUITTER";
 
         play[0].text = "SOLO";
-        play[0].text = "HEBERGER";
-        play[0].text = "REJOINDRE";
+        play[1].text = "HEBERGER";
+        play[2].text = "REJOINDRE";
     }
 
     public void German()
@@ -130,8 +130,8 @@ public class LanguageManager : MonoBehaviour {
         main[3].text = "VERLASSEN";
 
         play[0].text = "SOLO";
-        play[0].text = "GASTGEBER";
-        play[0].text = "BEITRETEN";
+        play[1].text = "GASTGEBER";
+        play[2].text = "BEITRETEN";
     }
 
     public void Despacito()
@@ -147,7 +147,7 @@ public class LanguageManager : MonoBehaviour {
         foreach(Text t in back)
             t.text = "ATRAS";
 
-        exit[0].text = "Estás seguro ?";
+        exit[0].text = "Estas seguro ?";
         exit[1].text = "Si";
         exit[2].text = "No";
 
@@ -168,8 +168,8 @@ public class LanguageManager : MonoBehaviour {
         main[3].text = "SALIR";
 
         play[0].text = "SOLO";
-        play[0].text = "ALOJAR";
-        play[0].text = "UNIRSE";
+        play[1].text = "ALOJAR";
+        play[2].text = "UNIRSE";
     }
 
 }

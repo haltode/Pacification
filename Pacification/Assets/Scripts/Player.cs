@@ -90,7 +90,7 @@ public class Player
         {
             Regular regular = new Regular(this);
             regular.Level = int.Parse(receivedData[3]);
-            if(regular.Level >= 10)
+            if(regular.Level > 10)
                 type = (Unit.UnitType)((int)type + 4);
             unit = regular;
         }
@@ -98,7 +98,7 @@ public class Player
         {
             Ranged ranged = new Ranged(this);
             ranged.Level = int.Parse(receivedData[3]);
-            if(ranged.Level >= 10)
+            if(ranged.Level > 10)
                 type = (Unit.UnitType)((int)type + 4);
             unit = ranged;
         }
@@ -106,7 +106,7 @@ public class Player
         {
             Heavy heavy = new Heavy(this);
             heavy.Level = int.Parse(receivedData[3]);
-            if(heavy.Level >= 10)
+            if(heavy.Level > 10)
                 type = (Unit.UnitType)((int)type + 4);
             unit = heavy;
         }

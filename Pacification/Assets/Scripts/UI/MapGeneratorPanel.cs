@@ -57,12 +57,18 @@ public class MapGeneratorPanel : MonoBehaviour {
     public GameObject map9G;
     public GameObject map10G;
 
-    public GameObject[] mapsG;
-    public Text[] maps;
+    GameObject[] mapsG;
+    Text[] maps;
+    public GameObject[] mapsGM;
+    public Text[] mapsM;
+
 
     public GameObject randomPanel;
     public GameObject loadPanel;
+    public GameObject randomPanelM;
+    public GameObject loadPanelM;
     public Text button;
+    public Text buttonM;
 
     bool modeRandom = true;
 
@@ -75,12 +81,15 @@ public class MapGeneratorPanel : MonoBehaviour {
     public void ChangeGenMode()
     {
         loadPanel.SetActive(modeRandom);
+        loadPanelM.SetActive(modeRandom);
         modeRandom = !modeRandom;
         randomPanel.SetActive(modeRandom);
+        randomPanelM.SetActive(modeRandom);
 
         if(modeRandom)
         {
             button.text = "LOAD";
+            buttonM.text = "LOAD";
             GameManager.Instance.path = "";
         }
         else
@@ -91,7 +100,11 @@ public class MapGeneratorPanel : MonoBehaviour {
             foreach(GameObject g in mapsG)
                 g.SetActive(false);
 
+            foreach(GameObject g in mapsGM)
+                g.SetActive(false);
+
             button.text = "RANDOM";
+            buttonM.text = "RANDOM";
 
             string[] paths = Directory.GetFiles(Application.persistentDataPath, "*.map");
             Array.Sort(paths);
@@ -99,8 +112,12 @@ public class MapGeneratorPanel : MonoBehaviour {
                 if(i < 11)
                 {
                     maps[i].text = Path.GetFileNameWithoutExtension(paths[i]);
+                    mapsM[i].text = Path.GetFileNameWithoutExtension(paths[i]);
                     mapsG[i].SetActive(true);
+                    mapsGM[i].SetActive(true);
                 }
+
+            GameManager.Instance.path = Path.Combine(Application.persistentDataPath, maps[0].text + ".map");
         }
     }
 

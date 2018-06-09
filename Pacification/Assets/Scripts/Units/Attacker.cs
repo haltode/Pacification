@@ -59,7 +59,7 @@ public class Attacker : Unit
 
         hexUnit.Rotation(target.HexUnit.Location);
         Thread.Sleep(250);
-        anim.animator.SetInteger("AnimPar", 2);
+        anim.animator.SetTrigger("ActionTrigger");
 
         float multiplier = 1f;
         dmgMult.TryGetValue(target.Type, out multiplier);
@@ -70,6 +70,7 @@ public class Attacker : Unit
         else
             target.Owner.NetworkTakeDamageUnit(target.HexUnit.location.coordinates.X + "#" + target.HexUnit.location.coordinates.Z + "#" + damage);
         hasMadeAction = true;
+        anim.animator.SetTrigger("IdleTrigger");
         return true;
     }
 
@@ -80,7 +81,7 @@ public class Attacker : Unit
 
         hexUnit.Rotation(target.Location);
         Thread.Sleep(250);
-        anim.animator.SetInteger("AnimPar", 2);
+        anim.animator.SetTrigger("ActionTrigger");
 
         int damage = (int)((float)((defaultATK - upgradeATK) + upgradeATK * level) * dmgMultCity);
 
@@ -89,6 +90,7 @@ public class Attacker : Unit
         else
             target.Owner.NetworkTakeDamageCity(target.Location.coordinates.X + "#" + target.Location.coordinates.Z + "#" + damage);
         hasMadeAction = true;
+        anim.animator.SetTrigger("IdleTrigger");
         return true;
     }
 
@@ -99,12 +101,13 @@ public class Attacker : Unit
 
         hexUnit.Rotation(target.Location);
         Thread.Sleep(250);
-        anim.animator.SetInteger("AnimPar", 2);
+        anim.animator.SetTrigger("ActionTrigger");
 
         int damage = (int)((float)((defaultATK - upgradeATK) + upgradeATK * level) * dmgMultCity);
 
         Owner.client.Send("CUNI|RTD|" + target.Location.coordinates.X + "#" + target.Location.coordinates.Z + "#" + damage + "|" + target.Owner.name);
         hasMadeAction = true;
+        anim.animator.SetTrigger("IdleTrigger");
         return true;
     }
 }

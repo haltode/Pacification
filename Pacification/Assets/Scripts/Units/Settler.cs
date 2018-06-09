@@ -21,7 +21,8 @@ public class Settler : Unit
         if (hasMadeAction)
             return;
 
-        anim.animator.SetInteger("AnimPar", 2);
+        //anim.animator.SetInteger("AnimPar", 2);
+        anim.animator.SetTrigger("ActionTrigger");
 
         Owner.client.Send("CUNI|CIT|" + (int)type + "#" + hexUnit.location.coordinates.X + "#" + hexUnit.location.coordinates.Z);
         hasMadeAction = true;

@@ -76,7 +76,7 @@ public class HexUnit : MonoBehaviour
             Grid.DecreaseVisibility(location, VisionRange);
             location.DisableHighlight();
         }
-        Unit.anim.animator.SetInteger("AnimPar", 3);
+        Unit.anim.animator.SetTrigger("DeathTrigger");
         location.Unit = null;
         Destroy(gameObject);
     }
@@ -152,7 +152,7 @@ public class HexUnit : MonoBehaviour
             currentTravelLocation ? currentTravelLocation : pathToTravel[0],
             VisionRange);
 
-        Unit.anim.animator.SetInteger("AnimPar", 1);
+        Unit.anim.animator.SetTrigger("WalkTrigger");
         float t = Time.deltaTime * TravelSpeed;
         for(int i = 1; i < pathToTravel.Count; ++i)
         {
@@ -163,8 +163,8 @@ public class HexUnit : MonoBehaviour
             Grid.IncreaseVisibility(pathToTravel[i], VisionRange);
             for(; t < 1f; t += Time.deltaTime * TravelSpeed)
             {
-                if(i == pathToTravel.Count - 1 && t > 0.6f)
-                    Unit.anim.animator.SetInteger("AnimPar", 0);
+                if (i == pathToTravel.Count - 1 && t > 0.6f)
+                    Unit.anim.animator.SetTrigger("IdleTrigger");
                 transform.localPosition = Bezier.GetPoint(a, b, c, t);
                 Vector3 d = Bezier.GetDerivative(a, b, c, t);
                 d.y = 0f;

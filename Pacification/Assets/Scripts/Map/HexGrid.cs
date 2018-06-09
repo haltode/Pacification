@@ -421,7 +421,7 @@ public class HexGrid : MonoBehaviour
         string str = "CUNI|INI";
         for(int i = 0; i < client.players.Count; ++i)
         {
-            if(client.players[i].name == "Google")
+            if(GameManager.Instance.gamemode == GameManager.Gamemode.SOLO && i == 1)
                 continue;
 
             client.players[i].color = client.player.PlayerColors[i];

@@ -18,7 +18,17 @@ public class LanguageManager : MonoBehaviour {
     public Text[] play;         //
     public Text[] main;         //
 
+    public Slider[] sliders;
+    public Text[] slidersName;
+    public Text[] slidersValues;
+
     public GameObject[] selected;
+
+    private void Update()
+    {
+        for(int i = 0; i < sliders.Length; ++i)
+            slidersValues[i].text = "" + sliders[i].value;
+    }
 
     public void English()
     {
@@ -56,6 +66,29 @@ public class LanguageManager : MonoBehaviour {
         play[0].text = "SOLO";
         play[1].text = "HOST";
         play[2].text = "JOIN";
+
+
+        slidersName[0].text = "Map Size";
+        slidersName[1].text = "Jitter Probability";
+        slidersName[2].text = "Land Percentage";
+        slidersName[3].text = "Erosion Percentage";
+        slidersName[4].text = "Maximum Elevation";
+        slidersName[5].text = "Chunk Minimum Size";
+        slidersName[6].text = "Chunk Maximum Size";
+        slidersName[7].text = "Region Count";
+        slidersName[8].text = "Region Border";
+        slidersName[9].text = "Resources Percentage";
+        slidersName[10].text = "Map Size";
+        slidersName[11].text = "Jitter Probability";
+        slidersName[12].text = "Land Percentage";
+        slidersName[13].text = "Erosion Percentage";
+        slidersName[14].text = "Maximum Elevation";
+        slidersName[15].text = "Chunk Minimum Size";
+        slidersName[16].text = "Chunk Maximum Size";
+        slidersName[17].text = "Region Count";
+        slidersName[18].text = "Region Border";
+        slidersName[19].text = "Resources Percentage";
+
     }
 
     public void French()
@@ -94,6 +127,27 @@ public class LanguageManager : MonoBehaviour {
         play[0].text = "SOLO";
         play[1].text = "HEBERGER";
         play[2].text = "REJOINDRE";
+
+        slidersName[0].text = "Taille de la Carte";
+        slidersName[1].text = "Probabilite de gigue";
+        slidersName[2].text = "Pourcentage de terre";
+        slidersName[3].text = "Pourcentage d'erosion";
+        slidersName[4].text = "Elevation Maximum";
+        slidersName[5].text = "Taille minimale des Chunck";
+        slidersName[6].text = "Taille maximum des Chunck";
+        slidersName[7].text = "Nombre de regions";
+        slidersName[8].text = "Bordure des regions";
+        slidersName[9].text = "Pourcentage de ressources";
+        slidersName[10].text = "Taille de la Carte";
+        slidersName[11].text = "Probabilité de gigue";
+        slidersName[12].text = "Pourcentage de terre";
+        slidersName[13].text = "Pourcentage d'erosion";
+        slidersName[14].text = "Elevation Maximum";
+        slidersName[15].text = "Taille minimale des Chunck";
+        slidersName[16].text = "Taille maximum des Chunck";
+        slidersName[17].text = "Nombre de regions";
+        slidersName[18].text = "Bordure des regions";
+        slidersName[19].text = "Pourcentage de ressources";
     }
 
     public void German()
@@ -132,6 +186,27 @@ public class LanguageManager : MonoBehaviour {
         play[0].text = "SOLO";
         play[1].text = "GASTGEBER";
         play[2].text = "BEITRETEN";
+
+        slidersName[0].text = "KartengroBe";
+        slidersName[1].text = "Jitter-Wahrscheinlichkeit";
+        slidersName[2].text = "Flachenanteil";
+        slidersName[3].text = "Erosionsprozentsatz";
+        slidersName[4].text = "Höhenmaximum";
+        slidersName[5].text = "Chunk minimale GroBe";
+        slidersName[6].text = "Chunk maximale GroBe";
+        slidersName[7].text = "Regionsnummer";
+        slidersName[8].text = "Regionsgrenze";
+        slidersName[9].text = "Ressourcen Prozentsatze";
+        slidersName[10].text = "KartengroBe";
+        slidersName[11].text = "Jitter-Wahrscheinlichkeit";
+        slidersName[12].text = "Flachenanteil";
+        slidersName[13].text = "Erosionsprozentsatz";
+        slidersName[14].text = "Höhenmaximum";
+        slidersName[15].text = "Chunk minimale GroBe";
+        slidersName[16].text = "Chunk maximale GroBe";
+        slidersName[17].text = "Regionsnummer";
+        slidersName[18].text = "Regionsgrenze";
+        slidersName[19].text = "Ressourcen Prozentsatze";
     }
 
     public void Despacito()
@@ -170,6 +245,27 @@ public class LanguageManager : MonoBehaviour {
         play[0].text = "SOLO";
         play[1].text = "ALOJAR";
         play[2].text = "UNIRSE";
+
+        slidersName[0].text = "Tamano de la tarjeta";
+        slidersName[1].text = "Probabilidad de fluctuacion";
+        slidersName[2].text = "Porcentaje de tierra";
+        slidersName[3].text = "Porcentaje de erosion";
+        slidersName[4].text = "Maxima elevacion";
+        slidersName[5].text = "Tamano minimo del Chunk";
+        slidersName[6].text = "Tamano maximo del Chunk";
+        slidersName[7].text = "Numero de region";
+        slidersName[8].text = "Frontera de la region";
+        slidersName[9].text = "Porcentajes de recursos";
+        slidersName[10].text = "Tamano de la tarjeta";
+        slidersName[11].text = "Probabilidad de fluctuacion";
+        slidersName[12].text = "Porcentaje de tierra";
+        slidersName[13].text = "Porcentaje de erosion";
+        slidersName[14].text = "Maxima elevacion";
+        slidersName[15].text = "Tamano minimo del Chunk";
+        slidersName[16].text = "Tamano maximo del Chunk";
+        slidersName[17].text = "Numero de region";
+        slidersName[18].text = "Frontera de la region";
+        slidersName[19].text = "Porcentajes de recursos";
     }
 
 }

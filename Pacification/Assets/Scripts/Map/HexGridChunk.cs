@@ -80,8 +80,7 @@ public class HexGridChunk : MonoBehaviour
 
         TriangulateConnection(cell, v1, v2, dir);
 
-        if(cell.IsUnderWater)
-            TriangulateWater(cell, center, dir);
+        TriangulateWater(cell, center, dir);
     }
 
     void TriangulateConnection(HexCell cell, Vector3 v1, Vector3 v2, HexDirection dir)
@@ -210,7 +209,7 @@ public class HexGridChunk : MonoBehaviour
         if(dir <= HexDirection.SE)
         {
             HexCell neighbor = cell.GetNeighbor(dir);
-            if(neighbor == null || !neighbor.IsUnderWater)
+            if(neighbor == null)
                 return;
             Vector3 bridge = HexMetrics.GetBridge(dir);
             Vector3 e1 = c1 + bridge;
@@ -222,7 +221,7 @@ public class HexGridChunk : MonoBehaviour
             if(dir <= HexDirection.E)
             {
                 HexCell nextNeighbor = cell.GetNeighbor(dir.Next());
-                if(nextNeighbor == null || !nextNeighbor.IsUnderWater)
+                if(nextNeighbor == null)
                     return;
                 water.AddTriangle(c2, e2, c2 + HexMetrics.GetBridge(dir.Next()));
                 indices.z = nextNeighbor.Index;

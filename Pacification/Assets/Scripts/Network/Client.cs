@@ -260,10 +260,7 @@ public class Client : MonoBehaviour
                         bool victory = true;
                         foreach(Player p in players)
                             if(p != player)
-                            {
                                 victory &= p.isDead;
-                                Debug.Log(p.name + ": " + p.isDead + "/" + p.playerCities.Count + "/" + p.playerUnits.Count);
-                            }
 
                         if(victory)
                             player.displayer.victory.SetActive(true);

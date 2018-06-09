@@ -75,7 +75,7 @@ public class PlayerListManager : MonoBehaviour {
         {
             if(names[i].text == name)
             {
-                names[i].text = "Available Slot";
+                names[i].text = "";
                 isUsed[i] = false;
             }
         }
@@ -87,7 +87,7 @@ public class PlayerListManager : MonoBehaviour {
 
         for(int i = 0; i < 8; ++i)
         {
-            names[i].text = "Available Slot";
+            names[i].text = "";
             isUsed[i] = false;
         }
     }

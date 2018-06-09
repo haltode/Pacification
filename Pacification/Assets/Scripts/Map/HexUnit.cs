@@ -173,13 +173,13 @@ public class HexUnit : MonoBehaviour
             }
 
             // Embark on water
-            if(location.IsUnderWater && location.Elevation == 0 && !Unit.embark && Unit.CanEmbark)
+            if(location.IsUnderWater && !Unit.embark && Unit.CanEmbark)
             {
                 Unit.embark = true;
                 Unit.SetGraphics(Grid.unitPrefab[5]);
             }
             // Embark on land
-            else if((!location.IsUnderWater || location.Elevation > 0)&& Unit.embark)
+            else if(!location.IsUnderWater && Unit.embark)
             {
                 Unit.embark = false;
                 Unit.SetGraphics(Grid.unitPrefab[(int)Unit.Type]);

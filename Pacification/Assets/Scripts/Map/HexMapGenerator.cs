@@ -378,7 +378,8 @@ public class HexMapGenerator : MonoBehaviour
         for(int i = 0; i < cellCount; ++i)
         {
             HexCell cell = grid.GetCell(i);
-            cell.IsUnderWater = true;
+            if(cell.Elevation == 0)
+                cell.IsUnderWater = true;
         }
     }
 
@@ -397,7 +398,7 @@ public class HexMapGenerator : MonoBehaviour
     {
         int nbValidCell = 0;
         for (int i = 0; i < cellCount; ++i)
-            if (!grid.GetCell(i).IsUnderWater || grid.GetCell(i).Elevation > 0)
+            if(!grid.GetCell(i).IsUnderWater)
                 nbValidCell++;
         int resourcesBudget = Mathf.RoundToInt(nbValidCell * resourcesPercentage * 0.01f);
         int guard = 0;
@@ -426,7 +427,7 @@ public class HexMapGenerator : MonoBehaviour
                         for(HexDirection dir = HexDirection.NE; dir <= HexDirection.NW; ++dir)
                         {
                             HexCell neighbor = cell.GetNeighbor(dir);
-                            if(neighbor && (!neighbor.IsUnderWater || neighbor.Elevation > 0)&&
+                            if(neighbor && !neighbor.IsUnderWater &&
                                !neighbor.HasFeature && neighbor.Elevation == cell.Elevation)
                             {
                                 neighbor.FeatureIndex = (int)HexCell.FeatureType.FOREST;
@@ -458,7 +459,7 @@ public class HexMapGenerator : MonoBehaviour
         do
         {
             cell = grid.GetCell(Random.Range(0, cellCount));
-        } while ((cell.IsUnderWater && cell.Elevation == 0) || cell.HasFeature ||
+        } while(cell.IsUnderWater || cell.HasFeature ||
                  cell.TerrainBiomeIndex == (int)HexCell.BiomeType.SNOW ||
                  cell.CountNeighborsFeatures >= 2);
         return cell;

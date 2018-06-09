@@ -187,7 +187,7 @@ public class HexGameUI : MonoBehaviour
             if(selectedUnit.Type == Unit.UnitType.WORKER && selectedUnit.currMVT < selectedUnit.MvtSPD)
             {
                 HexCell roadCell = GetCellUnderCursor();
-                if(!roadCell || (roadCell.IsUnderWater && roadCell.Elevation == 0) || !roadCell.IsExplored || roadCell.Unit)
+                if(!roadCell || roadCell.IsUnderWater || !roadCell.IsExplored || roadCell.Unit)
                     return;
                 bool roadOk = ((Worker)selectedUnit).AddRoad(roadCell);
                 if(roadOk)

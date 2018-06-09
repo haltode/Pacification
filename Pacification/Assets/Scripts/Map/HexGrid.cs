@@ -103,7 +103,7 @@ public class HexGrid : MonoBehaviour
                 HexCell neighbor = current.GetNeighbor(dir);
                 if(neighbor == null || neighbor.Distance != int.MaxValue)
                     continue;
-                if((neighbor.IsUnderWater && neighbor.Elevation == 0) || neighbor.HasUnit || IsBorder(neighbor) || neighbor.Elevation >= 4)
+                if(neighbor.IsUnderWater || neighbor.HasUnit || IsBorder(neighbor) || neighbor.Elevation >= 4)
                     continue;
                 neighbor.Distance = current.Distance + 1;
                 neighbor.SearchHeuristic = 0;
@@ -284,7 +284,7 @@ public class HexGrid : MonoBehaviour
                 HexCell neighbor = current.GetNeighbor(dir);
                 if(neighbor == null || neighbor.Distance != int.MaxValue)
                     continue;
-                if(neighbor.IsUnderWater && neighbor.Elevation == 0 && !unit.Unit.CanEmbark || neighbor.Unit)
+                if(neighbor.IsUnderWater && !unit.Unit.CanEmbark || neighbor.Unit)
                     continue;
                 // AI ignores fog
                 if(!isAI && !neighbor.IsExplored)
@@ -413,7 +413,7 @@ public class HexGrid : MonoBehaviour
         for(int i = 0; i < cells.Length; ++i)
         {
             HexCell cell = cells[i];
-            if((!cell.IsUnderWater || cell.Elevation > 0) && !cell.Unit && !IsBorder(cell) && cell.Elevation <= 2)
+            if(!cell.IsUnderWater && !cell.Unit && !IsBorder(cell) && cell.Elevation <= 2)
                 possibleLocation.Add(cell);
         }
 

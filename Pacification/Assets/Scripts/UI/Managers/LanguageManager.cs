@@ -5,18 +5,18 @@ using UnityEngine.UI;
 
 public class LanguageManager : MonoBehaviour {
 
-    public Text error;          //
-    public Text about;          //
-    public Text[] back;         //
-    public Text[] controls;     //
-    public Text[] settings;     //
-    public Text[] exit;         //
-    public Text[] waiting;      //FUCK
-    public Text[] join;         //FUCK
-    public Text[] host;         //FUCK
-    public Text[] solo;         //FUCK
-    public Text[] play;         //
-    public Text[] main;         //
+    public Text error;
+    public Text about;
+    public Text[] back;
+    public Text[] controls;
+    public Text[] settings;
+    public Text[] exit;
+    public Text[] waiting;
+    public Text[] join;
+    public Text[] host;
+    public Text[] solo;
+    public Text[] play;
+    public Text[] main;
 
     public Slider[] sliders;
     public Text[] slidersName;
@@ -89,6 +89,26 @@ public class LanguageManager : MonoBehaviour {
         slidersName[18].text = "Region Border";
         slidersName[19].text = "Resources Percentage";
 
+        solo[0].text = "START";
+        solo[1].text = "CANCEL";
+        solo[2].text = "Seed ( random  if  empty )";
+        solo[3].text = "WARNING: Expect loading time";
+
+        host[0].text = "Enter your username";
+        host[1].text = "OPEN SERVER";
+
+        join[0].text = "Host Adress";
+        join[1].text = "Enter your username";
+        join[2].text = "CONNECT";
+
+        waiting[0].text = "CANCEL";
+        waiting[1].text = "CANCEL";
+        waiting[2].text = "Waiting for other players...";
+        waiting[3].text = "Waiting for other players...";
+        waiting[4].text = "START";
+        waiting[5].text = "START";
+        waiting[6].text = "Seed ( random if empty )";
+
     }
 
     public void French()
@@ -148,6 +168,26 @@ public class LanguageManager : MonoBehaviour {
         slidersName[17].text = "Nombre de regions";
         slidersName[18].text = "Bordure des regions";
         slidersName[19].text = "Pourcentage de ressources";
+
+        solo[0].text = "DEMARER";
+        solo[1].text = "ANNULER";
+        solo[2].text = "Seed ( aleatoire si vide )";
+        solo[3].text = "ATTENTION: Attendez vous a un temps de chargement";
+
+        host[0].text = "Entrer le pseudo";
+        host[1].text = "DEMARER LE SERVEUR";
+
+        join[0].text = "Adresse de l'hote";
+        join[1].text = "Entrer le pseudo";
+        join[2].text = "SE CONNECTER";
+
+        waiting[0].text = "ANNULER";
+        waiting[1].text = "ANNULER";
+        waiting[2].text = "En attente d'autres joueurs...";
+        waiting[3].text = "En attente d'autres joueurs...";
+        waiting[4].text = "DEMARER";
+        waiting[5].text = "DEMARER";
+        waiting[6].text = "Seed ( aleatoire si vide )";
     }
 
     public void German()
@@ -207,6 +247,26 @@ public class LanguageManager : MonoBehaviour {
         slidersName[17].text = "Regionsnummer";
         slidersName[18].text = "Regionsgrenze";
         slidersName[19].text = "Ressourcen Prozentsatze";
+
+        solo[0].text = "ANFANG";
+        solo[1].text = "STORNIEREN";
+        solo[2].text = "Seed ( zufällig, wenn leer )";
+        solo[3].text = "WARNUNG: Ladezeit erwarten";
+
+        host[0].text = "Nutzername";
+        host[1].text = "ÖFFNEN SERVER";
+
+        join[0].text = "Adresse des Gastgebers";
+        join[1].text = "Nutzername";
+        join[2].text = "VERBINDEN";
+
+        waiting[0].text = "STORNIEREN";
+        waiting[1].text = "STORNIEREN";
+        waiting[2].text = "Warten auf andere Spieler...";
+        waiting[3].text = "Warten auf andere Spieler...";
+        waiting[4].text = "ANFANG";
+        waiting[5].text = "ANFANG";
+        waiting[6].text = "Seed ( zufällig, wenn leer )";
     }
 
     public void Despacito()
@@ -266,6 +326,26 @@ public class LanguageManager : MonoBehaviour {
         slidersName[17].text = "Numero de region";
         slidersName[18].text = "Frontera de la region";
         slidersName[19].text = "Porcentajes de recursos";
+
+        solo[0].text = "COMIENZO";
+        solo[1].text = "ANULAR";
+        solo[2].text = "Seed ( al azar si está vacío )";
+        solo[3].text = "ADVERTENCIA: Espere tiempo de carga";
+
+        host[0].text = "Usuario";
+        host[1].text = "SERVIDOR ABIERTO";
+
+        join[0].text = "Dirección del servidor";
+        join[1].text = "Usuario";
+        join[2].text = "CONECTAR";
+
+        waiting[0].text = "ANULAR";
+        waiting[1].text = "ANULAR";
+        waiting[2].text = "Esperando a otros jugadores...";
+        waiting[3].text = "Esperando a otros jugadores...";
+        waiting[4].text = "COMIENZO";
+        waiting[5].text = "COMIENZO";
+        waiting[6].text = "Seed ( al azar si está vacío )";
     }
 
 }

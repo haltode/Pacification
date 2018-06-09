@@ -32782,6 +32782,8 @@ MonoBehaviour:
   - {fileID: 1159670301}
   - {fileID: 1910906820}
   - {fileID: 1127796173}
+  - {fileID: 338498141}
+  - {fileID: 1382699891}
   controls:
   - {fileID: 2139890819}
   - {fileID: 1283957677}
@@ -32797,10 +32799,26 @@ MonoBehaviour:
   - {fileID: 374896765}
   - {fileID: 621613724}
   - {fileID: 206189057}
-  waiting: []
-  join: []
-  host: []
-  solo: []
+  waiting:
+  - {fileID: 1986257988}
+  - {fileID: 758538846}
+  - {fileID: 1742439684}
+  - {fileID: 1631666017}
+  - {fileID: 878455129}
+  - {fileID: 1281229159}
+  - {fileID: 1381426417}
+  join:
+  - {fileID: 792009467}
+  - {fileID: 194278893}
+  - {fileID: 304764869}
+  host:
+  - {fileID: 1002459767}
+  - {fileID: 1553230772}
+  solo:
+  - {fileID: 2002299001}
+  - {fileID: 1322715559}
+  - {fileID: 1537730135}
+  - {fileID: 1861222956}
   play:
   - {fileID: 1148155888}
   - {fileID: 899616607}

@@ -7,4 +7,6 @@ come out a winner.
 
 ![Game cover](reports/report_3/cd_box/Jaquette.png)
 
+Watch our game trailer:
+
 [![Game trailer](https://img.youtube.com/vi/hd6ipXo5ZIo/0.jpg)](https://www.youtube.com/watch?v=hd6ipXo5ZIo "Pacification Trailer")

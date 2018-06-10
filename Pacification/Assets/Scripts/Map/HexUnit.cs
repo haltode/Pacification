@@ -77,7 +77,7 @@ public class HexUnit : MonoBehaviour
             location.DisableHighlight();
         }
         location.Unit = null;
-        if (Unit.Type == Unit.UnitType.SETTLER || Unit.Type == Unit.UnitType.HEAVY)
+        if (Unit.Type == Unit.UnitType.SETTLER || Unit.Type == Unit.UnitType.HEAVY || Unit.embark)
             Destroy(gameObject);
         else
             FindObjectOfType<Client>().DeadList.Add(gameObject);

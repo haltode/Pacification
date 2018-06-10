@@ -130,9 +130,9 @@ public class Client : MonoBehaviour
                 for(int i = 1; i < receivedData.Length - 2; i+=2)
                 {
                     string[] resTD = receivedData[i].Split('#');
-                    string[] resTD2 = receivedData[i].Split('#');
+                    string[] resTD2 = receivedData[i+1].Split('#');
                     HexCell attackerRes = player.hexGrid.GetCell(new HexCoordinates(int.Parse(resTD[0]), int.Parse(resTD[1])));
-                    HexCell unit = player.hexGrid.GetCell(new HexCoordinates(int.Parse(resTD[0]), int.Parse(resTD[1])));
+                    HexCell unit = player.hexGrid.GetCell(new HexCoordinates(int.Parse(resTD2[0]), int.Parse(resTD2[1])));
 
                     attackerRes.Unit.Rotation(unit);
                     attackerRes.Unit.Unit.anim.animator.SetTrigger("ActionTrigger");
@@ -177,12 +177,11 @@ public class Client : MonoBehaviour
                 for(int i = 1; i < receivedData.Length - 2; i+=2)
                 {
                     string[] resTD = receivedData[i].Split('#');
-                    string[] resTD2 = receivedData[i].Split('#');
+                    string[] resTD2 = receivedData[i+1].Split('#');
                     HexCell attackerRes = player.hexGrid.GetCell(new HexCoordinates(int.Parse(resTD[0]), int.Parse(resTD[1])));
-                    HexCell city = player.hexGrid.GetCell(new HexCoordinates(int.Parse(resTD[0]), int.Parse(resTD[1])));
+                    HexCell city = player.hexGrid.GetCell(new HexCoordinates(int.Parse(resTD2[0]), int.Parse(resTD2[1])));
 
                     attackerRes.Unit.Rotation(city);
-
                     attackerRes.Unit.Unit.anim.animator.SetTrigger("ActionTrigger");
                     foreach(Player p in players)
                     {
@@ -208,9 +207,9 @@ public class Client : MonoBehaviour
                 for(int i = 1; i < receivedData.Length - 2; i+=2)
                 {
                     string[] resTD = receivedData[i].Split('#');
-                    string[] resTD2 = receivedData[i].Split('#');
+                    string[] resTD2 = receivedData[i+1].Split('#');
                     HexCell attackerRes = player.hexGrid.GetCell(new HexCoordinates(int.Parse(resTD[0]), int.Parse(resTD[1])));
-                    HexCell ressource = player.hexGrid.GetCell(new HexCoordinates(int.Parse(resTD[0]), int.Parse(resTD[1])));
+                    HexCell ressource = player.hexGrid.GetCell(new HexCoordinates(int.Parse(resTD2[0]), int.Parse(resTD2[1])));
 
                     attackerRes.Unit.Rotation(ressource);
                     attackerRes.Unit.Unit.anim.animator.SetTrigger("ActionTrigger");

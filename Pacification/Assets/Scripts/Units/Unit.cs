@@ -6,7 +6,7 @@ public class Unit
 {
     public const int ScienceMinLevelEmbark = 150;
 
-    protected HexUnit hexUnit;
+    HexUnit hexUnit;
     public GameObject hexGameObject;
     public UnitsAnimator anim;
     protected int level = 1;

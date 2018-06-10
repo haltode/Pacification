@@ -22,7 +22,7 @@ public class Settler : Unit
             return;
 
         anim.animator.SetTrigger("ActionTrigger");
-        Owner.client.Send("CUNI|CIT|" + (int)type + "#" + hexUnit.location.coordinates.X + "#" + hexUnit.location.coordinates.Z);
+        Owner.client.Send("CUNI|CIT|" + (int)type + "#" + HexUnit.location.coordinates.X + "#" + HexUnit.location.coordinates.Z);
         hasMadeAction = true;
         anim.animator.SetTrigger("IdleTrigger");
     }

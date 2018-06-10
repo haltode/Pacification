@@ -127,13 +127,23 @@ public class Client : MonoBehaviour
 
             //Unit TakeDamage
             case "SUTD":
-                for(int i = 1; i < receivedData.Length - 2; i++)
+                for(int i = 1; i < receivedData.Length - 2; i+=2)
                 {
+                    string[] resTD = receivedData[i].Split('#');
+                    string[] resTD2 = receivedData[i].Split('#');
+                    HexCell attackerRes = player.hexGrid.GetCell(new HexCoordinates(int.Parse(resTD[0]), int.Parse(resTD[1])));
+                    HexCell unit = player.hexGrid.GetCell(new HexCoordinates(int.Parse(resTD[0]), int.Parse(resTD[1])));
+
+                    attackerRes.Unit.Rotation(unit);
+                    attackerRes.Unit.Unit.anim.animator.SetTrigger("ActionTrigger");
+
                     foreach(Player p in players)
                     {
                         if(p.name == receivedData[receivedData.Length - 2])
-                            p.NetworkTakeDamageUnit(receivedData[i]);
+                            p.NetworkTakeDamageUnit(receivedData[i+1]);
                     }
+
+                    attackerRes.Unit.Unit.anim.animator.SetTrigger("IdleTrigger");
                 }
                 break;
 
@@ -164,13 +174,22 @@ public class Client : MonoBehaviour
 
             //City Take Damage
             case "SCTD":
-                for(int i = 1; i < receivedData.Length - 2; i++)
+                for(int i = 1; i < receivedData.Length - 2; i+=2)
                 {
+                    string[] resTD = receivedData[i].Split('#');
+                    string[] resTD2 = receivedData[i].Split('#');
+                    HexCell attackerRes = player.hexGrid.GetCell(new HexCoordinates(int.Parse(resTD[0]), int.Parse(resTD[1])));
+                    HexCell city = player.hexGrid.GetCell(new HexCoordinates(int.Parse(resTD[0]), int.Parse(resTD[1])));
+
+                    attackerRes.Unit.Rotation(city);
+
+                    attackerRes.Unit.Unit.anim.animator.SetTrigger("ActionTrigger");
                     foreach(Player p in players)
                     {
                         if(p.name == receivedData[receivedData.Length - 2])
-                            p.NetworkTakeDamageCity(receivedData[i]);
+                            p.NetworkTakeDamageCity(receivedData[i+1]);
                     }
+                    attackerRes.Unit.Unit.anim.animator.SetTrigger("IdleTrigger");
                 }
                 break;
 
@@ -186,13 +205,21 @@ public class Client : MonoBehaviour
 
             //Resources TakeDamage
             case "SRTD":
-                for(int i = 1; i < receivedData.Length - 2; i++)
+                for(int i = 1; i < receivedData.Length - 2; i+=2)
                 {
+                    string[] resTD = receivedData[i].Split('#');
+                    string[] resTD2 = receivedData[i].Split('#');
+                    HexCell attackerRes = player.hexGrid.GetCell(new HexCoordinates(int.Parse(resTD[0]), int.Parse(resTD[1])));
+                    HexCell ressource = player.hexGrid.GetCell(new HexCoordinates(int.Parse(resTD[0]), int.Parse(resTD[1])));
+
+                    attackerRes.Unit.Rotation(ressource);
+                    attackerRes.Unit.Unit.anim.animator.SetTrigger("ActionTrigger");
                     foreach(Player p in players)
                     {
                         if(p.name == receivedData[receivedData.Length - 2])
-                            p.NetworkTakeDamageResource(receivedData[i]);
+                            p.NetworkTakeDamageResource(receivedData[i+1]);
                     }
+                    attackerRes.Unit.Unit.anim.animator.SetTrigger("IdleTrigger");
                 }
                 break;
 
@@ -211,7 +238,9 @@ public class Client : MonoBehaviour
                 FindObjectOfType<SoundManager>().PlayNewBuilding();
                 string[] exploitData = receivedData[1].Split('#');
                 HexCell exploit = player.hexGrid.GetCell(new HexCoordinates(int.Parse(exploitData[0]), int.Parse(exploitData[1])));
-                
+                exploit.Unit.Unit.anim.animator.SetTrigger("ActionTrigger");
+                exploit.Unit.Unit.anim.animator.SetTrigger("IdleTrigger");
+
                 foreach(Player p in players)
                 {
                     if(p.name == receivedData[2])

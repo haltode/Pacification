@@ -22,10 +22,7 @@ public class Worker : Unit
         if (hasMadeAction)
             return;
 
-        anim.animator.SetTrigger("ActionTrigger");
-        anim.animator.SetTrigger("IdleTrigger");
-
-        HexCell cell = hexUnit.location;
+        HexCell cell = HexUnit.location;
         if(cell.FeatureIndex <= 3)
             return;
 
@@ -36,7 +33,7 @@ public class Worker : Unit
 
     public bool AddRoad(HexCell roadCell)
     {
-        HexCell currentCell = hexUnit.location;
+        HexCell currentCell = HexUnit.location;
         bool isNeighbor = false;
 
         HexDirection roadDir = HexDirection.NE;

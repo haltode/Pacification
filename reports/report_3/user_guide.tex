@@ -6,6 +6,8 @@
 \usepackage{graphicx}
 \usepackage{titlesec}
 \usepackage{fontspec}
+\usepackage{float}
+\usepackage{caption}
 \pagenumbering{gobble}
 
 \graphicspath{ {../../static/} {img/} }
@@ -53,5 +55,11 @@ scientifiques.\\
 En haut de l'écran, vous trouverez vos différents indicateurs de ressources.
 Lorsque vous sélectionnez une ville ou une unité, un menu à droite apparaît
 pour vous informer de ses caractéristiques.\\
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.9\textwidth]{controls}
+    \caption*{Contrôles du jeu}
+\end{figure}
 
 \end{document}

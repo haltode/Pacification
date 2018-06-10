@@ -34,35 +34,14 @@ public class Ranged : Attacker
         };
     }
 
-    public void LevelUp()
+    public void NetworkLevelUp()
     {
-        if (IsMaxed())
+        if(IsMaxed())
             return;
-        /*else if (level == 10)
-        {
-            this.SetGraphics(hexUnit.Grid.unitPrefab[(int)type + 4]);
-            hp = 400;
-            maxHP = 400;
 
-            defaultATK = 300;
-
-            dmgMultCity = 0.5f;
-            dmgMult = new Dictionary<UnitType, float>()
-            {
-                { UnitType.SETTLER, 2f },
-                { UnitType.WORKER, 2f },
-                { UnitType.REGULAR, 2f },
-                { UnitType.RANGED, 2f },
-                { UnitType.HEAVY, 0.5f },
-            };
-        }*/
-        else
-        {
-            MaxHP += upgradeHP;
-            hp += upgradeHP;
-            defaultATK += upgradeATK;
-        }
-
+        MaxHP += upgradeHP;
+        hp += upgradeHP;
+        defaultATK += upgradeATK;
         level++;
     }
 }

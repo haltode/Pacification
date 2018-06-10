@@ -34,28 +34,14 @@ public class Heavy : Attacker
         };
     }
 
-    public void LevelUp()
+    public void NetworkLevelUp()
     {
-        if (IsMaxed())
+        if(IsMaxed())
             return;
-        /*else if (level == 10)
-        {
-            this.SetGraphics(hexUnit.Grid.unitPrefab[(int)type + 4]);
-            range = 2;
-            hp = 350;
-            maxHP = 350;
 
-            defaultATK = 210;
-
-            dmgMultCity = 2f;
-        }*/
-        else
-        {
-            MaxHP += upgradeHP;
-            hp += upgradeHP;
-            defaultATK += upgradeATK;
-        }
-
+        MaxHP += upgradeHP;
+        hp += upgradeHP;
+        defaultATK += upgradeATK;
         level++;
     }
 }

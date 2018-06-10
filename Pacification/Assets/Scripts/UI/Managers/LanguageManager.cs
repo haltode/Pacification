@@ -170,7 +170,7 @@ public class LanguageManager : MonoBehaviour {
         slidersName[3].text = "Pourcentage d'erosion";
         slidersName[4].text = "Elevation Maximum";
         slidersName[5].text = "Taille minimale des Chunck";
-        slidersName[6].text = "Taille maximum des Chunck";
+        slidersName[6].text = "Taille maximale des Chunck";
         slidersName[7].text = "Nombre de regions";
         slidersName[8].text = "Bordure des regions";
         slidersName[9].text = "Pourcentage de ressources";

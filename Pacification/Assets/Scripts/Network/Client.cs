@@ -254,6 +254,12 @@ public class Client : MonoBehaviour
                 }
                 break;
 
+            case "SLVP":
+                foreach(Player p in players)
+                    if(p.name == receivedData[2])
+                        p.NetworkLevelUp(receivedData[1]);
+                break;
+
             /////PLAYER : Take turn
             case "SYGO":
                 ++roundNb;
@@ -396,7 +402,10 @@ public class Client : MonoBehaviour
         }
 
         if(player != null && player.displayer != null)
+        {
             player.displayer.UpdateInformationPannels();
+            player.displayer.UpdateUpgradePannel();
+        }
     }
 
     void UserConnected(string name, bool host)

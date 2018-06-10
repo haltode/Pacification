@@ -34,36 +34,14 @@ public class Regular : Attacker
         };
     }
 
-    public void LevelUp()
+    public void NetworkLevelUp()
     {
-        if (IsMaxed())
+        if(IsMaxed())
             return;
-        /*else if (level == 10)
-        {
-            this.SetGraphics(hexUnit.Grid.unitPrefab[(int)type + 4]);
-            mvtSPD = 3;
-            hp = 420;
-            maxHP = 420;
 
-            defaultATK = 375;
-
-            dmgMultCity = 0.75f;
-            dmgMult = new Dictionary<UnitType, float>()
-            {
-                { UnitType.SETTLER, 1f },
-                { UnitType.WORKER, 1f },
-                { UnitType.REGULAR, 1f },
-                { UnitType.RANGED, 1.125f },
-                { UnitType.HEAVY, 1.5f },
-            };
-        }*/
-        else
-        {
-            MaxHP += upgradeHP;
-            hp += upgradeHP;
-            defaultATK += upgradeATK;
-        }
-
+        MaxHP += upgradeHP;
+        hp += upgradeHP;
+        defaultATK += upgradeATK;
         level++;
     }
 }

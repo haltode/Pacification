@@ -193,18 +193,21 @@ public class Player
             return;
 
         if(unitLevel[(int)type - 2] < 20)
-        {
-            unitLevel[(int)type - 2]++;
+            client.Send("CUNI|LVP|" + ((int)type - 2));
+    }
 
-            foreach(Unit u in playerUnits)
-            {
-                if(type == Unit.UnitType.REGULAR && u.Type == Unit.UnitType.REGULAR)
-                    ((Regular)u).LevelUp();
-                else if(type == Unit.UnitType.RANGED && u.Type == Unit.UnitType.RANGED)
-                    ((Ranged)u).LevelUp();
-                else if(type == Unit.UnitType.HEAVY && u.Type == Unit.UnitType.HEAVY)
-                    ((Heavy)u).LevelUp();
-            }
+    public void NetworkLevelUp(string type)
+    {
+        unitLevel[int.Parse(type)]++;
+
+        foreach(Unit u in playerUnits)
+        {
+            if(u.Type == Unit.UnitType.REGULAR && type == "0")
+                ((Regular)u).NetworkLevelUp();
+            else if(u.Type == Unit.UnitType.RANGED && type == "1")
+                ((Ranged)u).NetworkLevelUp();
+            else if(u.Type == Unit.UnitType.HEAVY && type == "2")
+                ((Heavy)u).NetworkLevelUp();
         }
     }
 

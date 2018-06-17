@@ -123,6 +123,7 @@ public class MapGeneratorPanel : MonoBehaviour {
 
             GameManager.Instance.path = Path.Combine(Application.persistentDataPath, maps[0].text + ".map");
             isActive[0].SetActive(true);
+            isActive[10].SetActive(true);
         }
     }
 

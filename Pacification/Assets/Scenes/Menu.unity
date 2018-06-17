@@ -58755,7 +58755,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: Spanish
+  m_Text: "Espanol\r"
 --- !u!222 &2133097837
 CanvasRenderer:
   m_ObjectHideFlags: 0

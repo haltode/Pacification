@@ -120,10 +120,13 @@ public class MapGeneratorPanel : MonoBehaviour {
                     mapsG[i].SetActive(true);
                     mapsGM[i].SetActive(true);
                 }
-
-            GameManager.Instance.path = Path.Combine(Application.persistentDataPath, maps[0].text + ".map");
-            isActive[0].SetActive(true);
-            isActive[10].SetActive(true);
+            
+            if(paths.Length != 0)
+            {
+                GameManager.Instance.path = Path.Combine(Application.persistentDataPath, maps[0].text + ".map");
+                isActive[0].SetActive(true);
+                isActive[10].SetActive(true);
+            }
         }
     }
 

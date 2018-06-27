@@ -37,12 +37,12 @@ public class FreeCamMovement : MonoBehaviour {
 
         if(Input.GetKey(KeyCode.Keypad8))
             transform.Translate(0, 0, 0.1f * speed);
-        else if(Input.GetKey(KeyCode.Keypad2))
+        else if(Input.GetKey(KeyCode.Keypad5))
             transform.Translate(0, 0, -0.1f * speed);
 
-        if(Input.GetKey(KeyCode.KeypadPlus))
+        if(Input.GetKey(KeyCode.KeypadEnter))
             transform.Translate(0, 0.5f, 0);
-        else if(Input.GetKey(KeyCode.KeypadMinus))
+        else if(Input.GetKey(KeyCode.KeypadPeriod))
             transform.Translate(0, -0.5f, 0);
 
         if(Input.GetKey(KeyCode.Keypad9))

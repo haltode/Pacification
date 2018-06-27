@@ -15,9 +15,6 @@ public class FreeCamMovement : MonoBehaviour {
 	// Update is called once per frame
 	void Update () {
         float sensitivity = 0.05f;
-        float left = 0;
-        float right = 0;
-        float high = 0;
 
         Vector3 vp = mycam.ScreenToViewportPoint(new Vector3(Input.mousePosition.x, Input.mousePosition.y, mycam.nearClipPlane));
         vp.x -= 0.5f;

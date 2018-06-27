@@ -9,7 +9,10 @@ public class CamManager : MonoBehaviour
     public GameObject cameraOne;
     public GameObject cameraTwo;
 
+    public GameObject pannel;
+
     int cameraCount = -1;
+    bool displayed = true;
 
     void Start()
     {
@@ -20,9 +23,10 @@ public class CamManager : MonoBehaviour
     {
         if(Input.GetKeyDown(KeyCode.F12))
             CameraChangeCounter();
+        if(Input.GetKeyDown(KeyCode.F11))
+            DisplayChange();
     }
 
-    //Camera Counter
     void CameraChangeCounter()
     {
         //int cameraPositionCounter = PlayerPrefs.GetInt("CameraPosition"); //Will register wich cam was last chosen for the next game 
@@ -41,5 +45,12 @@ public class CamManager : MonoBehaviour
             cameraTwo.SetActive(true);
             cameraOne.SetActive(false);
         }
+    }
+
+    void DisplayChange()
+    {
+        displayed = !displayed;
+
+        pannel.SetActive(displayed);
     }
 }
